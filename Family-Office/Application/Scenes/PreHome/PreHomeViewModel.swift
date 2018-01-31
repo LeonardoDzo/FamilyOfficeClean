@@ -12,19 +12,21 @@ import RxSwift
 
 final class PreHomeViewModel: ViewModelType {
     private let user: User
+
     private let navigator: PreHomeNav
     init(user: User, navigator: PreHomeNav) {
         self.user = user
         self.navigator = navigator
     }
     func transform(input: PreHomeViewModel.Input) -> PreHomeViewModel.Output {
-        return Output()
+        let u = Variable(user).asDriver().startWith(self.user)
+        return Output(user: u)
     }
 }
 extension PreHomeViewModel {
     struct Input {
     }
     struct Output {
-        
+        let user: Driver<User>
     }
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 import RxSwift
-
+import RxCocoa
 class SignInViewController: UIViewController {
     private let disposeBag = DisposeBag()
     var v = SignInView()
@@ -22,6 +22,7 @@ class SignInViewController: UIViewController {
             self.view = self.v
             self.bindViewModel()
         }
+        self.navigationController?.isNavigationBarHidden = true
         self.bindViewModel()
         // Do any additional setup after loading the view.
     }
@@ -29,9 +30,18 @@ class SignInViewController: UIViewController {
     func bindViewModel() -> Void {
         let input = SignInviewModel.Input(loginTrigger: v.login.rx.tap.asDriver(), email: v.email.rx.text.orEmpty.asDriver(), password: v.password.rx.text.orEmpty.asDriver())
         let output = viewModel.transform(input: input)
-        output.dismiss.drive().disposed(by: disposeBag)
-        output.loginEnabled.drive(v.login.rx.isEnabled).disposed(by: disposeBag)
+        
+        output.dismiss
+            .drive()
+            .disposed(by: disposeBag)
+        output.loginEnabled
+            .drive(v.login.rx.isEnabled)
+            .disposed(by: disposeBag)
+        output.error
+            .drive(self.errorBinding)
+            .disposed(by: disposeBag)
     }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

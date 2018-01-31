@@ -18,6 +18,7 @@ final class SignInviewModel: ViewModelType {
         self.navigator = navigator
     }
     func transform(input: SignInviewModel.Input) -> SignInviewModel.Output {
+        let errorTracker = ErrorTracker()
         let emailAndPassword = Driver.combineLatest(input.email, input.password)
         let activityIndicator = ActivityIndicator()
         let canLogin = Driver.combineLatest(emailAndPassword, activityIndicator.asDriver()) {
@@ -28,11 +29,14 @@ final class SignInviewModel: ViewModelType {
             
             return self.authUseCase
                 .signIn(email: $0.0, password: $0.1)
+                .trackError(errorTracker)
                 .trackActivity(activityIndicator)
                 .asDriverOnErrorJustComplete()
-        }).do(onNext: navigator.toPreHome)
+        })
         
-        return Output(dismiss: login, loginEnabled: canLogin)
+        .do(onNext: navigator.toPreHome)
+        
+        return Output(dismiss: login, loginEnabled: canLogin, error: errorTracker.asDriver())
     }
 }
 extension SignInviewModel {
@@ -44,5 +48,6 @@ extension SignInviewModel {
     struct Output {
         let dismiss: Driver<User>
         let loginEnabled: Driver<Bool>
+        let error: Driver<Error>
     }
 }

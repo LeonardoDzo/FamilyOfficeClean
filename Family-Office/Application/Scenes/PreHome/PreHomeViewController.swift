@@ -19,22 +19,27 @@ class PreHomeViewController: UIViewController {
         self.view.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         // Do any additional setup after loading the view.
         on("INJECTION_BUNDLE_NOTIFICATION") {
-            self.v = Prehome()
-            self.view = self.v
+            self.setupView()
         }
-        let input = PreHomeViewModel.Input()
-        let output = viewModel.transform(input: input)
-        
+       self.setupView()
+       
     }
-    
+    fileprivate func setupView(){
+        self.v = Prehome()
+        self.view = self.v
+        let input = PreHomeViewModel.Input()
+        let output = self.viewModel.transform(input: input)
+        output.user.drive(self.userBinding).disposed(by: self.disposeBag)
+        self.navigationController?.isNavigationBarHidden = true
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
     var userBinding: Binder<User> {
         return Binder(self, binding: { (vc, user) in
-            vc.v.email.text = user.name
-            vc.v.name.text = user.email
+            vc.v.bind(user: user)
         })
     }
 

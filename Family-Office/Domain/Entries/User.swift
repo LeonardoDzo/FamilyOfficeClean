@@ -16,7 +16,7 @@ public struct User : Codable {
     public let name: String
     public let phone: String?
     public let uid: String
-    public let photoURL: String?
+    public var photoURL: String? = "https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg"
     
     public init(address: Address,
                 email: String,

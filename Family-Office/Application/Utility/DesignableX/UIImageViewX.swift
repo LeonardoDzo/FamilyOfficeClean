@@ -7,10 +7,13 @@
 //
 
 import UIKit
+import Gzip
+let imageCache = NSCache<AnyObject, AnyObject>()
 
 @IBDesignable
 class UIImageViewX: SpringImageView {
-    
+    var urlString: String?
+    private var activityIndicator: UIActivityIndicatorView!
     // MARK: - Properties
     
     @IBInspectable public var borderColor: UIColor = UIColor.clear {
@@ -107,4 +110,102 @@ class UIImageViewX: SpringImageView {
             }, completion: nil)
         }
     }
+    
+    
+    
+   func loadImage(urlString: String) -> Void {
+        guard let url = URL(string: urlString) else {
+            return
+        }
+        showActivityIndicator()
+        
+        self.image = nil
+        self.urlString = urlString
+        //check if image exist in cache
+        if let cacheImage = imageCache.object(forKey: urlString as AnyObject) {
+            self.image = cacheImage as? UIImage
+            hideActivityIndicator()
+            return
+        }
+        
+        //        if let img = rManager.realm.object(ofType: ImageEntity.self, forPrimaryKey: url.absoluteString) {
+        //            let decompressedData: Data
+        //            if (img.data.isGzipped) {
+        //                decompressedData = try! img.data.gunzipped()
+        //            } else {
+        //                decompressedData = img.data
+        //            }
+        //            if let downloadImage = UIImage.init(data: decompressedData) {
+        //                imageCache.setObject(downloadImage, forKey: urlString as AnyObject)
+        //                self.image = nil
+        //                self.image = downloadImage
+        //                self.hideActivityIndicator()
+        //                return
+        //            }
+        //        }
+        
+        URLSession.shared.dataTask(with: url, completionHandler: {(data, response, error) in
+            if error != nil {
+                print(error?.localizedDescription as Any)
+                return
+            }
+            DispatchQueue.main.async {
+                let decompressedData: Data
+                if (data?.isGzipped)! {
+                    decompressedData = try! data?.gunzipped() ?? Data()
+                } else {
+                    decompressedData = data!
+                }
+                if let downloadImage = UIImage.init(data: decompressedData) {
+                    imageCache.setObject(downloadImage, forKey: urlString as AnyObject)
+                    if urlString == self.urlString{
+                        self.image = downloadImage
+                        self.hideActivityIndicator()
+                    }
+                    
+                }
+            }
+        }).resume()
+        
+    }
+    
+    
+    
+    func showActivityIndicator() {
+        
+        if (activityIndicator == nil) {
+            activityIndicator = createActivityIndicator()
+        }
+        
+        showSpinning()
+    }
+    
+    
+    
+    func hideActivityIndicator() {
+        activityIndicator.stopAnimating()
+    }
+    
+    private func createActivityIndicator() -> UIActivityIndicatorView {
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.color = UIColor.lightGray
+        return activityIndicator
+    }
+    
+    func showSpinning() {
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(activityIndicator)
+        centerActivityIndicatorInButton()
+        activityIndicator.startAnimating()
+    }
+    
+    private func centerActivityIndicatorInButton() {
+        let xCenterConstraint = NSLayoutConstraint(item: self, attribute: .centerX, relatedBy: .equal, toItem: activityIndicator, attribute: .centerX, multiplier: 1, constant: 0)
+        self.addConstraint(xCenterConstraint)
+        
+        let yCenterConstraint = NSLayoutConstraint(item: self, attribute: .centerY, relatedBy: .equal, toItem: activityIndicator, attribute: .centerY, multiplier: 1, constant: 0)
+        self.addConstraint(yCenterConstraint)
+    }
 }
+

@@ -31,13 +31,8 @@ extension ObservableType {
         }
     }
     
-    func asDriverOnErrorJustComplete(_ view: UIViewController) -> Driver<E> {
-        return asDriver { error in
-            print(type(of: error))
-            if let e = error as? RxApolloError, case RxApolloError.graphQLErrors(let errors) = e {
-              let alertController = UIAlertController(title: "Error", message: errors.first?.message, preferredStyle: .alert)
-             view.present(alertController, animated: true, completion: nil)
-            }
+    func asDriverOnErrorJustComplete() -> Driver<E> {
+        return asDriver { _ in
             return Driver.empty()
         }
     }
