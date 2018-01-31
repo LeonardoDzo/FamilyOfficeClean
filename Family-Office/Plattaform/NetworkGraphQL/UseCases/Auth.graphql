@@ -1,0 +1,14 @@
+
+mutation SignInUser($e:String!, $p:String!) {
+    signInUser(emailProvider: {
+        email: $e,
+        password: $p
+        }) {
+            token,
+            user {
+                id,
+                name,
+                email
+            }
+    }
+}

@@ -1,0 +1,16 @@
+
+query allUser {
+    allUsers {
+        id,
+        name,
+        email
+    }
+}
+
+
+query MyFamilies {
+    myFamilies {
+        id,
+        name
+    }
+}

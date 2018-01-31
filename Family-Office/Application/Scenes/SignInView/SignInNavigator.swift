@@ -1,0 +1,43 @@
+//
+//  SignInRouter.swift
+//  Family-Office
+//
+//  Created by Leonardo Durazo on 30/01/18.
+//  Copyright © 2018 Leonardo Durazo. All rights reserved.
+//
+
+import Foundation
+import UIKit
+
+protocol AuthNavigator {
+    func toSignIn()
+    func toSignUp()
+    func toPreHome(user: User)
+}
+
+class DefaultAuthNavigator: AuthNavigator {
+    private let navigationController: UINavigationController
+    private let services: NetAuthUseCaseProvider
+    
+    init(service: NetAuthUseCaseProvider, nc: UINavigationController) {
+        self.services = service
+        self.navigationController = nc
+    }
+    func toPreHome(user: User) {
+        let preHome = PreHomeViewController()
+        let navigator = PreHomeNav(service: RMUserUseCaseProvider(), nc:  navigationController)
+        let viewModel = PreHomeViewModel(user: user, navigator: navigator)
+        preHome.viewModel = viewModel
+        let nc = UINavigationController(rootViewController: preHome)
+        navigationController.present(nc, animated: true, completion: { 
+            print("#function")
+         })
+    }
+    func toSignIn() {
+        
+    }
+    func toSignUp() {
+        
+    }
+    
+}
