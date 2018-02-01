@@ -29,15 +29,17 @@ class DefaultAuthNavigator: AuthNavigator {
         let viewModel = PreHomeViewModel(user: user, navigator: navigator)
         preHome.viewModel = viewModel
         let nc = UINavigationController(rootViewController: preHome)
-        navigationController.present(nc, animated: true, completion: { 
-            print("#function")
-         })
+        navigationController.present(nc, animated: true, completion: nil)
     }
     func toSignIn() {
         
     }
     func toSignUp() {
-        
+        let signUp = SignUpViewController()
+        let nc = UINavigationController(rootViewController: signUp)
+          let viewModel = SignUpviewModel(useCase: services.makeAuthUseCase(), navigator: SignUpNavigator(service: services, nc: nc))
+        signUp.viewModel = viewModel
+        navigationController.present(nc, animated: true, completion: nil)
     }
     
 }

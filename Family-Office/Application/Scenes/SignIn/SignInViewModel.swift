@@ -13,6 +13,7 @@ import RxSwift
 final class SignInviewModel: ViewModelType {
     private let authUseCase : AuthUseCase
     private let navigator: DefaultAuthNavigator
+    
     init(useCase: AuthUseCase, navigator: DefaultAuthNavigator) {
         self.authUseCase = useCase
         self.navigator = navigator
@@ -33,14 +34,17 @@ final class SignInviewModel: ViewModelType {
                 .trackActivity(activityIndicator)
                 .asDriverOnErrorJustComplete()
         })
-        
         .do(onNext: navigator.toPreHome)
         
-        return Output(dismiss: login, loginEnabled: canLogin, error: errorTracker.asDriver())
+        let signUp = input.signUpTrigger
+            .do(onNext: navigator.toSignUp)
+        
+        return Output(dismiss: login, loginEnabled: canLogin, signUp: signUp, error: errorTracker.asDriver())
     }
 }
 extension SignInviewModel {
     struct Input {
+        let signUpTrigger: Driver<Void>
         let loginTrigger: Driver<Void>
         let email: Driver<String>
         let password: Driver<String>
@@ -48,6 +52,7 @@ extension SignInviewModel {
     struct Output {
         let dismiss: Driver<User>
         let loginEnabled: Driver<Bool>
+        let signUp: Driver<Void>
         let error: Driver<Error>
     }
 }

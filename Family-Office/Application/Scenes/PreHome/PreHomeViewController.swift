@@ -17,7 +17,6 @@ class PreHomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-        // Do any additional setup after loading the view.
         on("INJECTION_BUNDLE_NOTIFICATION") {
             self.setupView()
         }
@@ -42,15 +41,4 @@ class PreHomeViewController: UIViewController {
             vc.v.bind(user: user)
         })
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

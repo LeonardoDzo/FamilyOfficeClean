@@ -28,7 +28,7 @@ class SignInViewController: UIViewController {
     }
     
     func bindViewModel() -> Void {
-        let input = SignInviewModel.Input(loginTrigger: v.login.rx.tap.asDriver(), email: v.email.rx.text.orEmpty.asDriver(), password: v.password.rx.text.orEmpty.asDriver())
+        let input = SignInviewModel.Input(signUpTrigger: v.signUpBtn.rx.tap.asDriver(), loginTrigger: v.login.rx.tap.asDriver(), email: v.email.rx.text.orEmpty.asDriver(), password: v.password.rx.text.orEmpty.asDriver())
         let output = viewModel.transform(input: input)
         
         output.dismiss
@@ -36,6 +36,10 @@ class SignInViewController: UIViewController {
             .disposed(by: disposeBag)
         output.loginEnabled
             .drive(v.login.rx.isEnabled)
+            .disposed(by: disposeBag)
+        
+        output.signUp
+            .drive()
             .disposed(by: disposeBag)
         output.error
             .drive(self.errorBinding)
