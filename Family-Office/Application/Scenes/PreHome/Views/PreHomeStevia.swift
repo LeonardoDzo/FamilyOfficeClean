@@ -20,7 +20,7 @@ class Prehome: UIViewX, UserBindeble {
     var emailLbl: UILabelX! = UILabelX()
     var settingBtn = UIButtonX()
     var logoutBtn = UIButtonX()
-    
+    var creteFamilybtn = UIButtonX()
     convenience init() {
         self.init(frame:CGRect.zero)
         render()
@@ -33,7 +33,8 @@ class Prehome: UIViewX, UserBindeble {
             photoProfile,
             nameLbl,
             settingBtn,
-            logoutBtn
+            logoutBtn,
+            creteFamilybtn
         )
        
         layout(
@@ -53,6 +54,7 @@ class Prehome: UIViewX, UserBindeble {
             0,
             ""
         )
+        creteFamilybtn.height(80).width(80).bottom(5%).centerHorizontally()
         
         settingBtn.top(240).left(15%)
         logoutBtn.top(240).right(15%)
@@ -73,23 +75,35 @@ class Prehome: UIViewX, UserBindeble {
         emailLbl.style(self.styleTextField)
         nameLbl.style(self.styleTextField)
         photoProfile.style(self.styleImg)
+        creteFamilybtn.style { (btn) in
+            btn.cornerRadius = 40
+            btn.animation = "squeezeUp"
+            btn.curve =  "spring"
+            btn.delay = 1
+            btn.setImage(#imageLiteral(resourceName: "icons8-add").maskWithColor(color: #colorLiteral(red: 0.1764705926, green: 0.01176470611, blue: 0.5607843399, alpha: 1)), for: .normal)
+        }
+        animations()
         
     }
+    internal func animations() -> Void {
+        for view in self.subviews as [UIView] {
+            if let v = view as? Springable {
+                v.animate()
+            }
+        }
+    }
+    
     func styleImg(_ img: UIImageViewX) -> Void {
         img.clipsToBounds = true
         img.cornerRadius = 50
         img.borderColor = borderColor
         img.borderWidth = 1
         img.animation = "fadeIn"
-        img.duration = 3
-        img.animate()
     }
     
     func styleBtn(_ btn: UIButtonX) -> Void {
         btn.width(40).height(40)
         btn.animation = "pop"
-        btn.delay = 1
-        btn.animate()
     }
 
     func styleTextField(_ text: UILabelX) -> Void {

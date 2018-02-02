@@ -76,9 +76,7 @@ class SignInView: UIViewX {
             if let v = view as? Springable {
                v.animate()
             }
-        }
-
-        
+        }  
     }
     
     func styleTextField(_ text: UITextFieldX) -> Void {

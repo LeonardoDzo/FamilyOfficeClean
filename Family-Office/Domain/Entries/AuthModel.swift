@@ -8,13 +8,36 @@
 
 import Foundation
 
+//enum AuthModelType:  Decodable {
+//    case signInUser(AuthModel)
+//    case createUser(AuthModel)
+//}
+
 public struct AuthModel: Codable {
-    let user: User
+    var user: User
     let token: String
     var error: String?
     
     enum CodingKeys: String, CodingKey {
-        case signInUser
+        case user
+        case token
+    }
+    public init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        self.user = try values.decode(User.self, forKey: .user)
+        token = try values.decode(String.self, forKey: .token)
+    }
+
+    public func encode(to encoder: Encoder) throws {
+    }
+}
+public struct SignUpModel: Codable {
+    var user: User
+    let token: String
+    var error: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case user
     }
     enum SignInCodingKeys: String, CodingKey {
         case user
@@ -22,11 +45,11 @@ public struct AuthModel: Codable {
     }
     public init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
-        let signInContainer = try values.nestedContainer(keyedBy: SignInCodingKeys.self, forKey: .signInUser)
-        user = try signInContainer.decode(User.self, forKey: .user)
-        token = try signInContainer.decode(String.self, forKey: .token)
-        
+        let userContainer = try values.nestedContainer(keyedBy: SignInCodingKeys.self, forKey: .user)
+        user = try userContainer.decodeIfPresent(User.self, forKey: .user) ??  userContainer.decode(User.self, forKey: .user)
+        token = try userContainer.decode(String.self, forKey: .token)
     }
+    
     public func encode(to encoder: Encoder) throws {
     }
 }

@@ -13,4 +13,19 @@ mutation SignInUser($e:String!, $p:String!) {
     }
 }
 
-
+mutation SignUp($name:String!, $email:String!, $password: String!, $phone: String!) {
+    createUser(name: $name,
+        phone: $phone,
+        emailProvider: {
+            email: $email,
+            password: $password
+        }
+        ){
+        token,
+        user {
+            id,
+            name,
+            email
+        }
+    }
+}

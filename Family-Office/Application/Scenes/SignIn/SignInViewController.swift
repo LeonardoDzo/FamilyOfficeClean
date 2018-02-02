@@ -37,7 +37,6 @@ class SignInViewController: UIViewController {
         output.loginEnabled
             .drive(v.login.rx.isEnabled)
             .disposed(by: disposeBag)
-        
         output.signUp
             .drive()
             .disposed(by: disposeBag)

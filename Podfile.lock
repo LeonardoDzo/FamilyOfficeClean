@@ -4,6 +4,8 @@ PODS:
     - Apollo/Core (= 0.7.0)
   - Apollo/Core (0.7.0)
   - Eureka (4.0.1)
+  - GenericPasswordRow (3.0.0):
+    - Eureka (~> 4.0)
   - GzipSwift (4.0.4)
   - ImagePicker (3.0.0)
   - Kingfisher (4.5.0)
@@ -28,6 +30,7 @@ DEPENDENCIES:
   - Alamofire
   - Apollo (~> 0.7.0)
   - Eureka
+  - GenericPasswordRow (~> 3.0)
   - GzipSwift
   - ImagePicker
   - Kingfisher (~> 4.0)
@@ -43,6 +46,7 @@ SPEC CHECKSUMS:
   Alamofire: f41a599bd63041760b26d393ec1069d9d7b917f4
   Apollo: d6649ac06168660e70c6226c4eadfc0770791ba5
   Eureka: c8bd5cc07143b6f66268c208d28a246c99b41955
+  GenericPasswordRow: 27a52c727c47b2e4d50c2295d1cc7d32c5883e70
   GzipSwift: 1a5bc5f7827e09846b0635b5079f1224bc3b1c3a
   ImagePicker: 973953c25960fe04729a7082a56194321c6762d2
   Kingfisher: 26ae0473102b77b575da51960c932431e3745407
@@ -56,6 +60,6 @@ SPEC CHECKSUMS:
   SteviaLayout: 8a3524d4280841abf9f215145304a6cb37a54521
   Whisper: 169760fc4bab0abf24d5529f9276f95c25cf1025
 
-PODFILE CHECKSUM: 7519739fa489cfc10299cabbcf9db09562e46bf4
+PODFILE CHECKSUM: 2f885552b3e883e78bbdbc0a7582e181fe9af42c
 
 COCOAPODS: 1.3.1

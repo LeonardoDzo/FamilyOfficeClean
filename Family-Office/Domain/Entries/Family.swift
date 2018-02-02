@@ -12,18 +12,17 @@ public struct Family : Codable {
     
     public let uid: String
     public let name: String
-    public let photoURL: String
+    public let photo: Photo?
     public let admin: String
-    public let members: [User]
+    public var members = [User]()
     
     public init(name: String,
-                photoURL: String,
                 admin: String,
                 members: [User],
                 uid: String) {
         self.admin = admin
         self.members = members
-        self.photoURL = photoURL
+        self.photo = nil
         self.name = name
         self.uid = uid
     }
@@ -32,7 +31,7 @@ public struct Family : Codable {
 extension Family: Equatable {
     public static func == (lhs: Family, rhs: Family) -> Bool {
         return lhs.name == rhs.name &&
-            lhs.photoURL == rhs.photoURL &&
+            lhs.photo == rhs.photo &&
             lhs.admin == rhs.admin &&
             lhs.members == rhs.members
     }

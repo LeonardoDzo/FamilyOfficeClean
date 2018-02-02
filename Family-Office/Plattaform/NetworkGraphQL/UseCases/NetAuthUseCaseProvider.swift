@@ -18,5 +18,6 @@ public final class NetAuthUseCaseProvider : UseCaseProvider {
     public func makeAuthUseCase() -> AuthUseCase {
         return NetAuthUseCase(networkProvider.makeAuthNetwork())
     }
+    
 }
 

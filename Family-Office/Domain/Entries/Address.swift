@@ -11,20 +11,22 @@ import Foundation
 public struct Address : Codable {
     
     public var city: String
+    public var country: String
 //    public let geo: Location
     public var street: String
-    public var suite: String
+    public var suburb: String
     public var zipcode: String
     
     public init(city: String,
 //                geo: Location,
                 street: String,
-                suite: String,
+                suburb: String,
                 zipcode: String) {
         self.city = city
 //        self.geo = geo
+        self.country = ""
         self.street = street
-        self.suite = suite
+        self.suburb = suburb
         self.zipcode = zipcode
     }
 }
@@ -34,7 +36,7 @@ extension Address: Equatable {
         return lhs.city == rhs.city &&
 //            lhs.geo == rhs.geo &&
             lhs.street == rhs.street &&
-            lhs.suite == rhs.suite &&
+            lhs.suburb == rhs.suburb &&
             lhs.zipcode == rhs.zipcode
     }
 }

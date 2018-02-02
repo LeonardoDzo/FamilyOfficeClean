@@ -11,6 +11,6 @@ import RxSwift
 
 public protocol AuthUseCase {
     func signIn(email: String, password: String) -> Observable<User>
-//    func signUp(user: User) -> Observable<User>
+    func signUp(user: User, password: String) -> Observable<User>
 //    func logOut() -> Observable<Void>
 }

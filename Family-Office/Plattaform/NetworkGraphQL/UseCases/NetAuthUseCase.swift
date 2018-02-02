@@ -10,8 +10,6 @@ import Foundation
 import RxSwift
 final class NetAuthUseCase: AuthUseCase {
 
-    
-   
     private let network: AuthNetwork!
     
     init(_ network: AuthNetwork) {
@@ -20,6 +18,9 @@ final class NetAuthUseCase: AuthUseCase {
     
     func signIn(email: String, password: String) -> Observable<User> {
         return  network.signIn(email:email, password: password)
+    }
+    func signUp(user:User, password: String) -> Observable<User> {
+        return network.signUp(email: user.email, name: user.name, phone: user.phone!, password: password)
     }
 }
 

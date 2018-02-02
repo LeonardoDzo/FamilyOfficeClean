@@ -16,6 +16,6 @@ extension User : Mappable {
         case phone
         case name
         case email
-        case photoURL
+        case photo
     }
 }

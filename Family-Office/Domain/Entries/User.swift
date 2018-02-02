@@ -12,26 +12,25 @@ public struct User : Codable {
     
     public let address: Address?
     public let birth: Int?
-    public let email: String
-    public let name: String
-    public let phone: String?
+    public var email: String
+    public var name: String
+    public var phone: String?
     public let uid: String
-    public var photoURL: String? = "https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg"
-    
+    public let photo: Photo?
+    public var families = [Family]()
     public init(address: Address,
                 email: String,
                 name: String,
-                phone: String,
                 uid: String,
                 birth: Int,
                 photoURL: String) {
         self.address = address
         self.email = email
         self.name = name
-        self.phone = phone
+        self.phone = nil
         self.uid = uid
         self.birth = birth
-        self.photoURL = photoURL
+        self.photo = nil
         
     }
     public init(uid: String, name: String, email: String){
@@ -40,9 +39,19 @@ public struct User : Codable {
         self.email = email
         self.birth = -1
         self.phone = ""
-        self.photoURL = ""
+        self.photo = nil
         self.address = nil
     }
+    public init(name: String, email: String, phone: String){
+        self.name = name
+        self.uid = ""
+        self.email = email
+        self.birth = -1
+        self.phone = phone
+        self.photo = nil
+        self.address = nil
+    }
+    
 }
 
 

@@ -36,7 +36,7 @@ extension UserBindeble {
             emailLbl.text = user.email
         }
         if let photo = photoProfile {
-            if let url  = URL(string: user.photoURL ?? "https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg") {
+            if let url  = URL(string: "") {
                 photo.kf.setImage(with: url)
             }else{
                 photo.image = #imageLiteral(resourceName: "profile_default")

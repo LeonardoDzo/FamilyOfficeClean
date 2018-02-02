@@ -11,6 +11,7 @@ import UIKit
 
 protocol SignUpNavigatorProtocol {
     func toSignIn() -> Void
+    func toPreHome(user: User) -> Void
 }
 class SignUpNavigator: SignUpNavigatorProtocol {
     private let navigationController: UINavigationController
@@ -23,6 +24,14 @@ class SignUpNavigator: SignUpNavigatorProtocol {
 
     func toSignIn() {
           navigationController.dismiss(animated: true)
+    }
+    func toPreHome(user: User) {
+        let preHome = PreHomeViewController()
+        let navigator = PreHomeNav(service: RMUserUseCaseProvider(), nc:  navigationController)
+        let viewModel = PreHomeViewModel(user: user, navigator: navigator)
+        preHome.viewModel = viewModel
+        let nc = UINavigationController(rootViewController: preHome)
+        navigationController.present(nc, animated: true, completion: nil)
     }
     
 }

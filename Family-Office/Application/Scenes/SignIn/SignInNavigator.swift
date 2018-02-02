@@ -37,7 +37,7 @@ class DefaultAuthNavigator: AuthNavigator {
     func toSignUp() {
         let signUp = SignUpViewController()
         let nc = UINavigationController(rootViewController: signUp)
-          let viewModel = SignUpviewModel(useCase: services.makeAuthUseCase(), navigator: SignUpNavigator(service: services, nc: nc))
+        let viewModel = SignUpviewModel(useCase: services.makeAuthUseCase(), navigator: SignUpNavigator(service: services, nc: nc))
         signUp.viewModel = viewModel
         navigationController.present(nc, animated: true, completion: nil)
     }

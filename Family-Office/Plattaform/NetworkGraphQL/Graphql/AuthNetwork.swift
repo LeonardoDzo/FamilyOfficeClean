@@ -23,8 +23,13 @@ public final class AuthNetwork {
             _ = RMUserUseCaseProvider().makeUseCase().save(user: authmodel.user).map({ authmodel.user })
             return authmodel.user
         }
-        
     }
     
+    func signUp(email: String, name: String, phone: String, password: String) -> Observable<User> {
+        return network.postItem(SignUpMutation(name: name, email: email, password: password, phone: phone)).map({ (authmodel) -> User in
+            _ = RMUserUseCaseProvider().makeUseCase().save(user: authmodel.user).map({ authmodel.user })
+            return authmodel.user
+        })
+    }
     
 }
