@@ -25,6 +25,7 @@ final class SignInviewModel: ViewModelType {
         let canLogin = Driver.combineLatest(emailAndPassword, activityIndicator.asDriver()) {
             return !$0.0.isEmpty && !$0.1.isEmpty && !$1
         }
+        
         let login = input.loginTrigger.withLatestFrom(emailAndPassword).flatMapLatest({
              [unowned self] in
             

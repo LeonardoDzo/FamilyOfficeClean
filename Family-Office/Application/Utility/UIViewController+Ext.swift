@@ -31,6 +31,7 @@ extension UIViewController {
                                        style: UIAlertActionStyle.cancel,
                                        handler: nil)
             alert.addAction(action)
+
             vc.present(alert, animated: true, completion: nil)
         })
     }

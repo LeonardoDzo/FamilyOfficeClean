@@ -15,7 +15,7 @@ target 'Family-Office' do
 	pod 'Eureka'
     pod 'GenericPasswordRow', '~> 3.0'
 	pod 'Kingfisher', '~> 4.0'
-	pod 'Alamofire'
+    pod 'Alamofire'
 	pod 'RxSwift',    '~> 4.0'
     	pod 'RxCocoa',    '~> 4.0'
 	pod 'Apollo', '~> 0.7.0'

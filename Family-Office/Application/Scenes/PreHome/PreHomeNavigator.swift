@@ -13,6 +13,7 @@ protocol PreHomeNavigator {
     func toHome()
     func toMe(user: User)
     func toSignIn()
+    func toAddFamily()
     func toProfile()
 }
 class PreHomeNav: PreHomeNavigator {
@@ -30,7 +31,13 @@ class PreHomeNav: PreHomeNavigator {
     func toHome() {
         
     }
-    
+    func toAddFamily() {
+        let view = AddEditFamilyViewController()
+        let nc = UINavigationController(rootViewController: view)
+        let navigator = AddEditNavigator(nc: nc)
+        view.viewModel = AddEditViewModel(navigator: navigator)
+        navigationController.present(nc, animated: true, completion: nil)
+    }
     func toSignIn() {
         
     }

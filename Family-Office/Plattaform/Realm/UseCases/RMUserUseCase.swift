@@ -12,6 +12,7 @@ import Realm
 import RxSwift
 
 final class RMUserUseCase<Repository>: UserUseCase where Repository: AbstractRepository, Repository.T == User {
+   
     private let repository : Repository
     init(repository: Repository) {
         self.repository = repository
@@ -24,6 +25,13 @@ final class RMUserUseCase<Repository>: UserUseCase where Repository: AbstractRep
     func delete(user: User)  -> Observable<Void> {
         return repository.delete(entity: user)
     }
-    
+    func getUser(by id: String) -> Observable<User?> {
+        return self.repository.query(uid: id).map({ (user) -> User in
+            if user == nil {
+                //GET USER NETWORK
+            }
+            return user!
+        })
+    }
     
 }

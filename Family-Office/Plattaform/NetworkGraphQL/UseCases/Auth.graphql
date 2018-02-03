@@ -4,12 +4,10 @@ mutation SignInUser($e:String!, $p:String!) {
         email: $e,
         password: $p
         }) {
-            token,
-            user {
-                id,
-                name,
-                email
-            }
+        token,
+        user {
+        ...UserDetails
+        }
     }
 }
 
@@ -21,11 +19,15 @@ mutation SignUp($name:String!, $email:String!, $password: String!, $phone: Strin
             password: $password
         }
         ){
-        token,
-        user {
-            id,
-            name,
-            email
+            token,
+            user {
+            ...UserDetails
+            }
+
         }
-    }
+}
+fragment UserDetails on User {
+    id,
+    name,
+    email
 }

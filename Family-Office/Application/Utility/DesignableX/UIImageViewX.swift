@@ -34,6 +34,14 @@ class UIImageViewX: SpringImageView {
         }
     }
     
+    @IBInspectable public var filter: UIColor = UIColor.clear {
+        didSet {
+            let view = UIView(frame: bounds)
+            view.backgroundColor = filter
+            addSubview(view)
+        }
+    }
+    
     @IBInspectable var pulseDelay: Double = 0.0
     
     @IBInspectable var popIn: Bool = false

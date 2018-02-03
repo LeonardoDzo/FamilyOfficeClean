@@ -14,7 +14,7 @@ import RxSwift
 class Prehome: UIViewX, UserBindeble {
     var user: User!
     
-    var topContent: UIImageViewX = UIImageViewX()
+    var topContent = UIImageViewX()
     var photoProfile: UIImageViewX = UIImageViewX()
     var nameLbl: UILabelX! = UILabelX()
     var emailLbl: UILabelX! = UILabelX()
@@ -24,6 +24,19 @@ class Prehome: UIViewX, UserBindeble {
     convenience init() {
         self.init(frame:CGRect.zero)
         render()
+    }
+    
+    fileprivate func styleForBtnCreateFamily() -> (UIButtonX) -> Void {
+        return { (btn) in
+            btn.cornerRadius = 40
+            btn.animation = "squeezeUp"
+            btn.curve =  "spring"
+            btn.delay = 1
+            btn.setImage(#imageLiteral(resourceName: "icons8-add").maskWithColor(color: #colorLiteral(red: 0.1764705926, green: 0.01176470611, blue: 0.5607843399, alpha: 1)), for: .normal)
+            btn.shadowOpacity = 0.3
+            btn.shadowColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+            btn.shadowRadius = 2
+        }
     }
     
     func render() {
@@ -63,7 +76,7 @@ class Prehome: UIViewX, UserBindeble {
         topContent.contentMode = .scaleToFill
         photoProfile.width(100).height(100)
         backgroundColor = #colorLiteral(red: 0.921431005, green: 0.9214526415, blue: 0.9214410186, alpha: 1)
-        photoProfile.image = #imageLiteral(resourceName: "profile_default")
+        photoProfile.setImage(url: URL(string: "https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg")!, placeholderImage: #imageLiteral(resourceName: "profile_default"))
         settingBtn.style(self.styleBtn).style({ (btn) in
             btn.setImage(#imageLiteral(resourceName: "Setting"), for: .normal)
         })
@@ -75,13 +88,7 @@ class Prehome: UIViewX, UserBindeble {
         emailLbl.style(self.styleTextField)
         nameLbl.style(self.styleTextField)
         photoProfile.style(self.styleImg)
-        creteFamilybtn.style { (btn) in
-            btn.cornerRadius = 40
-            btn.animation = "squeezeUp"
-            btn.curve =  "spring"
-            btn.delay = 1
-            btn.setImage(#imageLiteral(resourceName: "icons8-add").maskWithColor(color: #colorLiteral(red: 0.1764705926, green: 0.01176470611, blue: 0.5607843399, alpha: 1)), for: .normal)
-        }
+        creteFamilybtn.style(self.styleForBtnCreateFamily())
         animations()
         
     }

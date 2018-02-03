@@ -11,22 +11,32 @@ import RxCocoa
 import RxSwift
 
 final class PreHomeViewModel: ViewModelType {
-    private let user: User
-
+    private let uid: String
+    private let userUseCase: UserUseCase
     private let navigator: PreHomeNav
-    init(user: User, navigator: PreHomeNav) {
-        self.user = user
+    init(uid: String, navigator: PreHomeNav, userusecase: UserUseCase) {
+        self.uid = uid
+        self.userUseCase = userusecase
         self.navigator = navigator
     }
     func transform(input: PreHomeViewModel.Input) -> PreHomeViewModel.Output {
-        let u = Variable(user).asDriver().startWith(self.user)
-        return Output(user: u)
+    
+        let toCreateFamily  = input.createBtntrigger.do(onNext: navigator.toAddFamily)
+        let user = input.triggerUser.flatMapLatest {
+            return self.userUseCase.getUser(by: self.uid).flatMapLatest({ (<#User?#>) -> ObservableConvertibleType in
+                <#code#>
+            })
+        }
+        return Output(user: u, create: toCreateFamily)
     }
 }
 extension PreHomeViewModel {
     struct Input {
+        let triggerUser: Driver<Void>
+        let createBtntrigger: Driver<Void>
     }
     struct Output {
         let user: Driver<User>
+        let create: Driver<Void>
     }
 }

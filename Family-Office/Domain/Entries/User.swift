@@ -16,14 +16,14 @@ public struct User : Codable {
     public var name: String
     public var phone: String?
     public let uid: String
-    public let photo: Photo?
+    public var photo: Photo?
     public var families = [Family]()
     public init(address: Address,
                 email: String,
                 name: String,
                 uid: String,
                 birth: Int,
-                photoURL: String) {
+                families: [Family] ) {
         self.address = address
         self.email = email
         self.name = name
@@ -31,6 +31,7 @@ public struct User : Codable {
         self.uid = uid
         self.birth = birth
         self.photo = nil
+        self.families = families
         
     }
     public init(uid: String, name: String, email: String){

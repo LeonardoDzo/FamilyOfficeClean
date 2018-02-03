@@ -26,11 +26,18 @@ class PreHomeViewController: UIViewController {
     fileprivate func setupView(){
         self.v = Prehome()
         self.view = self.v
-        let input = PreHomeViewModel.Input()
+        let input = PreHomeViewModel.Input(createBtntrigger: self.v.creteFamilybtn.rx.tap.asDriver())
         let output = self.viewModel.transform(input: input)
         output.user.drive(self.userBinding).disposed(by: self.disposeBag)
+        output.create
+            .drive()
+            .disposed(by: disposeBag)
         self.navigationController?.isNavigationBarHidden = true
     }
+    
+  
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
