@@ -10,9 +10,9 @@ import Foundation
 import RxSwift
 
 public protocol UserUseCase {
-    func save(user: User) -> Observable<Void>
-    func delete(user: User) -> Observable<Void>
-    func getUser(by id: String) -> Observable<User?>
-   // func allUser(fid: String) -> Void
+    //func save(user: User) -> Observable<User>
+    //func delete(user: User) -> Observable<Void>
+    //func getUser(by id: String) -> Observable<User>
+    //func allUser(fid: String) -> Void
     
 }

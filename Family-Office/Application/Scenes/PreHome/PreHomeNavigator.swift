@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-
+import SideMenu
 protocol PreHomeNavigator {
     func toHome()
     func toMe(user: User)
@@ -19,8 +19,8 @@ protocol PreHomeNavigator {
 class PreHomeNav: PreHomeNavigator {
     
     private let navigationController: UINavigationController
-    private let service: RMUserUseCaseProvider
-    init(service: RMUserUseCaseProvider, nc: UINavigationController) {
+    private let service: NetUseCaseProvider
+    init(service: NetUseCaseProvider, nc: UINavigationController) {
         self.service = service
         self.navigationController = nc
     }
@@ -29,13 +29,24 @@ class PreHomeNav: PreHomeNavigator {
     }
     
     func toHome() {
-        
+        let homeNavigationController = UINavigationController()
+        homeNavigationController.tabBarItem = UITabBarItem(title: "Home", image: #imageLiteral(resourceName: "icons8-booking"), selectedImage: nil)
+    
+        let homeNavigator = DefaultHomeNavigator(navigationController: homeNavigationController)
+        let tabBarController = UITabBarController()
+        tabBarController.viewControllers = [
+            homeNavigationController
+        ]
+        tabBarController.view.backgroundColor = #colorLiteral(red: 0.9792956669, green: 0.9908331388, blue: 1, alpha: 1)
+        navigationController.present(tabBarController, animated: true, completion: nil)
+        homeNavigator.toHome()
+       
     }
     func toAddFamily() {
         let view = AddEditFamilyViewController()
         let nc = UINavigationController(rootViewController: view)
         let navigator = AddEditNavigator(nc: nc)
-        view.viewModel = AddEditViewModel(navigator: navigator)
+        view.viewModel = AddEditViewModel(navigator: navigator, familyUseCase: service.makeFamilyUseCase())
         navigationController.present(nc, animated: true, completion: nil)
     }
     func toSignIn() {

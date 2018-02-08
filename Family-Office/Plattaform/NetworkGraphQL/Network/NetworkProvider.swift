@@ -10,9 +10,10 @@ import Foundation
 import Apollo
 final class NetworkProvider {
     let apollo: ApolloClient!
+    var offline = false
     
-    
-    public init() {
+    public init(_ offline: Bool = false) {
+        self.offline = offline
         apollo = {
             let configuration = URLSessionConfiguration.default
             // Add additional headers as needed
@@ -28,5 +29,13 @@ final class NetworkProvider {
     public func makeAuthNetwork() -> AuthNetwork {
         let network = Network<AuthModel>(apollo)
         return AuthNetwork(network: network)
+    }
+    public func makeUserNetwork() -> UserNetwork {
+        let network = Network<User>(apollo)
+        return UserNetwork(network: network)
+    }
+    public func makeFamilyNetwork() -> FamilyNetwork {
+        let network = Network<Family>(apollo)
+        return FamilyNetwork(network: network)
     }
 }

@@ -12,26 +12,16 @@ import RxSwift
 
 public final class AuthNetwork {
     private let network: Network<AuthModel>
-    
     init(network: Network<AuthModel>) {
         self.network = network
     }
     
-    func signIn(email: String, password: String) -> Observable<User> {
-       return network.postItem(SignInUserMutation(e: email, p: password))
-        .map { (authmodel) -> User in
-            UserDefaults().set(authmodel.token, forKey: "token")
-            UserDefaults().set(authmodel.user.uid, forKey: "uid")
-            _ = RMUserUseCaseProvider().makeUseCase().save(user: authmodel.user).map({ authmodel.user })
-            return authmodel.user
-        }
+    func signIn(email: String, password: String) -> Observable<AuthModel> {
+        return network.postItem(SignInUserMutation(e: email, p: password))
     }
     
-    func signUp(email: String, name: String, phone: String, password: String) -> Observable<User> {
-        return network.postItem(SignUpMutation(name: name, email: email, password: password, phone: phone)).map({ (authmodel) -> User in
-            _ = RMUserUseCaseProvider().makeUseCase().save(user: authmodel.user).map({ authmodel.user })
-            return authmodel.user
-        })
+    func signUp(email: String, name: String, phone: String, password: String) -> Observable<AuthModel> {
+        return network.postItem(SignUpMutation(name: name, email: email, password: password, phone: phone))
     }
     
 }

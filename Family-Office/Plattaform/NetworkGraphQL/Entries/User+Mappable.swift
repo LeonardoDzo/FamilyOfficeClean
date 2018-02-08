@@ -16,6 +16,13 @@ extension User : Mappable {
         case phone
         case name
         case email
+        case families
         case photo
     }
+    
+    enum AnotherCodingKeys: String, CodingKey {
+        case family
+        case __typename
+    }
+    
 }

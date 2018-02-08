@@ -11,32 +11,34 @@ import RxCocoa
 import RxSwift
 
 final class PreHomeViewModel: ViewModelType {
-    private let uid: String
-    private let userUseCase: UserUseCase
+    private let user: User
     private let navigator: PreHomeNav
-    init(uid: String, navigator: PreHomeNav, userusecase: UserUseCase) {
-        self.uid = uid
-        self.userUseCase = userusecase
+    init(user: User, navigator: PreHomeNav) {
+        self.user = user
         self.navigator = navigator
     }
     func transform(input: PreHomeViewModel.Input) -> PreHomeViewModel.Output {
     
         let toCreateFamily  = input.createBtntrigger.do(onNext: navigator.toAddFamily)
-        let user = input.triggerUser.flatMapLatest {
-            return self.userUseCase.getUser(by: self.uid).flatMapLatest({ (<#User?#>) -> ObservableConvertibleType in
-                <#code#>
-            })
-        }
-        return Output(user: u, create: toCreateFamily)
+        let user = Variable(self.user).asDriver().startWith(self.user)
+        let fams = Variable(self.user.families).asDriver().map { (fams) -> [Family] in
+            return fams
+            }.startWith(self.user.families )
+        let selectedFamily = input.selection
+            .withLatestFrom(fams) { _, fams in return fams.first! }
+            .do(onNext:{ _ in self.navigator.toHome()})
+        return Output(user: user, families: fams, create: toCreateFamily, selectedFamily: selectedFamily)
     }
 }
 extension PreHomeViewModel {
     struct Input {
-        let triggerUser: Driver<Void>
+        let selection: Driver<IndexPath>
         let createBtntrigger: Driver<Void>
     }
     struct Output {
         let user: Driver<User>
+        let families: Driver<[Family]>
         let create: Driver<Void>
+        let selectedFamily: Driver<Family>
     }
 }

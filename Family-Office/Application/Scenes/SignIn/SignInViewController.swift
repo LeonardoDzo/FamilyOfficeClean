@@ -43,6 +43,10 @@ class SignInViewController: UIViewController {
         output.error
             .drive(self.errorBinding)
             .disposed(by: disposeBag)
+        output.emailpass
+            .drive(self.emailPassBinding)
+            .disposed(by: disposeBag)
+        
     }
     
     
@@ -50,4 +54,13 @@ class SignInViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    var emailPassBinding: Binder<(String,String)> {
+        return Binder(self, binding: { (vc, e) in
+            vc.v.email.text = e.0
+            vc.v.password.text = e.1
+            
+        })
+    }
+    
 }

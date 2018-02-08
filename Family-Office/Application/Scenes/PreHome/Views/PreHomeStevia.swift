@@ -13,7 +13,7 @@ import RxSwift
 
 class Prehome: UIViewX, UserBindeble {
     var user: User!
-    
+    var tableView : UITableView = UITableView()
     var topContent = UIImageViewX()
     var photoProfile: UIImageViewX = UIImageViewX()
     var nameLbl: UILabelX! = UILabelX()
@@ -39,6 +39,22 @@ class Prehome: UIViewX, UserBindeble {
         }
     }
     
+    fileprivate func styles() {
+        photoProfile.setImage(url: URL(string: "https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg")!, placeholderImage: #imageLiteral(resourceName: "profile_default"))
+        settingBtn.style(self.styleBtn).style({ (btn) in
+            btn.setImage(#imageLiteral(resourceName: "Setting"), for: .normal)
+        })
+        logoutBtn.style(self.styleBtn).style { (btn) in
+            btn.setImage(#imageLiteral(resourceName: "logout"), for: .normal)
+        }
+        logoutBtn.style(self.styleBtn)
+        photoProfile.centerHorizontally()
+        emailLbl.style(self.styleTextField)
+        nameLbl.style(self.styleTextField)
+        photoProfile.style(self.styleImg)
+        creteFamilybtn.style(self.styleForBtnCreateFamily())
+    }
+    
     func render() {
         sv(
             topContent,
@@ -47,13 +63,17 @@ class Prehome: UIViewX, UserBindeble {
             nameLbl,
             settingBtn,
             logoutBtn,
-            creteFamilybtn
+            creteFamilybtn,
+            tableView
         )
-       
+        conftable()
         layout(
             0,
             |topContent.height(300).width(100%)|,
-            0,
+            10,
+            |-tableView.width(100%)-|,
+            10,
+            creteFamilybtn,
             ""
         )
         
@@ -68,7 +88,6 @@ class Prehome: UIViewX, UserBindeble {
             ""
         )
         creteFamilybtn.height(80).width(80).bottom(5%).centerHorizontally()
-        
         settingBtn.top(240).left(15%)
         logoutBtn.top(240).right(15%)
         topContent.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
@@ -76,28 +95,18 @@ class Prehome: UIViewX, UserBindeble {
         topContent.contentMode = .scaleToFill
         photoProfile.width(100).height(100)
         backgroundColor = #colorLiteral(red: 0.921431005, green: 0.9214526415, blue: 0.9214410186, alpha: 1)
-        photoProfile.setImage(url: URL(string: "https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg")!, placeholderImage: #imageLiteral(resourceName: "profile_default"))
-        settingBtn.style(self.styleBtn).style({ (btn) in
-            btn.setImage(#imageLiteral(resourceName: "Setting"), for: .normal)
-        })
-        logoutBtn.style(self.styleBtn).style { (btn) in
-            btn.setImage(#imageLiteral(resourceName: "logout"), for: .normal)
-        }
-        logoutBtn.style(self.styleBtn)
-        photoProfile.centerHorizontally()
-        emailLbl.style(self.styleTextField)
-        nameLbl.style(self.styleTextField)
-        photoProfile.style(self.styleImg)
-        creteFamilybtn.style(self.styleForBtnCreateFamily())
+        styles()
         animations()
         
     }
-    internal func animations() -> Void {
-        for view in self.subviews as [UIView] {
-            if let v = view as? Springable {
-                v.animate()
-            }
-        }
+    
+    fileprivate func conftable() {
+        
+        tableView.estimatedRowHeight = 100
+        tableView.rowHeight = 64
+        tableView.register(FamilyTableViewCell.self, forCellReuseIdentifier: FamilyTableViewCell.reuseID)
+        
+        tableView.tableFooterView = UIView()
     }
     
     func styleImg(_ img: UIImageViewX) -> Void {

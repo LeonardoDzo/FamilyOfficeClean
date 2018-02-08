@@ -10,9 +10,10 @@ import Foundation
 
 
 
-public protocol UseCaseProvider {
+public protocol AuthUseCaseProvider {
     func makeAuthUseCase() -> AuthUseCase
 }
-public protocol UserUseCaseProvider {
+public protocol UseCaseProvider {
     func makeUseCase() -> UserUseCase
+    func makeFamilyUseCase() -> FamilyUseCase
 }

@@ -71,14 +71,6 @@ class SignInView: UIViewX {
         animations()
     }
     
-    internal func animations() -> Void {
-        for view in self.subviews as [UIView] {
-            if let v = view as? Springable {
-               v.animate()
-            }
-        }  
-    }
-    
     func styleTextField(_ text: UITextFieldX) -> Void {
         text.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         text.leftPadding = 10

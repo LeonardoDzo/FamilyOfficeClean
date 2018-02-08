@@ -17,7 +17,7 @@ final class RMFamily: Object {
     public var members = List<RMUser>()
     
     override class func primaryKey() -> String {
-        return "id"
+        return "uid"
     }
 }
 extension RMFamily: DomainConvertibleType {

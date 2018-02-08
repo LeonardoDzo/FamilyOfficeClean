@@ -10,12 +10,12 @@ import Foundation
 
 public struct Family : Codable {
     
-    public let uid: String
-    public let name: String
-    public let photo: Photo?
-    public let admin: String
+    public var uid: String = ""
+    public var name: String = ""
+    public var photo: Photo? = nil
+    public var admin: String? = ""
     public var members = [User]()
-    
+    public var __typename = ""
     public init(name: String,
                 admin: String,
                 members: [User],
@@ -26,6 +26,31 @@ public struct Family : Codable {
         self.name = name
         self.uid = uid
     }
+    public init(name: String) {
+        self.admin = ""
+        self.members = []
+        self.photo = nil
+        self.name = name
+        self.uid = ""
+    }
+    public init(from decoder: Decoder) throws
+    {
+        
+        if  let values = try? decoder.container(keyedBy: CodingKeys.self) {
+            
+            name = try values.decode(String.self, forKey: .name)
+            
+            uid = try values.decode(String.self, forKey: .uid)
+            
+            photo = try! values.decodeIfPresent(Photo.self, forKey: .photo)
+            members = try values.decodeIfPresent([[String:User]].self, forKey: .members)?.flatMap({$0.values.filter({
+            !$0.uid.isEmpty})}) ?? []
+        }
+        
+        
+//        members = try values.decode()
+    }
+    
 }
 
 extension Family: Equatable {

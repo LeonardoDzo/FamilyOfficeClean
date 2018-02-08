@@ -10,14 +10,14 @@ import Foundation
 
 public struct User : Codable {
     
-    public let address: Address?
-    public let birth: Int?
-    public var email: String
-    public var name: String
-    public var phone: String?
-    public let uid: String
-    public var photo: Photo?
-    public var families = [Family]()
+    public var address: Address?
+    public var birth: Int? = -1
+    public var email: String = ""
+    public var name: String = ""
+    public var phone: String? = nil
+    public var uid: String = ""
+    public var photo: Photo? = nil
+    public var families: [Family] = [Family]()
     public init(address: Address,
                 email: String,
                 name: String,
@@ -53,8 +53,25 @@ public struct User : Codable {
         self.address = nil
     }
     
-}
+    public init(from decoder: Decoder) throws
+    {
+    
+        if  let values = try? decoder.container(keyedBy: CodingKeys.self)  {
+            name = try values.decode(String.self, forKey: .name)
+            phone = try values.decodeIfPresent(String.self, forKey: .phone)
+            uid = try values.decode(String.self, forKey: .uid)
+            birth = try values.decodeIfPresent(Int.self, forKey: .birth)
+            photo = try values.decodeIfPresent(Photo.self, forKey: .photo)
+            email = try values.decode(String.self, forKey: .email)
+            address = try! values.decodeIfPresent(Address.self, forKey: .address)
+            
+            families = try values.decodeIfPresent([[String:Family]].self, forKey: .families)?.flatMap({$0.values.filter({!$0.uid.isEmpty})}) ?? []
+        }
+        
 
+    }
+
+}
 
 extension User: Equatable {
     public static func == (lhs: User, rhs: User) -> Bool {

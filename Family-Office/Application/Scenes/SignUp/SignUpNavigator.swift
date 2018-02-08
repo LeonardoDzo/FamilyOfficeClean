@@ -15,9 +15,9 @@ protocol SignUpNavigatorProtocol {
 }
 class SignUpNavigator: SignUpNavigatorProtocol {
     private let navigationController: UINavigationController
-    private let services: NetAuthUseCaseProvider
+    private let services: NetUseCaseProvider
     
-    init(service: NetAuthUseCaseProvider, nc: UINavigationController) {
+    init(service: NetUseCaseProvider, nc: UINavigationController) {
         self.services = service
         self.navigationController = nc
     }
@@ -28,7 +28,7 @@ class SignUpNavigator: SignUpNavigatorProtocol {
     func toPreHome(user: User) {
         let preHome = PreHomeViewController()
         let nc = UINavigationController(rootViewController: preHome)
-        let navigator = PreHomeNav(service: RMUserUseCaseProvider(), nc:  nc)
+        let navigator = PreHomeNav(service: NetUseCaseProvider(), nc:  nc)
         let viewModel = PreHomeViewModel(user: user, navigator: navigator)
         preHome.viewModel = viewModel
        

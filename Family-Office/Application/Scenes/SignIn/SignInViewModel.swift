@@ -20,7 +20,11 @@ final class SignInviewModel: ViewModelType {
     }
     func transform(input: SignInviewModel.Input) -> SignInviewModel.Output {
         let errorTracker = ErrorTracker()
-        let emailAndPassword = Driver.combineLatest(input.email, input.password)
+        let emailAndPassword = Driver.combineLatest(input.email, input.password).map({ (e, p) -> (String,String) in
+            let email = UserDefaults().value(forKey: "email") as? String ?? e
+            let pass =  UserDefaults().value(forKey: "password") as? String ?? p
+            return ( email , pass )
+        })
         let activityIndicator = ActivityIndicator()
         let canLogin = Driver.combineLatest(emailAndPassword, activityIndicator.asDriver()) {
             return !$0.0.isEmpty && !$0.1.isEmpty && !$1
@@ -37,23 +41,26 @@ final class SignInviewModel: ViewModelType {
         })
         .do(onNext: navigator.toPreHome)
         
+     
+        
         let signUp = input.signUpTrigger
             .do(onNext: navigator.toSignUp)
         
-        return Output(dismiss: login, loginEnabled: canLogin, signUp: signUp, error: errorTracker.asDriver())
+        return Output(dismiss: login, loginEnabled: canLogin, signUp: signUp, emailpass: emailAndPassword, error: errorTracker.asDriver())
     }
 }
 extension SignInviewModel {
     struct Input {
         let signUpTrigger: Driver<Void>
         let loginTrigger: Driver<Void>
-        let email: Driver<String>
-        let password: Driver<String>
+        var email: Driver<String>
+        var password: Driver<String>
     }
     struct Output {
         let dismiss: Driver<User>
         let loginEnabled: Driver<Bool>
         let signUp: Driver<Void>
+        let emailpass: Driver<(String,String)>
         let error: Driver<Error>
     }
 }

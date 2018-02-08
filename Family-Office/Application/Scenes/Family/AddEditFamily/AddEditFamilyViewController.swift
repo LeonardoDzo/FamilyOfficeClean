@@ -35,12 +35,16 @@ class AddEditFamilyViewController: UIViewController {
     fileprivate func setupView(){
         self.v = AddEditFamily()
         self.view = self.v
-        let input = AddEditViewModel.Input(backTrigger: v.cancelBtn.rx.tap.asDriver(),name: self.v.nameTxt.rx.text.orEmpty.asDriver() )
+        let input = AddEditViewModel.Input(backTrigger: v.cancelBtn.rx.tap.asDriver(), saveTrigger: self.v.saveBtn.rx.tap.asDriver(), name: self.v.nameTxt.rx.text.orEmpty.asDriver() )
         let output = viewModel.transform(input: input)
         output.back
             .drive()
             .disposed(by: disposeBag)
         output.canSave.drive(self.v.saveBtn.rx.isHidden).disposed(by: disposeBag)
+        output.saved.drive().disposed(by: disposeBag)
+        output.error
+            .drive(self.errorBinding)
+            .disposed(by: disposeBag)
         self.navigationController?.isNavigationBarHidden = true
     }
     

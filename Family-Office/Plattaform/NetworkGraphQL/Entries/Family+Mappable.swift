@@ -9,6 +9,14 @@
 import Foundation
 
 extension Family: Mappable  {
+    enum CodingKeys: String, CodingKey {
+        case name
+        case uid = "id"
+        case members
+        case photo
+        case __typename
+    }
+  
 }
 
 

@@ -1,0 +1,31 @@
+
+mutation CreateFamily($name:String!) {
+    createFamily(name: $name) {
+        ...FamilyDetails,
+        members{
+            user{
+                ...UserDetails,
+                families {
+                    family{
+                        ...FamilyDetails
+                    }
+                }
+            }
+        }
+    }
+}
+
+fragment PhotoDetails on Attachment {
+    mime,
+    ext,
+    url,
+    name
+}
+
+fragment FamilyDetails on Family {
+    id,
+    name,
+    photo{
+    ...PhotoDetails
+    }
+}

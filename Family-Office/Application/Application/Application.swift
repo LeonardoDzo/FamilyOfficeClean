@@ -11,13 +11,10 @@ import UIKit
 
 final class Application {
     static let shared = Application()
-
-    private let realmUseCaseProvider: RMUserUseCaseProvider
-    private let networkUseCaseProvider: NetAuthUseCaseProvider
+    private let networkUseCaseProvider: NetUseCaseProvider
     
     private init() {
-        self.realmUseCaseProvider = RMUserUseCaseProvider()
-        self.networkUseCaseProvider = NetAuthUseCaseProvider()
+        self.networkUseCaseProvider = NetUseCaseProvider()
     }
     
     func configureMainInterface(in window: UIWindow) {

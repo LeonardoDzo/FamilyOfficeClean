@@ -17,8 +17,10 @@ target 'Family-Office' do
 	pod 'Kingfisher', '~> 4.0'
     pod 'Alamofire'
 	pod 'RxSwift',    '~> 4.0'
-    	pod 'RxCocoa',    '~> 4.0'
+    pod 'RxCocoa',    '~> 4.0'
 	pod 'Apollo', '~> 0.7.0'
-	pod "RxRealm"
+    pod 'SideMenu'
+	pod 'RxRealm'
+    pod 'GoogleSignIn'
 
 end
