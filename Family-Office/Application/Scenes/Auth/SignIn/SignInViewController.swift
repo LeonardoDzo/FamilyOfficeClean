@@ -9,7 +9,9 @@
 import UIKit
 import RxSwift
 import RxCocoa
-class SignInViewController: UIViewController {
+import GoogleSignIn
+
+class SignInViewController: UIViewController, GIDSignInUIDelegate {
     private let disposeBag = DisposeBag()
     var v = SignInView()
     var viewModel: SignInviewModel!
@@ -17,11 +19,9 @@ class SignInViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        on("INJECTION_BUNDLE_NOTIFICATION") {
-            self.v = SignInView()
-            self.view = self.v
-            self.bindViewModel()
-        }
+        GIDSignIn.sharedInstance().uiDelegate = self
+        self.v = SignInView()
+        self.view = self.v
         self.navigationController?.isNavigationBarHidden = true
         self.bindViewModel()
         // Do any additional setup after loading the view.
@@ -55,6 +55,8 @@ class SignInViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+   
+    
     var emailPassBinding: Binder<(String,String)> {
         return Binder(self, binding: { (vc, e) in
             vc.v.email.text = e.0
@@ -63,4 +65,23 @@ class SignInViewController: UIViewController {
         })
     }
     
+}
+extension SignInViewController {
+    
+    // pressed the Sign In button
+    func signInWillDispatch(signIn: GIDSignIn!, error: NSError!) {
+        
+    }
+    
+    // Present a view that prompts the user to sign in with Google
+    func signIn(signIn: GIDSignIn!,
+                presentViewController viewController: UIViewController!) {
+        self.present(viewController, animated: true, completion: nil)
+    }
+    
+    // Dismiss the "Sign in with Google" view
+    func signIn(signIn: GIDSignIn!,
+                dismissViewController viewController: UIViewController!) {
+        self.dismiss(animated: true, completion: nil)
+    }
 }

@@ -39,11 +39,13 @@ extension RMUser: DomainConvertibleType {
 
 extension User: RealmRepresentable {
     func asRealm() -> RMUser {
-        let user = RMUser()
-        user.uid = uid
-        user.name = name
-        user.email = email
-        user.photo = photo?.asRealm()
-        return user
+        return RMUser.build({ (object) in
+            object.birthday = birth
+            object.email = email
+            object.name = name
+            object.phone = phone
+            object.photo = photo?.asRealm()
+            object.uid = uid
+        })
     }
 }

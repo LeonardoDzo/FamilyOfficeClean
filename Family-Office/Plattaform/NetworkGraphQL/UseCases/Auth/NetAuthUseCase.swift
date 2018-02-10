@@ -8,34 +8,37 @@
 
 import Foundation
 import RxSwift
-final class NetAuthUseCase<Repository>: AuthUseCase where Repository: AbstractRepository, Repository.T == User {
+final class NetAuthUseCase: AuthUseCase {
 
     private let network: AuthNetwork!
-    private let repository: Repository!
-    
-    init(_ network: AuthNetwork, repository: Repository) {
+    private let provider: RMUseCaseProvider!
+    init(_ network: AuthNetwork, provider: RMUseCaseProvider = RMUseCaseProvider()) {
         self.network = network
-        self.repository = repository
+        self.provider = provider
+    }
+    
+    fileprivate func afterLogin(_ authmodel: (AuthModel), pass: String) {
+        UserDefaults().set(authmodel.token, forKey: "token")
+        UserDefaults().set(authmodel.user.email, forKey: "email")
+        UserDefaults().set(pass, forKey: "password")
+        _ = self.provider.makeUseCase().save(user: authmodel.user).subscribe().dispose()
+        authmodel.user.families.forEach({ (family) in
+          _ = self.provider.makeFamilyUseCase().save(fam: family).subscribe().dispose()
+        })
     }
     
     func signIn(email: String, password: String) -> Observable<User> {
         return  network.signIn(email:email, password: password)
             .do(onNext: { authmodel in
-                 UserDefaults().set(authmodel.token, forKey: "token")
-                 UserDefaults().set(authmodel.user.email, forKey: "email")
-                 UserDefaults().set(password, forKey: "password")
-                //Save token
-               _ = self.repository.save(entity: authmodel.user).debug()
+                self.afterLogin(authmodel, pass: password)
             }).map({ (authmodel) -> User in
                 return authmodel.user
             })
     }
     func signUp(user:User, password: String) -> Observable<User> {
-        return network.signUp(email: user.email, name: user.name, phone: user.phone!, password: password)
+        return network.signUp(email: user.email, name: user.name, phone: user.phone, password: password)
             .do(onNext: { authmodel in
-                
-            
-              _ = self.repository.save(entity: user)
+                self.afterLogin(authmodel, pass: password)
             }).map({ (authmodel) -> User in
                 return authmodel.user
             })

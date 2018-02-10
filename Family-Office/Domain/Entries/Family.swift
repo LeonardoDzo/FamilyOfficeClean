@@ -15,7 +15,7 @@ public struct Family : Codable {
     public var photo: Photo? = nil
     public var admin: String? = ""
     public var members = [User]()
-    public var __typename = ""
+    
     public init(name: String,
                 admin: String,
                 members: [User],

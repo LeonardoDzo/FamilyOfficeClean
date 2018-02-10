@@ -18,8 +18,8 @@ protocol AbstractRepository {
     func query(uid: String) -> Maybe<T>
     func query(with predicate: NSPredicate,
                sortDescriptors: [NSSortDescriptor]) -> Observable<[T]>
-    func save(entity: T) -> Completable
-    func delete(entity: T) -> Completable
+    func save(entity: T) -> Observable<Void>
+    func delete(entity: T) ->  Observable<Void>
 }
 
 final class Repository<T:RealmRepresentable>: AbstractRepository where T == T.RealmType.DomainType, T.RealmType: Object {
@@ -33,7 +33,7 @@ final class Repository<T:RealmRepresentable>: AbstractRepository where T == T.Re
     
     init(configuration: Realm.Configuration) {
         self.configuration = configuration
-        let name = "com.FamilyOffice.RealmPlatform.Repository"
+        let name = "Family-Office-RealmPlatform-Repository"
         self.scheduler = RunLoopThreadScheduler(threadName: name)
         
         print("File 📁 url: \(RLMRealmPathForFile("default.realm"))")
@@ -68,16 +68,16 @@ final class Repository<T:RealmRepresentable>: AbstractRepository where T == T.Re
             .subscribeOn(scheduler)
     }
     
-    func save(entity: T) -> Completable {
-        return Completable.create(subscribe: { (observer) -> Disposable in
-            return self.realm.rx.save(entity: entity).subscribe()
-        })
+    func save(entity: T) ->  Observable<Void> {
+        return Observable.deferred {
+            return self.realm.rx.save(entity: entity)
+            }.debug().subscribeOn(scheduler)
     }
     
-    func delete(entity: T) -> Completable {
-        return Completable.create(subscribe: { (observer) -> Disposable in
-            return self.realm.rx.delete(entity: entity).subscribe()
-        })
+    func delete(entity: T) ->  Observable<Void> {
+        return Observable.deferred {
+            return self.realm.rx.delete(entity: entity)
+            }.subscribeOn(scheduler)
     }
     
 }

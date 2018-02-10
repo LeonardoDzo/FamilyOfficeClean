@@ -32,7 +32,7 @@ final class AddEditViewModel: ViewModelType {
                     .trackError(errorTracker)
                     .trackActivity(activityIndicator)
                     .asDriverOnErrorJustComplete()
-            }.do(onNext:{ family in
+            }.do(onNext:{ _ in
                 self.navigator.toPrehome()
             })
         
@@ -48,7 +48,7 @@ extension AddEditViewModel {
     struct Output {
         let back: Driver<Void>
         let canSave: Driver<Bool>
-        let saved: Driver<Family>
+        let saved: Driver<Void>
         let error: Driver<Error>
     }
 }

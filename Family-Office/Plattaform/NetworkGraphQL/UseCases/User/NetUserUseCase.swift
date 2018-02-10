@@ -9,18 +9,17 @@
 import Foundation
 import RxSwift
 
-final class NetUserUseCase<Repository>: UserUseCase where Repository: AbstractRepository, Repository.T == User {
+final class NetUserUseCase: UserUseCase  {
     private let network: UserNetwork
-    private var offline = false
-    private var repository: Repository!
-    init(network: UserNetwork, repository: Repository, _ offline:Bool = false) {
+
+    init(network: UserNetwork) {
         self.network = network
-        self.repository = repository
-        self.offline = offline
     }
-//    func save(user: User) -> Observable<User> {
-//        return network.
-//    }
+
+    func save(user: User) -> Observable<Void> {
+        return Variable(()).asObservable()
+    }
+    
 //    func delete(user: User) -> Observable<Void> {
 //        
 //    }

@@ -27,9 +27,10 @@ class DefaultAuthNavigator: AuthNavigator {
         let preHome = PreHomeViewController()
         let nc = UINavigationController(rootViewController: preHome)
         let navigator = PreHomeNav(service: NetUseCaseProvider(), nc:  nc)
-        let viewModel = PreHomeViewModel(user: user, navigator: navigator)
+        let viewModel = PreHomeViewModel(user: user, navigator: navigator, familyUseCase: RMUseCaseProvider().makeFamilyUseCase())
         preHome.viewModel = viewModel
-        
+        RMUseCaseProvider().makeFamilyUseCase().save(fam: Family(name: "Familia test", admin: "", members: [user], uid: "ERT4356SWS"))
+            .asDriverOnErrorJustComplete()
         navigationController.present(nc, animated: true, completion: nil)
     }
     func toSignIn() {

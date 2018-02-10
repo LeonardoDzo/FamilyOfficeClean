@@ -10,7 +10,8 @@ import Foundation
 import RxSwift
 
 public protocol FamilyUseCase {
-    func save(fam: Family) -> Observable<Family>
+    func save(fam: Family) -> Observable<Void>
+    func get() -> Observable<[Family]>
 //    func delete(fam: Family) -> Observable<Void>
     // func allUser(fid: String) -> Void
     

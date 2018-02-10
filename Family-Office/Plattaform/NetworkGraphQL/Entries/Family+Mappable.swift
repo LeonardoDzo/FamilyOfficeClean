@@ -14,7 +14,6 @@ extension Family: Mappable  {
         case uid = "id"
         case members
         case photo
-        case __typename
     }
   
 }

@@ -12,9 +12,9 @@ import RealmSwift
 
 @objcMembers
 final class RMFamily: Object {
-    public var uid: String = ""
-    public var name: String = ""
-    public var members = List<RMUser>()
+    dynamic var uid: String = ""
+    dynamic var name: String = ""
+    dynamic var members = List<RMUser>()
     
     override class func primaryKey() -> String {
         return "uid"
@@ -28,7 +28,6 @@ extension RMFamily: DomainConvertibleType {
 }
 
 extension Family: RealmRepresentable {
-    
     func asRealm() -> RMFamily {
         let family = RMFamily()
         family.uid = uid

@@ -29,11 +29,11 @@ extension Photo: RealmRepresentable {
         return UUID().uuidString
     }
     func asRealm() -> RMPhoto {
-        let photo = RMPhoto()
-        photo.url = url
-        photo.name = name
-        photo.ext = ext
-        photo.mime = mime
-        return photo
+        return RMPhoto.build({ (obj) in
+            obj.ext = ext
+            obj.mime = mime
+            obj.name = name
+            obj.url = url
+        })
     }
 }

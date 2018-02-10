@@ -8,46 +8,45 @@
 
 import UIKit
 import SideMenu
-class HomeViewController: UIViewController {
+import RxCocoa
+import RxSwift
+
+class HomeViewController: UIViewController, UICollectionViewDelegate {
+    private let disposeBag = DisposeBag()
     var v = HomeView()
+    var menuBtn = UIBarButtonItem(image: #imageLiteral(resourceName: "icons8-list").maskWithColor(color: #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)), style: .plain, target: self, action: nil)
+    var viewModel: HomeViewmodel!
     override func loadView() { view = v }
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Do any additional setup after loading the view.
     }
     override func viewDidAppear(_ animated: Bool) {
-       SideMenuManager.default.menuPresentMode = .viewSlideInOut
-       self.present(SideMenuManager.default.menuLeftNavigationController!, animated: true, completion: nil)
         SideMenuManager.default.menuAddPanGestureToPresent(toView: self.navigationController!.navigationBar)
         SideMenuManager.default.menuAddScreenEdgePanGesturesToPresent(toView: self.navigationController!.view)
- 
+        self.navigationItem.leftBarButtonItem = menuBtn
+         self.setupView()
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-        on("INJECTION_BUNDLE_NOTIFICATION") {
-            self.setupView()
-        }
-        self.setupView()
+        
     }
     fileprivate func setupView(){
-        
-        self.v = HomeView()
-        self.view = self.v
-        
-        
+       
+        self.v.collection.isUserInteractionEnabled = true
+        let input = HomeViewmodel.Input(menuTrigger: menuBtn.rx.tap.asDriver(), selectTrigger: self.v.collection.rx.itemSelected.asDriver())
+        let output = viewModel.transform(input: input)
         self.navigationController?.isNavigationBarHidden = false
+        
+        output.selected.drive().disposed(by: disposeBag)
+        
+        output.menu.drive(onNext: {_ in
+            self.present(SideMenuManager.default.menuLeftNavigationController!, animated: true, completion: nil)
+        }).disposed(by: disposeBag)
+        
+        output.homeBtns.drive(self.v.collection.rx.items(cellIdentifier: "cell", cellType: HomeBtnCollectionViewCell.self)){ // 3
+            row, model, cell in
+            cell.isSelected = true
+            cell.bind(model)
+            }.disposed(by: disposeBag)
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

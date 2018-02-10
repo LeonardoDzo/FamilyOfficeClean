@@ -29,7 +29,7 @@ class SignUpNavigator: SignUpNavigatorProtocol {
         let preHome = PreHomeViewController()
         let nc = UINavigationController(rootViewController: preHome)
         let navigator = PreHomeNav(service: NetUseCaseProvider(), nc:  nc)
-        let viewModel = PreHomeViewModel(user: user, navigator: navigator)
+        let viewModel = PreHomeViewModel(user: user, navigator: navigator, familyUseCase: RMUseCaseProvider().makeFamilyUseCase())
         preHome.viewModel = viewModel
        
         navigationController.present(nc, animated: true, completion: nil)

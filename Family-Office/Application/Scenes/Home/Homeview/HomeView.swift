@@ -38,16 +38,8 @@ class HomeView: UIViewX {
     }
     
     private func setupCellConfiguration() {
+        collection.allowsSelection = true
         collection.register(HomeBtnCollectionViewCell.self, forCellWithReuseIdentifier: "cell")
-        homeBtns
-            .bind(to: collection
-                .rx //2
-                .items(cellIdentifier: "cell",
-                       cellType: HomeBtnCollectionViewCell.self)) { // 3
-                        row, model, cell in
-                        cell.bind(model)
-            }.disposed(by: disposeBag)
-        
     }
    
 }

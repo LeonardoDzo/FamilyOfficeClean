@@ -101,7 +101,7 @@ class Prehome: UIViewX, UserBindeble {
     }
     
     fileprivate func conftable() {
-        
+        tableView.refreshControl = UIRefreshControl()
         tableView.estimatedRowHeight = 100
         tableView.rowHeight = 64
         tableView.register(FamilyTableViewCell.self, forCellReuseIdentifier: FamilyTableViewCell.reuseID)

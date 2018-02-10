@@ -18,6 +18,7 @@ final class SignInviewModel: ViewModelType {
         self.authUseCase = useCase
         self.navigator = navigator
     }
+    
     func transform(input: SignInviewModel.Input) -> SignInviewModel.Output {
         let errorTracker = ErrorTracker()
         let emailAndPassword = Driver.combineLatest(input.email, input.password).map({ (e, p) -> (String,String) in
@@ -30,8 +31,17 @@ final class SignInviewModel: ViewModelType {
             return !$0.0.isEmpty && !$0.1.isEmpty && !$1
         }
         
-        let login = input.loginTrigger.withLatestFrom(emailAndPassword).flatMapLatest({
-             [unowned self] in
+        let login = loginAction(input, emailAndPassword, errorTracker, activityIndicator)
+        let signUp = input.signUpTrigger
+            .do(onNext: navigator.toSignUp)
+        
+        return Output(dismiss: login, loginEnabled: canLogin, signUp: signUp, emailpass: emailAndPassword, error: errorTracker.asDriver())
+    }
+    
+    
+    fileprivate func loginAction(_ input: SignInviewModel.Input, _ emailAndPassword: SharedSequence<DriverSharingStrategy, (String, String)>, _ errorTracker: ErrorTracker, _ activityIndicator: ActivityIndicator) -> SharedSequence<DriverSharingStrategy, User> {
+        return input.loginTrigger.withLatestFrom(emailAndPassword).flatMapLatest({
+            [unowned self] in
             
             return self.authUseCase
                 .signIn(email: $0.0, password: $0.1)
@@ -39,14 +49,9 @@ final class SignInviewModel: ViewModelType {
                 .trackActivity(activityIndicator)
                 .asDriverOnErrorJustComplete()
         })
-        .do(onNext: navigator.toPreHome)
-        
-     
-        
-        let signUp = input.signUpTrigger
-            .do(onNext: navigator.toSignUp)
-        
-        return Output(dismiss: login, loginEnabled: canLogin, signUp: signUp, emailpass: emailAndPassword, error: errorTracker.asDriver())
+            .do(onNext: { user in
+                self.navigator.toPreHome(user: user)
+            })
     }
 }
 extension SignInviewModel {

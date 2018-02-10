@@ -10,10 +10,12 @@ import Foundation
 import Stevia
 import UIKit
 import RxSwift
-
+import GoogleSignIn
 class SignInView: UIViewX {
     let email: UITextFieldX! = UITextFieldX()
+    
     let password: UITextFieldX! = UITextFieldX()
+    let googleBtn: GIDSignInButton! = GIDSignInButton()
     let login: UIButtonX! = UIButtonX()
     let logoImg = UIImageViewX()
     let signUpBtn = UIButtonX()
@@ -32,25 +34,35 @@ class SignInView: UIViewX {
             password,
             login,
             signUpBtn,
-            textLbl
+            textLbl,
+            googleBtn
         )
-       
+    
         logoImg.image = #imageLiteral(resourceName: "logo")
         
         logoImg.height(100).width(100).top(20%).centerHorizontally()
         email.height(60).width(80%).bottom(40%).centerHorizontally()
         password.height(60).width(80%).bottom(30%).centerHorizontally()
         
-        login.height(60).width(30%).bottom(10%).centerHorizontally()
+      
         textLbl.text("Aún no tienenes cuenta?")
         textLbl.height(20).width(60%).bottom(3%).left(20)
+        
+        
         signUpBtn.height(20).width(30%).bottom(3%).right(14%)
         signUpBtn.text("Registrate")
         signUpBtn.setTitleColor(#colorLiteral(red: 0.8554335237, green: 0.2522738874, blue: 0.4795196056, alpha: 1), for: .normal)
+        
+        login.height(60).width(30%).bottom(15%).centerHorizontally()
+        googleBtn.height(20).width(30%).bottom(7%).centerHorizontally()
+        googleBtn.colorScheme = .light
+        alignVertically(login, googleBtn)
+      
         email.style(self.styleTextField).style { (txt) in
             txt.placeholder = "EMAIL"
             txt.leftImage = #imageLiteral(resourceName: "icons8-gmail")
         }
+        
         password.style(self.styleTextField).style { (txt) in
             txt.placeholder = "CONTRASEÑA"
             txt.isSecureTextEntry = true
@@ -65,9 +77,7 @@ class SignInView: UIViewX {
             btn.animation = "fadeInUp"
             btn.delay = 1
         }
-        backgroundColor = #colorLiteral(red: 0.9478426847, green: 0.9478426847, blue: 0.9478426847, alpha: 1)
-        logoImg.animation = "fadeInUp"
-        logoImg.delay = 1
+        backgroundColor = #colorLiteral(red: 0.9792956669, green: 0.9908331388, blue: 1, alpha: 1)
         animations()
     }
     

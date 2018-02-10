@@ -11,10 +11,10 @@ import Foundation
 public struct User : Codable {
     
     public var address: Address?
-    public var birth: Int? = -1
+    public var birth: Int = -1
     public var email: String = ""
     public var name: String = ""
-    public var phone: String? = nil
+    public var phone: String = ""
     public var uid: String = ""
     public var photo: Photo? = nil
     public var families: [Family] = [Family]()
@@ -27,7 +27,7 @@ public struct User : Codable {
         self.address = address
         self.email = email
         self.name = name
-        self.phone = nil
+        self.phone = ""
         self.uid = uid
         self.birth = birth
         self.photo = nil
@@ -58,9 +58,9 @@ public struct User : Codable {
     
         if  let values = try? decoder.container(keyedBy: CodingKeys.self)  {
             name = try values.decode(String.self, forKey: .name)
-            phone = try values.decodeIfPresent(String.self, forKey: .phone)
+            phone = try values.decodeIfPresent(String.self, forKey: .phone) ?? ""
             uid = try values.decode(String.self, forKey: .uid)
-            birth = try values.decodeIfPresent(Int.self, forKey: .birth)
+            birth = try values.decodeIfPresent(Int.self, forKey: .birth) ?? -1
             photo = try values.decodeIfPresent(Photo.self, forKey: .photo)
             email = try values.decode(String.self, forKey: .email)
             address = try! values.decodeIfPresent(Address.self, forKey: .address)

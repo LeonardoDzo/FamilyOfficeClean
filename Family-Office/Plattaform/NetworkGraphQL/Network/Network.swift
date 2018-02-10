@@ -45,7 +45,6 @@ final class Network<T: Codable> {
             .debug()
             .observeOn(scheduler)
             .map({ (data) -> T in
-                
                 let user = try JSONDecoder().decode([String: T].self, from: data.snapshot.jsonObject.jsonToData()!).first?.value
                 return user!
             }).asObservable()

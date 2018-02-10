@@ -32,14 +32,19 @@ class PreHomeNav: PreHomeNavigator {
         let homeNavigationController = UINavigationController()
         homeNavigationController.tabBarItem = UITabBarItem(title: "Home", image: #imageLiteral(resourceName: "icons8-booking"), selectedImage: nil)
     
-        let homeNavigator = DefaultHomeNavigator(navigationController: homeNavigationController)
+        let homeNavigator = HomeNavigator(navigationController: homeNavigationController)
         let tabBarController = UITabBarController()
         tabBarController.viewControllers = [
             homeNavigationController
         ]
+        let menu = MenuViewController()
+        menu.viewModel = MenuViewModel(service: RMUseCaseProvider().makeFamilyUseCase())
+        let menuLeftNavigationController = UISideMenuNavigationController(rootViewController: menu)
+        menuLeftNavigationController.view.backgroundColor = #colorLiteral(red: 0.9792956669, green: 0.9908331388, blue: 1, alpha: 1)
+        SideMenuManager.default.menuLeftNavigationController = menuLeftNavigationController
         tabBarController.view.backgroundColor = #colorLiteral(red: 0.9792956669, green: 0.9908331388, blue: 1, alpha: 1)
         navigationController.present(tabBarController, animated: true, completion: nil)
-        homeNavigator.toHome()
+        homeNavigator.toMain()
        
     }
     func toAddFamily() {
@@ -50,10 +55,11 @@ class PreHomeNav: PreHomeNavigator {
         navigationController.present(nc, animated: true, completion: nil)
     }
     func toSignIn() {
-        
+        navigationController.dismiss(animated: true, completion: nil)
     }
     
     func toProfile() {
-        
+        let view = ProfileViewController()
+        navigationController.pushViewController(view, animated: true)
     }
 }

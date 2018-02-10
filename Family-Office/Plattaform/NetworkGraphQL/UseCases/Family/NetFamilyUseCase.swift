@@ -9,21 +9,19 @@
 import Foundation
 import RxSwift
 
-final class NetFamilyUseCase<Repository>: FamilyUseCase where Repository: AbstractRepository, Repository.T == Family  {
+final class NetFamilyUseCase: FamilyUseCase  {
     private let network: FamilyNetwork!
-    private let repository: Repository!
-
-    init(_ network: FamilyNetwork, repository: Repository) {
+    private let provider: RMUseCaseProvider!
+    init(_ network: FamilyNetwork, provider: RMUseCaseProvider = RMUseCaseProvider()) {
         self.network = network
-        self.repository = repository
+        self.provider = provider
     }
-    func save(fam: Family) -> Observable<Family> {
+    func save(fam: Family) -> Observable<Void> {
         return network.createFamily(family: fam).do(onNext: { family in
-            _ = self.repository.save(entity: family)
-            family.members.forEach({ (user) in
-                user.asRealm().families.append(family.asRealm())
-                
-            })
-        })
+        _ = self.provider.makeFamilyUseCase().save(fam: family).subscribe().dispose()
+        }).mapToVoid()
+    }
+    func get() -> Observable<[Family]> {
+        return Variable([]).asObservable()
     }
 }

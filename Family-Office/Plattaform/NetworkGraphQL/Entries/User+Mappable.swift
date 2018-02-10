@@ -20,9 +20,4 @@ extension User : Mappable {
         case photo
     }
     
-    enum AnotherCodingKeys: String, CodingKey {
-        case family
-        case __typename
-    }
-    
 }
