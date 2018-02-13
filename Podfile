@@ -22,5 +22,4 @@ target 'Family-Office' do
     pod 'SideMenu'
 	pod 'RxRealm'
     pod 'GoogleSignIn'
-
 end

@@ -11,7 +11,7 @@ import Stevia
 import RxCocoa
 import RxSwift
 
-class Prehome: UIViewX, UserBindeble {
+class Prehome: UIViewX, UserBindable {
     var user: User!
     var tableView : UITableView = UITableView()
     var topContent = UIImageViewX()

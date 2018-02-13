@@ -20,11 +20,11 @@ class ProfileAssistantViewController: UIViewController {
         on("INJECTION_BUNDLE_NOTIFICATION") {
             self.v = ProfileAssistantStevia()
             self.view = self.v
-            
         }
-        
         v.topview.callBtn.btn.addTarget(self, action: #selector(self.call(_:)), for: .touchUpInside)
         self.navigationItem.leftBarButtonItem = self.backBtn
+        
+        
     }
     @objc func call(_ sender: UIButtonX){
         if let url = URL(string: "tel://\(sender.tag)"), UIApplication.shared.canOpenURL(url) {

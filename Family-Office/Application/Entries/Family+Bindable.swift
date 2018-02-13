@@ -8,12 +8,12 @@
 
 import Foundation
 import UIKit
-protocol FamilyBindeble: AnyObject {
+protocol FamilyBindable: AnyObject {
     var family: Family! {get set}
     var titleLbl: UILabelX! {get}
     var photo: UIImageViewX! {get}
 }
-extension FamilyBindeble {
+extension FamilyBindable {
     var titleLbl: UILabelX! {return nil}
     var photo: UIImageViewX! {return nil}
     

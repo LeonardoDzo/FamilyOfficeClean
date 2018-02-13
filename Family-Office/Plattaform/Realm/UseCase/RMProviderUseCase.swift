@@ -12,6 +12,8 @@ import RxSwift
 import RealmSwift
 
 public final class RMUseCaseProvider: UseCaseProvider {
+    
+    
     private let configuration: Realm.Configuration
     
     public init(configuration: Realm.Configuration = Realm.Configuration()) {
@@ -26,5 +28,10 @@ public final class RMUseCaseProvider: UseCaseProvider {
     public func makeUseCase() -> UserUseCase {
          let repository = Repository<User>(configuration: configuration)
         return RMUserUseCase(repository: repository)
+    }
+    
+    public func makePendingUseCase() -> PendingUseCase {
+        let repository = Repository<Pending>(configuration: configuration)
+        return RMPendingUseCase(repository: repository)
     }
 }

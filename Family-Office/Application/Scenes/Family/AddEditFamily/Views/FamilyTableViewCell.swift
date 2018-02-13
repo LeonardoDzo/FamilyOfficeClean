@@ -9,7 +9,7 @@
 import UIKit
 import Stevia
 
-class FamilyTableViewCell: UITableViewCell, FamilyBindeble {
+class FamilyTableViewCell: UITableViewCell, FamilyBindable {
     var family: Family!
     var titleLbl: UILabelX! = UILabelX()
     var photo: UIImageViewX! = UIImageViewX()

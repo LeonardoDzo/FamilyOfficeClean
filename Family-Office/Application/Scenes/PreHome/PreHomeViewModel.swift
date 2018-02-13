@@ -37,7 +37,7 @@ final class PreHomeViewModel: ViewModelType {
             self.navigator.toProfile()
         })
         let logout = input.logoutTrigger.do(onNext: {
-            let realm = try! Realm()
+            let realm = try! Realm(configuration: Realm.Configuration())
             try! realm.write({
                 realm.deleteAll()
             })

@@ -9,13 +9,13 @@
 import Foundation
 import UIKit
 import Kingfisher
-protocol UserBindeble: AnyObject {
+protocol UserBindable: AnyObject {
     var user: User! {get set}
     var nameLbl: UILabelX! {get}
     var emailLbl: UILabelX! {get}
     var photoProfile: UIImageViewX! {get}
 }
-extension UserBindeble {
+extension UserBindable {
     var nameLbl: UILabelX! {return nil}
     var emailLbl: UILabelX! {return nil}
     var photoProfile: UIImageViewX! {return nil}

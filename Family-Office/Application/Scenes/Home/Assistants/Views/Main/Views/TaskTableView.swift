@@ -25,7 +25,7 @@ class TaskTableview: UIViewX {
         sv(
             tableView
         )
-        
+        conftable()
         layout(
             0,
             |tableView|,
@@ -36,6 +36,13 @@ class TaskTableview: UIViewX {
         imageview.contentMode = .scaleAspectFit
         self.tableView.backgroundView = imageview
         self.tableView.tableFooterView = UIView()
+    }
+    fileprivate func conftable() {
+        tableView.refreshControl = UIRefreshControl()
+        tableView.register(PendingTableViewCell.self, forCellReuseIdentifier: PendingTableViewCell.reuseID)
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = 100
+        tableView.tableFooterView = UIView()
     }
     
 }

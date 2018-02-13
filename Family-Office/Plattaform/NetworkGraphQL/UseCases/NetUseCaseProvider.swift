@@ -11,9 +11,7 @@ import Realm
 import RealmSwift
 
 public final class NetUseCaseProvider : AuthUseCaseProvider, UseCaseProvider {
-   
-    
-    
+
     private let networkProvider: NetworkProvider
     
     public init() {
@@ -29,6 +27,10 @@ public final class NetUseCaseProvider : AuthUseCaseProvider, UseCaseProvider {
    
     public func makeFamilyUseCase() -> FamilyUseCase {
         return NetFamilyUseCase(networkProvider.makeFamilyNetwork())
+    }
+    
+    public func makePendingUseCase() -> PendingUseCase {
+        return NetPendingUseCase(network: networkProvider.makePendingNetwork())
     }
     
 }

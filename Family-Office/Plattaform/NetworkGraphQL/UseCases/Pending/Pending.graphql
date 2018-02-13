@@ -1,0 +1,20 @@
+
+query AllPending {
+    allPendings {
+        ...PendingDetails
+    }
+}
+mutation CreatePending($title: String!, $priority:Int, $details: String){
+    createPending(title: $title, priority: $priority, details: $details){
+        ...PendingDetails
+    }
+}
+
+fragment PendingDetails on Pending {
+    id
+    title,
+    priority,
+    details,
+    created_at,
+    updated_at
+}

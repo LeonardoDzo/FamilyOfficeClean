@@ -7,15 +7,19 @@
 //
 
 import UIKit
+import RxCocoa
+import RxSwift
 
 class AssistantViewController: UIViewController {
+    private let disposeBag = DisposeBag()
+
     var v = MainAssistantViewStevia()
-    
+    var viewModel: PendingViewModel!
     override func loadView() { view = v }
     override func viewDidLoad() {
         super.viewDidLoad()
         setNavbar()
-        // Do any additional setup after loading the view.
+        bindViewModel()
     }
 
     override func didReceiveMemoryWarning() {
@@ -23,19 +27,30 @@ class AssistantViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     fileprivate func setNavbar() {
+        self.navigationItem.leftBarButtonItem = self.backBtn
         self.tabBarController?.navigationItem.titleView = nil
         self.tabBarController?.navigationItem.title = nil
         self.tabBarController?.navigationItem.title = "Peticiones"
     }
 
-    /*
-    // MARK: - Navigation
+    private func bindViewModel() {
+        let back = self.backBtn
+        let viewWillAppear = rx.sentMessage(#selector(UIViewController.viewWillAppear(_:))).mapToVoid().asDriverOnErrorJustComplete()
+        let pull = self.v.table.tableView.refreshControl!.rx
+            .controlEvent(.valueChanged)
+            .asDriver()
+        let input = PendingViewModel.Input(trigger: Driver.merge(viewWillAppear, pull), backtrigger: (back?.rx.tap.asDriver())!)
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        let output = viewModel.transform(input: input)
+        
+        output.pendings.drive(self.v.table.tableView.rx.items(cellIdentifier: PendingTableViewCell.reuseID, cellType: PendingTableViewCell.self)){
+            i,model,cell in
+                cell.bind(pending: model)
+                cell.content.bind(pending: model)
+            
+            }.disposed(by: disposeBag)
+        
+        output.backTrigger.drive().disposed(by: disposeBag)
     }
-    */
-
+    
 }

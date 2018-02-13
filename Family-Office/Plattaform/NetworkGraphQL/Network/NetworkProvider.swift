@@ -38,4 +38,9 @@ final class NetworkProvider {
         let network = Network<Family>(apollo)
         return FamilyNetwork(network: network)
     }
+
+    public func makePendingNetwork() -> PendingNetwork {
+        let network = Network<Pending>(apollo)
+        return PendingNetwork(network: network)
+    }
 }
