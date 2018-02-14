@@ -21,11 +21,7 @@ final class SignInviewModel: ViewModelType {
     
     func transform(input: SignInviewModel.Input) -> SignInviewModel.Output {
         let errorTracker = ErrorTracker()
-        let emailAndPassword = Driver.combineLatest(input.email, input.password).map({ (e, p) -> (String,String) in
-            let email = UserDefaults().value(forKey: "email") as? String ?? e
-            let pass =  UserDefaults().value(forKey: "password") as? String ?? p
-            return ( email , pass )
-        })
+        let emailAndPassword = Driver.combineLatest(input.email, input.password)
         let activityIndicator = ActivityIndicator()
         let canLogin = Driver.combineLatest(emailAndPassword, activityIndicator.asDriver()) {
             return !$0.0.isEmpty && !$0.1.isEmpty && !$1

@@ -60,11 +60,14 @@ class SignInView: UIViewX {
       
         email.style(self.styleTextField).style { (txt) in
             txt.placeholder = "EMAIL"
+            txt.text = UserDefaults().value(forKey: "email") as? String ?? ""
+            
             txt.leftImage = #imageLiteral(resourceName: "icons8-gmail")
         }
         
         password.style(self.styleTextField).style { (txt) in
             txt.placeholder = "CONTRASEÑA"
+            txt.text =  UserDefaults().value(forKey: "password") as? String ?? ""
             txt.isSecureTextEntry = true
             txt.leftImage = #imageLiteral(resourceName: "icons8-password")
             

@@ -14,7 +14,7 @@ class PendingTableViewCell: UITableViewCellX, PendingBindable {
 
     var pending: Pending! = Pending()
     var content : contentPending!
-    var priority = UIViewX()
+    var priority: UIViewX! = UIViewX()
     
     
     required init?(coder aDecoder: NSCoder) { super.init(coder: aDecoder)

@@ -4,7 +4,7 @@ query AllPending {
         ...PendingDetails
     }
 }
-mutation CreatePending($title: String!, $priority:Int, $details: String){
+mutation CreatePending($title: String!, $priority:String, $details: String){
     createPending(title: $title, priority: $priority, details: $details){
         ...PendingDetails
     }

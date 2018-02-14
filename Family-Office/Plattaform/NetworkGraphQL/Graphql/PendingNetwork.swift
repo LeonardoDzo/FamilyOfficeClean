@@ -17,7 +17,7 @@ public final class PendingNetwork {
     }
     
     public func create(pending: Pending) -> Observable<Pending> {
-        return network.postItem(CreatePendingMutation(title: pending.title, priority: pending.priority.hashValue, details: pending.details))
+        return network.postItem(CreatePendingMutation(title: pending.title, priority: pending.priority.rawValue, details: pending.details))
     }
     public func delete(pending: Pending) -> Observable<Void> {
         return Variable(()).asObservable()

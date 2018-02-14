@@ -8,10 +8,10 @@
 
 import Foundation
 
-@objc public enum PENDING_PRIORITY: Int, CustomStringConvertible {
-    case High = 2
-    case Normal = 1
-    case Low = 0
+ public enum PENDING_PRIORITY: String, CustomStringConvertible {
+    case Low
+    case Normal
+    case High
     
     public var description: String {
         switch self {
@@ -23,9 +23,10 @@ import Foundation
             return "Baja"
         }
     }
+    
 }
 extension PENDING_PRIORITY : Codable {
-    enum CodingKeys: Int, CodingKey {
+    enum CodingKeys: String, CodingKey {
         case Low, Normal, High
     }
 }
@@ -52,8 +53,7 @@ public struct Pending: Codable {
             title = try values.decode(String.self, forKey: .title)
             details = try values.decodeIfPresent(String.self, forKey: .details) ?? ""
             uid = try values.decode(String.self, forKey: .uid)
-            let value = try values.decodeIfPresent(String.self, forKey: .priority) ?? "1"
-            priority = PENDING_PRIORITY(rawValue: Int(value)!)!
+            priority = try values.decode(PENDING_PRIORITY.self, forKey: .priority)
             created_at = try values.decodeIfPresent(Int.self, forKey: .created_at) ?? 0
             updated_at = try values.decodeIfPresent(Int.self, forKey: .updated_at) ?? 0
         }

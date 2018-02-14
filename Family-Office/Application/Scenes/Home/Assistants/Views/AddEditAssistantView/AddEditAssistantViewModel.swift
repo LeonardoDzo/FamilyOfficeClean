@@ -18,14 +18,17 @@ final class AddEditPendingViewModel: ViewModelType {
     
     func transform(input: AddEditPendingViewModel.Input) -> AddEditPendingViewModel.Output {
         let errorTracker = ErrorTracker()
-        let cansave = input.canSaveTrigger.map { ( pending) -> Bool in
-            return !pending.title.isEmpty && pending.title.count > 4
-        }
+       
         
         let save = input.saveTrigger.withLatestFrom(input.canSaveTrigger).flatMapLatest { [unowned self] in
             return self.usecases.save(pending: $0)
                 .trackError(errorTracker)
                 .asDriverOnErrorJustComplete()
+            }.do(onNext: { _ in
+                
+            })
+        let cansave = input.canSaveTrigger.map { ( pending) -> Bool in
+            return !pending.title.isEmpty && pending.title.count > 4
         }
         return Output(canSave: cansave, save: save)
     }

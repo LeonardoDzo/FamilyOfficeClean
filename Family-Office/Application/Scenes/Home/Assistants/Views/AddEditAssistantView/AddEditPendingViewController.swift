@@ -13,6 +13,7 @@ import RxCocoa
 
 class AddEditPendingViewController: FormViewController {
     private let disposeBag = DisposeBag()
+
     var saveBtn = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: nil)
     var pending : Variable<Pending> = Variable(Pending())
     var viewModel: AddEditPendingViewModel!
@@ -65,6 +66,7 @@ class AddEditPendingViewController: FormViewController {
                 
                 self.navigationController?.setNavigationBarHidden(false, animated: true)
                 }.onChange({ (row) in
+                    self.searchKey(row.tag!, row.value)
                     if row.isValid {
                         row.updateCell()
                     }
@@ -92,17 +94,16 @@ class AddEditPendingViewController: FormViewController {
         bindViewModel()
     }
     private func bindViewModel() {
+        
         let input = AddEditPendingViewModel.Input(canSaveTrigger: pending.asDriver(), saveTrigger: self.saveBtn.rx.tap.asDriver())
         let output = viewModel.transform(input: input)
         
         output.canSave.drive(saveBtn.rx.isEnabled).disposed(by: disposeBag)
         output.save.drive(onNext: { _ in
             if self.pending.value.uid.isEmpty {
-    
-                self.pending = Variable(Pending())
+                self.pending.value = Pending()
                 self.form.removeAll()
                 self.setupForm()
-                self.bindViewModel()
             }
         }).disposed(by: disposeBag)
     }

@@ -47,7 +47,7 @@ final class Repository<T:RealmRepresentable>: AbstractRepository where T == T.Re
             return Observable.array(from: objects)
                 .mapToDomain()
             }
-            .asObservable()
+            .subscribeOn(self.scheduler)
     }
     
     func query(uid: String) -> Maybe<T> {
@@ -71,7 +71,7 @@ final class Repository<T:RealmRepresentable>: AbstractRepository where T == T.Re
     func save(entity: T) ->  Observable<Void> {
         return Observable.deferred {
             return self.realm.rx.save(entity: entity)
-            }.asObservable()
+            }.observeOn(scheduler)
     }
     
     func delete(entity: T) ->  Observable<Void> {
@@ -79,5 +79,4 @@ final class Repository<T:RealmRepresentable>: AbstractRepository where T == T.Re
             return self.realm.rx.delete(entity: entity)
             }.subscribeOn(scheduler)
     }
-    
 }

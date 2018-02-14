@@ -20,7 +20,9 @@ final class RMFamilyUseCase<Repository>: FamilyUseCase where Repository: Abstrac
     }
     
     func save(fam: Family) -> Observable<Void> {
-        return repository.save(entity: fam)
+        return repository.save(entity: fam).do(onNext: {
+            
+        })
     }
     func get() -> Observable<[Family]> {
         return repository.queryAll()

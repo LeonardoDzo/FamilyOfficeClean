@@ -14,7 +14,7 @@ final class RMPending: Object {
     dynamic var uid: String = ""
     dynamic var details: String = ""
     dynamic var title: String = ""
-    dynamic var priority: PENDING_PRIORITY = .Normal
+    dynamic var priority: PENDING_PRIORITY = .Low
     dynamic var done: Bool = false
     dynamic var type : Int = 0
     dynamic var seen : Bool = false

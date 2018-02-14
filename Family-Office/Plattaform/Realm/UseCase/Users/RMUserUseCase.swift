@@ -21,6 +21,8 @@ final class RMUserUseCase<Repository>: UserUseCase where Repository: AbstractRep
     }
    
     func save(user: User) -> Observable<Void> {
-        return repository.save(entity: user)
+        return repository.save(entity: user).do(onNext: {() in
+            MainSocket.shareIntstance.channel.action("execute", with: ["variables": ["id": user.uid], "query": "subscription UserChanged($id:ID){userChanged(id:$id) {id, name, email, phone}}"])
+        })
     }
 }

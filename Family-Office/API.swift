@@ -1788,15 +1788,15 @@ public final class AllPendingQuery: GraphQLQuery {
 
 public final class CreatePendingMutation: GraphQLMutation {
   public static let operationString =
-    "mutation CreatePending($title: String!, $priority: Int, $details: String) {\n  createPending(title: $title, priority: $priority, details: $details) {\n    __typename\n    ...PendingDetails\n  }\n}"
+    "mutation CreatePending($title: String!, $priority: String, $details: String) {\n  createPending(title: $title, priority: $priority, details: $details) {\n    __typename\n    ...PendingDetails\n  }\n}"
 
   public static var requestString: String { return operationString.appending(PendingDetails.fragmentString) }
 
   public var title: String
-  public var priority: Int?
+  public var priority: String?
   public var details: String?
 
-  public init(title: String, priority: Int? = nil, details: String? = nil) {
+  public init(title: String, priority: String? = nil, details: String? = nil) {
     self.title = title
     self.priority = priority
     self.details = details

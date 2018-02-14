@@ -23,6 +23,7 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate {
         self.v = SignInView()
         self.view = self.v
         self.navigationController?.isNavigationBarHidden = true
+        
         self.bindViewModel()
         // Do any additional setup after loading the view.
     }
