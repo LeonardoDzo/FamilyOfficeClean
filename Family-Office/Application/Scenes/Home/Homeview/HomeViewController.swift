@@ -18,13 +18,12 @@ class HomeViewController: UIViewController, UICollectionViewDelegate {
     var viewModel: HomeViewmodel!
     override func loadView() { view = v }
     override func viewDidLoad() {
+        
         super.viewDidLoad()
-    }
-    override func viewDidAppear(_ animated: Bool) {
         SideMenuManager.default.menuAddPanGestureToPresent(toView: self.navigationController!.navigationBar)
         SideMenuManager.default.menuAddScreenEdgePanGesturesToPresent(toView: self.navigationController!.view)
         self.navigationItem.leftBarButtonItem = menuBtn
-         self.setupView()
+        self.setupView()
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

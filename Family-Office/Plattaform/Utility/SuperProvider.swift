@@ -7,11 +7,17 @@
 //
 
 import Foundation
-public final class SuperProvider {
+
+
+
+
+public final class SuperProvider{
     let rmusecaseprovider = RMUseCaseProvider()
     let netusecaseprovider = NetUseCaseProvider()
     
     init(_ offline: Bool = false ) {
         
     }
+    
+    
 }

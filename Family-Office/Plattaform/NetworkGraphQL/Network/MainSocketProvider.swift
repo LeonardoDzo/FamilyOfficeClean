@@ -9,7 +9,7 @@
 import Foundation
 import ActionCableClient
 import Starscream
-
+import RealmSwift
 final class MainSocket {
     var request = URL(string:"ws://localhost:3000/websocket")!
     var client : ActionCableClient!
@@ -25,6 +25,25 @@ final class MainSocket {
                
                 self.channel.onReceive = { (JSON: Any?, error : Error?) in
                     print("Received", JSON ?? "empty json", error ?? "no error")
+                    
+                    if let dic = JSON as? Dictionary<String,Any> {
+                        if let result = dic["result"] as? Dictionary<String,Any>, let json = result["data"] as? Dictionary<String,Any> {
+                            guard let data = json.jsonToData() else {
+                                return
+                            }
+                            let key = json.keys.first  ?? ""
+                            
+                            switch key {
+                                case "userChanged":
+                                    if let user = FindObject<User>().decoder(data: data) {
+                                      RMUseCaseProvider().makeUseCase().save(user: user).subscribe().dispose()
+                                    }
+                                    break
+                                default:
+                                    break
+                            }
+                        }
+                    }
                 }
               
                 self.channel.onSubscribed = {

@@ -30,7 +30,9 @@ extension FamilyBindable {
             titlelbl.text = family.name
         }
         if let photo = photo {
-            photo.image = #imageLiteral(resourceName: "icons8-family")
+            photo.backgroundColor = #colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1)
+            photo.cornerRadius = 8
+            //photo.image = #imageLiteral(resourceName: "icons8-family")
         }
     }
 }

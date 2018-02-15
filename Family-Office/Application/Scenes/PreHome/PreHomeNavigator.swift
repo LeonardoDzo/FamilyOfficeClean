@@ -19,8 +19,8 @@ protocol PreHomeNavigator {
 class PreHomeNav: PreHomeNavigator {
     
     private let navigationController: UINavigationController
-    private let service: NetUseCaseProvider
-    init(service: NetUseCaseProvider, nc: UINavigationController) {
+    private let service: RMUseCaseProvider
+    init(service: RMUseCaseProvider, nc: UINavigationController) {
         self.service = service
         self.navigationController = nc
     }
@@ -32,13 +32,22 @@ class PreHomeNav: PreHomeNavigator {
         let homeNavigationController = UINavigationController()
         homeNavigationController.tabBarItem = UITabBarItem(title: "Home", image: #imageLiteral(resourceName: "icons8-booking"), selectedImage: nil)
     
+        let view = FamilyViewController()
+        view.viewModel = FamilyViewModel(familyUseCase: RMUseCaseProvider().makeFamilyUseCase())
+        
+        let familyNc = UINavigationController(rootViewController: view)
+        familyNc.tabBarItem = UITabBarItem(title: "Home", image: #imageLiteral(resourceName: "Family"), selectedImage: nil)
+        
         let homeNavigator = HomeNavigator(navigationController: homeNavigationController)
         let tabBarController = UITabBarController()
         tabBarController.viewControllers = [
-            homeNavigationController
+            homeNavigationController,
+            familyNc
         ]
+        tabBarController.tabBar.tintColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)
         let menu = MenuViewController()
         menu.viewModel = MenuViewModel(service: RMUseCaseProvider().makeFamilyUseCase())
+        
         let menuLeftNavigationController = UISideMenuNavigationController(rootViewController: menu)
         menuLeftNavigationController.view.backgroundColor = #colorLiteral(red: 0.9792956669, green: 0.9908331388, blue: 1, alpha: 1)
         SideMenuManager.default.menuLeftNavigationController = menuLeftNavigationController

@@ -10,57 +10,64 @@ import Foundation
 import RxCocoa
 import RxSwift
 import RealmSwift
+import RxRealm
+
 final class PreHomeViewModel: ViewModelType {
     private let user: User
     private let navigator: PreHomeNav
+  
+    private let userUseCase: UserUseCase!
     private let familyUseCase: FamilyUseCase!
     
-    init(user: User, navigator: PreHomeNav, familyUseCase: FamilyUseCase) {
+    init(user: User, navigator: PreHomeNav, familyUseCase: FamilyUseCase, userUseCase: UserUseCase) {
         self.user = user
-        
+        self.userUseCase = userUseCase
         self.navigator = navigator
         self.familyUseCase = familyUseCase
         
     }
     
     
-    func transform(input: PreHomeViewModel.Input) -> PreHomeViewModel.Output {
-        let activityIndicator = ActivityIndicator()
-        let errorTracker = ErrorTracker()
-        let toCreateFamily = input.createBtntrigger.do(onNext: navigator.toAddFamily)
-        let user = Variable(self.user).asDriver().startWith(self.user)
-        
-    
-        let families = getFamilies(input, activityIndicator, errorTracker)
-        
-        let gotoProfile = input.profileViewTrigger.do(onNext: {_ in
-            self.navigator.toProfile()
-        })
-        let logout = input.logoutTrigger.do(onNext: {
+    fileprivate func Logout(_ input: PreHomeViewModel.Input) -> SharedSequence<DriverSharingStrategy, Void> {
+        return input.logoutTrigger.do(onNext: {
             let realm = try! Realm(configuration: Realm.Configuration())
             try! realm.write({
                 realm.deleteAll()
             })
             self.navigator.toSignIn()
         })
-        let selectedFamily = input.selection
+    }
+    
+    fileprivate func SelectFamily(_ input: PreHomeViewModel.Input, _ families: SharedSequence<DriverSharingStrategy, [Family]>) -> SharedSequence<DriverSharingStrategy, Family> {
+        return input.selection
             .withLatestFrom(families) { _, fams in return fams.first! }
             .do(onNext:{ _ in self.navigator.toHome()})
+    }
+    
+    func transform(input: PreHomeViewModel.Input) -> PreHomeViewModel.Output {
+        let toCreateFamily = input.createBtntrigger.do(onNext: navigator.toAddFamily)
+        
+        let user = input.trigger.flatMapLatest ({_ in
+            return self.userUseCase.getUser(by: self.user.uid).asDriverOnErrorJustComplete()
+        })
+      
+       
+        let families = self.getFamilies(input.trigger, self.familyUseCase)
+        
+        let gotoProfile = input.profileViewTrigger.do(onNext: {_ in
+            self.navigator.toProfile()
+        })
+        let logout = Logout(input)
+        let selectedFamily = SelectFamily(input, families)
+        
         return Output(user: user, families: families, create: toCreateFamily, profile: gotoProfile, logout: logout, selectedFamily: selectedFamily)
     }
     
-    fileprivate func getFamilies(_ input: PreHomeViewModel.Input, _ activityIndicator: ActivityIndicator, _ errorTracker: ErrorTracker) -> SharedSequence<DriverSharingStrategy, [Family]> {
-        return input.trigger.flatMapLatest { ()  in
-            return self.familyUseCase.get()
-                .trackActivity(activityIndicator)
-                .trackError(errorTracker)
-                .asDriverOnErrorJustComplete()
-        }
-    }
 }
 extension PreHomeViewModel {
     struct Input {
         let profileViewTrigger: Driver<Void>
+        let triggerUser: Driver<Void>
         let logoutTrigger: Driver<Void>
         let trigger: Driver<Void>
         let selection: Driver<IndexPath>

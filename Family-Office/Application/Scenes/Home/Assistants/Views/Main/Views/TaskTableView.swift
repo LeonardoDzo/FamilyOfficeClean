@@ -9,8 +9,10 @@
 import Foundation
 import Stevia
 import RealmSwift
+import RxSwift
+import RxCocoa
 
-class TaskTableview: UIViewX {
+class TaskTableview: UIViewX, UITableViewDelegate{
     let tableView = UITableView()
     var type = 0
     var notificationToken: NotificationToken? = nil
@@ -39,6 +41,7 @@ class TaskTableview: UIViewX {
     }
     fileprivate func conftable() {
         tableView.refreshControl = UIRefreshControl()
+        tableView.isEditing = true
         tableView.register(PendingTableViewCell.self, forCellReuseIdentifier: PendingTableViewCell.reuseID)
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.rowHeight = 100

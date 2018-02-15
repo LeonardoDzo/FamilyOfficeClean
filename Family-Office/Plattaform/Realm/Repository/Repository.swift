@@ -15,7 +15,7 @@ import RxRealm
 protocol AbstractRepository {
     associatedtype T
     func queryAll() -> Observable<[T]>
-    func query(uid: String) -> Maybe<T>
+    func query(uid: String) -> Observable<T>
     func query(with predicate: NSPredicate,
                sortDescriptors: [NSSortDescriptor]) -> Observable<[T]>
     func save(entity: T) -> Observable<Void>
@@ -50,11 +50,15 @@ final class Repository<T:RealmRepresentable>: AbstractRepository where T == T.Re
             .subscribeOn(self.scheduler)
     }
     
-    func query(uid: String) -> Maybe<T> {
-        return Maybe<T>.create(subscribe: { (observer) -> Disposable in
-            let object = self.realm.object(ofType: T.RealmType.self, forPrimaryKey: uid)
-            return Variable(object?.asDomain()).asObservable().subscribe()
-        })
+    func query(uid: String) -> Observable<T> {
+        return Observable.deferred {
+            let realm = self.realm
+            let object = realm.object(ofType: T.RealmType.self, forPrimaryKey: uid)!
+            return Observable.from([object.asDomain()]).map({ (u) -> T in
+                return u
+            })
+        }
+
     }
     
     func query(with predicate: NSPredicate,
@@ -71,7 +75,7 @@ final class Repository<T:RealmRepresentable>: AbstractRepository where T == T.Re
     func save(entity: T) ->  Observable<Void> {
         return Observable.deferred {
             return self.realm.rx.save(entity: entity)
-            }.observeOn(scheduler)
+            }
     }
     
     func delete(entity: T) ->  Observable<Void> {

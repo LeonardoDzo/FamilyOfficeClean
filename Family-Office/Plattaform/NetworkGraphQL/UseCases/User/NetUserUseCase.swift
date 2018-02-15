@@ -10,6 +10,7 @@ import Foundation
 import RxSwift
 
 final class NetUserUseCase: UserUseCase  {
+    
     private let network: UserNetwork
 
     init(network: UserNetwork) {
@@ -23,10 +24,8 @@ final class NetUserUseCase: UserUseCase  {
 //    func delete(user: User) -> Observable<Void> {
 //        
 //    }
-//        func getUser(by id: String) -> Observable<User> {
-//            if offline {
-//
-//            }
-//        }
-//
+    func getUser(by id: String) -> Observable<User> {
+        return Variable(User(uid: "", name: "", email: "")).asObservable()
+    }
+
 }

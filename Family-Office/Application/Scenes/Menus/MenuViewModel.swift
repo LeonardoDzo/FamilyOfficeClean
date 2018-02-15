@@ -18,22 +18,12 @@ final class MenuViewModel: ViewModelType {
     }
     
     func transform(input: MenuViewModel.Input) -> MenuViewModel.Output {
-        let activityIndicator = ActivityIndicator()
-        let errorTracker = ErrorTracker()
-        let families = getFamilies(input, activityIndicator, errorTracker)
-        
+       
+        let families = self.getFamilies(input.trigger, self.familyUseCase)
         return Output(families: families)
     }
     
-    fileprivate func getFamilies(_ input: MenuViewModel.Input, _ activityIndicator: ActivityIndicator, _ errorTracker: ErrorTracker) -> SharedSequence<DriverSharingStrategy, [Family]> {
-       
-        return input.trigger.flatMapLatest { _ in
-            return self.familyUseCase.get()
-                .trackActivity(activityIndicator)
-                .trackError(errorTracker)
-                .asDriverOnErrorJustComplete()
-        }
-    }
+   
 }
 extension MenuViewModel {
     struct Input {

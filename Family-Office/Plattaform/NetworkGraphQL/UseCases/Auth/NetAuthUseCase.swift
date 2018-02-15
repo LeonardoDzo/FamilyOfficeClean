@@ -21,9 +21,9 @@ final class NetAuthUseCase: AuthUseCase {
         UserDefaults().set(authmodel.token, forKey: "token")
         UserDefaults().set(authmodel.user.email, forKey: "email")
         UserDefaults().set(pass, forKey: "password")
-        _ = self.provider.makeUseCase().save(user: authmodel.user).subscribe().dispose()
+        self.provider.makeUseCase().save(user: authmodel.user).subscribe().dispose()
         authmodel.user.families.forEach({ (family) in
-          _ = self.provider.makeFamilyUseCase().save(fam: family).subscribe().dispose()
+            self.provider.makeFamilyUseCase().save(fam: family).subscribe().dispose()
         })
     }
     
