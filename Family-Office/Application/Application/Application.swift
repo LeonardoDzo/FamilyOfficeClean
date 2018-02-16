@@ -18,10 +18,9 @@ final class Application {
     }
     
     func configureMainInterface(in window: UIWindow) {
-        let sigInVc = SignInViewController()
-        let nc = UINavigationController(rootViewController: sigInVc)
+        let nc = UINavigationController()
         let signInNavigator = DefaultAuthNavigator(service: networkUseCaseProvider, nc: nc)
-        sigInVc.viewModel = SignInviewModel(useCase: self.networkUseCaseProvider.makeAuthUseCase(), navigator: signInNavigator)
         window.rootViewController = nc
+        signInNavigator.toSignIn()
     }
 }

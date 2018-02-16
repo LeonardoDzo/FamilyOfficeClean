@@ -43,4 +43,11 @@ extension UIViewController {
         }
     }
     
+    open override func reloadInputViews() {
+        on("INJECTION_BUNDLE_NOTIFICATION") {
+            self.viewDidLoad()
+        }
+    }
+    
+    
 }

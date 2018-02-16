@@ -30,6 +30,7 @@ final class Network<T: Codable> {
     }
     
     func getItem<Q: GraphQLQuery>(_ query: Q) -> Observable<T> {
+    
         return apollo.rx.fetch(query: query)
             .debug()
             .observeOn(scheduler)

@@ -14,7 +14,7 @@ protocol PreHomeNavigator {
     func toMe(user: User)
     func toSignIn()
     func toAddFamily()
-    func toProfile()
+    func toProfile(user: User)
 }
 class PreHomeNav: PreHomeNavigator {
     
@@ -28,33 +28,45 @@ class PreHomeNav: PreHomeNavigator {
     func toMe(user: User) {
     }
     
-    func toHome() {
-        let homeNavigationController = UINavigationController()
-        homeNavigationController.tabBarItem = UITabBarItem(title: "Home", image: #imageLiteral(resourceName: "icons8-booking"), selectedImage: nil)
-    
-        let view = FamilyViewController()
-        view.viewModel = FamilyViewModel(familyUseCase: RMUseCaseProvider().makeFamilyUseCase())
-        
-        let familyNc = UINavigationController(rootViewController: view)
-        familyNc.tabBarItem = UITabBarItem(title: "Home", image: #imageLiteral(resourceName: "Family"), selectedImage: nil)
-        
-        let homeNavigator = HomeNavigator(navigationController: homeNavigationController)
-        let tabBarController = UITabBarController()
-        tabBarController.viewControllers = [
-            homeNavigationController,
-            familyNc
-        ]
-        tabBarController.tabBar.tintColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)
+    fileprivate func setMenu() {
         let menu = MenuViewController()
-        menu.viewModel = MenuViewModel(service: RMUseCaseProvider().makeFamilyUseCase())
+        menu.viewModel = MenuViewModel(service: service.makeFamilyUseCase())
         
         let menuLeftNavigationController = UISideMenuNavigationController(rootViewController: menu)
         menuLeftNavigationController.view.backgroundColor = #colorLiteral(red: 0.9792956669, green: 0.9908331388, blue: 1, alpha: 1)
         SideMenuManager.default.menuLeftNavigationController = menuLeftNavigationController
+    }
+    
+    func toHome() {
+        let homeNavigationController = UINavigationController()
+        homeNavigationController.tabBarItem = UITabBarItem(title: "Home", image: #imageLiteral(resourceName: "icons8-booking"), selectedImage: nil)
+        let homeNavigator = HomeNavigator(navigationController: homeNavigationController)
+       
+        
+        let familyNc = UINavigationController()
+        let familiesnavigator = HomeFamilyNavigator(nc: familyNc)
+        familyNc.tabBarItem = UITabBarItem(title: "Familias", image: #imageLiteral(resourceName: "Family"), selectedImage: nil)
+        
+        
+        let notificationNc = UINavigationController()
+        notificationNc.tabBarItem = UITabBarItem(title: "Notificationes", image: #imageLiteral(resourceName: "icons8-megaphone"), selectedImage: nil)
+        let notificationNavigator = NotificationNavigator(navigationController: notificationNc)
+        
+        let tabBarController = UITabBarController()
+        tabBarController.viewControllers = [
+            homeNavigationController,
+            familyNc,
+            notificationNc
+        ]
+        tabBarController.tabBar.tintColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)
+        
+        setMenu()
+        
         tabBarController.view.backgroundColor = #colorLiteral(red: 0.9792956669, green: 0.9908331388, blue: 1, alpha: 1)
         navigationController.present(tabBarController, animated: true, completion: nil)
         homeNavigator.toMain()
-       
+        familiesnavigator.fmailies()
+        notificationNavigator.toMain()
     }
     func toAddFamily() {
         let view = AddEditFamilyViewController()
@@ -67,8 +79,10 @@ class PreHomeNav: PreHomeNavigator {
         navigationController.dismiss(animated: true, completion: nil)
     }
     
-    func toProfile() {
-        let view = ProfileViewController()
-        navigationController.pushViewController(view, animated: true)
+    func toProfile(user: User) {
+        let nc = UINavigationController()
+        let navigator = ProfileNavigator(nc: nc)
+        navigator.toProfile(user: user)
+        navigationController.present(nc, animated: true, completion: nil)
     }
 }

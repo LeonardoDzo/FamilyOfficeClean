@@ -20,7 +20,6 @@ class FamilyCollectionViewCell: UICollectionViewCell, FamilyBindable {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         render()
     }
     func render() -> Void {
@@ -35,12 +34,13 @@ class FamilyCollectionViewCell: UICollectionViewCell, FamilyBindable {
         titleLbl.textAlignment = .center
     }
     func bind() {
-        
+        photo.backgroundColor = UIColor.clear
         self.photo.image = #imageLiteral(resourceName: "add")
         self.photo.borderWidth = 1
         self.photo.borderColor = #colorLiteral(red: 0.1764705926, green: 0.01176470611, blue: 0.5607843399, alpha: 1)
         self.photo.cornerRadius = 8
         self.photo.contentMode = .center
+        self.titleLbl.text = "Agregar familia"
         
     }
 }

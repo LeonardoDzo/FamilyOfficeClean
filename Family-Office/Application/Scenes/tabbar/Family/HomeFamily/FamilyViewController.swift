@@ -30,7 +30,8 @@ class FamilyViewController: UIViewController {
         let viewWillAppear = rx.sentMessage(#selector(UIViewController.viewDidAppear(_:)))
             .mapToVoid()
             .asDriverOnErrorJustComplete()
-        let input = FamilyViewModel.Input(willAppearTrigger: viewWillAppear)
+        self.v.collectionView.isUserInteractionEnabled = true
+        let input = FamilyViewModel.Input(willAppearTrigger: viewWillAppear, selectTrigger: self.v.collectionView.rx.itemSelected.asDriver())
         let output = viewModel.transform(input: input)
         
         output.families.drive(self.v.collectionView.rx.items(cellIdentifier: "cell", cellType: FamilyCollectionViewCell.self)) {
@@ -39,6 +40,7 @@ class FamilyViewController: UIViewController {
             model.name.isEmpty ? cell.bind() : cell.bind(family: model)
             
         }.disposed(by: disposeBag)
+        output.selected.drive().disposed(by: disposeBag)
     }
 
     /*

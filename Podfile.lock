@@ -30,7 +30,7 @@ PODS:
     - GTMSessionFetcher/Core (= 1.1.13)
   - GzipSwift (4.0.4)
   - ImagePicker (3.0.0)
-  - Kingfisher (4.6.1)
+  - Kingfisher (4.6.2)
   - ReactiveSwift (3.1.0):
     - Result (~> 3.2)
   - Realm (3.1.1):
@@ -81,7 +81,7 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 5bb1eae636127de695590f50e7d248483eb891e6
   GzipSwift: 1a5bc5f7827e09846b0635b5079f1224bc3b1c3a
   ImagePicker: 973953c25960fe04729a7082a56194321c6762d2
-  Kingfisher: 1f9157d9c02b380cbd0b7cc890161195164eb634
+  Kingfisher: 55b9c395bf8d3949676ad3861111923990ab68cf
   ReactiveSwift: 5b26d2e988fe0eed2daf48c4054d1de74db50184
   Realm: 42d1c38a5b1bbcc828b48a7ce702cb86fc68adf4
   RealmSwift: d31937ca6a6ee54acde64ec839523c0a3c04924b

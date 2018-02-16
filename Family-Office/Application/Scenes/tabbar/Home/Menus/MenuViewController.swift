@@ -11,9 +11,10 @@ import RxSwift
 import RxRealm
 import RxCocoa
 class MenuViewController: UIViewController {
+    private let disposeBag = DisposeBag()
     var v = MenuView()
     var viewModel: MenuViewModel!
-    private let disposeBag = DisposeBag()
+    
     override func loadView() { view = v }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,12 +26,14 @@ class MenuViewController: UIViewController {
         let viewWillAppear = rx.sentMessage(#selector(UIViewController.viewWillAppear(_:)))
             .mapToVoid()
             .asDriverOnErrorJustComplete()
-        let input = MenuViewModel.Input(trigger: viewWillAppear)
+        let input = MenuViewModel.Input(trigger: viewWillAppear, triggerLogout: self.v.logoutBtn.rx.tap.asDriver())
         let output = viewModel.transform(input: input)
         
         output.families.drive(self.v.tableView.rx.items(cellIdentifier: FamilyTableViewCell.reuseID, cellType: FamilyTableViewCell.self)){tv,model,cell in
             cell.bind(family: model)
             }.disposed(by: disposeBag)
+        
+        output.logout.drive().disposed(by: disposeBag)
     }
 
     override func didReceiveMemoryWarning() {

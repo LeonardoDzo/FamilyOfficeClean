@@ -18,6 +18,9 @@ public struct User : Codable {
     public var uid: String = ""
     public var photo: Photo? = nil
     public var families: [Family] = [Family]()
+    public var nss = ""
+    public var rfc = ""
+    public var bloodyType = ""
     public init(address: Address,
                 email: String,
                 name: String,

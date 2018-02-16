@@ -13,14 +13,17 @@ import RealmSwift
 
 final class MenuViewModel: ViewModelType {
     private var familyUseCase: FamilyUseCase!
-    init(service: FamilyUseCase) {
+    private var navigator: MenuNavigator!
+    init(service: FamilyUseCase, navigator: MenuNavigator = MenuNavigator()) {
         self.familyUseCase = service
+        self.navigator = navigator
     }
     
     func transform(input: MenuViewModel.Input) -> MenuViewModel.Output {
        
         let families = self.getFamilies(input.trigger, self.familyUseCase)
-        return Output(families: families)
+        let logout = input.triggerLogout.do(onNext: navigator.logout)
+        return Output(families: families, logout: logout)
     }
     
    
@@ -28,8 +31,10 @@ final class MenuViewModel: ViewModelType {
 extension MenuViewModel {
     struct Input {
         let trigger: Driver<Void>
+        let triggerLogout: Driver<Void>
     }
     struct Output {
         let families: Driver<[Family]>
+        let logout: Driver<Void>
     }
 }

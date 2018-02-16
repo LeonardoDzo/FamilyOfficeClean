@@ -8,9 +8,12 @@
 
 import Foundation
 import Stevia
+
 class MenuMainAss: UIViewX {
+    var btns = [UIButtonX]()
     let allBtn = UIButtonX()
     let line = UIViewX()
+    var views = [UIView]()
     let doneBtn = UIButtonX()
     let pendingBtn = UIButtonX()
     var selected = 0
@@ -21,6 +24,44 @@ class MenuMainAss: UIViewX {
         // Get injectionForXcode here : http://johnholdsworth.com/injection.html
         render()
     }
+    convenience init(total: [String]) {
+        self.init(frame:.zero)
+        total.enumerated().forEach { (i,text) in
+            let btn = UIButtonX()
+            btn.text(text)
+            btn.tag = i
+            btn.style(commonFieldStyle)
+            views.append(btn)
+        }
+        renderv2()
+    }
+    func renderv2() -> Void {
+        
+        views.append(line)
+        sv(
+            views
+        )
+        
+        let bounds = UIScreen.main.bounds
+        let width = bounds.size.width
+        let count = (width/CGFloat(views.filter({$0 is UIButtonX}).count))
+        
+        var ci = 0
+        views.filter({$0 is UIButtonX}).enumerated().forEach( { (arg) in
+            let (i, v) = arg
+            if let btn = v as? UIButtonX {
+                btn.left(CGFloat(ci)+8).width(count).height(60).top(0)
+                ci = Int(count) * (i+1)
+            }
+           
+        })
+    
+        line.left(8).width(count).height(5).top(46)
+        line.backgroundColor = #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)
+        line.cornerRadius = 2
+
+    }
+    
     
     fileprivate func setStyleBtns() {
         allBtn.style(commonFieldStyle)
@@ -33,13 +74,7 @@ class MenuMainAss: UIViewX {
         // This essentially does `translatesAutoresizingMaskIntoConstraints = false`
         // and `addSubsview()`. The neat benefit is that
         // (`sv` calls can be nested which will visually show hierarchy ! )
-        sv(
-            allBtn,
-            doneBtn,
-            pendingBtn,
-            line
-        )
-        
+ 
         layout(
             4,
             |-allBtn.width(33%)-doneBtn.width(33%)-pendingBtn.width(33%)-| ~ 60,

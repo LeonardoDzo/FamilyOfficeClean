@@ -10,13 +10,13 @@ import Foundation
 import UIKit
 
 protocol AuthNavigator {
-    func toSignIn()
+    func toSignIn(_ presenter: Bool)
     func toSignUp()
     func toPreHome(user: User)
 }
 
 class DefaultAuthNavigator: AuthNavigator {
-    private let navigationController: UINavigationController
+    private var navigationController: UINavigationController
     private let services: NetUseCaseProvider
     
     init(service: NetUseCaseProvider, nc: UINavigationController) {
@@ -31,8 +31,16 @@ class DefaultAuthNavigator: AuthNavigator {
         preHome.viewModel = viewModel
         navigationController.present(nc, animated: true, completion: nil)
     }
-    func toSignIn() {
-        
+    func toSignIn(_ presnter: Bool = false) {
+           let sigInVc = SignInViewController()
+           sigInVc.viewModel = SignInviewModel(useCase: self.services.makeAuthUseCase(), navigator: self)
+        if !presnter {
+            self.navigationController.pushViewController(sigInVc, animated: true)
+        }else{
+            self.navigationController.present(sigInVc, animated: true, completion: nil)
+            navigationController = UINavigationController(rootViewController: sigInVc)
+        }
+       
     }
     func toSignUp() {
         let signUp = SignUpViewController()

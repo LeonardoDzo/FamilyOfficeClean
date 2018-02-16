@@ -41,6 +41,7 @@ class HomeNavigator: HomeNavigatorPr {
             profileAssistant.tabBarItem = UITabBarItem(title: "Asistente", image: #imageLiteral(resourceName: "clipboard"), selectedImage: nil)
       
             let addeditPendingNavigationController = UINavigationController()
+            
             let adPendingNavigator = AddeditPendingNavigator(service: SuperProvider(), nc: addeditPendingNavigationController)
             addeditPendingNavigationController.tabBarItem = UITabBarItem(title: "Agregar", image: #imageLiteral(resourceName: "icons8-plus_2_math"), selectedImage: nil)
             

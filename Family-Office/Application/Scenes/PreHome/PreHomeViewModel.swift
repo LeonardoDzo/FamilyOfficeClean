@@ -55,7 +55,7 @@ final class PreHomeViewModel: ViewModelType {
         let families = self.getFamilies(input.trigger, self.familyUseCase)
         
         let gotoProfile = input.profileViewTrigger.do(onNext: {_ in
-            self.navigator.toProfile()
+            self.navigator.toProfile(user: self.user)
         })
         let logout = Logout(input)
         let selectedFamily = SelectFamily(input, families)
