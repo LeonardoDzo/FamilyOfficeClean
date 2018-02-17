@@ -25,17 +25,17 @@ protocol AbstractRepository {
 final class Repository<T:RealmRepresentable>: AbstractRepository where T == T.RealmType.DomainType, T.RealmType: Object {
 
     private let configuration: Realm.Configuration
-    private let scheduler: RunLoopThreadScheduler
+    private let scheduler: RunLoopThreadScheduler!
     
     private var realm: Realm {
-        return try! Realm(configuration: self.configuration)
+        let realm = try! Realm(configuration: self.configuration)
+        return  realm
     }
     
     init(configuration: Realm.Configuration) {
         self.configuration = configuration
-        let name = "Family-Office-RealmPlatform-Repository"
-        self.scheduler = RunLoopThreadScheduler(threadName: name)
-        
+       
+        self.scheduler = RunLoopThreadScheduler.sharedInstance
         print("File 📁 url: \(RLMRealmPathForFile("default.realm"))")
     }
     
@@ -47,18 +47,18 @@ final class Repository<T:RealmRepresentable>: AbstractRepository where T == T.Re
             return Observable.array(from: objects)
                 .mapToDomain()
             }
-            .subscribeOn(self.scheduler)
+            .observeOn(self.scheduler)
     }
     
     func query(uid: String) -> Observable<T> {
         return Observable.deferred {
             let realm = self.realm
             let object = realm.object(ofType: T.RealmType.self, forPrimaryKey: uid)!
-            return Observable.from([object.asDomain()]).map({ (u) -> T in
-                return u
-            })
-        }
-
+            return BehaviorSubject(value: object.asDomain()).asObserver()
+            }
+            .subscribeOn(scheduler)
+            .observeOn(scheduler)
+            
     }
     
     func query(with predicate: NSPredicate,
@@ -76,6 +76,9 @@ final class Repository<T:RealmRepresentable>: AbstractRepository where T == T.Re
         return Observable.deferred {
             return self.realm.rx.save(entity: entity)
             }
+            .subscribeOn(scheduler)
+            .observeOn(scheduler)
+        
     }
     
     func delete(entity: T) ->  Observable<Void> {

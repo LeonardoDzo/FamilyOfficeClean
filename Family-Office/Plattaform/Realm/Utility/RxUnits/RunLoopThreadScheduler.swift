@@ -1,11 +1,13 @@
 import Foundation
 import RxSwift
-
+import Realm
 final class RunLoopThreadScheduler: ImmediateSchedulerType {
     private let thread: Thread
     private let target: ThreadTarget
     
-    init(threadName: String) {
+    static let sharedInstance = RunLoopThreadScheduler(threadName:  "Family-Office-RealmPlatform-Repository")
+    
+    private init(threadName: String) {
         self.target = ThreadTarget()
         self.thread = Thread(target: target,
                              selector: #selector(ThreadTarget.threadEntryPoint),
@@ -38,6 +40,7 @@ final class RunLoopThreadScheduler: ImmediateSchedulerType {
     }
     
     deinit {
+      
         thread.cancel()
     }
 }

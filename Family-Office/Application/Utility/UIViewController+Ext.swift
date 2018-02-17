@@ -42,12 +42,7 @@ extension UIViewController {
             self.dismiss(animated: true, completion: nil)
         }
     }
-    
-    open override func reloadInputViews() {
-        on("INJECTION_BUNDLE_NOTIFICATION") {
-            self.viewDidLoad()
-        }
-    }
+
     
     
 }

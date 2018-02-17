@@ -24,7 +24,6 @@ final class PreHomeViewModel: ViewModelType {
         self.userUseCase = userUseCase
         self.navigator = navigator
         self.familyUseCase = familyUseCase
-        
     }
     
     
@@ -48,7 +47,9 @@ final class PreHomeViewModel: ViewModelType {
         let toCreateFamily = input.createBtntrigger.do(onNext: navigator.toAddFamily)
         
         let user = input.trigger.flatMapLatest ({_ in
-            return self.userUseCase.getUser(by: self.user.uid).asDriverOnErrorJustComplete()
+            return self.userUseCase.getUser(by: self.user.uid)
+                .subscribeOn(RunLoopThreadScheduler.sharedInstance)
+                .asDriverOnErrorJustComplete()
         })
       
        
