@@ -14,7 +14,7 @@ import RxSwift
 class HomeViewController: UIViewController, UICollectionViewDelegate {
     private let disposeBag = DisposeBag()
     var v = HomeView()
-    var menuBtn = UIBarButtonItem(image: #imageLiteral(resourceName: "icons8-list").maskWithColor(color: #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)), style: .plain, target: self, action: nil)
+    var menuBtn = UIBarButtonItem(image: #imageLiteral(resourceName: "icons8-list").maskWithColor(color: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)), style: .plain, target: self, action: nil)
     var viewModel: HomeViewmodel!
     override func loadView() { view = v }
     override func viewDidLoad() {

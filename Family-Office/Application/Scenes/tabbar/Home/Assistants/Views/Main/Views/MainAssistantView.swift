@@ -51,8 +51,6 @@ class MainAssistantViewStevia: UIViewX {
     func changeType(_ sender: UIButtonX) {
         menu.indexLine(from: table.type, to: sender.tag)
         table.type = sender.tag
-        
-        
     }
     
     // Style can be extracted and applied kind of like css \o/

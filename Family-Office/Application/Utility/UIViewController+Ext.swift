@@ -11,8 +11,9 @@ import RxCocoa
 import UIKit
 extension UIViewController {
     var backBtn: UIBarButtonItem! {
-       return UIBarButtonItem(image: #imageLiteral(resourceName: "back-27x20").maskWithColor(color: #colorLiteral(red: 0.9792956669, green: 0.9908331388, blue: 1, alpha: 1)), style: .plain, target: self, action: nil)
+        return UIBarButtonItem(image: #imageLiteral(resourceName: "back-27x20").maskWithColor(color: #colorLiteral(red: 0.9792956669, green: 0.9908331388, blue: 1, alpha: 1)), style: .plain, target: self, action: #selector(self.back))
     }
+    
     
     var errorBinding: Binder<Error> {
         return Binder(self, binding: { (vc, error) in

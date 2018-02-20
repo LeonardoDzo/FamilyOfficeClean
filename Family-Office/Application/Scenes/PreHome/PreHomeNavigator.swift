@@ -35,13 +35,20 @@ class PreHomeNav: PreHomeNavigator {
         let menuLeftNavigationController = UISideMenuNavigationController(rootViewController: menu)
         menuLeftNavigationController.view.backgroundColor = #colorLiteral(red: 0.9792956669, green: 0.9908331388, blue: 1, alpha: 1)
         SideMenuManager.default.menuLeftNavigationController = menuLeftNavigationController
+        SideMenuManager.default.menuPresentMode = .menuSlideIn
+        SideMenuManager.default.menuBlurEffectStyle = UIBlurEffectStyle.extraLight
+        SideMenuManager.default.menuAnimationFadeStrength = 0.4
+        SideMenuManager.default.menuAnimationTransformScaleFactor = 1
+        SideMenuManager.default.menuWidth =  240
     }
     
     func toHome() {
         let homeNavigationController = UINavigationController()
         homeNavigationController.tabBarItem = UITabBarItem(title: "Home", image: #imageLiteral(resourceName: "icons8-booking"), selectedImage: nil)
+        homeNavigationController.navigationBar.tintColor = #colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1)
         let homeNavigator = HomeNavigator(navigationController: homeNavigationController)
        
+        
         
         let familyNc = UINavigationController()
         let familiesnavigator = HomeFamilyNavigator(nc: familyNc)
@@ -58,6 +65,7 @@ class PreHomeNav: PreHomeNavigator {
             familyNc,
             notificationNc
         ]
+        
         tabBarController.tabBar.tintColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)
         
         setMenu()
@@ -84,5 +92,6 @@ class PreHomeNav: PreHomeNavigator {
         let navigator = ProfileNavigator(nc: nc)
         navigator.toProfile(user: user)
         navigationController.present(nc, animated: true, completion: nil)
+        
     }
 }

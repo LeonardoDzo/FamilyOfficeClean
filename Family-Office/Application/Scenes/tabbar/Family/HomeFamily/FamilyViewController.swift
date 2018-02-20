@@ -16,6 +16,7 @@ class FamilyViewController: UIViewController {
     var viewModel: FamilyViewModel!
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.v = Familystevia()
         self.view = self.v
         self.title = "Familias"
         bindToView()

@@ -46,19 +46,16 @@ final class PreHomeViewModel: ViewModelType {
     func transform(input: PreHomeViewModel.Input) -> PreHomeViewModel.Output {
         let toCreateFamily = input.createBtntrigger.do(onNext: navigator.toAddFamily)
         
-        let user = input.trigger.flatMapLatest ({_ in
-            return self.userUseCase.getUser(by: self.user.uid)
-                .subscribeOn(RunLoopThreadScheduler.sharedInstance)
-                .asDriverOnErrorJustComplete()
-        })
-      
-       
+        let user = self.getUser(input.trigger, self.userUseCase, self.user.uid)
+    
         let families = self.getFamilies(input.trigger, self.familyUseCase)
         
         let gotoProfile = input.profileViewTrigger.do(onNext: {_ in
             self.navigator.toProfile(user: self.user)
         })
+        
         let logout = Logout(input)
+        
         let selectedFamily = SelectFamily(input, families)
         
         return Output(user: user, families: families, create: toCreateFamily, profile: gotoProfile, logout: logout, selectedFamily: selectedFamily)

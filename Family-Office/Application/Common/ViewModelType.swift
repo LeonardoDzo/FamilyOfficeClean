@@ -27,4 +27,22 @@ extension ViewModelType {
                 .asDriverOnErrorJustComplete()
         })
     }
+    
+    func getFamily(_ input: Driver<Void>,_ familyUseCase: FamilyUseCase, _ id: String) -> SharedSequence<DriverSharingStrategy, Family> {
+        let errorTracker = ErrorTracker()
+        return input.flatMapLatest({ _ -> Driver<Family> in
+            return familyUseCase.get(byId: id)
+                .trackError(errorTracker)
+                .asDriverOnErrorJustComplete()
+        })
+    }
+    
+    func getUser(_ input: Driver<Void>, _ userUseCase: UserUseCase, _ uid: String) -> Driver<User> {
+         let errorTracker = ErrorTracker()
+         return input.flatMapLatest ({_ in
+            return userUseCase.getUser(by: uid)
+                .trackError(errorTracker)
+                .asDriverOnErrorJustComplete()
+        })
+    }
 }
