@@ -34,7 +34,6 @@ final class Repository<T:RealmRepresentable>: AbstractRepository where T == T.Re
     
     init(configuration: Realm.Configuration) {
         self.configuration = configuration
-       
         self.scheduler = RunLoopThreadScheduler.sharedInstance
         print("File 📁 url: \(RLMRealmPathForFile("default.realm"))")
     }
@@ -54,10 +53,9 @@ final class Repository<T:RealmRepresentable>: AbstractRepository where T == T.Re
         return Observable.deferred {
             let realm = self.realm
             let object = realm.object(ofType: T.RealmType.self, forPrimaryKey: uid)!
-            return BehaviorSubject(value: object.asDomain()).asObserver()
-            }
-            .subscribeOn(scheduler)
-            .observeOn(scheduler)
+            return Observable.from(object: object).map({$0.asDomain()})
+        }
+        .observeOn(scheduler)
             
     }
     
@@ -76,7 +74,6 @@ final class Repository<T:RealmRepresentable>: AbstractRepository where T == T.Re
         return Observable.deferred {
             return self.realm.rx.save(entity: entity)
             }
-            .subscribeOn(scheduler)
             .observeOn(scheduler)
         
     }

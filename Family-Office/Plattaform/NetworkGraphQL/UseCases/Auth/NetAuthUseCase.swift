@@ -21,9 +21,15 @@ final class NetAuthUseCase: AuthUseCase {
         UserDefaults().set(authmodel.token, forKey: "token")
         UserDefaults().set(authmodel.user.email, forKey: "email")
         UserDefaults().set(pass, forKey: "password")
+        
+        MainSocket.shareIntstance.channel.action("execute", with: UserSubscription(authmodel.user))
+        MainSocket.shareIntstance.channel.action("execute", with: PendingAddedSubscription())
         self.provider.makeUseCase().save(user: authmodel.user).subscribe().dispose()
+        
         authmodel.user.families.forEach({ (family) in
+            MainSocket.shareIntstance.channel.action("execute", with: FamilySubscription(family))
             self.provider.makeFamilyUseCase().save(fam: family).subscribe().dispose()
+           
         })
     }
     

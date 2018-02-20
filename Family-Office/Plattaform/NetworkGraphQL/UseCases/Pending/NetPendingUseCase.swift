@@ -32,6 +32,7 @@ final class NetPendingUseCase: PendingUseCase {
             pendings.forEach({ (pending) in
                 _ = self.provider.makePendingUseCase().save(pending: pending).subscribe().dispose()
             })
+        
         })
     }
 }

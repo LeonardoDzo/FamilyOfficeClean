@@ -12,7 +12,8 @@ import RxSwift
 public protocol FamilyUseCase {
     func save(fam: Family) -> Observable<Void>
     func get() -> Observable<[Family]>
-//    func delete(fam: Family) -> Observable<Void>
+    func get(byId: String) -> Observable<Family>
+    //func delete(fam: Family) -> Observable<Void>
     // func allUser(fid: String) -> Void
     
 }

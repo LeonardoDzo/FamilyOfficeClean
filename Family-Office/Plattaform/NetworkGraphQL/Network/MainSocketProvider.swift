@@ -15,7 +15,9 @@ final class MainSocket {
     var client : ActionCableClient!
     var channel : Channel!
     static let shareIntstance = MainSocket()
-    private init() {
+    private let provider: RMUseCaseProvider!
+    private init(provider: RMUseCaseProvider = RMUseCaseProvider()) {
+        self.provider = provider
         if let token = UserDefaults().value(forKey: "token") as? String {
             client = ActionCableClient(url: request)
             client.headers = ["Authorization": token]
@@ -36,12 +38,23 @@ final class MainSocket {
                             switch key {
                                 case "userChanged":
                                     if let user = FindObject<User>().decoder(data: data) {
-                                      RMUseCaseProvider().makeUseCase().save(user: user).subscribe().dispose()
+                                      provider.makeUseCase().save(user: user).subscribe().dispose()
                                     }
                                     break
+                            case "familyChanged":
+                                if let family = FindObject<Family>().decoder(data: data) {
+                                    provider.makeFamilyUseCase().save(fam: family).subscribe().dispose()
+                                }
+                                break
+                            case "pendingAdded":
+                                if let model = FindObject<Pending>().decoder(data: data) {
+                                    provider.makePendingUseCase().save(pending: model).subscribe().dispose()
+                                }
+                                break
                                 default:
                                     break
                             }
+                            
                         }
                     }
                 }
