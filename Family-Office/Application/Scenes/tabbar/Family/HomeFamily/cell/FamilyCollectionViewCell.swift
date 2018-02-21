@@ -13,6 +13,7 @@ class FamilyCollectionViewCell: UICollectionViewCell, FamilyBindable {
     var family: Family!
     var titleLbl: UILabelX! = UILabelX()
     var photo: UIImageViewX! = UIImageViewX()
+    var selectedPhoto: UIImageViewX! = UIImageViewX()
     override func awakeFromNib() {
         super.awakeFromNib()
     }
@@ -23,13 +24,14 @@ class FamilyCollectionViewCell: UICollectionViewCell, FamilyBindable {
         render()
     }
     func render() -> Void {
-        sv(titleLbl, photo)
+        sv(titleLbl, photo, selectedPhoto)
+        
         layout(4,
                |-4-photo.width(100%).height(80%)-4-|,
                2,
                titleLbl.width(100%).height(20),
                4)
-       
+        selectedPhoto.width(40).height(40).top(75%).right(5%)
         titleLbl.centerHorizontally()
         titleLbl.textAlignment = .center
     }

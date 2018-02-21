@@ -10,16 +10,24 @@ import Foundation
 import UIKit
 
 protocol AddEditNavigatorPr {
-    func toPrehome()
+    func toback()
+    func toMe() -> Void
 }
 
 class AddEditNavigator: AddEditNavigatorPr{
     private let navigationController: UINavigationController
-    init( nc: UINavigationController) {
+    private let service : NetUseCaseProvider!
+    init( nc: UINavigationController, service: NetUseCaseProvider = NetUseCaseProvider()) {
         self.navigationController = nc
+        self.service = service
     }
     
-    func toPrehome() {
+    func toback() {
          navigationController.dismiss(animated: true)
+    }
+    func toMe() {
+        let view = AddEditFamilyViewController()
+        view.viewModel = AddEditViewModel(navigator: self, familyUseCase: self.service.makeFamilyUseCase())
+        navigationController.pushViewController(view, animated: true)
     }
 }

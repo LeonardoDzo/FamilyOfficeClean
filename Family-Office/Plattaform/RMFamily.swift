@@ -15,7 +15,7 @@ final class RMFamily: Object {
     dynamic var uid: String = ""
     dynamic var name: String = ""
     dynamic var members = List<RMUser>()
-    
+    dynamic var isSelected = false
     override class func primaryKey() -> String {
         return "uid"
     }
@@ -23,7 +23,9 @@ final class RMFamily: Object {
 extension RMFamily: DomainConvertibleType {
     func asDomain() -> Family {
         let mapMembers = Array(members.map({$0.asDomain()}))
-        return Family(name: name, admin: "", members: mapMembers, uid: uid)
+        var family = Family(name: name, admin: "", members: mapMembers, uid: uid)
+        family.isSelected = isSelected
+        return family
     }
 }
 
@@ -32,6 +34,8 @@ extension Family: RealmRepresentable {
         let family = RMFamily()
         family.uid = uid
         family.name = name
+        family.members.append(objectsIn: members.map({$0.asRealm()}))
+        family.isSelected = isSelected
         return family
     }
 }

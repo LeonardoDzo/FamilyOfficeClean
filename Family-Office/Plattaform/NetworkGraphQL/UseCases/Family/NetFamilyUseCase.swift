@@ -18,7 +18,8 @@ final class NetFamilyUseCase: FamilyUseCase  {
     }
     func save(fam: Family) -> Observable<Void> {
         return network.createFamily(family: fam).do(onNext: { family in
-        _ = self.provider.makeFamilyUseCase().save(fam: family).subscribe().dispose()
+            MainSocket.shareIntstance.channel.action("execute", with: FamilySubscription(fam))
+            self.provider.makeFamilyUseCase().save(fam: family).subscribe().dispose()
         }).mapToVoid()
     }
     func get() -> Observable<[Family]> {

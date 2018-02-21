@@ -22,6 +22,7 @@ class HomeNavigator: HomeNavigatorPr {
     func toMain() {
         let vc = HomeViewController()
         vc.viewModel = HomeViewmodel(navigator: self)
+        vc.title = "Menu"
         navigationController.pushViewController(vc, animated: true)
     }
     func toModule(homeBtn: HomeBtn) {

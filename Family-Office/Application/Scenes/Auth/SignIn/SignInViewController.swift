@@ -19,9 +19,11 @@ class SignInViewController: UIViewController, GIDSignInUIDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+       
         GIDSignIn.sharedInstance().uiDelegate = self
         self.v = SignInView()
         self.view = self.v
+        self.view.endEditing(true)
         self.navigationController?.isNavigationBarHidden = true
         
         self.bindViewModel()

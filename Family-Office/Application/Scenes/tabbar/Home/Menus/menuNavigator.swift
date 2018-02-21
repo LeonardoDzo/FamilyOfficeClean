@@ -21,9 +21,12 @@ final class MenuNavigator : MenuNavigatorPr {
         if let top = UIApplication.topViewController() {
             top.dismiss(animated: true, completion: {
                   if let top = UIApplication.topViewController() {
-                    let nc = top.navigationController!
+                    let nc = UINavigationController()
+                    nc.view.backgroundColor = #colorLiteral(red: 0.5725490451, green: 0, blue: 0.2313725501, alpha: 0)
+                    nc.isNavigationBarHidden = true
                     let signInNavigator = DefaultAuthNavigator(service: NetUseCaseProvider(), nc: nc)
-                    signInNavigator.toSignIn(true)
+                    top.present(nc, animated: true, completion: nil)
+                    signInNavigator.toSignIn()
                 }
             })
         }

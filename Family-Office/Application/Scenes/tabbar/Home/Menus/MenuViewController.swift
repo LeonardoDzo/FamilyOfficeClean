@@ -26,7 +26,7 @@ class MenuViewController: UIViewController {
         let viewWillAppear = rx.sentMessage(#selector(UIViewController.viewWillAppear(_:)))
             .mapToVoid()
             .asDriverOnErrorJustComplete()
-        let input = MenuViewModel.Input(trigger: viewWillAppear, triggerLogout: self.v.logoutBtn.rx.tap.asDriver())
+        let input = MenuViewModel.Input(trigger: viewWillAppear, triggerSelected: self.v.tableView.rx.itemSelected.asDriver(), triggerLogout: self.v.logoutBtn.rx.tap.asDriver())
         let output = viewModel.transform(input: input)
         
         output.families.drive(self.v.tableView.rx.items(cellIdentifier: FamilyTableViewCell.reuseID, cellType: FamilyTableViewCell.self)){tv,model,cell in
@@ -34,6 +34,7 @@ class MenuViewController: UIViewController {
             }.disposed(by: disposeBag)
         
         output.logout.drive().disposed(by: disposeBag)
+        output.selected.drive().disposed(by: disposeBag)
     }
 
     override func didReceiveMemoryWarning() {

@@ -10,9 +10,11 @@ import UIKit
 import Stevia
 
 class FamilyTableViewCell: UITableViewCell, FamilyBindable {
+    
     var family: Family!
     var titleLbl: UILabelX! = UILabelX()
     var photo: UIImageViewX! = UIImageViewX()
+    var selectedPhoto: UIImageViewX! = UIImageViewX()
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -26,11 +28,12 @@ class FamilyTableViewCell: UITableViewCell, FamilyBindable {
         
         sv(
             titleLbl.style(self.nameStyle),
-            photo
+            photo,
+            selectedPhoto
         )
         photo.size(50).centerVertically()
-        alignHorizontally(|-20-photo-titleLbl.height(20)-20-|)
-        
+        alignHorizontally(|-20-photo-titleLbl.height(20)-selectedPhoto.size(20)-20-|)
+        titleLbl.sizeToFit()
     }
     
     func nameStyle(l:UILabelX) {

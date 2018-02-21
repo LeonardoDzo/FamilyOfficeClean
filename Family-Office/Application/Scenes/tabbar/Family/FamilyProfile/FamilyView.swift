@@ -11,22 +11,29 @@ import Stevia
 
 final class FamilyProfileView : UIViewX, FamilyBindable {
     var family: Family!
+    var tableView = UITableView()
     var backButton = UIButtonX()
     let menu = MenuMainAss(total: ["Miembros", "Imagenes", "Eventos"], colorPrimary: #colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1))
     var photo: UIImageViewX! = UIImageViewX()
     var titleLbl: UILabelX! = UILabelX()
     var selected = 0
+    
     convenience init(){
         self.init(frame: .zero)
+        conftable()
         render()
     }
+    
     func render() -> Void {
-        sv(photo,titleLbl,menu,backButton)
+        sv(photo,titleLbl,menu,backButton,tableView)
        
         
         photo.top(0).left(0).right(0).height(30%).width(100%)
         
         menu.top(33%).height(60).width(100%).left(0).right(0)
+        
+        tableView.top(40%).width(100%).height(40%).left(0).right(0)
+        tableView.tableFooterView = UIView()
         
         titleLbl.font = titleLbl.font.withSize(24)
         titleLbl.top(15%).width(100%).height(24).centerHorizontally()
@@ -45,6 +52,15 @@ final class FamilyProfileView : UIViewX, FamilyBindable {
         }
         
     }
+    
+    fileprivate func conftable() {
+        tableView.refreshControl = UIRefreshControl()
+        tableView.estimatedRowHeight = 100
+        tableView.rowHeight = 64
+        tableView.register(FamilyMemberTableViewCell.self, forCellReuseIdentifier: FamilyMemberTableViewCell.reuseID)
+        tableView.tableFooterView = UIView()
+    }
+    
     
     @objc
     func changeType(_ sender: UIButtonX) {

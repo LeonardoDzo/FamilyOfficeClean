@@ -18,7 +18,7 @@ final class AddEditViewModel: ViewModelType {
         self.familyUseCase = familyUseCase
     }
     func transform(input: AddEditViewModel.Input) -> AddEditViewModel.Output {
-        let back = input.backTrigger.do(onNext: navigator.toPrehome)
+        let back = input.backTrigger.do(onNext: navigator.toback)
         let activityIndicator = ActivityIndicator()
         let errorTracker = ErrorTracker()
         let canSave = input.name.map { (value) -> Bool in
@@ -33,7 +33,7 @@ final class AddEditViewModel: ViewModelType {
                     .trackActivity(activityIndicator)
                     .asDriverOnErrorJustComplete()
             }.do(onNext:{ _ in
-                self.navigator.toPrehome()
+                self.navigator.toback()
             })
         
         return Output(back: back, canSave: canSave, saved: save, error: errorTracker.asDriver())

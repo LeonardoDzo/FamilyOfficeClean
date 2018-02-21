@@ -22,7 +22,11 @@ class FamilyProfileViewModel: ViewModelType {
     func transform(input: FamilyProfileViewModel.Input) -> FamilyProfileViewModel.Output {
         let back = input.backtrigger.do(onNext: {self.navigator.toBack()})
         let family = self.getFamily(input.familyTrigger, self.familyUseCase, self.family.uid)
-        return Output(family: family, back: back)
+        let members = family.flatMapLatest { (family) in
+            return BehaviorRelay(value: family.members).asDriver()
+        }
+        
+        return Output(family: family, back: back, members: members)
     }
     
 }
@@ -34,5 +38,6 @@ extension FamilyProfileViewModel {
     struct Output {
         let family: Driver<Family>
         let back: Driver<Void>
+        let members: Driver<[User]>
     }
 }

@@ -9,5 +9,5 @@
 import Foundation
 
 func FamilySubscription(_ family: Family) -> [String : Any] {
-    return ["variables": ["id": family.uid], "query": "subscription FamilyChanged($id:ID){familyChanged(id:$id) {...FamilyDetails}}".appending(FamilyDetails.fragmentString).appending(PhotoDetails.fragmentString)]
+    return ["variables": ["id": family.uid], "query": "subscription FamilyChanged($id:ID){familyChanged(id:$id) {...FamilyDetails, members{ user{ ...UserDetails, families { family{ ...FamilyDetails }}}}}}".appending(FamilyDetails.fragmentString).appending(PhotoDetails.fragmentString).appending(UserDetails.fragmentString)]
 }

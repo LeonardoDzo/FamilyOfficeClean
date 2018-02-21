@@ -12,10 +12,12 @@ protocol FamilyBindable: AnyObject {
     var family: Family! {get set}
     var titleLbl: UILabelX! {get}
     var photo: UIImageViewX! {get}
+    var selectedPhoto: UIImageViewX! {get}
 }
 extension FamilyBindable {
     var titleLbl: UILabelX! {return nil}
     var photo: UIImageViewX! {return nil}
+    var selectedPhoto: UIImageViewX! {return nil}
     
     func bind(family: Family) -> Void {
         self.family = family
@@ -34,6 +36,11 @@ extension FamilyBindable {
             photo.backgroundColor = #colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1)
             photo.cornerRadius = 8
             //photo.image = #imageLiteral(resourceName: "icons8-family")
+        }
+        
+        if let selectedPhoto  = selectedPhoto {
+            selectedPhoto.image = #imageLiteral(resourceName: "check-1")
+            selectedPhoto.isHidden = self.family.isSelected ? false : true
         }
     }
 }

@@ -29,6 +29,7 @@ PODS:
   - GTMSessionFetcher/Full (1.1.13):
     - GTMSessionFetcher/Core (= 1.1.13)
   - GzipSwift (4.0.4)
+  - Hero (1.1.0)
   - ImagePicker (3.0.0)
   - Kingfisher (4.6.2)
   - ReactiveSwift (3.1.0):
@@ -58,6 +59,7 @@ DEPENDENCIES:
   - GenericPasswordRow (~> 3.0)
   - GoogleSignIn
   - GzipSwift
+  - Hero
   - ImagePicker
   - Kingfisher (~> 4.0)
   - ReactiveSwift
@@ -80,6 +82,7 @@ SPEC CHECKSUMS:
   GTMOAuth2: c77fe325e4acd453837e72d91e3b5f13116857b2
   GTMSessionFetcher: 5bb1eae636127de695590f50e7d248483eb891e6
   GzipSwift: 1a5bc5f7827e09846b0635b5079f1224bc3b1c3a
+  Hero: ce59e81c79390613d97b43da7179e2c5e1017e04
   ImagePicker: 973953c25960fe04729a7082a56194321c6762d2
   Kingfisher: 55b9c395bf8d3949676ad3861111923990ab68cf
   ReactiveSwift: 5b26d2e988fe0eed2daf48c4054d1de74db50184
@@ -94,6 +97,6 @@ SPEC CHECKSUMS:
   SteviaLayout: 0d2112caea45707695e8c718262c8ea3dd37ef17
   Whisper: 169760fc4bab0abf24d5529f9276f95c25cf1025
 
-PODFILE CHECKSUM: b846b53fb01c1f9b02b9d561addab0fab9895ae7
+PODFILE CHECKSUM: 67ffbc7bb5d9888a5d9cec9d24822bbbd54d1a58
 
 COCOAPODS: 1.3.1

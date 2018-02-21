@@ -20,7 +20,7 @@ final class NetworkProvider {
             if let token = UserDefaults().value(forKey: "token") as? String {
                 configuration.httpAdditionalHeaders = ["Authorization": token] // Replace `<token>`
             }
-            let url = URL(string: "http://localhost:3000/graphql")!
+            let url = URL(string: "http://192.168.1.114:3000/graphql")!
             
             return ApolloClient(networkTransport: HTTPNetworkTransport(url: url, configuration: configuration))
         }()

@@ -20,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         registerForPushNotifications()
         let window = UIWindow(frame: UIScreen.main.bounds)
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to:nil, from:nil, for:nil)
         Application.shared.configureMainInterface(in: window)
         self.window = window
         GIDSignIn.sharedInstance().clientID = google.CLIENTID

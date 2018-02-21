@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 import SideMenu
+import Hero
+
 protocol PreHomeNavigator {
     func toHome()
     func toMe(user: User)
@@ -23,9 +25,16 @@ class PreHomeNav: PreHomeNavigator {
     init(service: RMUseCaseProvider, nc: UINavigationController) {
         self.service = service
         self.navigationController = nc
+        navigationController.hero.isEnabled = true
     }
     
     func toMe(user: User) {
+          let preHome = PreHomeViewController()
+            let viewModel = PreHomeViewModel(user: user, navigator: self, familyUseCase: RMUseCaseProvider().makeFamilyUseCase(), userUseCase: RMUseCaseProvider().makeUseCase())
+            preHome.viewModel = viewModel
+            preHome.hero.isEnabled = true
+            navigationController.hero.navigationAnimationType = .slide(direction: .up)
+            navigationController.pushViewController(preHome, animated: true)
     }
     
     fileprivate func setMenu() {
@@ -47,7 +56,7 @@ class PreHomeNav: PreHomeNavigator {
         homeNavigationController.tabBarItem = UITabBarItem(title: "Home", image: #imageLiteral(resourceName: "icons8-booking"), selectedImage: nil)
         homeNavigationController.navigationBar.tintColor = #colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1)
         let homeNavigator = HomeNavigator(navigationController: homeNavigationController)
-       
+        
         
         
         let familyNc = UINavigationController()
@@ -60,6 +69,7 @@ class PreHomeNav: PreHomeNavigator {
         let notificationNavigator = NotificationNavigator(navigationController: notificationNc)
         
         let tabBarController = UITabBarController()
+        tabBarController.title = "Menu"
         tabBarController.viewControllers = [
             homeNavigationController,
             familyNc,
@@ -77,11 +87,10 @@ class PreHomeNav: PreHomeNavigator {
         notificationNavigator.toMain()
     }
     func toAddFamily() {
-        let view = AddEditFamilyViewController()
-        let nc = UINavigationController(rootViewController: view)
+        let nc = UINavigationController()
         let navigator = AddEditNavigator(nc: nc)
-        view.viewModel = AddEditViewModel(navigator: navigator, familyUseCase: service.makeFamilyUseCase())
         navigationController.present(nc, animated: true, completion: nil)
+        navigator.toMe()
     }
     func toSignIn() {
         navigationController.dismiss(animated: true, completion: nil)

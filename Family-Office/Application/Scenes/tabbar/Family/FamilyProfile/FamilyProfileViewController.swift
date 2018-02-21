@@ -46,6 +46,11 @@ class FamilyProfileViewController: UIViewController {
             })
             .disposed(by: disposeBag)
         
+        output.members.drive(self.v.tableView.rx.items(cellIdentifier: FamilyMemberTableViewCell.reuseID, cellType: FamilyMemberTableViewCell.self)){
+            i,model,cell in
+            cell.bind(user: model)
+        }.disposed(by: disposeBag)
+        
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

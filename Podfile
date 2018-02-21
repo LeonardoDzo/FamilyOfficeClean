@@ -23,4 +23,5 @@ target 'Family-Office' do
 	pod 'RxRealm'
     pod 'GoogleSignIn'
     pod 'ActionCableClient'
+    pod 'Hero'
 end

@@ -10,13 +10,13 @@ import Foundation
 import UIKit
 
 protocol AuthNavigator {
-    func toSignIn(_ presenter: Bool)
+    func toSignIn()
     func toSignUp()
     func toPreHome(user: User)
 }
 
 class DefaultAuthNavigator: AuthNavigator {
-    private var navigationController: UINavigationController
+    private weak var navigationController: UINavigationController!
     private let services: NetUseCaseProvider
     
     init(service: NetUseCaseProvider, nc: UINavigationController) {
@@ -24,23 +24,17 @@ class DefaultAuthNavigator: AuthNavigator {
         self.navigationController = nc
     }
     func toPreHome(user: User) {
-        let preHome = PreHomeViewController()
-        let nc = UINavigationController(rootViewController: preHome)
+        let nc = UINavigationController()
         let navigator = PreHomeNav(service: RMUseCaseProvider(), nc:  nc)
-        let viewModel = PreHomeViewModel(user: user, navigator: navigator, familyUseCase: RMUseCaseProvider().makeFamilyUseCase(), userUseCase: RMUseCaseProvider().makeUseCase())
-        preHome.viewModel = viewModel
         navigationController.present(nc, animated: true, completion: nil)
+        navigationController.isNavigationBarHidden = true
+        navigator.toMe(user: user)
     }
-    func toSignIn(_ presnter: Bool = false) {
+    func toSignIn() {
            let sigInVc = SignInViewController()
            sigInVc.viewModel = SignInviewModel(useCase: self.services.makeAuthUseCase(), navigator: self)
-        if !presnter {
             self.navigationController.pushViewController(sigInVc, animated: true)
-        }else{
-            self.navigationController.present(sigInVc, animated: true, completion: nil)
-            navigationController = UINavigationController(rootViewController: sigInVc)
-        }
-       
+
     }
     func toSignUp() {
         let signUp = SignUpViewController()
