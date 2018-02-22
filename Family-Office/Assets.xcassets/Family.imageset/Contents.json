@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "familias-2.png",
+      "filename" : "icons8-family.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "familias-1.png",
+      "filename" : "icons8-family-1.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "familias.png",
+      "filename" : "icons8-family-2.png",
       "scale" : "3x"
     }
   ],

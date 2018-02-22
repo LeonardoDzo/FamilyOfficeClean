@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 protocol HomeFamilyPr {
-    func familyProfile(fam: Family)
+    func familyProfile()
     func addfamily()
 }
 
@@ -29,13 +29,13 @@ final class HomeFamilyNavigator : HomeFamilyPr {
         navigationController.pushViewController(view, animated: true)
     }
     
-    func familyProfile(fam: Family) {
+    func familyProfile() {
         let nc = UINavigationController()
         nc.view.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         nc.isNavigationBarHidden = true
         let navigator = FamProfileNavigator(nc: nc)
         navigationController.present(nc, animated: true, completion: nil)
-        navigator.toMain(family: fam)
+        navigator.toMain()
     }
     func addfamily() {
         let view = AddEditFamilyViewController()

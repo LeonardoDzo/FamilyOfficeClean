@@ -19,8 +19,12 @@ class HomeView: UIViewX {
     convenience init() {
         self.init(frame:CGRect.zero)
         let layout = UICollectionViewFlowLayout()
+        let bounds = UIScreen.main.bounds
+        let width = (bounds.size.width - 43) / 3
+        layout.minimumLineSpacing = 10
+        layout.minimumInteritemSpacing = 10
         layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-        layout.itemSize = CGSize(width: 120, height: 120)
+        layout.itemSize = CGSize(width: width, height: width)
         
         collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
         render()

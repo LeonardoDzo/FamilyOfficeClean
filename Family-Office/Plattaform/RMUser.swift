@@ -45,6 +45,7 @@ extension User: RealmRepresentable {
             object.name = name
             object.phone = phone
             object.photo = photo?.asRealm()
+            object.families.append(objectsIn: families.map({$0.asRealm()}))
             object.uid = uid
         })
     }

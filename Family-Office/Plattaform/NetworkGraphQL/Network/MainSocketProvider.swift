@@ -11,7 +11,7 @@ import ActionCableClient
 import Starscream
 import RealmSwift
 final class MainSocket {
-    var request = URL(string:"ws://localhost:3000/websocket")!
+    var request = URL(string:"ws://192.168.1.114:3000/websocket")!
     var client : ActionCableClient!
     var channel : Channel!
     static let shareIntstance = MainSocket()

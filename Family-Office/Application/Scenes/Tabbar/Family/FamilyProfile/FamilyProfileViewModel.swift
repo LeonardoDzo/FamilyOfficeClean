@@ -11,21 +11,25 @@ import RxCocoa
 import RxSwift
 
 class FamilyProfileViewModel: ViewModelType {
-    let family: Family!
     let familyUseCase: FamilyUseCase!
+    let userUseCase: UserUseCase!
     let navigator: FamProfileNavigator!
-    init(family: Family, familyUseCase: FamilyUseCase, navigator: FamProfileNavigator) {
-        self.family = family
+
+    init(familyUseCase: FamilyUseCase, navigator: FamProfileNavigator, userUseCase: UserUseCase) {
         self.familyUseCase = familyUseCase
         self.navigator = navigator
+        self.userUseCase = userUseCase
     }
     func transform(input: FamilyProfileViewModel.Input) -> FamilyProfileViewModel.Output {
         let back = input.backtrigger.do(onNext: {self.navigator.toBack()})
-        let family = self.getFamily(input.familyTrigger, self.familyUseCase, self.family.uid)
-        let members = family.flatMapLatest { (family) in
-            return BehaviorRelay(value: family.members).asDriver()
-        }
+        let family = input.familyTrigger.flatMapLatest({_ in
+            return self.familyUseCase.getFamilyActive().asDriverOnErrorJustComplete()
+        })
         
+        let members = family.flatMapLatest { (family) in
+            return self.userUseCase.getUsers(byFamily: family).asDriverOnErrorJustComplete()
+        }
+    
         return Output(family: family, back: back, members: members)
     }
     

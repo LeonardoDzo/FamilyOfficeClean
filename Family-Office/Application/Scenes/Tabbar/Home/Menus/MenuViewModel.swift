@@ -26,17 +26,11 @@ final class MenuViewModel: ViewModelType {
             self.families = families
         })
         let logout = input.triggerLogout.do(onNext: navigator.logout)
-        let selected = Driver.merge(input.triggerSelected).flatMapLatest({ indexpath -> SharedSequence<DriverSharingStrategy, Void> in
-            let result = self.families.enumerated().map({ (arg) -> SharedSequence<DriverSharingStrategy, Void> in
-                var (i, fam) = arg
-                fam.isSelected = i == indexpath.row ? true : false
-                return self.familyUseCase.save(fam: fam).asDriverOnErrorJustComplete()
-            })
-            return Driver.merge(result).asDriver().mapToVoid()
-        })
-        
-        
-        
+        let selected = input.triggerSelected.flatMapLatest { (indexpath) in
+            return self.familyUseCase
+                .changeFamilyActive(family: self.families[indexpath.row])
+                .asDriverOnErrorJustComplete()
+        }
         return Output(families: families, selected: selected, logout: logout)
     }
     

@@ -31,6 +31,9 @@ class FamilyTableViewCell: UITableViewCell, FamilyBindable {
             photo,
             selectedPhoto
         )
+        titleLbl.isUserInteractionEnabled = false
+        photo.isUserInteractionEnabled = false
+        selectedPhoto.isUserInteractionEnabled = false
         photo.size(50).centerVertically()
         alignHorizontally(|-20-photo-titleLbl.height(20)-selectedPhoto.size(20)-20-|)
         titleLbl.sizeToFit()

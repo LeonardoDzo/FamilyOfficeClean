@@ -28,7 +28,7 @@ class FamilyViewModel: ViewModelType {
         }
         let selected = input.selectTrigger.do(onNext: { indexpath in
             let fam = self.families[indexpath.row]
-            fam.uid.isEmpty ? self.navigator.addfamily() : self.navigator.familyProfile(fam: fam)
+            fam.uid.isEmpty ? self.navigator.addfamily() : self.navigator.familyProfile()
         }).mapToVoid()
         return Output(families: families, selected: selected)
     }

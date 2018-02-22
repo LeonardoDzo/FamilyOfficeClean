@@ -15,13 +15,13 @@ final class NetworkProvider {
     public init(_ offline: Bool = false) {
         self.offline = offline
         apollo = {
-            let configuration = URLSessionConfiguration.default
+            let configuration = URLSessionConfiguration.ephemeral
             // Add additional headers as needed
             if let token = UserDefaults().value(forKey: "token") as? String {
                 configuration.httpAdditionalHeaders = ["Authorization": token] // Replace `<token>`
             }
             let url = URL(string: "http://192.168.1.114:3000/graphql")!
-            
+          
             return ApolloClient(networkTransport: HTTPNetworkTransport(url: url, configuration: configuration))
         }()
     }

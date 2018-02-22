@@ -45,4 +45,15 @@ extension ViewModelType {
                 .asDriverOnErrorJustComplete()
         })
     }
+    
+    func selectFamily(_ input: Driver<IndexPath>, _ families: [Family], _ familyUseCase: FamilyUseCase) -> Driver<Void> {
+        return Driver.merge(input).flatMapLatest({ indexpath -> SharedSequence<DriverSharingStrategy, Void> in
+            let result = families.enumerated().map({ (arg) -> SharedSequence<DriverSharingStrategy, Void> in
+                var (i, fam) = arg
+                fam.isSelected = i == indexpath.row ? true : false
+                return familyUseCase.save(fam: fam).asDriverOnErrorJustComplete()
+            })
+            return Driver.merge(result)
+        })
+    }
 }

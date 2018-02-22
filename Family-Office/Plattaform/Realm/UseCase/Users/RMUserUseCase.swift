@@ -27,4 +27,7 @@ final class RMUserUseCase<Repository>: UserUseCase where Repository: AbstractRep
     func getUser(by id: String) -> Observable<User> {
         return repository.query(uid: id)
     }
+    func getUsers(byFamily: Family) -> Observable<[User]> {
+        return repository.queryAll().filter({$0.contains(where: {$0.families.contains(where: {$0 == byFamily})})})
+    }
 }

@@ -27,5 +27,7 @@ final class NetUserUseCase: UserUseCase  {
     func getUser(by id: String) -> Observable<User> {
         return Variable(User(uid: "", name: "", email: "")).asObservable()
     }
-
+    func getUsers(byFamily: Family) -> Observable<[User]> {
+        return Variable([]).asObservable()
+    }
 }

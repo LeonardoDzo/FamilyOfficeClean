@@ -60,8 +60,9 @@ class PreHomeNav: PreHomeNavigator {
         
         
         let familyNc = UINavigationController()
-        let familiesnavigator = HomeFamilyNavigator(nc: familyNc)
-        familyNc.tabBarItem = UITabBarItem(title: "Familias", image: #imageLiteral(resourceName: "Family"), selectedImage: nil)
+        familyNc.view.backgroundColor = #colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1)
+        let familiesnavigator = FamProfileNavigator(nc: familyNc)
+        familyNc.tabBarItem = UITabBarItem(title: "Mi Familia", image: #imageLiteral(resourceName: "Family"), selectedImage: nil)
         
         
         let notificationNc = UINavigationController()
@@ -83,7 +84,7 @@ class PreHomeNav: PreHomeNavigator {
         tabBarController.view.backgroundColor = #colorLiteral(red: 0.9792956669, green: 0.9908331388, blue: 1, alpha: 1)
         navigationController.present(tabBarController, animated: true, completion: nil)
         homeNavigator.toMain()
-        familiesnavigator.fmailies()
+        familiesnavigator.toMain()
         notificationNavigator.toMain()
     }
     func toAddFamily() {

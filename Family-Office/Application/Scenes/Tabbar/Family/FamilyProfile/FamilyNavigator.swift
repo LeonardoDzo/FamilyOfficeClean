@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 protocol FamProfileNavPr {
-    func toMain(family: Family) -> Void
+    func toMain() -> Void
 }
 
 final class FamProfileNavigator: FamProfileNavPr {
@@ -21,9 +21,9 @@ final class FamProfileNavigator: FamProfileNavPr {
         self.service = service
     }
     
-    func toMain(family: Family) {
+    func toMain() {
         let view = FamilyProfileViewController()
-        view.viewModel = FamilyProfileViewModel(family: family, familyUseCase: service.makeFamilyUseCase(), navigator: self)
+        view.viewModel = FamilyProfileViewModel( familyUseCase: service.makeFamilyUseCase(), navigator: self, userUseCase: service.makeUseCase())
         nc.pushViewController(view, animated: true)
     }
     func toBack() -> Void {

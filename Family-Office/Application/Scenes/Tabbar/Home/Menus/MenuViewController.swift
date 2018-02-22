@@ -30,6 +30,7 @@ class MenuViewController: UIViewController {
         let output = viewModel.transform(input: input)
         
         output.families.drive(self.v.tableView.rx.items(cellIdentifier: FamilyTableViewCell.reuseID, cellType: FamilyTableViewCell.self)){tv,model,cell in
+            cell.isSelected = false
             cell.bind(family: model)
             }.disposed(by: disposeBag)
         

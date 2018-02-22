@@ -55,9 +55,6 @@ public struct Family : Codable {
 
 extension Family: Equatable {
     public static func == (lhs: Family, rhs: Family) -> Bool {
-        return lhs.name == rhs.name &&
-            lhs.photo == rhs.photo &&
-            lhs.admin == rhs.admin &&
-            lhs.members == rhs.members
+        return lhs.uid == rhs.uid
     }
 }

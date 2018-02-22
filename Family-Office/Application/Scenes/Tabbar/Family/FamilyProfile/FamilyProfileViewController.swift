@@ -9,7 +9,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
-
+import SideMenu
 class FamilyProfileViewController: UIViewController {
     private let disposeBag = DisposeBag()
     var v = FamilyProfileView()
@@ -21,6 +21,8 @@ class FamilyProfileViewController: UIViewController {
     fileprivate func setupView() {
         self.v = FamilyProfileView()
         self.view = self.v
+        SideMenuManager.default.menuAddPanGestureToPresent(toView: self.navigationController!.navigationBar)
+        SideMenuManager.default.menuAddScreenEdgePanGesturesToPresent(toView: self.navigationController!.view)
         bindToView()
     }
     override func viewDidLoad() {

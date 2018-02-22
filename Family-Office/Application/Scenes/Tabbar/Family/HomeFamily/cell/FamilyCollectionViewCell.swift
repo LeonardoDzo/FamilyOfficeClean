@@ -31,7 +31,7 @@ class FamilyCollectionViewCell: UICollectionViewCell, FamilyBindable {
                2,
                titleLbl.width(100%).height(20),
                4)
-        selectedPhoto.width(40).height(40).top(75%).right(5%)
+        selectedPhoto.size(40).top(73%).right(0%)
         titleLbl.centerHorizontally()
         titleLbl.textAlignment = .center
     }
@@ -42,6 +42,7 @@ class FamilyCollectionViewCell: UICollectionViewCell, FamilyBindable {
         self.photo.borderColor = #colorLiteral(red: 0.1764705926, green: 0.01176470611, blue: 0.5607843399, alpha: 1)
         self.photo.cornerRadius = 8
         self.photo.contentMode = .center
+        self.selectedPhoto.isHidden = true
         self.titleLbl.text = "Agregar familia"
         
     }

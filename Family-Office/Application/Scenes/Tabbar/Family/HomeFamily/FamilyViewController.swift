@@ -9,7 +9,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
-
+import SideMenu
 class FamilyViewController: UIViewController {
     private let disposeBag = DisposeBag()
     var v = Familystevia()
@@ -20,6 +20,8 @@ class FamilyViewController: UIViewController {
         self.view = self.v
         self.title = "Familias"
         bindToView()
+        SideMenuManager.default.menuAddPanGestureToPresent(toView: self.navigationController!.navigationBar)
+        SideMenuManager.default.menuAddScreenEdgePanGesturesToPresent(toView: self.navigationController!.view)
     }
 
     override func didReceiveMemoryWarning() {

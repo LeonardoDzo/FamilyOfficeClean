@@ -28,4 +28,24 @@ final class RMFamilyUseCase<Repository>: FamilyUseCase where Repository: Abstrac
     func get(byId: String) -> Observable<Family> {
         return repository.query(uid: byId)
     }
+    
+    func changeFamilyActive(family: Family) -> Observable<Void> {
+        
+        return Observable.create { observer in
+                self.repository.queryAll().do(onNext: {fams in
+                    fams.forEach({ f in
+                        var fam = f
+                        fam.isSelected = fam.uid == family.uid ? true : false
+                        self.repository.save(entity: fam).subscribe().dispose()
+                    })
+                    observer.onNext(())
+                    observer.onCompleted()
+                }).subscribe().dispose()
+            return Disposables.create()
+        }
+    }
+    
+    func getFamilyActive() -> Observable<Family> {
+        return repository.query(with: NSPredicate(format: "isSelected == true"), sortDescriptors: []).map({$0.filter({$0.isSelected}).first ?? $0.first ?? Family(name: "Cargando ...")})
+    }
 }

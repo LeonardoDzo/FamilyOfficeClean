@@ -15,7 +15,7 @@ import RxRealm
 final class PreHomeViewModel: ViewModelType {
     private let user: User
     private let navigator: PreHomeNav
-  
+    private var families = [Family]()
     private let userUseCase: UserUseCase!
     private let familyUseCase: FamilyUseCase!
     
@@ -48,7 +48,9 @@ final class PreHomeViewModel: ViewModelType {
         
         let user = self.getUser(input.trigger, self.userUseCase, self.user.uid)
     
-        let families = self.getFamilies(input.trigger, self.familyUseCase)
+        let families = self.getFamilies(input.trigger, self.familyUseCase).do(onNext: { fams in
+            self.families = fams
+        })
         
         let gotoProfile = input.profileViewTrigger.do(onNext: {_ in
             self.navigator.toProfile(user: self.user)
@@ -56,7 +58,14 @@ final class PreHomeViewModel: ViewModelType {
         
         let logout = Logout(input)
         
-        let selectedFamily = SelectFamily(input, families)
+        let selectedFamily = input.selection.flatMapLatest { (indexpath) in
+            return self.familyUseCase
+                .changeFamilyActive(family: self.families[indexpath.row])
+                .asDriverOnErrorJustComplete()
+        }.do(onNext: {self.navigator.toHome()})
+        
+        
+    
         
         return Output(user: user, families: families, create: toCreateFamily, profile: gotoProfile, logout: logout, selectedFamily: selectedFamily)
     }
@@ -77,6 +86,6 @@ extension PreHomeViewModel {
         let create: Driver<Void>
         let profile: Driver<Void>
         let logout: Driver<Void>
-        let selectedFamily: Driver<Family>
+        let selectedFamily: Driver<Void>
     }
 }
