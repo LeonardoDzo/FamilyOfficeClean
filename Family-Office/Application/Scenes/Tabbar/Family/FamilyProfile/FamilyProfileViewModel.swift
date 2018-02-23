@@ -25,22 +25,24 @@ class FamilyProfileViewModel: ViewModelType {
         let family = input.familyTrigger.flatMapLatest({_ in
             return self.familyUseCase.getFamilyActive().asDriverOnErrorJustComplete()
         })
-        
+        let tapAdd = input.tapAddMemberTrigger.do(onNext: {self.navigator.addMember()})
         let members = family.flatMapLatest { (family) in
             return self.userUseCase.getUsers(byFamily: family).asDriverOnErrorJustComplete()
         }
     
-        return Output(family: family, back: back, members: members)
+        return Output(family: family, tapAddMember: tapAdd, back: back, members: members)
     }
     
 }
 extension FamilyProfileViewModel {
     struct Input {
         let familyTrigger: Driver<Void>
+        let tapAddMemberTrigger: Driver<Void>
         let backtrigger: Driver<Void>
     }
     struct Output {
         let family: Driver<Family>
+        let tapAddMember: Driver<Void>
         let back: Driver<Void>
         let members: Driver<[User]>
     }

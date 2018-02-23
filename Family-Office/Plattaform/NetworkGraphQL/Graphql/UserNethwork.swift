@@ -18,7 +18,7 @@ public final class UserNetwork {
         self.network = network
     }
 
-//    public func getUser() -> Observable<User> {
-//        return network.getItem(GraphQLQuery)
-//    }
+    public func getUsers(phones: [String], rol: Int) -> Observable<[User]> {
+       return network.getItems(AllUserQuery(phones: phones, rol: rol))
+   }
 }

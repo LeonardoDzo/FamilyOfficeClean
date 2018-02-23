@@ -18,6 +18,7 @@ extension User : Mappable {
         case email
         case families
         case photo
+        case user_type
     }
     
 }

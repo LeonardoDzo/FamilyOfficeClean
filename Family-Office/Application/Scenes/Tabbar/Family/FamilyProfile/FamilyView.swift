@@ -17,7 +17,7 @@ final class FamilyProfileView : UIViewX, FamilyBindable {
     var photo: UIImageViewX! = UIImageViewX()
     var titleLbl: UILabelX! = UILabelX()
     var selected = 0
-    
+    var addMemberBtn = UIButtonX()
     convenience init(){
         self.init(frame: .zero)
         conftable()
@@ -25,7 +25,7 @@ final class FamilyProfileView : UIViewX, FamilyBindable {
     }
     
     func render() -> Void {
-        sv(photo,titleLbl,menu,backButton,tableView)
+        sv(photo,titleLbl,menu,backButton,tableView,addMemberBtn.style(self.styleAddMemberBtn))
        
         
         photo.top(0).left(0).right(0).height(30%).width(100%)
@@ -47,14 +47,21 @@ final class FamilyProfileView : UIViewX, FamilyBindable {
         animation = "squeezeLeft"
         self.animations()
         
+        addMemberBtn.bottom(50).right(5%)
+        
         menu.btns.forEach { (btn) in
            btn.addTarget(self, action: #selector(self.changeType(_:)), for: .touchUpInside)
         }
         
     }
     
+    func styleAddMemberBtn(_ btnx: UIButtonX ) {
+        btnx.setImage(#imageLiteral(resourceName: "add"), for: .normal)
+        btnx.size(50)
+        btnx.backgroundColor = UIColor.clear
+    }
+    
     fileprivate func conftable() {
-        tableView.refreshControl = UIRefreshControl()
         tableView.estimatedRowHeight = 100
         tableView.rowHeight = 64
         tableView.register(FamilyMemberTableViewCell.self, forCellReuseIdentifier: FamilyMemberTableViewCell.reuseID)

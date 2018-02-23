@@ -1,0 +1,9 @@
+
+query allUser($phones: [String], $rol: Int) {
+    allUsers(filter: {
+        phone: $phones,
+        user_type: $rol
+    }) {
+       ...UserDetails
+    }
+}

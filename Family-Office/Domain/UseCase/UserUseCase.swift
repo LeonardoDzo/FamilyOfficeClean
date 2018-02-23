@@ -14,6 +14,7 @@ public protocol UserUseCase {
     //func delete(user: User) -> Observable<Void>
     func getUser(by id: String) -> Observable<User>
     func getUsers(byFamily: Family) -> Observable<[User]>
+    func getUsers(phones: [String], rol: Int) -> Observable<[User]>
     //func allUser(fid: String) -> Void
     
 }

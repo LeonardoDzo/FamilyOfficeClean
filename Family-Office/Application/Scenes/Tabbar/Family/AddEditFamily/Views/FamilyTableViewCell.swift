@@ -22,10 +22,7 @@ class FamilyTableViewCell: UITableViewCell, FamilyBindable {
     required init?(coder aDecoder: NSCoder) { super.init(coder: aDecoder)
     }
    
-    override init(style: UITableViewCellStyle, reuseIdentifier: String? = "cell") {
-       
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
+    fileprivate func render() {
         sv(
             titleLbl.style(self.nameStyle),
             photo,
@@ -37,6 +34,13 @@ class FamilyTableViewCell: UITableViewCell, FamilyBindable {
         photo.size(50).centerVertically()
         alignHorizontally(|-20-photo-titleLbl.height(20)-selectedPhoto.size(20)-20-|)
         titleLbl.sizeToFit()
+    }
+    
+    override init(style: UITableViewCellStyle, reuseIdentifier: String? = "cell") {
+       
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        render()
     }
     
     func nameStyle(l:UILabelX) {

@@ -15,6 +15,7 @@ final class SignInviewModel: ViewModelType {
     private let navigator: DefaultAuthNavigator
     
     init(useCase: AuthUseCase, navigator: DefaultAuthNavigator) {
+        
         self.authUseCase = useCase
         self.navigator = navigator
     }
@@ -38,7 +39,7 @@ final class SignInviewModel: ViewModelType {
     fileprivate func loginAction(_ input: SignInviewModel.Input, _ emailAndPassword: SharedSequence<DriverSharingStrategy, (String, String)>, _ errorTracker: ErrorTracker, _ activityIndicator: ActivityIndicator) -> SharedSequence<DriverSharingStrategy, User> {
         return input.loginTrigger.withLatestFrom(emailAndPassword).flatMapLatest({
             [unowned self] in
-            
+            UserDefaults().removeObject(forKey: "token")
             return self.authUseCase
                 .signIn(email: $0.0, password: $0.1)
                 .trackError(errorTracker)

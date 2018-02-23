@@ -30,4 +30,7 @@ final class NetUserUseCase: UserUseCase  {
     func getUsers(byFamily: Family) -> Observable<[User]> {
         return Variable([]).asObservable()
     }
+    func getUsers(phones: [String], rol: Int = 0) -> Observable<[User]> {
+        return network.getUsers(phones:phones , rol:rol)
+    }
 }

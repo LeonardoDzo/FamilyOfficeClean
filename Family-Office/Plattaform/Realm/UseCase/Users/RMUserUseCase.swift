@@ -14,6 +14,8 @@ import RealmSwift
 final class RMUserUseCase<Repository>: UserUseCase where Repository: AbstractRepository, Repository.T == User  {
     
     
+    
+    
     private let repository: Repository!
     
     init(repository: Repository) {
@@ -29,5 +31,9 @@ final class RMUserUseCase<Repository>: UserUseCase where Repository: AbstractRep
     }
     func getUsers(byFamily: Family) -> Observable<[User]> {
         return repository.queryAll().filter({$0.contains(where: {$0.families.contains(where: {$0 == byFamily})})})
+    }
+    
+    func getUsers(phones: [String], rol: Int) -> Observable<[User]> {
+        return repository.queryAll()
     }
 }

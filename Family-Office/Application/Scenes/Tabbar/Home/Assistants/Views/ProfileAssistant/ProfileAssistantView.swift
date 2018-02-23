@@ -23,11 +23,6 @@ class ProfileAssistantStevia: UIViewX {
     }
     
     func render() {
-        
-        // View Hierarchy
-        // This essentially does `translatesAutoresizingMaskIntoConstraints = false`
-        // and `addSubsview()`. The neat benefit is that
-        // (`sv` calls can be nested which will visually show hierarchy ! )
         sv(
             topview
         )

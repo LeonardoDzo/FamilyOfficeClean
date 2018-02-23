@@ -31,6 +31,9 @@ class FamilyProfileViewController: UIViewController {
           self.setupView()
         }
         self.setupView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.isNavigationBarHidden = true
     }
     func bindToView() -> Void {
@@ -38,7 +41,7 @@ class FamilyProfileViewController: UIViewController {
             .mapToVoid()
             .asDriverOnErrorJustComplete()
         
-        let input = FamilyProfileViewModel.Input(familyTrigger: viewWillAppear, backtrigger: self.v.backButton.rx.tap.asDriver())
+        let input = FamilyProfileViewModel.Input(familyTrigger: viewWillAppear, tapAddMemberTrigger: self.v.addMemberBtn.rx.tap.asDriver(), backtrigger: self.v.backButton.rx.tap.asDriver())
         let output = viewModel.transform(input: input)
         
         output.back.drive().disposed(by: disposeBag)
@@ -52,6 +55,10 @@ class FamilyProfileViewController: UIViewController {
             i,model,cell in
             cell.bind(user: model)
         }.disposed(by: disposeBag)
+        
+        output.tapAddMember
+            .drive()
+            .disposed(by: disposeBag)
         
     }
     override func didReceiveMemoryWarning() {

@@ -33,6 +33,8 @@ final class PreHomeViewModel: ViewModelType {
             try! realm.write({
                 realm.deleteAll()
             })
+            UserDefaults().removeObject(forKey: "token")
+            UserDefaults().removeObject(forKey: "password")
             self.navigator.toSignIn()
         })
     }

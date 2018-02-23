@@ -21,6 +21,8 @@ public struct User : Codable {
     public var nss = ""
     public var rfc = ""
     public var bloodyType = ""
+    public var user_type = 0
+    
     public init(address: Address,
                 email: String,
                 name: String,
@@ -78,10 +80,6 @@ public struct User : Codable {
 
 extension User: Equatable {
     public static func == (lhs: User, rhs: User) -> Bool {
-        return lhs.uid == rhs.uid &&
-            lhs.address == rhs.address &&
-            lhs.email == rhs.email &&
-            lhs.name == rhs.name &&
-            lhs.phone == rhs.phone
+        return lhs.uid == rhs.uid 
     }
 }

@@ -20,6 +20,7 @@ final class RMUser: Object {
     dynamic var phone: String = ""
     dynamic var photo: RMPhoto?
     dynamic var families = List<RMFamily>()
+    dynamic var user_type = 0
     
     override class func primaryKey() -> String {
         return "uid"
@@ -28,9 +29,9 @@ final class RMUser: Object {
 
 extension RMUser: DomainConvertibleType {
     func asDomain() -> User {
-        let mapFamilies = Array(families.map({$0.asDomain()}))
+      
         var user = User(uid: "", name: name, email: email)
-        user.families = mapFamilies
+        user.user_type = user_type
         user.phone = phone
         user.photo = photo?.asDomain()
         return user
@@ -45,6 +46,7 @@ extension User: RealmRepresentable {
             object.name = name
             object.phone = phone
             object.photo = photo?.asRealm()
+            object.user_type = user_type
             object.families.append(objectsIn: families.map({$0.asRealm()}))
             object.uid = uid
         })
