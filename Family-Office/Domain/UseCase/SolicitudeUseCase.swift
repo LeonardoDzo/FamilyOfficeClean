@@ -9,8 +9,8 @@
 import Foundation
 import RxSwift
 
-public protocol SolocitudeUseCase {
+public protocol SolicitudeUseCase {
      func save(solicitude: Solicitude) -> Observable<Void>
-     func get(familyId: String) -> Observable<[Solicitude]>
-     func get(assistant: String) -> Observable<[Solicitude]>
+     func getFamilyApplications() -> Observable<[Solicitude]>
+     //func getAssistantsApplications() -> Observable<[Solicitude]>
 }

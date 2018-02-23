@@ -34,4 +34,8 @@ public final class RMUseCaseProvider: UseCaseProvider {
         let repository = Repository<Pending>(configuration: configuration)
         return RMPendingUseCase(repository: repository)
     }
+    public func makeSolicitudeUseCase() -> SolicitudeUseCase {
+        let repository = Repository<Solicitude>(configuration: configuration)
+        return RMSolicitudeUseCase(repository: repository)
+    }
 }

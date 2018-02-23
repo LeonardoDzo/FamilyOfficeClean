@@ -31,9 +31,10 @@ class SearchUsersViewController: UIViewController {
             .asDriverOnErrorJustComplete()
         let input = SearchUserViewModel.Input(trigger: viewWillAppear, backTrigger: self.backBt.rx.tap.asDriver())
         let output = viewModel.transform(input: input)
-        output.users.drive(self.v.tableView.rx.items(cellIdentifier: UserInviteTableViewCell.reuseID, cellType: UserInviteTableViewCell.self)){
+        output.applications.drive(self.v.tableView.rx.items(cellIdentifier: UserInviteTableViewCell.reuseID, cellType: UserInviteTableViewCell.self)){
                 i, model, cell in
-            cell.bind(user: model)
+                cell.bind(user: model.user)
+                cell.bindInviteBtn(isInvited: model.isInvited)
             }
             .disposed(by: disposeBag)
         output.back.drive().disposed(by: disposeBag)

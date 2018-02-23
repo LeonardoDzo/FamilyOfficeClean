@@ -24,4 +24,5 @@ target 'Family-Office' do
     pod 'GoogleSignIn'
     pod 'ActionCableClient'
     pod 'Hero'
+    pod 'SwiftLint'
 end

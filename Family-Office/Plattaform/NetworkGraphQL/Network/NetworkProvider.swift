@@ -14,9 +14,9 @@ final class NetworkProvider {
     
     public init(_ offline: Bool = false) {
         self.offline = offline
-        UserDefaults().removeObject(forKey: "token")
+        
         apollo = {
-            let configuration = URLSessionConfiguration.ephemeral
+            let configuration = URLSessionConfiguration.default
             // Add additional headers as needed
             if let token = UserDefaults().value(forKey: "token") as? String {
                 configuration.httpAdditionalHeaders = ["Authorization": token] // Replace `<token>`
@@ -43,5 +43,10 @@ final class NetworkProvider {
     public func makePendingNetwork() -> PendingNetwork {
         let network = Network<Pending>(apollo)
         return PendingNetwork(network: network)
+    }
+    
+    public func makeSolicitudeUseCase() -> SolicitudeNetwork {
+        let network = Network<Solicitude>(apollo)
+        return SolicitudeNetwork(network: network)
     }
 }

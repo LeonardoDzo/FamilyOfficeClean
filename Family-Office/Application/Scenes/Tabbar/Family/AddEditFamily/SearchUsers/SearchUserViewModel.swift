@@ -15,22 +15,42 @@ import ContactsUI
 final class SearchUserViewModel: ViewModelType {
     let userUseCase: UserUseCase!
     let navigator: SearchUserNavigator!
+    let netsolicitudeUseCase: SolicitudeUseCase!
+    let rmsolicitudeUseCase: SolicitudeUseCase!
     var contacts : [String] = []
-    
-    init(userUseCase: UserUseCase, navigator: SearchUserNavigator) {
+    var solicitudes = [Solicitude]()
+    init(userUseCase: UserUseCase, navigator: SearchUserNavigator, netsolicitude: SolicitudeUseCase, rmsolicitude: SolicitudeUseCase) {
         self.userUseCase = userUseCase
         self.navigator = navigator
+        self.netsolicitudeUseCase = netsolicitude
+        self.rmsolicitudeUseCase = rmsolicitude
         getContacts()
+        getSolicitudes()
     }
     func transform(input: SearchUserViewModel.Input) -> SearchUserViewModel.Output {
-        let users = input.trigger.flatMapLatest { _ -> SharedSequence<DriverSharingStrategy, [User]> in
+        let applications = input.trigger.flatMapLatest { _ -> SharedSequence<DriverSharingStrategy,  [SolicitudeFamilyViewModel]> in
             return self.userUseCase
                 .getUsers(phones: self.contacts, rol: 0)
-                .asDriverOnErrorJustComplete()
+                .map({ (users) -> [SolicitudeFamilyViewModel] in
+                    return users.map({ (u) -> SolicitudeFamilyViewModel in
+                        let isInvited = self.solicitudes.contains(where: {$0.to == u.uid})
+                        return SolicitudeFamilyViewModel(user: u, isInvited: isInvited)
+                    })
+                }).asDriverOnErrorJustComplete()
+            
         }
         let back = input.backTrigger.do(onNext:  {self.navigator.toBack()})
         
-        return Output(users: users.asDriver(), back: back)
+        return Output(applications: applications.asDriver(), back: back)
+    }
+    
+    func getSolicitudes() -> Void {
+        self.netsolicitudeUseCase
+            .getFamilyApplications()
+            .asDriverOnErrorJustComplete()
+            .do(onNext: { (solicitudes) in
+                self.solicitudes = solicitudes
+            }).drive().dispose()
     }
     
     func getContacts() -> Void {
@@ -46,6 +66,7 @@ final class SearchUserViewModel: ViewModelType {
             }
         }
     }
+    
 }
 
 extension SearchUserViewModel {
@@ -54,7 +75,7 @@ extension SearchUserViewModel {
         let backTrigger: Driver<Void>
     }
     struct Output {
-        let users: Driver<[User]>
+        let applications: Driver<[SolicitudeFamilyViewModel]>
         let back: Driver<Void>
     }
 }

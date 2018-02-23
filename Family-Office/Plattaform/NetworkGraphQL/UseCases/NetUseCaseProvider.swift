@@ -33,5 +33,8 @@ public final class NetUseCaseProvider : AuthUseCaseProvider, UseCaseProvider {
         return NetPendingUseCase(network: networkProvider.makePendingNetwork())
     }
     
+    public func makeSolicitudeUseCase() -> SolicitudeUseCase {
+        return NetSolicitudeUseCase(network: networkProvider.makeSolicitudeUseCase())
+    }
 }
 

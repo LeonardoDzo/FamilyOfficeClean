@@ -26,7 +26,7 @@ class SearchUserNavigator:  SearchUserNavPr {
     
     func toMe() {
         let view = SearchUsersViewController()
-        view.viewModel = SearchUserViewModel(userUseCase: service.makeUseCase(), navigator: self)
+        view.viewModel = SearchUserViewModel(userUseCase: service.makeUseCase(), navigator: self, netsolicitude: service.makeSolicitudeUseCase(), rmsolicitude: RMUseCaseProvider().makeSolicitudeUseCase())
         navigateController.pushViewController(view, animated: true)
     }
     

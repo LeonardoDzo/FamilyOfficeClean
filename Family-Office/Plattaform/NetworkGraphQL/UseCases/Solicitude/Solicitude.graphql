@@ -1,0 +1,24 @@
+
+
+mutation FamilyApplication($userId: ID!, $familyId: ID!) {
+    createFamilyApplication(family: $familyId, user: $userId) {
+        ...SolicitudeFDetails
+    }
+}
+
+query FamilyApplications {
+    allFamilyApplications {
+        ...SolicitudeFDetails
+    }
+}
+
+fragment SolicitudeFDetails on FamilyApplication {
+        id,
+        family {
+        ...FamilyDetails
+        },
+        user{
+        ...UserDetails
+        },
+        status
+}

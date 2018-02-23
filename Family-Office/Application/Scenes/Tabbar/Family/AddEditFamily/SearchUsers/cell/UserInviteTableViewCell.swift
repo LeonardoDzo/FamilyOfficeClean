@@ -37,9 +37,13 @@ class UserInviteTableViewCell: UITableViewCellX, UserBindable {
         alignHorizontally(|-20-photoProfile-nameLbl.height(20)-btnInvite.width(20%).width(30)-|)
         btnInvite.style { (btn) in
             btn.backgroundColor = #colorLiteral(red: 0.1764705926, green: 0.01176470611, blue: 0.5607843399, alpha: 1)
-            btn.text("Invitar")
             btn.tintColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         }
+    }
+    
+    func bindInviteBtn(isInvited: Bool) -> Void {
+        btnInvite.text(isInvited ? "Invitado" : "Invitar")
+        btnInvite.isEnabled = !isInvited
     }
 
 }

@@ -10,7 +10,7 @@ import Foundation
 import Apollo
 import RxSwift
 
-final class Network<T: Codable> {
+final class Network<T: Decodable> {
     private let apollo: ApolloClient!
     private let scheduler: ConcurrentDispatchQueueScheduler
     

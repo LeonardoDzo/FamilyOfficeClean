@@ -8,9 +8,6 @@
 
 import Foundation
 
-
-
-
 public final class SuperProvider{
     let rmusecaseprovider = RMUseCaseProvider()
     let netusecaseprovider = NetUseCaseProvider()
@@ -18,6 +15,4 @@ public final class SuperProvider{
     init(_ offline: Bool = false ) {
         
     }
-    
-    
 }
