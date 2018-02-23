@@ -28,6 +28,7 @@ final class NetworkProvider {
     }
     
     public func makeAuthNetwork() -> AuthNetwork {
+    
         let network = Network<AuthModel>(apollo)
         return AuthNetwork(network: network)
     }
