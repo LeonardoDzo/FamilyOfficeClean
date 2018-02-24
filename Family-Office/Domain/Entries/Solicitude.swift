@@ -71,19 +71,19 @@ public struct Solicitude: Decodable {
     public init(from decoder: Decoder) throws {
         if let values = try? decoder.container(keyedBy: CodingKeys.self) {
             if let assistant = try? values.decode(User.self, forKey: .assistant) {
-                self.from = assistant.uid
+                self.to = assistant.uid
                 self.photo = assistant.photo
                 self.details = ""
                 self.type = .Assistant
             }
             if let family = try? values.decode(Family.self, forKey: .family) {
-                self.from = family.uid
+                self.to = family.uid
                 self.photo = family.photo
                 self.details = "Has sido invitado a la " + family.name
                 self.type = .Family
             }
             if let user = try? values.decode(User.self, forKey: .user) {
-                self.to = user.uid
+                self.from = user.uid
             }
             status = try values.decode(STATUS_SOLICITUDE.self, forKey: .status)
         }

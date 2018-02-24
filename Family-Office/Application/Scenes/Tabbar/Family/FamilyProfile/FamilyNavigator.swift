@@ -11,7 +11,7 @@ import UIKit
 
 protocol FamProfileNavPr {
     func toMain() -> Void
-    func addMember() -> Void
+    func addMember(family: Family) -> Void
 }
 
 final class FamProfileNavigator: FamProfileNavPr {
@@ -30,8 +30,8 @@ final class FamProfileNavigator: FamProfileNavPr {
     func toBack() -> Void {
         nc.dismiss(animated: true, completion: nil)
     }
-    func addMember() {
-        let navigator = SearchUserNavigator(service: NetUseCaseProvider(), nc: nc)
-        navigator.toMe()
+    func addMember(family: Family) {
+        let navigator = SearchUserNavigator(service:  NetUseCaseProvider(), rmService: service, nc: nc)
+        navigator.toMe(family: family)
     }
 }

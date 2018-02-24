@@ -18,10 +18,6 @@ class SearchUsersViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view = v
-        self.navigationController?.isNavigationBarHidden = false
-        self.navigationController?.navigationBar.isUserInteractionEnabled = true
-        self.navigationItem.leftBarButtonItem = self.backBt
-        self.navigationController?.navigationBar.tintColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         bindToModel()
     }
     
@@ -35,6 +31,7 @@ class SearchUsersViewController: UIViewController {
                 i, model, cell in
                 cell.bind(user: model.user)
                 cell.bindInviteBtn(isInvited: model.isInvited)
+                cell.viewModel.family = model.family
             }
             .disposed(by: disposeBag)
         output.back.drive().disposed(by: disposeBag)

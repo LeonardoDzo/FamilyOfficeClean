@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Stevia
 
 @IBDesignable
 class UIViewX: SpringView {
@@ -36,6 +37,7 @@ class UIViewX: SpringView {
             return CAGradientLayer.self
         }
     }
+    var backButton = UIButtonX()
     
     func updateView() {
         let layer = self.layer as! CAGradientLayer
@@ -50,6 +52,10 @@ class UIViewX: SpringView {
         }
     }
     
+    func styleBtnBack(_ btx: UIButtonX) {
+        btx.top(5%).left(5%).width(25).height(25)
+        btx.setImage(#imageLiteral(resourceName: "back-27x20").maskWithColor(color: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)), for: .normal)
+    }
     // MARK: - Border
     
     @IBInspectable public var borderColor: UIColor = UIColor.clear {

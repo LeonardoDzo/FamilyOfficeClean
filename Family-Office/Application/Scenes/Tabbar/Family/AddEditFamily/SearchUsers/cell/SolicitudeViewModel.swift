@@ -10,9 +10,11 @@ import Foundation
 
 struct SolicitudeFamilyViewModel {
     var user : User!
+    var family: Family!
     var isInvited: Bool!
-    init(user: User, isInvited: Bool = false) {
+    init(user: User, family: Family, isInvited: Bool = false) {
         self.user = user
         self.isInvited = isInvited
+        self.family = family
     }
 }

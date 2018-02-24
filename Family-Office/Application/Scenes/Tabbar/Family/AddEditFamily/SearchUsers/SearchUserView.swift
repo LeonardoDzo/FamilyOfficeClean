@@ -11,24 +11,28 @@ import Stevia
 import UIKit
 
 final class SearchUserView: UIViewX {
+    var background = UIImageViewX()
     var tableView = UITableView()
-
+    
     convenience init() {
         self.init(frame: .zero)
         render()
     }
     
-   
     
     fileprivate func render(){
-        sv(tableView)
+        sv(background,tableView, self.backButton.style(self.styleBtnBack))
         conftable()
         layout(
-            200,
+            0,
+            |background.width(100%).height(25%)|,
+            0,
             |-0-tableView.height(70%)-0-|,
             0
         )
-        backgroundColor = #colorLiteral(red: 0, green: 0.5690457821, blue: 0.5746168494, alpha: 1)
+        background.image = #imageLiteral(resourceName: "background-family")
+        background.contentMode = .scaleToFill
+        
         
     }
     

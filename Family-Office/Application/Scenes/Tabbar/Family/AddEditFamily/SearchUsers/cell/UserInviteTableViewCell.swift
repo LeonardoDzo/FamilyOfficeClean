@@ -8,13 +8,16 @@
 
 import UIKit
 import Stevia
+import RxSwift
+import RxCocoa
 
 class UserInviteTableViewCell: UITableViewCellX, UserBindable {
     var user: User!
+    private let disposeBag = DisposeBag()
     var nameLbl: UILabelX! = UILabelX()
     var photoProfile: UIImageViewX! = UIImageViewX()
     var btnInvite = UIButtonX()
-
+    var viewModel = UserInviteCellViewModel(solicitudeUseCase: NetUseCaseProvider().makeSolicitudeUseCase(), familyUseCase: RMUseCaseProvider().makeFamilyUseCase())
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -39,11 +42,24 @@ class UserInviteTableViewCell: UITableViewCellX, UserBindable {
             btn.backgroundColor = #colorLiteral(red: 0.1764705926, green: 0.01176470611, blue: 0.5607843399, alpha: 1)
             btn.tintColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         }
+        
     }
+    func bindViewToModel() -> Void {
+        let user = BehaviorRelay(value: self.user).asDriver()
+        let btn = self.btnInvite.rx.tap.asDriver()
+        let merge = Driver.combineLatest(btn, user)
     
+        let input = UserInviteCellViewModel.Input(inviteTrigger: merge)
+        let output = viewModel.transform(input: input)
+        output.invited.drive(onNext: { _ in
+            self.btnInvite.text("Invitado")
+            self.btnInvite.isEnabled = false
+        }).disposed(by: disposeBag)
+    }
     func bindInviteBtn(isInvited: Bool) -> Void {
         btnInvite.text(isInvited ? "Invitado" : "Invitar")
         btnInvite.isEnabled = !isInvited
+        self.bindViewToModel()
     }
 
 }

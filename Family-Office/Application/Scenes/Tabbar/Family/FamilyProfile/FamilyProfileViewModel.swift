@@ -14,7 +14,7 @@ class FamilyProfileViewModel: ViewModelType {
     let familyUseCase: FamilyUseCase!
     let userUseCase: UserUseCase!
     let navigator: FamProfileNavigator!
-
+    var family: Family!
     init(familyUseCase: FamilyUseCase, navigator: FamProfileNavigator, userUseCase: UserUseCase) {
         self.familyUseCase = familyUseCase
         self.navigator = navigator
@@ -24,8 +24,8 @@ class FamilyProfileViewModel: ViewModelType {
         let back = input.backtrigger.do(onNext: {self.navigator.toBack()})
         let family = input.familyTrigger.flatMapLatest({_ in
             return self.familyUseCase.getFamilyActive().asDriverOnErrorJustComplete()
-        })
-        let tapAdd = input.tapAddMemberTrigger.do(onNext: {self.navigator.addMember()})
+        }).do(onNext: {self.family = $0})
+        let tapAdd = input.tapAddMemberTrigger.do(onNext: {self.navigator.addMember(family: self.family)})
         let members = family.flatMapLatest { (family) in
             return self.userUseCase.getUsers(byFamily: family).asDriverOnErrorJustComplete()
         }

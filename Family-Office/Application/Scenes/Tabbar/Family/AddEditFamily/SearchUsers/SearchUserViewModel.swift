@@ -15,14 +15,13 @@ import ContactsUI
 final class SearchUserViewModel: ViewModelType {
     let userUseCase: UserUseCase!
     let navigator: SearchUserNavigator!
-    let netsolicitudeUseCase: SolicitudeUseCase!
     let rmsolicitudeUseCase: SolicitudeUseCase!
     var contacts : [String] = []
     var solicitudes = [Solicitude]()
-    init(userUseCase: UserUseCase, navigator: SearchUserNavigator, netsolicitude: SolicitudeUseCase, rmsolicitude: SolicitudeUseCase) {
+    var famiy: Family!
+    init(userUseCase: UserUseCase, navigator: SearchUserNavigator, rmsolicitude: SolicitudeUseCase) {
         self.userUseCase = userUseCase
         self.navigator = navigator
-        self.netsolicitudeUseCase = netsolicitude
         self.rmsolicitudeUseCase = rmsolicitude
         getContacts()
         getSolicitudes()
@@ -34,7 +33,7 @@ final class SearchUserViewModel: ViewModelType {
                 .map({ (users) -> [SolicitudeFamilyViewModel] in
                     return users.map({ (u) -> SolicitudeFamilyViewModel in
                         let isInvited = self.solicitudes.contains(where: {$0.to == u.uid})
-                        return SolicitudeFamilyViewModel(user: u, isInvited: isInvited)
+                        return SolicitudeFamilyViewModel(user: u,family: self.famiy, isInvited: isInvited)
                     })
                 }).asDriverOnErrorJustComplete()
             
@@ -45,7 +44,7 @@ final class SearchUserViewModel: ViewModelType {
     }
     
     func getSolicitudes() -> Void {
-        self.netsolicitudeUseCase
+        self.rmsolicitudeUseCase
             .getFamilyApplications()
             .asDriverOnErrorJustComplete()
             .do(onNext: { (solicitudes) in
