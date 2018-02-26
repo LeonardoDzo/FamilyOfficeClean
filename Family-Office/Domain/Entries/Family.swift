@@ -8,11 +8,11 @@
 
 import Foundation
 
-public struct Family : Codable {
-    
+public struct Family: Codable {
+
     public var uid: String = ""
     public var name: String = ""
-    public var photo: Photo? = nil
+    public var photo: Photo?
     public var admin: String? = ""
     public var members = [User]()
     public var isSelected = false
@@ -33,24 +33,22 @@ public struct Family : Codable {
         self.name = name
         self.uid = ""
     }
-    public init(from decoder: Decoder) throws
-    {
-        
+    public init(from decoder: Decoder) throws {
+
         if  let values = try? decoder.container(keyedBy: CodingKeys.self) {
-            
+
             name = try values.decode(String.self, forKey: .name)
-            
+
             uid = try values.decode(String.self, forKey: .uid)
-            
+
             photo = try! values.decodeIfPresent(Photo.self, forKey: .photo)
             members = try values.decodeIfPresent([[String:User]].self, forKey: .members)?.flatMap({$0.values.filter({
             !$0.uid.isEmpty})}) ?? []
         }
-        
-        
+
 //        members = try values.decode()
     }
-    
+
 }
 
 extension Family: Equatable {

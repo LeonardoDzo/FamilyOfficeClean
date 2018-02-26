@@ -18,7 +18,7 @@ class SignUpViewController: FormViewController {
     private var user = Variable(User(name: "", email: "", phone: ""))
     let cancel = UIBarButtonItem(image: #imageLiteral(resourceName: "back-27x20").maskWithColor(color: #colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1)), style: .plain, target: self, action: nil)
     let save = UIBarButtonItem(title: "Registrarse", style: .plain, target: self, action: nil)
-    
+
     var viewModel: SignUpviewModel!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,9 +27,9 @@ class SignUpViewController: FormViewController {
         self.navigationItem.title = "Registro"
         setupView()
     }
-    func setupView() -> Void {
-        
-        let nametxt = TextRow(){ row in
+    func setupView() {
+
+        let nametxt = TextRow() { row in
             row.title = "Nombre"
             row.tag = "name"
             row.add(rule: RuleRequired())
@@ -41,11 +41,11 @@ class SignUpViewController: FormViewController {
             }.cellUpdate { cell, row in
                 if !row.isValid {
                     cell.titleLabel?.textColor = .red
-                }else{
+                } else {
                     self.user.value.name = row.value!
                 }
         }
-        let phone = PhoneRow(){
+        let phone = PhoneRow() {
             $0.title = "Teléfono"
             $0.tag = "phone"
             $0.value = self.user.value.phone
@@ -55,12 +55,12 @@ class SignUpViewController: FormViewController {
             }.cellUpdate { cell, row in
                 if !row.isValid {
                     cell.titleLabel?.textColor = .red
-                }else{
+                } else {
                     self.user.value.phone = row.value ?? ""
-                    
+
                 }
         }
-        let email = EmailRow(){ row in
+        let email = EmailRow() { row in
             row.title = "Email"
             row.tag = "email"
             row.value = self.user.value.email
@@ -70,7 +70,7 @@ class SignUpViewController: FormViewController {
             }.cellUpdate { cell, row in
                 if !row.isValid {
                     cell.titleLabel?.textColor = .red
-                }else{
+                } else {
                     self.user.value.email = row.value ?? ""
                 }
         }
@@ -93,13 +93,13 @@ class SignUpViewController: FormViewController {
             }.cellUpdate { cell, row in
                 if !row.isValid {
                     cell.titleLabel?.textColor = .red
-                }else{
+                } else {
                     if password.value != row.value {
                         cell.titleLabel?.textColor = .red
                     }
                 }
         }
-        
+
         form +++ Section("Información Personal")
             <<< nametxt
             <<< phone
@@ -107,10 +107,10 @@ class SignUpViewController: FormViewController {
         +++ Section("")
             <<< password
             <<< rpassword
-        
+
          let input = SignUpviewModel.Input(cancelTrigger: cancel.rx.tap.asDriver(), saveTrigger: save.rx.tap.asDriver(), email: email.rx.value.orEmpty.asDriver(), phone: phone.rx.value.orEmpty.asDriver(), name: nametxt.rx.value.orEmpty.asDriver(), pass: password.rx.value.orEmpty.asDriver(), rpass: rpassword.rx.value.orEmpty.asDriver())
         let output = viewModel.transform(input: input)
-        
+
         output.dismiss
             .drive()
             .dispose()
@@ -121,15 +121,14 @@ class SignUpViewController: FormViewController {
             .drive(self.errorBinding)
             .disposed(by: disposeBag)
         output.saved.drive().disposed(by: disposeBag)
-        
+
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-  
+
     /*
     // MARK: - Navigation
 

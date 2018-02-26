@@ -12,7 +12,7 @@ import Foundation
     case Low
     case Normal
     case High
-    
+
     public var description: String {
         switch self {
         case .High:
@@ -23,9 +23,9 @@ import Foundation
             return "Baja"
         }
     }
-    
+
 }
-extension PENDING_PRIORITY : Codable {
+extension PENDING_PRIORITY: Codable {
     enum CodingKeys: String, CodingKey {
         case Low, Normal, High
     }
@@ -37,19 +37,18 @@ public struct Pending: Codable {
     public var title: String = ""
     public var priority: PENDING_PRIORITY = .Normal
     public var done: Bool = false
-    public var type : Int = 0
-    public var seen : Bool = false
-    public var boss : String = ""
+    public var type: Int = 0
+    public var seen: Bool = false
+    public var boss: String = ""
     public var assistantId: String = ""
-    public var created_at : Int = 0
-    public var updated_at : Int = 0
-    
+    public var created_at: Int = 0
+    public var updated_at: Int = 0
+
     init() {
     }
-    public init(from decoder: Decoder) throws
-    {
-        
-        if  let values = try? decoder.container(keyedBy: CodingKeys.self)  {
+    public init(from decoder: Decoder) throws {
+
+        if  let values = try? decoder.container(keyedBy: CodingKeys.self) {
             title = try values.decode(String.self, forKey: .title)
             details = try values.decodeIfPresent(String.self, forKey: .details) ?? ""
             uid = try values.decode(String.self, forKey: .uid)
@@ -57,8 +56,6 @@ public struct Pending: Codable {
             created_at = try values.decodeIfPresent(Int.self, forKey: .created_at) ?? 0
             updated_at = try values.decodeIfPresent(Int.self, forKey: .updated_at) ?? 0
         }
-        
-        
+
     }
-    
 }

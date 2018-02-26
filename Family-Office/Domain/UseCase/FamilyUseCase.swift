@@ -17,5 +17,5 @@ public protocol FamilyUseCase {
     func getFamilyActive() -> Observable<Family>
     //func delete(fam: Family) -> Observable<Void>
     // func allUser(fid: String) -> Void
-    
+
 }

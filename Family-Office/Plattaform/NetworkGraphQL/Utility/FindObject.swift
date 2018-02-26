@@ -8,18 +8,14 @@
 
 import Foundation
 
-
 final class FindObject<T: Codable> {
-   
+
     init() {
     }
-    
+
     func decoder(data: Data) -> T? {
         let obj = try? JSONDecoder().decode([String: T].self, from: data).first?.value
         return obj!
     }
-    
-   
+
 }
-
-

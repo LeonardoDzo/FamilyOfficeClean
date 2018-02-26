@@ -20,23 +20,23 @@ class PreHomeViewController: UIViewController {
         self.view.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
        self.setupView()
     }
-    fileprivate func setupView(){
-        
+    fileprivate func setupView() {
+
         self.v = Prehome()
         self.view = self.v
-        
+
         let viewWillAppear = rx.sentMessage(#selector(UIViewController.viewDidAppear(_:)))
             .mapToVoid()
             .asDriverOnErrorJustComplete()
-        
+
         let pull = v.tableView.refreshControl!.rx
             .controlEvent(.valueChanged)
             .asDriver()
-        
-        let input = PreHomeViewModel.Input(profileViewTrigger: self.v.settingBtn.rx.tap.asDriver(), triggerUser: viewWillAppear, logoutTrigger: self.v.logoutBtn.rx.tap.asDriver(),trigger: Driver.merge(viewWillAppear,pull), selection: self.v.tableView.rx.itemSelected.asDriver(), createBtntrigger: self.v.creteFamilybtn.rx.tap.asDriver())
-        
+
+        let input = PreHomeViewModel.Input(profileViewTrigger: self.v.settingBtn.rx.tap.asDriver(), triggerUser: viewWillAppear, logoutTrigger: self.v.logoutBtn.rx.tap.asDriver(), trigger: Driver.merge(viewWillAppear, pull), selection: self.v.tableView.rx.itemSelected.asDriver(), createBtntrigger: self.v.creteFamilybtn.rx.tap.asDriver())
+
         let output = self.viewModel.transform(input: input)
-        
+
         output.user
             .drive(self.userBinding)
             .disposed(by: self.disposeBag)
@@ -47,7 +47,7 @@ class PreHomeViewController: UIViewController {
             .drive()
             .disposed(by: disposeBag)
         output.families
-            .drive(self.v.tableView.rx.items(cellIdentifier: FamilyTableViewCell.reuseID, cellType: FamilyTableViewCell.self)){tv,model,cell in
+            .drive(self.v.tableView.rx.items(cellIdentifier: FamilyTableViewCell.reuseID, cellType: FamilyTableViewCell.self)) {tv, model, cell in
             cell.bind(family: model)
         }.disposed(by: disposeBag)
         output.logout
@@ -58,12 +58,12 @@ class PreHomeViewController: UIViewController {
             .disposed(by: disposeBag)
         self.navigationController?.isNavigationBarHidden = true
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
     var userBinding: Binder<User> {
         return Binder(self, binding: { (vc, user) in
             vc.v.bind(user: user)

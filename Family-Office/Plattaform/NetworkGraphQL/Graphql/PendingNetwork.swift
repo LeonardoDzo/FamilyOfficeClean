@@ -11,11 +11,11 @@ import RxSwift
 
 public final class PendingNetwork {
     private let network: Network<Pending>
-    
+
     init(network: Network<Pending>) {
         self.network = network
     }
-    
+
     public func create(pending: Pending) -> Observable<Pending> {
         return network.postItem(CreatePendingMutation(title: pending.title, priority: pending.priority.rawValue, details: pending.details))
     }

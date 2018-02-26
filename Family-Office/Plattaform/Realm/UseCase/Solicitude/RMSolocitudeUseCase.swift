@@ -11,19 +11,18 @@ import RxSwift
 import Realm
 import RealmSwift
 
-final class RMSolicitudeUseCase<Repository>: SolicitudeUseCase where Repository: AbstractRepository, Repository.T == Solicitude  {
-    
-    
+final class RMApplicationFamilyUseCase<Repository>: ApplicationFamilyUseCase where Repository: AbstractRepository, Repository.T == ApplicationFamily {
+
     private let repository: Repository!
-    
+
     init(repository: Repository) {
         self.repository = repository
     }
-    
-    func getFamilyApplications() -> Observable<[Solicitude]> {
+
+    func getFamilyApplications() -> Observable<[ApplicationFamily]> {
         return repository.query(with: NSPredicate(format: "stype = 0"), sortDescriptors: [])
     }
-    func save(solicitude: Solicitude) -> Observable<Void> {
+    func save(solicitude: ApplicationFamily) -> Observable<Void> {
         return repository.save(entity: solicitude)
     }
 }

@@ -10,13 +10,13 @@ import Foundation
 import UIKit
 
 protocol SignUpNavigatorProtocol {
-    func toSignIn() -> Void
-    func toPreHome(user: User) -> Void
+    func toSignIn()
+    func toPreHome(user: User)
 }
 class SignUpNavigator: SignUpNavigatorProtocol {
     private let navigationController: UINavigationController
     private let services: NetUseCaseProvider
-    
+
     init(service: NetUseCaseProvider, nc: UINavigationController) {
         self.services = service
         self.navigationController = nc
@@ -29,10 +29,10 @@ class SignUpNavigator: SignUpNavigatorProtocol {
         let preHome = PreHomeViewController()
         let service = RMUseCaseProvider()
         let nc = UINavigationController(rootViewController: preHome)
-        let navigator = PreHomeNav(service: service, nc:  nc)
+        let navigator = PreHomeNav(service: service, nc: nc)
         let viewModel = PreHomeViewModel(user: user, navigator: navigator, familyUseCase: service.makeFamilyUseCase(), userUseCase: service.makeUseCase())
         preHome.viewModel = viewModel
         navigationController.present(nc, animated: true, completion: nil)
     }
-    
+
 }

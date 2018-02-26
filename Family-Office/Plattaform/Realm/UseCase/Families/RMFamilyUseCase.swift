@@ -9,16 +9,14 @@
 import Foundation
 import RxSwift
 
-final class RMFamilyUseCase<Repository>: FamilyUseCase where Repository: AbstractRepository, Repository.T == Family  {
-   
-    
+final class RMFamilyUseCase<Repository>: FamilyUseCase where Repository: AbstractRepository, Repository.T == Family {
 
     private let repository: Repository!
-    
+
     init(repository: Repository) {
         self.repository = repository
     }
-    
+
     func save(fam: Family) -> Observable<Void> {
         return repository.save(entity: fam)
     }
@@ -28,9 +26,9 @@ final class RMFamilyUseCase<Repository>: FamilyUseCase where Repository: Abstrac
     func get(byId: String) -> Observable<Family> {
         return repository.query(uid: byId)
     }
-    
+
     func changeFamilyActive(family: Family) -> Observable<Void> {
-        
+
         return Observable.create { observer in
                 self.repository.queryAll().do(onNext: {fams in
                     fams.forEach({ f in
@@ -44,7 +42,7 @@ final class RMFamilyUseCase<Repository>: FamilyUseCase where Repository: Abstrac
             return Disposables.create()
         }
     }
-    
+
     func getFamilyActive() -> Observable<Family> {
         return repository.query(with: NSPredicate(format: "isSelected == true"), sortDescriptors: []).map({$0.filter({$0.isSelected}).first ?? $0.first ?? Family(name: "Cargando ...")})
     }

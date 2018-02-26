@@ -102,6 +102,7 @@ public final class SignInUserMutation: GraphQLMutation {
           GraphQLField("name", type: .nonNull(.scalar(String.self))),
           GraphQLField("email", type: .nonNull(.scalar(String.self))),
           GraphQLField("phone", type: .scalar(String.self)),
+          GraphQLField("user_type", type: .nonNull(.scalar(String.self))),
           GraphQLField("families", type: .nonNull(.list(.object(Family.selections)))),
         ]
 
@@ -111,8 +112,8 @@ public final class SignInUserMutation: GraphQLMutation {
           self.snapshot = snapshot
         }
 
-        public init(id: GraphQLID, name: String, email: String, phone: String? = nil, families: [Family?]) {
-          self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "families": families.map { $0.flatMap { $0.snapshot } }])
+        public init(id: GraphQLID, name: String, email: String, phone: String? = nil, userType: String, families: [Family?]) {
+          self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType, "families": families.map { $0.flatMap { $0.snapshot } }])
         }
 
         public var __typename: String {
@@ -157,6 +158,15 @@ public final class SignInUserMutation: GraphQLMutation {
           }
           set {
             snapshot.updateValue(newValue, forKey: "phone")
+          }
+        }
+
+        public var userType: String {
+          get {
+            return snapshot["user_type"]! as! String
+          }
+          set {
+            snapshot.updateValue(newValue, forKey: "user_type")
           }
         }
 
@@ -429,6 +439,7 @@ public final class SignInUserMutation: GraphQLMutation {
                   GraphQLField("name", type: .nonNull(.scalar(String.self))),
                   GraphQLField("email", type: .nonNull(.scalar(String.self))),
                   GraphQLField("phone", type: .scalar(String.self)),
+                  GraphQLField("user_type", type: .nonNull(.scalar(String.self))),
                 ]
 
                 public var snapshot: Snapshot
@@ -437,8 +448,8 @@ public final class SignInUserMutation: GraphQLMutation {
                   self.snapshot = snapshot
                 }
 
-                public init(id: GraphQLID, name: String, email: String, phone: String? = nil) {
-                  self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone])
+                public init(id: GraphQLID, name: String, email: String, phone: String? = nil, userType: String) {
+                  self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType])
                 }
 
                 public var __typename: String {
@@ -483,6 +494,15 @@ public final class SignInUserMutation: GraphQLMutation {
                   }
                   set {
                     snapshot.updateValue(newValue, forKey: "phone")
+                  }
+                }
+
+                public var userType: String {
+                  get {
+                    return snapshot["user_type"]! as! String
+                  }
+                  set {
+                    snapshot.updateValue(newValue, forKey: "user_type")
                   }
                 }
 
@@ -620,6 +640,7 @@ public final class SignUpMutation: GraphQLMutation {
           GraphQLField("name", type: .nonNull(.scalar(String.self))),
           GraphQLField("email", type: .nonNull(.scalar(String.self))),
           GraphQLField("phone", type: .scalar(String.self)),
+          GraphQLField("user_type", type: .nonNull(.scalar(String.self))),
           GraphQLField("families", type: .nonNull(.list(.object(Family.selections)))),
         ]
 
@@ -629,8 +650,8 @@ public final class SignUpMutation: GraphQLMutation {
           self.snapshot = snapshot
         }
 
-        public init(id: GraphQLID, name: String, email: String, phone: String? = nil, families: [Family?]) {
-          self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "families": families.map { $0.flatMap { $0.snapshot } }])
+        public init(id: GraphQLID, name: String, email: String, phone: String? = nil, userType: String, families: [Family?]) {
+          self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType, "families": families.map { $0.flatMap { $0.snapshot } }])
         }
 
         public var __typename: String {
@@ -675,6 +696,15 @@ public final class SignUpMutation: GraphQLMutation {
           }
           set {
             snapshot.updateValue(newValue, forKey: "phone")
+          }
+        }
+
+        public var userType: String {
+          get {
+            return snapshot["user_type"]! as! String
+          }
+          set {
+            snapshot.updateValue(newValue, forKey: "user_type")
           }
         }
 
@@ -1164,6 +1194,7 @@ public final class CreateFamilyMutation: GraphQLMutation {
             GraphQLField("name", type: .nonNull(.scalar(String.self))),
             GraphQLField("email", type: .nonNull(.scalar(String.self))),
             GraphQLField("phone", type: .scalar(String.self)),
+            GraphQLField("user_type", type: .nonNull(.scalar(String.self))),
             GraphQLField("families", type: .nonNull(.list(.object(Family.selections)))),
           ]
 
@@ -1173,8 +1204,8 @@ public final class CreateFamilyMutation: GraphQLMutation {
             self.snapshot = snapshot
           }
 
-          public init(id: GraphQLID, name: String, email: String, phone: String? = nil, families: [Family?]) {
-            self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "families": families.map { $0.flatMap { $0.snapshot } }])
+          public init(id: GraphQLID, name: String, email: String, phone: String? = nil, userType: String, families: [Family?]) {
+            self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType, "families": families.map { $0.flatMap { $0.snapshot } }])
           }
 
           public var __typename: String {
@@ -1219,6 +1250,15 @@ public final class CreateFamilyMutation: GraphQLMutation {
             }
             set {
               snapshot.updateValue(newValue, forKey: "phone")
+            }
+          }
+
+          public var userType: String {
+            get {
+              return snapshot["user_type"]! as! String
+            }
+            set {
+              snapshot.updateValue(newValue, forKey: "user_type")
             }
           }
 
@@ -2083,6 +2123,7 @@ public final class FamilyApplicationMutation: GraphQLMutation {
           GraphQLField("name", type: .nonNull(.scalar(String.self))),
           GraphQLField("email", type: .nonNull(.scalar(String.self))),
           GraphQLField("phone", type: .scalar(String.self)),
+          GraphQLField("user_type", type: .nonNull(.scalar(String.self))),
         ]
 
         public var snapshot: Snapshot
@@ -2091,8 +2132,8 @@ public final class FamilyApplicationMutation: GraphQLMutation {
           self.snapshot = snapshot
         }
 
-        public init(id: GraphQLID, name: String, email: String, phone: String? = nil) {
-          self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone])
+        public init(id: GraphQLID, name: String, email: String, phone: String? = nil, userType: String) {
+          self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType])
         }
 
         public var __typename: String {
@@ -2137,6 +2178,15 @@ public final class FamilyApplicationMutation: GraphQLMutation {
           }
           set {
             snapshot.updateValue(newValue, forKey: "phone")
+          }
+        }
+
+        public var userType: String {
+          get {
+            return snapshot["user_type"]! as! String
+          }
+          set {
+            snapshot.updateValue(newValue, forKey: "user_type")
           }
         }
 
@@ -2470,6 +2520,7 @@ public final class FamilyApplicationsQuery: GraphQLQuery {
           GraphQLField("name", type: .nonNull(.scalar(String.self))),
           GraphQLField("email", type: .nonNull(.scalar(String.self))),
           GraphQLField("phone", type: .scalar(String.self)),
+          GraphQLField("user_type", type: .nonNull(.scalar(String.self))),
         ]
 
         public var snapshot: Snapshot
@@ -2478,8 +2529,8 @@ public final class FamilyApplicationsQuery: GraphQLQuery {
           self.snapshot = snapshot
         }
 
-        public init(id: GraphQLID, name: String, email: String, phone: String? = nil) {
-          self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone])
+        public init(id: GraphQLID, name: String, email: String, phone: String? = nil, userType: String) {
+          self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType])
         }
 
         public var __typename: String {
@@ -2524,6 +2575,15 @@ public final class FamilyApplicationsQuery: GraphQLQuery {
           }
           set {
             snapshot.updateValue(newValue, forKey: "phone")
+          }
+        }
+
+        public var userType: String {
+          get {
+            return snapshot["user_type"]! as! String
+          }
+          set {
+            snapshot.updateValue(newValue, forKey: "user_type")
           }
         }
 
@@ -2607,6 +2667,7 @@ public final class AllUserQuery: GraphQLQuery {
         GraphQLField("name", type: .nonNull(.scalar(String.self))),
         GraphQLField("email", type: .nonNull(.scalar(String.self))),
         GraphQLField("phone", type: .scalar(String.self)),
+        GraphQLField("user_type", type: .nonNull(.scalar(String.self))),
       ]
 
       public var snapshot: Snapshot
@@ -2615,8 +2676,8 @@ public final class AllUserQuery: GraphQLQuery {
         self.snapshot = snapshot
       }
 
-      public init(id: GraphQLID, name: String, email: String, phone: String? = nil) {
-        self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone])
+      public init(id: GraphQLID, name: String, email: String, phone: String? = nil, userType: String) {
+        self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType])
       }
 
       public var __typename: String {
@@ -2664,6 +2725,15 @@ public final class AllUserQuery: GraphQLQuery {
         }
       }
 
+      public var userType: String {
+        get {
+          return snapshot["user_type"]! as! String
+        }
+        set {
+          snapshot.updateValue(newValue, forKey: "user_type")
+        }
+      }
+
       public var fragments: Fragments {
         get {
           return Fragments(snapshot: snapshot)
@@ -2691,7 +2761,7 @@ public final class AllUserQuery: GraphQLQuery {
 
 public struct UserDetails: GraphQLFragment {
   public static let fragmentString =
-    "fragment UserDetails on User {\n  __typename\n  id\n  name\n  email\n  phone\n}"
+    "fragment UserDetails on User {\n  __typename\n  id\n  name\n  email\n  phone\n  user_type\n}"
 
   public static let possibleTypes = ["User"]
 
@@ -2701,6 +2771,7 @@ public struct UserDetails: GraphQLFragment {
     GraphQLField("name", type: .nonNull(.scalar(String.self))),
     GraphQLField("email", type: .nonNull(.scalar(String.self))),
     GraphQLField("phone", type: .scalar(String.self)),
+    GraphQLField("user_type", type: .nonNull(.scalar(String.self))),
   ]
 
   public var snapshot: Snapshot
@@ -2709,8 +2780,8 @@ public struct UserDetails: GraphQLFragment {
     self.snapshot = snapshot
   }
 
-  public init(id: GraphQLID, name: String, email: String, phone: String? = nil) {
-    self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone])
+  public init(id: GraphQLID, name: String, email: String, phone: String? = nil, userType: String) {
+    self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType])
   }
 
   public var __typename: String {
@@ -2755,6 +2826,15 @@ public struct UserDetails: GraphQLFragment {
     }
     set {
       snapshot.updateValue(newValue, forKey: "phone")
+    }
+  }
+
+  public var userType: String {
+    get {
+      return snapshot["user_type"]! as! String
+    }
+    set {
+      snapshot.updateValue(newValue, forKey: "user_type")
     }
   }
 }
@@ -3318,6 +3398,7 @@ public struct SolicitudeFDetails: GraphQLFragment {
       GraphQLField("name", type: .nonNull(.scalar(String.self))),
       GraphQLField("email", type: .nonNull(.scalar(String.self))),
       GraphQLField("phone", type: .scalar(String.self)),
+      GraphQLField("user_type", type: .nonNull(.scalar(String.self))),
     ]
 
     public var snapshot: Snapshot
@@ -3326,8 +3407,8 @@ public struct SolicitudeFDetails: GraphQLFragment {
       self.snapshot = snapshot
     }
 
-    public init(id: GraphQLID, name: String, email: String, phone: String? = nil) {
-      self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone])
+    public init(id: GraphQLID, name: String, email: String, phone: String? = nil, userType: String) {
+      self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType])
     }
 
     public var __typename: String {
@@ -3372,6 +3453,15 @@ public struct SolicitudeFDetails: GraphQLFragment {
       }
       set {
         snapshot.updateValue(newValue, forKey: "phone")
+      }
+    }
+
+    public var userType: String {
+      get {
+        return snapshot["user_type"]! as! String
+      }
+      set {
+        snapshot.updateValue(newValue, forKey: "user_type")
       }
     }
 

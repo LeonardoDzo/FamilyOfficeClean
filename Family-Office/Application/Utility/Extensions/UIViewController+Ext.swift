@@ -13,18 +13,17 @@ extension UIViewController {
     var backBtn: UIBarButtonItem! {
         return UIBarButtonItem(image: #imageLiteral(resourceName: "back-27x20").maskWithColor(color: #colorLiteral(red: 0.9792956669, green: 0.9908331388, blue: 1, alpha: 1)), style: .plain, target: self, action: #selector(self.back))
     }
-    
-    
+
     var errorBinding: Binder<Error> {
         return Binder(self, binding: { (vc, error) in
             var text = "Error!!"
-            
+
             if let e = error as? RxApolloError, case RxApolloError.graphQLErrors(let errors) = e {
                 text = errors.first?.localizedDescription ?? "Something wrong!!"
-            }else{
+            } else {
                 text = error.localizedDescription
             }
-            
+
             let alert = UIAlertController(title: "Ups!!",
                                           message: text,
                                           preferredStyle: .alert)
@@ -36,22 +35,21 @@ extension UIViewController {
             vc.present(alert, animated: true, completion: nil)
         })
     }
-    @objc func back() -> Void {
+    @objc func back() {
         if (navigationController?.popViewController(animated: true)) != nil {
-            
-        }else{
+
+        } else {
             self.dismiss(animated: true, completion: nil)
         }
     }
-    
+
     @objc func hideKeyboardWhenTappedAround() {
-        let tap: UITapGestureRecognizer =     UITapGestureRecognizer(target: self, action:    #selector(UIViewController.dismissKeyboard))
+        let tap: UITapGestureRecognizer =     UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
         tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
     }
      @objc func dismissKeyboard() {
         view.endEditing(true)
     }
-    
-    
+
 }

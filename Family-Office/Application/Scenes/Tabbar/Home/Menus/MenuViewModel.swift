@@ -19,9 +19,9 @@ final class MenuViewModel: ViewModelType {
         self.familyUseCase = service
         self.navigator = navigator
     }
-    
+
     func transform(input: MenuViewModel.Input) -> MenuViewModel.Output {
-       
+
         let families = self.getFamilies(input.trigger, self.familyUseCase).do(onNext: {(families) in
             self.families = families
         })
@@ -33,8 +33,7 @@ final class MenuViewModel: ViewModelType {
         }
         return Output(families: families, selected: selected, logout: logout)
     }
-    
-   
+
 }
 extension MenuViewModel {
     struct Input {

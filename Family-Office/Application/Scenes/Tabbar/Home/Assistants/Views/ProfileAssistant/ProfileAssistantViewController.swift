@@ -11,22 +11,21 @@ import UIKit
 class ProfileAssistantViewController: UIViewController {
 
     var v = ProfileAssistantStevia()
-    
+
     override func loadView() { view = v }
     override func viewDidLoad() {
-        
+
         super.viewDidLoad()
-        
+
         on("INJECTION_BUNDLE_NOTIFICATION") {
             self.v = ProfileAssistantStevia()
             self.view = self.v
         }
         v.topview.callBtn.btn.addTarget(self, action: #selector(self.call(_:)), for: .touchUpInside)
         self.navigationItem.leftBarButtonItem = self.backBtn
-        
-        
+
     }
-    @objc func call(_ sender: UIButtonX){
+    @objc func call(_ sender: UIButtonX) {
         if let url = URL(string: "tel://\(sender.tag)"), UIApplication.shared.canOpenURL(url) {
             if #available(iOS 10, *) {
                 UIApplication.shared.open(url)

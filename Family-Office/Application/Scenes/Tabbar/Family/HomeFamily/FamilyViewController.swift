@@ -28,20 +28,20 @@ class FamilyViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    func bindToView() -> Void {
+
+    func bindToView() {
         let viewWillAppear = rx.sentMessage(#selector(UIViewController.viewDidAppear(_:)))
             .mapToVoid()
             .asDriverOnErrorJustComplete()
         self.v.collectionView.isUserInteractionEnabled = true
         let input = FamilyViewModel.Input(willAppearTrigger: viewWillAppear, selectTrigger: self.v.collectionView.rx.itemSelected.asDriver())
         let output = viewModel.transform(input: input)
-        
+
         output.families.drive(self.v.collectionView.rx.items(cellIdentifier: "cell", cellType: FamilyCollectionViewCell.self)) {
-            tv,model,cell in
+            tv, model, cell in
             cell.isSelected = true
             model.name.isEmpty ? cell.bind() : cell.bind(family: model)
-            
+
         }.disposed(by: disposeBag)
         output.selected.drive().disposed(by: disposeBag)
     }

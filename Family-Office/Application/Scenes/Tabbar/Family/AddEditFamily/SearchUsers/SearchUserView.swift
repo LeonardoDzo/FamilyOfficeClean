@@ -13,16 +13,16 @@ import UIKit
 final class SearchUserView: UIViewX {
     var background = UIImageViewX()
     var tableView = UITableView()
-    
+
     convenience init() {
         self.init(frame: .zero)
         render()
     }
-    
-    
-    fileprivate func render(){
-        sv(background,tableView, self.backButton.style(self.styleBtnBack))
+
+    fileprivate func render() {
+        sv(background, tableView, self.backButton)
         conftable()
+        backButton.style(self.styleBtnBack)
         layout(
             0,
             |background.width(100%).height(25%)|,
@@ -32,10 +32,9 @@ final class SearchUserView: UIViewX {
         )
         background.image = #imageLiteral(resourceName: "background-family")
         background.contentMode = .scaleToFill
-        
-        
+
     }
-    
+
     fileprivate func conftable() {
         tableView.estimatedRowHeight = 100
         tableView.rowHeight = 64

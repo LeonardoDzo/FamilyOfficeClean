@@ -12,16 +12,16 @@ import RealmSwift
 
 class ProfileAssistantStevia: UIViewX {
     var topview = TopViewProfileAssistant()
-    var notificationToken: NotificationToken? = nil
+    var notificationToken: NotificationToken?
     convenience init() {
-        self.init(frame:CGRect.zero)
+        self.init(frame: CGRect.zero)
         // This is only needed for live reload as injectionForXcode
         // doesn't swizzle init methods.
         // Get injectionForXcode here : http://johnholdsworth.com/injection.html
         render()
-        
+
     }
-    
+
     func render() {
         sv(
             topview
@@ -34,6 +34,6 @@ class ProfileAssistantStevia: UIViewX {
         )
 
         backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-        
+
     }
 }

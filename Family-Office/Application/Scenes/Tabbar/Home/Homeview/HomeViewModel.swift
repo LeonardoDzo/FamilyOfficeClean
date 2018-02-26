@@ -18,12 +18,12 @@ final class HomeViewmodel: ViewModelType {
     }
     func transform(input: HomeViewmodel.Input) -> HomeViewmodel.Output {
         let homeBtns = Variable(HomeBtn.btns).asDriver().startWith(HomeBtn.btns)
-       
+
         let selectBtn = input.selectTrigger.withLatestFrom(homeBtns) { indexpath, homebtns -> HomeBtn in
             return homebtns[indexpath.row]
         }.do(onNext: navigator.toModule)
         let menu = input.menuTrigger.asDriver()
-        
+
         return Output(homeBtns: homeBtns, selected: selectBtn, menu: menu)
     }
 }

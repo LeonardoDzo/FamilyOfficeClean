@@ -15,13 +15,13 @@ public final class AuthNetwork {
     init(network: Network<AuthModel>) {
         self.network = network
     }
-    
+
     func signIn(email: String, password: String) -> Observable<AuthModel> {
         return network.postItem(SignInUserMutation(e: email, p: password))
     }
-    
+
     func signUp(email: String, name: String, phone: String, password: String) -> Observable<AuthModel> {
         return network.postItem(SignUpMutation(name: name, email: email, password: password, phone: phone))
     }
-    
+
 }

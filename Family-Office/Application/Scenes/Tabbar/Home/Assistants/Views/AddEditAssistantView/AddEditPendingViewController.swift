@@ -15,10 +15,10 @@ class AddEditPendingViewController: FormViewController {
     private let disposeBag = DisposeBag()
 
     var saveBtn = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: nil)
-    var pending : Variable<Pending> = Variable(Pending())
+    var pending: Variable<Pending> = Variable(Pending())
     var viewModel: AddEditPendingViewModel!
     fileprivate func searchKey(_ key: String, _ value: Any?) {
-        
+
         switch key {
         case "title":
             self.pending.value.title = value as? String ?? ""
@@ -36,8 +36,8 @@ class AddEditPendingViewController: FormViewController {
             break
         }
     }
-        
-    fileprivate func setupForm() -> Void {
+
+    fileprivate func setupForm() {
         form +++ Section("")
             <<< TextRow() { row in
                 row.title = "Titúlo"
@@ -48,8 +48,8 @@ class AddEditPendingViewController: FormViewController {
             }.onChange({
                 self.searchKey($0.tag!, $0.value)
             })
-            
-            <<< TextAreaRow(){ row in
+
+            <<< TextAreaRow() { row in
                 row.title = "Descripción"
                 row.placeholder = "Descripción"
                 row.value = pending.value.details
@@ -59,11 +59,11 @@ class AddEditPendingViewController: FormViewController {
                 })
             <<< PushRow<PENDING_PRIORITY>() { row in
                 row.title = "Prioridad"
-                row.options = [.Low,.Normal,.High]
+                row.options = [.Low, .Normal, .High]
                 row.value = self.pending.value.priority
                 row.tag = "priority"
                 row.selectorTitle = ""
-                
+
                 self.navigationController?.setNavigationBarHidden(false, animated: true)
                 }.onChange({ (row) in
                     self.searchKey(row.tag!, row.value)
@@ -84,7 +84,7 @@ class AddEditPendingViewController: FormViewController {
                     self.searchKey($0.tag!, $0.value)
                 })
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tabBarController?.navigationItem.titleView = nil
@@ -94,10 +94,10 @@ class AddEditPendingViewController: FormViewController {
         bindViewModel()
     }
     private func bindViewModel() {
-        
+
         let input = AddEditPendingViewModel.Input(canSaveTrigger: pending.asDriver(), saveTrigger: self.saveBtn.rx.tap.asDriver())
         let output = viewModel.transform(input: input)
-        
+
         output.canSave.drive(saveBtn.rx.isEnabled).disposed(by: disposeBag)
         output.save.drive(onNext: { _ in
             if self.pending.value.uid.isEmpty {
@@ -107,13 +107,10 @@ class AddEditPendingViewController: FormViewController {
             }
         }).disposed(by: disposeBag)
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    
-  
 
 }

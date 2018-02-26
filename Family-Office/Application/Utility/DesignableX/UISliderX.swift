@@ -16,16 +16,16 @@ class UISliderX: UISlider {
             setupView()
         }
     }
-    
+
     @IBInspectable var thumbHighlightedImage: UIImage? {
         didSet {
             setupView()
         }
     }
-    
+
     func setupView() {
         setThumbImage(thumbImage, for: .normal)
-        
+
         if let highlighted = thumbHighlightedImage {
             setThumbImage(highlighted, for: .highlighted)
         } else {

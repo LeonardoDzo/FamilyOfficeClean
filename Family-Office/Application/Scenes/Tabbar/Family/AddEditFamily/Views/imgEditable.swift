@@ -14,12 +14,12 @@ import CoreImage
 class imgEditable: UIViewX {
     var img: UIImageViewX = UIImageViewX()
     var editBtn: UIButtonX = UIButtonX()
-    convenience init(){
+    convenience init() {
         self.init(frame: .zero)
         render()
     }
     fileprivate func render() {
-        sv(img,editBtn)
+        sv(img, editBtn)
         backgroundColor = #colorLiteral(red: 0.9792956669, green: 0.9908331388, blue: 1, alpha: 1)
         img.width(100%).height(100%)
         editBtn.right(5%).bottom(5%).width(10%).height(15%)

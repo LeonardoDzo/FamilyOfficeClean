@@ -10,18 +10,17 @@ import Foundation
 import Stevia
 
 class BtnWithLbl: UIViewX {
-    var btn : UIButtonX! = UIButtonX()
+    var btn: UIButtonX! = UIButtonX()
     var lbl: UILabelX! = UILabelX()
-    
+
     convenience init() {
-        self.init(frame:.zero)
+        self.init(frame: .zero)
         // This is only needed for live reload as injectionForXcode
         // doesn't swizzle init methods.
         // Get injectionForXcode here : http://johnholdsworth.com/injection.html
         render()
     }
-    
-    
+
     func render() {
         // View Hierarchy
         // This essentially does `translatesAutoresizingMaskIntoConstraints = false`
@@ -31,7 +30,7 @@ class BtnWithLbl: UIViewX {
             btn,
             lbl
         )
-        
+
         layout(
             0,
             |btn|,
@@ -42,8 +41,8 @@ class BtnWithLbl: UIViewX {
         btn.centerHorizontally()
         lbl.centerHorizontally()
     }
-    
-    func setFeatures(handler: @escaping ((BtnWithLbl)->Void)) {
+
+    func setFeatures(handler: @escaping ((BtnWithLbl) -> Void)) {
         handler(self)
     }
 }

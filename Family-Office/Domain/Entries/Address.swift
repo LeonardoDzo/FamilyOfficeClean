@@ -8,15 +8,15 @@
 
 import Foundation
 
-public struct Address : Codable {
-    
+public struct Address: Codable {
+
     public var city: String
     public var country: String
 //    public let geo: Location
     public var street: String
     public var suburb: String
     public var zipcode: String
-    
+
     public init(city: String,
 //                geo: Location,
                 street: String,

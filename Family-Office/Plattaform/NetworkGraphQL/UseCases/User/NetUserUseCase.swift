@@ -9,8 +9,8 @@
 import Foundation
 import RxSwift
 
-final class NetUserUseCase: UserUseCase  {
-    
+final class NetUserUseCase: UserUseCase {
+
     private let network: UserNetwork
 
     init(network: UserNetwork) {
@@ -20,7 +20,7 @@ final class NetUserUseCase: UserUseCase  {
     func save(user: User) -> Observable<Void> {
         return Variable(()).asObservable()
     }
-    
+
 //    func delete(user: User) -> Observable<Void> {
 //        
 //    }
@@ -31,6 +31,6 @@ final class NetUserUseCase: UserUseCase  {
         return Variable([]).asObservable()
     }
     func getUsers(phones: [String], rol: Int = 0) -> Observable<[User]> {
-        return network.getUsers(phones:phones , rol:rol)
+        return network.getUsers(phones: phones, rol: rol)
     }
 }

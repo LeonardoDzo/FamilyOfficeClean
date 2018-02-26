@@ -8,7 +8,6 @@
 
 import Foundation
 
-
-func UserSubscription(_ user: User) -> [String : Any] {
+func UserSubscription(_ user: User) -> [String: Any] {
     return ["variables": ["id": user.uid], "query": "subscription UserChanged($id:ID){userChanged(id:$id) {...UserDetails}}".appending(UserDetails.fragmentString)]
 }

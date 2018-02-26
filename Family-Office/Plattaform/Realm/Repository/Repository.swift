@@ -22,33 +22,33 @@ protocol AbstractRepository {
     func delete(entity: T) ->  Observable<Void>
 }
 
-final class Repository<T:RealmRepresentable>: AbstractRepository where T == T.RealmType.DomainType, T.RealmType: Object {
+final class Repository<T: RealmRepresentable>: AbstractRepository where T == T.RealmType.DomainType, T.RealmType: Object {
 
     private let configuration: Realm.Configuration
     private let scheduler: RunLoopThreadScheduler!
-    
+
     private var realm: Realm {
         let realm = try! Realm(configuration: self.configuration)
         return  realm
     }
-    
+
     init(configuration: Realm.Configuration) {
         self.configuration = configuration
         self.scheduler = RunLoopThreadScheduler.sharedInstance
         print("File 📁 url: \(RLMRealmPathForFile("default.realm"))")
     }
-    
+
     func queryAll() -> Observable<[T]> {
         return Observable.deferred {
             let realm = self.realm
             let objects = realm.objects(T.RealmType.self)
-            
+
             return Observable.array(from: objects)
                 .mapToDomain()
             }
             .observeOn(self.scheduler)
     }
-    
+
     func query(uid: String) -> Observable<T> {
         return Observable.deferred {
             let realm = self.realm
@@ -56,9 +56,9 @@ final class Repository<T:RealmRepresentable>: AbstractRepository where T == T.Re
             return Observable.from(object: object).map({$0.asDomain()})
         }
         .observeOn(scheduler)
-            
+
     }
-    
+
     func query(with predicate: NSPredicate,
                sortDescriptors: [NSSortDescriptor] = []) -> Observable<[T]> {
         return Observable.deferred {
@@ -69,15 +69,15 @@ final class Repository<T:RealmRepresentable>: AbstractRepository where T == T.Re
             }
             .subscribeOn(scheduler)
     }
-    
+
     func save(entity: T) ->  Observable<Void> {
         return Observable.deferred {
             return self.realm.rx.save(entity: entity)
             }
             .observeOn(scheduler)
-        
+
     }
-    
+
     func delete(entity: T) ->  Observable<Void> {
         return Observable.deferred {
             return self.realm.rx.delete(entity: entity)

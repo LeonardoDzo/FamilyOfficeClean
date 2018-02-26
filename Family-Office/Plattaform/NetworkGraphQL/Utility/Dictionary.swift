@@ -9,9 +9,9 @@
 import Foundation
 
 extension Dictionary {
-    mutating func update(other:Dictionary) {
-        for (key,value) in other {
-            self.updateValue(value, forKey:key)
+    mutating func update(other: Dictionary) {
+        for (key, value) in other {
+            self.updateValue(value, forKey: key)
         }
     }
     func jsonToData() -> Data? {
@@ -20,6 +20,6 @@ extension Dictionary {
         } catch let myJSONError {
             print(myJSONError)
         }
-        return nil;
+        return nil
     }
 }

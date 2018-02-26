@@ -15,30 +15,30 @@ protocol UserBindable: AnyObject {
     var emailLbl: UILabelX! {get}
     var photoProfile: UIImageViewX! {get}
     var phoneV: InfoLineView! {get}
-    var birthdayV: InfoLineView!  {get}
-    var bloodtypeV: InfoLineView!  {get}
-    var addressV: InfoLineView!  {get}
-    var rfcV: InfoLineView!  {get}
+    var birthdayV: InfoLineView! {get}
+    var bloodtypeV: InfoLineView! {get}
+    var addressV: InfoLineView! {get}
+    var rfcV: InfoLineView! {get}
     var nssV: InfoLineView! {get}
 }
 extension UserBindable {
-    
+
     var nameLbl: UILabelX! {return nil}
     var emailLbl: UILabelX! {return nil}
     var photoProfile: UIImageViewX! {return nil}
     var phoneV: InfoLineView! {return nil}
-    var birthdayV: InfoLineView!  {return nil}
-    var bloodtypeV: InfoLineView!  {return nil}
-    var addressV: InfoLineView!  {return nil}
-    var rfcV: InfoLineView!  {return nil}
+    var birthdayV: InfoLineView! {return nil}
+    var bloodtypeV: InfoLineView! {return nil}
+    var addressV: InfoLineView! {return nil}
+    var rfcV: InfoLineView! {return nil}
     var nssV: InfoLineView! {return nil}
-    
-    func bind(user: User) -> Void {
+
+    func bind(user: User) {
         self.user = user
         self.bind()
     }
-    
-    func bind() -> Void {
+
+    func bind() {
         guard let user = user else {
             return
         }
@@ -51,7 +51,7 @@ extension UserBindable {
         if let photo = photoProfile {
             if let url  = URL(string: "") {
                 photo.kf.setImage(with: url)
-            }else{
+            } else {
                 photo.image = #imageLiteral(resourceName: "profile_default")
             }
             photo.cornerRadius = 50
@@ -78,7 +78,7 @@ extension UserBindable {
             if self.user.birth < 2 {
                 view.textline.text = self.user.birth.toDate().string(with: .ddMMMyyyy)
             }
-            
+
         }
     }
 }

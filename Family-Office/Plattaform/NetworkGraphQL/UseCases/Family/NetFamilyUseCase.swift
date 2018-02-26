@@ -9,7 +9,7 @@
 import Foundation
 import RxSwift
 
-final class NetFamilyUseCase: FamilyUseCase  {
+final class NetFamilyUseCase: FamilyUseCase {
     private let network: FamilyNetwork!
     private let provider: RMUseCaseProvider!
     init(_ network: FamilyNetwork, provider: RMUseCaseProvider = RMUseCaseProvider()) {
@@ -28,7 +28,7 @@ final class NetFamilyUseCase: FamilyUseCase  {
     func get(byId: String) -> Observable<Family> {
         return Variable(Family(name: "Cargando...")).asObservable()
     }
-    
+
     func changeFamilyActive(family: Family) -> Observable<Void> {
         return Variable(()).asObservable()
     }

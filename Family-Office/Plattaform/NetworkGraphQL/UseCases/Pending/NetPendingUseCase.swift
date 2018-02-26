@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 
 final class NetPendingUseCase: PendingUseCase {
-    
+
     private let provider: RMUseCaseProvider!
     private let network: PendingNetwork!
     init(network: PendingNetwork, provider: RMUseCaseProvider = RMUseCaseProvider()) {
@@ -22,17 +22,17 @@ final class NetPendingUseCase: PendingUseCase {
             _ = self.provider.makePendingUseCase().save(pending: pending).subscribe().dispose()
         }).mapToVoid()
     }
-    
+
     func delete(pending: Pending) -> Observable<Void> {
         return network.delete(pending: pending)
     }
-    
+
     func get() -> Observable<[Pending]> {
         return network.get().do(onNext: { pendings in
             pendings.forEach({ (pending) in
                 _ = self.provider.makePendingUseCase().save(pending: pending).subscribe().dispose()
             })
-        
+
         })
     }
 }

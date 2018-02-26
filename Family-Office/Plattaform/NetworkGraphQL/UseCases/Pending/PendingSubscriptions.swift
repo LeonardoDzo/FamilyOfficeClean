@@ -6,6 +6,6 @@
 //  Copyright © 2018 Leonardo Durazo. All rights reserved.
 //
 
-func PendingAddedSubscription() -> [String : Any] {
+func PendingAddedSubscription() -> [String: Any] {
     return ["query": "subscription PendingAdded{pendingAdded {...PendingDetails}}".appending(PendingDetails.fragmentString)]
 }

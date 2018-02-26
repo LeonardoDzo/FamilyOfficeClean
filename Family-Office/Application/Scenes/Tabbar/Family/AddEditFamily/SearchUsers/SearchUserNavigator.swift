@@ -10,12 +10,11 @@ import Foundation
 import UIKit
 
 protocol SearchUserNavPr {
-    func toMe(family: Family) -> Void
-    func toBack() -> Void
+    func toMe(family: Family)
+    func toBack()
  }
 
-
-class SearchUserNavigator:  SearchUserNavPr {
+class SearchUserNavigator: SearchUserNavPr {
     let service: NetUseCaseProvider!
     let navigateController: UINavigationController!
     let rmService: RMUseCaseProvider!
@@ -24,17 +23,16 @@ class SearchUserNavigator:  SearchUserNavPr {
         self.navigateController = nc
         self.rmService = rmService
     }
-    
+
     func toMe(family: Family) {
         let view = SearchUsersViewController()
-        view.viewModel = SearchUserViewModel(userUseCase: service.makeUseCase(), navigator: self, rmsolicitude: rmService.makeSolicitudeUseCase())
+        view.viewModel = SearchUserViewModel(userUseCase: service.makeUseCase(), navigator: self, rmsolicitude: rmService.makeApplicationFamilyUseCase())
         view.viewModel.famiy = family
         navigateController.pushViewController(view, animated: true)
     }
-    
+
     func toBack() {
         navigateController.popViewController(animated: true)
     }
-    
-    
+
 }

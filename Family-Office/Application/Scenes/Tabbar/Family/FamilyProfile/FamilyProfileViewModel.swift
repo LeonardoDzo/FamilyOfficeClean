@@ -29,10 +29,10 @@ class FamilyProfileViewModel: ViewModelType {
         let members = family.flatMapLatest { (family) in
             return self.userUseCase.getUsers(byFamily: family).asDriverOnErrorJustComplete()
         }
-    
+
         return Output(family: family, tapAddMember: tapAdd, back: back, members: members)
     }
-    
+
 }
 extension FamilyProfileViewModel {
     struct Input {

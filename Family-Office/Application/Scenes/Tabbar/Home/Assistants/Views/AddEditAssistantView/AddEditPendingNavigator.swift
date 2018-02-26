@@ -21,7 +21,7 @@ class AddeditPendingNavigator: AddEditPendingNavigatorPr {
         self.service = service
         self.navigationController = nc
     }
-    
+
     func toMain(pending: Pending) {
         let view = AddEditPendingViewController()
         view.viewModel = AddEditPendingViewModel(usecases: service.netusecaseprovider.makePendingUseCase() )

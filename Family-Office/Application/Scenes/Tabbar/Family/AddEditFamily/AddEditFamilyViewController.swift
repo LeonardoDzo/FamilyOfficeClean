@@ -12,7 +12,7 @@ import RxSwift
 
 class AddEditFamilyViewController: UIViewController {
     private let disposeBag = DisposeBag()
- 
+
     var v = AddEditFamily()
     var viewModel: AddEditViewModel!
     override func loadView() { view = v }
@@ -22,17 +22,16 @@ class AddEditFamilyViewController: UIViewController {
             self.setupView()
         }
         self.setupView()
-        
+
         // Do any additional setup after loading the view.
     }
-   
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    fileprivate func setupView(){
+
+    fileprivate func setupView() {
         self.v = AddEditFamily()
         self.view = self.v
         let input = AddEditViewModel.Input(backTrigger: v.cancelBtn.rx.tap.asDriver(), saveTrigger: self.v.saveBtn.rx.tap.asDriver(), name: self.v.nameTxt.rx.text.orEmpty.asDriver() )
@@ -47,7 +46,7 @@ class AddEditFamilyViewController: UIViewController {
             .disposed(by: disposeBag)
         self.navigationController?.isNavigationBarHidden = true
     }
-    
+
     /*
     // MARK: - Navigation
 

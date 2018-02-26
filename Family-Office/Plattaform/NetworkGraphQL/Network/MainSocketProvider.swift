@@ -12,8 +12,8 @@ import Starscream
 import RealmSwift
 final class MainSocket {
     var request = URL(string: Curl.ws)!
-    var client : ActionCableClient!
-    var channel : Channel!
+    var client: ActionCableClient!
+    var channel: Channel!
     static let shareIntstance = MainSocket()
     private let provider: RMUseCaseProvider!
     private init(provider: RMUseCaseProvider = RMUseCaseProvider()) {
@@ -24,17 +24,17 @@ final class MainSocket {
             self.channel = self.client.create("GraphqlChannel")
             client.onConnected = {
                 print("conectado!\n")
-               
-                self.channel.onReceive = { (JSON: Any?, error : Error?) in
+
+                self.channel.onReceive = { (JSON: Any?, error: Error?) in
                     print("Received", JSON ?? "empty json", error ?? "no error")
-                    
-                    if let dic = JSON as? Dictionary<String,Any> {
-                        if let result = dic["result"] as? Dictionary<String,Any>, let json = result["data"] as? Dictionary<String,Any> {
+
+                    if let dic = JSON as? Dictionary<String, Any> {
+                        if let result = dic["result"] as? Dictionary<String, Any>, let json = result["data"] as? Dictionary<String, Any> {
                             guard let data = json.jsonToData() else {
                                 return
                             }
                             let key = json.keys.first  ?? ""
-                            
+
                             switch key {
                                 case "userChanged":
                                     if let user = FindObject<User>().decoder(data: data) {
@@ -54,34 +54,34 @@ final class MainSocket {
                                 default:
                                     break
                             }
-                            
+
                         }
                     }
                 }
-              
+
                 self.channel.onSubscribed = {
                     print("Subscribed")
                 }
-                
+
                 self.channel.onUnsubscribed = {
                     print("Unsubscribed")
                 }
-                
+
                 self.channel.onRejected = {
                     print("rejected")
                 }
-                
+
                             }
-            
+
             client.onDisconnected = { (error) in
                 print("asldknaslk")
                 print(error?.localizedDescription ?? "desconectado")
                 self.client.connect()
             }
-            
+
             client.connect()
         }
-        
+
     }
-    
+
 }

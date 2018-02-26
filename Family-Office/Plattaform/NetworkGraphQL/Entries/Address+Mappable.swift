@@ -7,6 +7,6 @@
 //
 import Foundation
 
-extension Address : Mappable {
-    
+extension Address: Mappable {
+
 }

@@ -8,25 +8,23 @@
 
 import Foundation
 import RxSwift
-final class NetSolicitudeUseCase: SolicitudeUseCase {
+final class NetApplicationFamilyUseCase: ApplicationFamilyUseCase {
 
     private let provider: RMUseCaseProvider!
-    private let network: SolicitudeNetwork!
-    init(network: SolicitudeNetwork, provider: RMUseCaseProvider = RMUseCaseProvider()) {
+    private let network: ApplicationFamilyNetwork!
+    init(network: ApplicationFamilyNetwork, provider: RMUseCaseProvider = RMUseCaseProvider()) {
         self.network = network
         self.provider = provider
     }
-    
-    
-    func save(solicitude: Solicitude) -> Observable<Void> {
+
+    func save(solicitude: ApplicationFamily) -> Observable<Void> {
         return network.createFamilyApplication(solicitude).do(onNext: { solicitude in
-            self.provider.makeSolicitudeUseCase().save(solicitude: solicitude).subscribe().dispose()
+            self.provider.makeApplicationFamilyUseCase().save(solicitude: solicitude).subscribe().dispose()
         }).mapToVoid()
     }
-    
-    func getFamilyApplications() -> Observable<[Solicitude]> {
+
+    func getFamilyApplications() -> Observable<[ApplicationFamily]> {
         return network.allFamilyApplications()
     }
-    
 
 }

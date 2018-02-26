@@ -9,29 +9,26 @@
 import UIKit
 import Stevia
 
-
 class PendingTableViewCell: UITableViewCellX, PendingBindable {
 
     var pending: Pending! = Pending()
-    var content : contentPending!
+    var content: contentPending!
     var priority: UIViewX! = UIViewX()
-    
-    
+
     required init?(coder aDecoder: NSCoder) { super.init(coder: aDecoder)
-        
+
     }
-    
-    
+
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         render()
     }
     override func awakeFromNib() {
         self.awakeFromNib()
-        
+
     }
-    func render(){
-        
+    func render() {
+
         content = contentPending(pending: pending)
         sv(
             content,
@@ -46,12 +43,12 @@ class PendingTableViewCell: UITableViewCellX, PendingBindable {
         self.animation = "slideUp"
         self.animate()
     }
-    
+
 }
 
 class contentPending: UIViewX, PendingBindable {
     var pending: Pending!
-    
+
     var titleLbl: UILabelX!  = UILabelX()
     var detailsTxtV: UITextView! = UITextView()
     var doneImg: UIImageViewX! = UIImageViewX()
@@ -60,20 +57,19 @@ class contentPending: UIViewX, PendingBindable {
         super.init(frame: frame)
     }
     convenience init(pending: Pending) {
-        
+
         self.init(frame: .zero)
         self.pending = pending
         render()
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    func render() -> Void {
+    func render() {
         doneImg = UIImageViewX()
         self.bind(pending: pending)
-        
-        
+
         sv(
             doneImg,
             titleLbl,
@@ -98,7 +94,7 @@ class contentPending: UIViewX, PendingBindable {
         detailsTxtV.textColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
         detailsTxtV.backgroundColor = UIColor.clear
         self.backgroundColor = pending.seen ? #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0) : #colorLiteral(red: 0.9529411765, green: 0.5137254902, blue: 0.3529411765, alpha: 0.03898914319)
-        
+
     }
-    
+
 }

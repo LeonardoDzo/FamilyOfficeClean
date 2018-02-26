@@ -4,9 +4,9 @@ import Realm
 final class RunLoopThreadScheduler: ImmediateSchedulerType {
     private let thread: Thread
     private let target: ThreadTarget
-    
-    static let sharedInstance = RunLoopThreadScheduler(threadName:  "Family-Office-RealmPlatform-Repository")
-    
+
+    static let sharedInstance = RunLoopThreadScheduler(threadName: "Family-Office-RealmPlatform-Repository")
+
     private init(threadName: String) {
         self.target = ThreadTarget()
         self.thread = Thread(target: target,
@@ -15,32 +15,32 @@ final class RunLoopThreadScheduler: ImmediateSchedulerType {
         self.thread.name = threadName
         self.thread.start()
     }
-    
+
     func schedule<StateType>(_ state: StateType, action: @escaping (StateType) -> Disposable) -> Disposable {
         let disposable = SingleAssignmentDisposable()
-        
+
         var action: Action? = Action {
             if disposable.isDisposed {
                 return
             }
             disposable.setDisposable(action(state))
         }
-        
+
         action?.perform(#selector(Action.performAction),
                         on: thread,
                         with: nil,
                         waitUntilDone: false,
                         modes: [RunLoopMode.defaultRunLoopMode.rawValue])
-        
+
         let actionDisposable = Disposables.create {
             action = nil
         }
-        
+
         return Disposables.create(disposable, actionDisposable)
     }
-    
+
     deinit {
-      
+
         thread.cancel()
     }
 }
@@ -54,12 +54,12 @@ private final class ThreadTarget: NSObject {
 }
 
 private final class Action: NSObject {
-    private let action: () -> ()
-    
-    init(action: @escaping () -> ()) {
+    private let action: () -> Void
+
+    init(action: @escaping () -> Void) {
         self.action = action
     }
-    
+
     @objc func performAction() {
         action()
     }

@@ -8,14 +8,12 @@
 
 import Foundation
 
-extension Family: Mappable  {
+extension Family: Mappable {
     enum CodingKeys: String, CodingKey {
         case name
         case uid = "id"
         case members
         case photo
     }
-  
+
 }
-
-

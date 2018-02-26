@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 class UITableViewCellX: UITableViewCell, Springable {
-    
+
     @IBInspectable public var autostart: Bool = false
     @IBInspectable public var autohide: Bool = false
     @IBInspectable public var animation: String = ""
@@ -28,55 +28,55 @@ class UITableViewCellX: UITableViewCell, Springable {
     @IBInspectable public var curve: String = ""
     public var opacity: CGFloat = 1
     public var animateFrom: Bool = false
-    
-    lazy private var spring : Spring = Spring(self)
-    
+
+    lazy private var spring: Spring = Spring(self)
+
     override open func awakeFromNib() {
         super.awakeFromNib()
         self.spring.customAwakeFromNib()
     }
-    
+
     open override func layoutSubviews() {
         super.layoutSubviews()
         spring.customLayoutSubviews()
     }
-    
+
     public func animate() {
         self.spring.animate()
     }
-    
-    public func animateNext(completion: @escaping () -> ()) {
+
+    public func animateNext(completion: @escaping () -> Void) {
         self.spring.animateNext(completion: completion)
     }
-    
+
     public func animateTo() {
         self.spring.animateTo()
     }
-    
-    public func animateToNext(completion: @escaping () -> ()) {
+
+    public func animateToNext(completion: @escaping () -> Void) {
         self.spring.animateToNext(completion: completion)
     }
-    
+
     // MARK: - Shadow
-    
+
     @IBInspectable public var shadowOpacity: CGFloat = 0 {
         didSet {
             layer.shadowOpacity = Float(shadowOpacity)
         }
     }
-    
+
     @IBInspectable public var shadowColor: UIColor = UIColor.clear {
         didSet {
             layer.shadowColor = shadowColor.cgColor
         }
     }
-    
+
     @IBInspectable public var shadowRadius: CGFloat = 0 {
         didSet {
             layer.shadowRadius = shadowRadius
         }
     }
-    
+
     @IBInspectable public var shadowOffsetY: CGFloat = 0 {
         didSet {
             layer.shadowOffset.height = shadowOffsetY

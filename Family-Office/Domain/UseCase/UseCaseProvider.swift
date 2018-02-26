@@ -8,8 +8,6 @@
 
 import Foundation
 
-
-
 public protocol AuthUseCaseProvider {
     func makeAuthUseCase() -> AuthUseCase
 }
@@ -17,5 +15,5 @@ public protocol UseCaseProvider {
     func makeUseCase() -> UserUseCase
     func makeFamilyUseCase() -> FamilyUseCase
     func makePendingUseCase() -> PendingUseCase
-    func makeSolicitudeUseCase() -> SolicitudeUseCase
+    func makeApplicationFamilyUseCase() -> ApplicationFamilyUseCase
  }

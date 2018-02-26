@@ -18,14 +18,14 @@ class FamilyCollectionViewCell: UICollectionViewCell, FamilyBindable {
         super.awakeFromNib()
     }
     required init?(coder aDecoder: NSCoder) { super.init(coder: aDecoder)}
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         render()
     }
-    func render() -> Void {
+    func render() {
         sv(titleLbl, photo, selectedPhoto)
-        
+
         layout(4,
                |-4-photo.width(100%).height(80%)-4-|,
                2,
@@ -44,6 +44,6 @@ class FamilyCollectionViewCell: UICollectionViewCell, FamilyBindable {
         self.photo.contentMode = .center
         self.selectedPhoto.isHidden = true
         self.titleLbl.text = "Agregar familia"
-        
+
     }
 }

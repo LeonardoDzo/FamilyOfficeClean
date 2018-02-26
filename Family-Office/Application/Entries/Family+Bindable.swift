@@ -18,13 +18,13 @@ extension FamilyBindable {
     var titleLbl: UILabelX! {return nil}
     var photo: UIImageViewX! {return nil}
     var selectedPhoto: UIImageViewX! {return nil}
-    
-    func bind(family: Family) -> Void {
+
+    func bind(family: Family) {
         self.family = family
         self.bind()
     }
-    
-    func bind() -> Void {
+
+    func bind() {
         guard let family = family else {
             return
         }
@@ -36,7 +36,7 @@ extension FamilyBindable {
             photo.cornerRadius = 8
             //photo.image = #imageLiteral(resourceName: "icons8-family")
         }
-        
+
         if let selectedPhoto  = selectedPhoto {
             selectedPhoto.image = #imageLiteral(resourceName: "check-1")
             selectedPhoto.isHidden = self.family.isSelected ? false : true

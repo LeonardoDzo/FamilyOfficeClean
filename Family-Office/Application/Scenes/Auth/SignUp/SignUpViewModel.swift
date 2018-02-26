@@ -14,12 +14,11 @@ enum SignUpError: Error {
     case passwordErrors(reason: String)
 }
 
-
 final class SignUpviewModel: ViewModelType {
 
-    private let authUseCase : AuthUseCase
+    private let authUseCase: AuthUseCase
     private let navigator: SignUpNavigator
-    
+
     init(useCase: AuthUseCase, navigator: SignUpNavigator) {
         self.authUseCase = useCase
         self.navigator = navigator
@@ -31,7 +30,7 @@ final class SignUpviewModel: ViewModelType {
         let pass = Driver.combineLatest(input.pass, input.rpass)
         let user = Driver.combineLatest(input.email, input.name, input.phone)
         let activityIndicator = ActivityIndicator()
-        let canSave = Driver.combineLatest(user, pass,activityIndicator.asDriver()){ (arg, pass, _) in
+        let canSave = Driver.combineLatest(user, pass, activityIndicator.asDriver()) { (arg, pass, _) in
             return !arg.0.isEmpty && !arg.1.isEmpty && !arg.2.isEmpty && pass.0 == pass.1
         }
         let params = Driver.combineLatest(user, pass)
@@ -44,7 +43,7 @@ final class SignUpviewModel: ViewModelType {
                 .trackActivity(activityIndicator)
                 .asDriverOnErrorJustComplete()
             }.do(onNext: navigator.toPreHome)
-     
+
         return Output(dismiss: cancel, saveEnabled: canSave, saved: save, error: errorTracker.asDriver())
     }
 }

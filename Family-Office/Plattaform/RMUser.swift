@@ -10,18 +10,17 @@ import Foundation
 import RealmSwift
 import Realm
 
-
 @objcMembers
 final class RMUser: Object {
     dynamic var uid: String = ""
-    dynamic var birthday : Int = -1
+    dynamic var birthday: Int = -1
     dynamic var email: String = ""
     dynamic var name: String = ""
     dynamic var phone: String = ""
     dynamic var photo: RMPhoto?
     dynamic var families = List<RMFamily>()
     dynamic var user_type = 0
-    
+
     override class func primaryKey() -> String {
         return "uid"
     }
@@ -29,7 +28,7 @@ final class RMUser: Object {
 
 extension RMUser: DomainConvertibleType {
     func asDomain() -> User {
-      
+
         var user = User(uid: "", name: name, email: email)
         user.user_type = user_type
         user.phone = phone

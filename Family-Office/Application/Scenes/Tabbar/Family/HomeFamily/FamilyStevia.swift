@@ -12,19 +12,19 @@ import UIKit
 
 class Familystevia: UIViewX {
     var label = UILabelX()
-    var collectionView : UICollectionView!
-    
+    var collectionView: UICollectionView!
+
     convenience init() {
         self.init(frame: .zero)
         let layout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         layout.itemSize = CGSize(width: 160, height: 180)
-        
+
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(FamilyCollectionViewCell.self, forCellWithReuseIdentifier: "cell")
         render()
     }
-    func render() -> Void {
+    func render() {
         sv(label, collectionView)
         label.left(10%).top(70).width(100%)
         collectionView.left(0).right(0).bottom(50).top(100).width(100%)

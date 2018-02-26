@@ -20,20 +20,20 @@ class FamilyMemberTableViewCell: UITableViewCellX, UserBindable {
 
     required init?(coder aDecoder: NSCoder) { super.init(coder: aDecoder)
     }
-    
-    override init(style: UITableViewCellStyle, reuseIdentifier: String? = FamilyMemberTableViewCell.reuseID) {
-        
+
+    override init(style: UITableViewCellStyle, reuseIdentifier: String? = "cell") {
+
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
+
         sv(
             nameLbl.style(self.nameStyle),
             photoProfile
         )
         photoProfile.size(50).centerVertically()
         alignHorizontally(|-20-photoProfile-nameLbl.height(20)-20-|)
-        
+
     }
-    func nameStyle(l:UILabelX) {
+    func nameStyle(l: UILabelX) {
         l.font = .systemFont(ofSize: 18)
         l.textColor = #colorLiteral(red: 0.1019607857, green: 0.2784313858, blue: 0.400000006, alpha: 1)
     }

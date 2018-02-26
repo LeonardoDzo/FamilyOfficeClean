@@ -49,7 +49,6 @@ PODS:
   - SideMenu (3.1.5)
   - Starscream (2.0.4)
   - SteviaLayout (4.2.0)
-  - SwiftLint (0.25.0)
   - Whisper (6.0.2)
 
 DEPENDENCIES:
@@ -70,7 +69,6 @@ DEPENDENCIES:
   - RxSwift (~> 4.0)
   - SideMenu
   - SteviaLayout
-  - SwiftLint
   - Whisper
 
 SPEC CHECKSUMS:
@@ -97,9 +95,8 @@ SPEC CHECKSUMS:
   SideMenu: 47dbf9e4d878062d8994aed43f6e4bf6c1fea30b
   Starscream: df5974ee928b157c8eda8af8de7c620276b7dfcc
   SteviaLayout: 0d2112caea45707695e8c718262c8ea3dd37ef17
-  SwiftLint: e14651157288e9e01d6e1a71db7014fb5744a8ea
   Whisper: 169760fc4bab0abf24d5529f9276f95c25cf1025
 
-PODFILE CHECKSUM: acf30b07eb1f66939610a5f03eb4760fb9940347
+PODFILE CHECKSUM: 67ffbc7bb5d9888a5d9cec9d24822bbbd54d1a58
 
 COCOAPODS: 1.3.1

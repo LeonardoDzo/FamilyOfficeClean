@@ -16,7 +16,6 @@ public struct Photo: Codable {
 }
 extension Photo: Equatable {
     public static func == (lhs: Photo, rhs: Photo) -> Bool {
-        return lhs.name == rhs.name &&
-            lhs.url == rhs.url
+        return lhs.url == rhs.url
     }
 }

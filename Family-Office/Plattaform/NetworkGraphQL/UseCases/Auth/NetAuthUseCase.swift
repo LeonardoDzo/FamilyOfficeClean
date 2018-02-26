@@ -16,32 +16,32 @@ final class NetAuthUseCase: AuthUseCase {
         self.network = network
         self.provider = provider
     }
-    
+
     fileprivate func afterLogin(_ authmodel: (AuthModel), pass: String) {
         UserDefaults().set(authmodel.token, forKey: "token")
         UserDefaults().set(authmodel.user.email, forKey: "email")
         UserDefaults().set(pass, forKey: "password")
-        
+
         MainSocket.shareIntstance.channel.action("execute", with: UserSubscription(authmodel.user))
         MainSocket.shareIntstance.channel.action("execute", with: PendingAddedSubscription())
         self.provider.makeUseCase().save(user: authmodel.user).subscribe().dispose()
-        
+
         authmodel.user.families.forEach({ (family) in
             MainSocket.shareIntstance.channel.action("execute", with: FamilySubscription(family))
             self.provider.makeFamilyUseCase().save(fam: family).subscribe().dispose()
-           
+
         })
     }
-    
+
     func signIn(email: String, password: String) -> Observable<User> {
-        return  network.signIn(email:email, password: password)
+        return  network.signIn(email: email, password: password)
             .do(onNext: { authmodel in
                 self.afterLogin(authmodel, pass: password)
             }).map({ (authmodel) -> User in
                 return authmodel.user
             })
     }
-    func signUp(user:User, password: String) -> Observable<User> {
+    func signUp(user: User, password: String) -> Observable<User> {
         return network.signUp(email: user.email, name: user.name, phone: user.phone, password: password)
             .do(onNext: { authmodel in
                 self.afterLogin(authmodel, pass: password)

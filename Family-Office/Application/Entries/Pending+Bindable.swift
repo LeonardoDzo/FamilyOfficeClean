@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 
-
 extension PENDING_PRIORITY {
     var color: UIColor! {
         switch self {
@@ -19,7 +18,7 @@ extension PENDING_PRIORITY {
             return #colorLiteral(red: 0.9607843161, green: 0.7058823705, blue: 0.200000003, alpha: 1)
         case .High:
             return #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)
-            
+
         }
     }
 }
@@ -28,13 +27,13 @@ protocol PendingBindable: AnyObject {
     var titleLbl: UILabelX! {get}
     var createdAtLbl: UILabelX! {get}
     var updatedAtLbl: UILabelX! {get}
-    var detailsTxtV : UITextView! {get}
+    var detailsTxtV: UITextView! {get}
     var priority: UIViewX! {get}
     var doneImg: UIImageViewX! {get}
 }
 extension PendingBindable {
     var titleLbl: UILabelX! {return nil}
-    var detailsTxtV : UITextView! {return nil}
+    var detailsTxtV: UITextView! {return nil}
     var priority: UIViewX! {return nil}
     var doneImg: UIImageViewX! {return nil}
     var createdAtLbl: UILabelX! {return nil}
@@ -43,9 +42,9 @@ extension PendingBindable {
         self.pending = pending
         bind()
     }
-    func bind() -> Void {
+    func bind() {
         guard let pending = self.pending else {return}
-        
+
         if let titleLbl = titleLbl {
             titleLbl.text = pending.title
             titleLbl.textColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
@@ -70,7 +69,7 @@ extension PendingBindable {
         if let doneImg = doneImg {
             doneImg.image = pending.done ? #imageLiteral(resourceName: "check-1").maskWithColor(color: #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1))! : #imageLiteral(resourceName: "icons8-clock").maskWithColor(color: #colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1))!
         }
-        
+
     }
-    
+
 }

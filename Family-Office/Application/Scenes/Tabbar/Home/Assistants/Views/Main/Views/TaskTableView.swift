@@ -12,14 +12,14 @@ import RealmSwift
 import RxSwift
 import RxCocoa
 
-class TaskTableview: UIViewX, UITableViewDelegate{
+class TaskTableview: UIViewX, UITableViewDelegate {
     let tableView = UITableView()
     var type = 0
-    var notificationToken: NotificationToken? = nil
+    var notificationToken: NotificationToken?
     var rowActions: [UITableViewRowAction]!
     convenience init() {
-        self.init(frame:CGRect.zero)
-        
+        self.init(frame: CGRect.zero)
+
         render()
     }
     func render() {
@@ -47,7 +47,5 @@ class TaskTableview: UIViewX, UITableViewDelegate{
         tableView.rowHeight = 100
         tableView.tableFooterView = UIView()
     }
-    
+
 }
-
-

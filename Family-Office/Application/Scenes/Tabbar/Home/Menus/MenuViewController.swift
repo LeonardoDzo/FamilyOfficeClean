@@ -14,7 +14,7 @@ class MenuViewController: UIViewController {
     private let disposeBag = DisposeBag()
     var v = MenuView()
     var viewModel: MenuViewModel!
-    
+
     override func loadView() { view = v }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,12 +28,12 @@ class MenuViewController: UIViewController {
             .asDriverOnErrorJustComplete()
         let input = MenuViewModel.Input(trigger: viewWillAppear, triggerSelected: self.v.tableView.rx.itemSelected.asDriver(), triggerLogout: self.v.logoutBtn.rx.tap.asDriver())
         let output = viewModel.transform(input: input)
-        
-        output.families.drive(self.v.tableView.rx.items(cellIdentifier: FamilyTableViewCell.reuseID, cellType: FamilyTableViewCell.self)){tv,model,cell in
+
+        output.families.drive(self.v.tableView.rx.items(cellIdentifier: FamilyTableViewCell.reuseID, cellType: FamilyTableViewCell.self)) {tv, model, cell in
             cell.isSelected = false
             cell.bind(family: model)
             }.disposed(by: disposeBag)
-        
+
         output.logout.drive().disposed(by: disposeBag)
         output.selected.drive().disposed(by: disposeBag)
     }

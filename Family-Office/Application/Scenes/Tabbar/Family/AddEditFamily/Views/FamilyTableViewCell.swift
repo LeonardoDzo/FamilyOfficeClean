@@ -10,7 +10,7 @@ import UIKit
 import Stevia
 
 class FamilyTableViewCell: UITableViewCell, FamilyBindable {
-    
+
     var family: Family!
     var titleLbl: UILabelX! = UILabelX()
     var photo: UIImageViewX! = UIImageViewX()
@@ -21,7 +21,7 @@ class FamilyTableViewCell: UITableViewCell, FamilyBindable {
     }
     required init?(coder aDecoder: NSCoder) { super.init(coder: aDecoder)
     }
-   
+
     fileprivate func render() {
         sv(
             titleLbl.style(self.nameStyle),
@@ -35,15 +35,15 @@ class FamilyTableViewCell: UITableViewCell, FamilyBindable {
         alignHorizontally(|-20-photo-titleLbl.height(20)-selectedPhoto.size(20)-20-|)
         titleLbl.sizeToFit()
     }
-    
+
     override init(style: UITableViewCellStyle, reuseIdentifier: String? = "cell") {
-       
+
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
+
         render()
     }
-    
-    func nameStyle(l:UILabelX) {
+
+    func nameStyle(l: UILabelX) {
         l.font = .systemFont(ofSize: 18)
         l.textColor = #colorLiteral(red: 0.1019607857, green: 0.2784313858, blue: 0.400000006, alpha: 1)
     }

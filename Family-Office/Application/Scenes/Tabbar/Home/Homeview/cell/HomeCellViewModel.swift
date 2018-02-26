@@ -18,12 +18,12 @@ final class HomeCellViewmodel: ViewModelType {
     }
     func transform(input: HomeCellViewmodel.Input) -> HomeCellViewmodel.Output {
         let selected = input.selectTrigger
-            .map({ (btn,_ ) -> HomeBtn in
+            .map({ (btn, _ ) -> HomeBtn in
                 return btn
             })
             .do(onNext: navigator.toModule)
             .mapToVoid()
-     
+
         return Output(selected: selected)
     }
 }

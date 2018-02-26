@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 extension UIView {
-    func animations() -> Void {
+    func animations() {
         for view in self.subviews as [UIView] {
             if let v = view as? Springable {
                 v.animate()

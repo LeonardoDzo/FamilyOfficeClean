@@ -17,7 +17,7 @@ public struct AuthModel: Codable {
     var user: User
     let token: String
     var error: String?
-    
+
     enum CodingKeys: String, CodingKey {
         case user
         case token
@@ -35,7 +35,7 @@ public struct SignUpModel: Codable {
     var user: User
     let token: String
     var error: String?
-    
+
     enum CodingKeys: String, CodingKey {
         case user
     }
@@ -49,7 +49,7 @@ public struct SignUpModel: Codable {
         user = try userContainer.decodeIfPresent(User.self, forKey: .user) ??  userContainer.decode(User.self, forKey: .user)
         token = try userContainer.decode(String.self, forKey: .token)
     }
-    
+
     public func encode(to encoder: Encoder) throws {
     }
 }

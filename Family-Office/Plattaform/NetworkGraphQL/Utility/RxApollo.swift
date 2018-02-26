@@ -18,11 +18,11 @@ public enum RxApolloError: Error {
 /// Reactive extensions for `ApolloClient`.
 public final class ApolloReactiveExtensions {
     private let client: ApolloClient
-    
+
     fileprivate init(_ client: ApolloClient) {
         self.client = client
     }
-    
+
     /// Fetches a query from the server or from the local cache, depending on the current contents of the cache and the specified cache policy.
     ///
     /// - Parameters:
@@ -46,13 +46,13 @@ public final class ApolloReactiveExtensions {
                     maybe(.completed)
                 }
             }
-            
+
             return Disposables.create {
                 cancellable.cancel()
             }
         }
     }
-    
+
     /// Watches a query by first fetching an initial result from the server or from the local cache, depending on the current contents of the cache and the specified cache policy. After the initial fetch, the returned `Observable` will emit events whenever any of the data the query result depends on changes in the local cache.
     ///
     /// - Parameters:
@@ -73,16 +73,16 @@ public final class ApolloReactiveExtensions {
                 } else if let data = result?.data {
                     observer.onNext(data)
                 }
-                
+
                 // Should we silently ignore the case where `result` and `error` are both nil, or should this be an error situation?
             }
-            
+
             return Disposables.create {
                 watcher.cancel()
             }
         }
     }
-    
+
     /// Performs a mutation by sending it to the server.
     ///
     /// - Parameters:
@@ -102,7 +102,7 @@ public final class ApolloReactiveExtensions {
                     maybe(.completed)
                 }
             }
-            
+
             return Disposables.create {
                 cancellable.cancel()
             }

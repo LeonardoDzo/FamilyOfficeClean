@@ -9,10 +9,10 @@
 import Foundation
 import CoreImage
 
-class ColorControl: Brightnessable{
-    
+class ColorControl: Brightnessable {
+
     // MARK: - Properties
-    
+
     let filter = CIFilter(name: "CIColorControls")!
 }
 import CoreImage
@@ -25,19 +25,19 @@ protocol Brightnessable: Processable {
 }
 
 extension Brightnessable {
-    
+
     var minBrightnessValue: Float {
         return -1.00
     }
-    
+
     var maxBrightnessValue: Float {
         return 1.00
     }
-    
+
     var currentBrightnessValue: Float {
         return filter.value(forKey: kCIInputBrightnessKey) as? Float ?? 0.00
     }
-    
+
     func brightness(_ brightness: Float) {
         self.filter.setValue(brightness, forKey: kCIInputBrightnessKey)
     }

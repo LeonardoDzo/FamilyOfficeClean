@@ -18,7 +18,7 @@ enum MODULE {
         ASSISTANT
 }
 extension MODULE {
-    
+
     public func iconBtn() -> UIImage {
         switch self {
         case .CALENDAR:
@@ -33,10 +33,10 @@ extension MODULE {
             return #imageLiteral(resourceName: "FirstKit")
         case .ASSISTANT:
             return #imageLiteral(resourceName: "asistance")
-        
+
         }
     }
-        
+
     public func color() -> UIColor {
         switch self {
         case .CALENDAR:
@@ -53,11 +53,8 @@ extension MODULE {
             return #colorLiteral(red: 0.9529411765, green: 0.5137254902, blue: 0.3529411765, alpha: 1)
         }
     }
- 
+
 }
-    
-
-
 
 struct HomeBtn {
     var photo: UIImage!
@@ -75,9 +72,9 @@ struct HomeBtn {
         let insurance = HomeBtn(.INSURANCE)
         let firstAidkit = HomeBtn(.FIRSTKIT)
         let assitant = HomeBtn(.ASSISTANT)
-        
-        return [calendar,chat,safeBox,insurance,firstAidkit,assitant]
-        
+
+        return [calendar, chat, safeBox, insurance, firstAidkit, assitant]
+
     }()
 
 }

@@ -8,14 +8,14 @@
 
 import Foundation
 
-enum ip : String {
+enum ip: String {
     case Dev = "0960d911.ngrok.io"
     case Prod = ""
 }
 
 let uri = ip.Dev
 
-extension ip  {
+extension ip {
     func getPort() -> String {
         switch self {
         case .Dev:

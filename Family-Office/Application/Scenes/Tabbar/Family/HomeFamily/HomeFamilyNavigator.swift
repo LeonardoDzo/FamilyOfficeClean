@@ -14,7 +14,7 @@ protocol HomeFamilyPr {
     func addfamily()
 }
 
-final class HomeFamilyNavigator : HomeFamilyPr {
+final class HomeFamilyNavigator: HomeFamilyPr {
     var navigationController: UINavigationController!
     var netService: NetUseCaseProvider!
     var rmService: RMUseCaseProvider!
@@ -23,12 +23,12 @@ final class HomeFamilyNavigator : HomeFamilyPr {
         self.rmService = rmprovider
         self.netService = netprovider
     }
-    func fmailies() -> Void {
+    func fmailies() {
         let view = FamilyViewController()
         view.viewModel = FamilyViewModel(familyUseCase: rmService.makeFamilyUseCase(), navigator: self)
         navigationController.pushViewController(view, animated: true)
     }
-    
+
     func familyProfile() {
         let nc = UINavigationController()
         nc.view.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)

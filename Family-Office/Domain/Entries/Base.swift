@@ -9,5 +9,6 @@
 import Foundation
 
 protocol Base {
-    
+    var updated_at: Int! { get set }
+    var created_at: Int! { get set }
 }

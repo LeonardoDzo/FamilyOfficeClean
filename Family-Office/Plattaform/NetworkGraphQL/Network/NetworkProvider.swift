@@ -11,10 +11,10 @@ import Apollo
 final class NetworkProvider {
     let apollo: ApolloClient!
     var offline = false
-    
+
     public init(_ offline: Bool = false) {
         self.offline = offline
-        
+
         apollo = {
             let configuration = URLSessionConfiguration.default
             // Add additional headers as needed
@@ -22,13 +22,13 @@ final class NetworkProvider {
                 configuration.httpAdditionalHeaders = ["Authorization": token] // Replace `<token>`
             }
             let url = URL(string: Curl.url)!
-          
+
             return ApolloClient(networkTransport: HTTPNetworkTransport(url: url, configuration: configuration))
         }()
     }
-    
+
     public func makeAuthNetwork() -> AuthNetwork {
-    
+
         let network = Network<AuthModel>(apollo)
         return AuthNetwork(network: network)
     }
@@ -45,9 +45,9 @@ final class NetworkProvider {
         let network = Network<Pending>(apollo)
         return PendingNetwork(network: network)
     }
-    
-    public func makeSolicitudeUseCase() -> SolicitudeNetwork {
-        let network = Network<Solicitude>(apollo)
-        return SolicitudeNetwork(network: network)
+
+    public func makeSApplicationFamilyNetwork() -> ApplicationFamilyNetwork {
+        let network = Network<ApplicationFamily>(apollo)
+        return ApplicationFamilyNetwork(network: network)
     }
 }

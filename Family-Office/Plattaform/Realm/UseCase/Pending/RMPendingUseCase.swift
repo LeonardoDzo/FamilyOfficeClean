@@ -11,15 +11,14 @@ import RxSwift
 import Realm
 import RealmSwift
 
-final class RMPendingUseCase<Repository>: PendingUseCase where Repository: AbstractRepository, Repository.T == Pending  {
-    
-    
+final class RMPendingUseCase<Repository>: PendingUseCase where Repository: AbstractRepository, Repository.T == Pending {
+
     private let repository: Repository!
-    
+
     init(repository: Repository) {
         self.repository = repository
     }
-    
+
     func delete(pending: Pending) -> Observable<Void> {
         return repository.delete(entity: pending)
     }

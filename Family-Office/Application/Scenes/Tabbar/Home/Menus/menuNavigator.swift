@@ -13,11 +13,11 @@ protocol MenuNavigatorPr {
     func logout()
 }
 
-final class MenuNavigator : MenuNavigatorPr {
+final class MenuNavigator: MenuNavigatorPr {
 
     init() {}
     func logout() {
-        
+
         if let top = UIApplication.topViewController() {
             top.dismiss(animated: true, completion: {
                   if let top = UIApplication.topViewController() {

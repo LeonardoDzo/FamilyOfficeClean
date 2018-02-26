@@ -32,10 +32,10 @@ final class AddEditViewModel: ViewModelType {
                     .trackError(errorTracker)
                     .trackActivity(activityIndicator)
                     .asDriverOnErrorJustComplete()
-            }.do(onNext:{ _ in
+            }.do(onNext: { _ in
                 self.navigator.toback()
             })
-        
+
         return Output(back: back, canSave: canSave, saved: save, error: errorTracker.asDriver())
     }
 }

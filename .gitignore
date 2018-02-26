@@ -50,7 +50,7 @@ Builds/
 
 ####
 # Other Xcode files
-profile
+
 *.hmap
 *.ipa
 

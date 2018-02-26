@@ -8,11 +8,10 @@
 
 import Foundation
 
-extension Solicitude : Mappable {
-    
+extension ApplicationFamily: Mappable {
+
     enum CodingKeys: String, CodingKey {
-        case assistant,
-             user,
+        case user,
              family,
              status,
              uid = "id"

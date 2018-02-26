@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension User : Mappable {
+extension User: Mappable {
     enum CodingKeys: String, CodingKey {
         case birth = "birthdate"
         case address
@@ -20,5 +20,5 @@ extension User : Mappable {
         case photo
         case user_type
     }
-    
+
 }

@@ -20,14 +20,14 @@ class SearchUsersViewController: UIViewController {
         self.view = v
         bindToModel()
     }
-    
-    func bindToModel(){
+
+    func bindToModel() {
         let viewWillAppear = rx.sentMessage(#selector(UIViewController.viewDidAppear(_:)))
             .mapToVoid()
             .asDriverOnErrorJustComplete()
         let input = SearchUserViewModel.Input(trigger: viewWillAppear, backTrigger: self.backBt.rx.tap.asDriver())
         let output = viewModel.transform(input: input)
-        output.applications.drive(self.v.tableView.rx.items(cellIdentifier: UserInviteTableViewCell.reuseID, cellType: UserInviteTableViewCell.self)){
+        output.applications.drive(self.v.tableView.rx.items(cellIdentifier: UserInviteTableViewCell.reuseID, cellType: UserInviteTableViewCell.self)) {
                 i, model, cell in
                 cell.bind(user: model.user)
                 cell.bindInviteBtn(isInvited: model.isInvited)

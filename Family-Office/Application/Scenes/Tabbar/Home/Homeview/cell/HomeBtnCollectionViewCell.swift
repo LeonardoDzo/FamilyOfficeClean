@@ -19,18 +19,18 @@ class HomeBtnCollectionViewCell: UICollectionViewX {
         super.awakeFromNib()
     }
     required init?(coder aDecoder: NSCoder) { super.init(coder: aDecoder)}
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+
         render()
     }
-    func render() -> Void {
+    func render() {
         sv(btn.style(self.styleBtn))
         btn.width(100%).height(100%)
         btn.isUserInteractionEnabled = false
     }
-    func bind(_ homeBtn: HomeBtn) -> Void {
+    func bind(_ homeBtn: HomeBtn) {
         btn.setImage(homeBtn.photo, for: .normal)
         btn.backgroundColor = homeBtn.color
         self.model = homeBtn
@@ -39,13 +39,13 @@ class HomeBtnCollectionViewCell: UICollectionViewX {
 //        let output = viewModel.transform(input: input)
 //        output.selected.drive().dispose()
         self.contentView.animations()
-        
+
     }
-    
-    func styleBtn(_ btx: UIButtonX) -> Void {
+
+    func styleBtn(_ btx: UIButtonX) {
         btn.contentMode = .center
         btn.cornerRadius = 8
         btn.animation = "zoomIn"
     }
-    
+
 }

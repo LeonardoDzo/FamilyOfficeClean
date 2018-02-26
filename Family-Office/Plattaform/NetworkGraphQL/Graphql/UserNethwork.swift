@@ -10,10 +10,9 @@ import Foundation
 import RxSwift
 
 public final class UserNetwork {
-    
-    
+
     private let network: Network<User>
-    
+
     init(network: Network<User>) {
         self.network = network
     }

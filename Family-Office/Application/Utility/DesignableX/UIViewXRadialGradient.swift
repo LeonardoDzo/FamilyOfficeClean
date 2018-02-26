@@ -10,10 +10,10 @@ import UIKit
 
 @IBDesignable
 class UIViewXRadialGradient: UIView {
-    
+
     @IBInspectable var InsideColor: UIColor = UIColor.clear
     @IBInspectable var OutsideColor: UIColor = UIColor.clear
-    
+
     override func draw(_ rect: CGRect) {
         let colors = [InsideColor.cgColor, OutsideColor.cgColor] as CFArray
         let endRadius = min(frame.width, frame.height) / 2

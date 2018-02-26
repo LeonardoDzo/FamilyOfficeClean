@@ -14,7 +14,7 @@ extension ObservableType where E == Bool {
     public func not() -> Observable<Bool> {
         return self.map(!)
     }
-    
+
 }
 
 extension SharedSequenceConvertibleType {
@@ -24,21 +24,20 @@ extension SharedSequenceConvertibleType {
 }
 
 extension ObservableType {
-    
+
     func catchErrorJustComplete() -> Observable<E> {
         return catchError { _ in
             return Observable.empty()
         }
     }
-    
+
     func asDriverOnErrorJustComplete() -> Driver<E> {
         return asDriver { _ in
             return Driver.empty()
         }
     }
-    
+
     func mapToVoid() -> Observable<Void> {
         return map { _ in }
     }
 }
-

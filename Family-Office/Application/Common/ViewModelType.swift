@@ -12,12 +12,12 @@ import RxSwift
 protocol ViewModelType {
     associatedtype Input
     associatedtype Output
-    
+
     func transform(input: Input) -> Output
 }
 extension ViewModelType {
-    
-    func getFamilies(_ input: Driver<Void>,_ familyUseCase: FamilyUseCase) -> SharedSequence<DriverSharingStrategy, [Family]> {
+
+    func getFamilies(_ input: Driver<Void>, _ familyUseCase: FamilyUseCase) -> SharedSequence<DriverSharingStrategy, [Family]> {
         let errorTracker = ErrorTracker()
         let activityIndicator = ActivityIndicator()
         return input.flatMapLatest({ _ -> Driver<[Family]> in
@@ -27,8 +27,8 @@ extension ViewModelType {
                 .asDriverOnErrorJustComplete()
         })
     }
-    
-    func getFamily(_ input: Driver<Void>,_ familyUseCase: FamilyUseCase, _ id: String) -> SharedSequence<DriverSharingStrategy, Family> {
+
+    func getFamily(_ input: Driver<Void>, _ familyUseCase: FamilyUseCase, _ id: String) -> SharedSequence<DriverSharingStrategy, Family> {
         let errorTracker = ErrorTracker()
         return input.flatMapLatest({ _ -> Driver<Family> in
             return familyUseCase.get(byId: id)
@@ -36,7 +36,7 @@ extension ViewModelType {
                 .asDriverOnErrorJustComplete()
         })
     }
-    
+
     func getUser(_ input: Driver<Void>, _ userUseCase: UserUseCase, _ uid: String) -> Driver<User> {
          let errorTracker = ErrorTracker()
          return input.flatMapLatest ({_ in
@@ -45,7 +45,7 @@ extension ViewModelType {
                 .asDriverOnErrorJustComplete()
         })
     }
-    
+
     func selectFamily(_ input: Driver<IndexPath>, _ families: [Family], _ familyUseCase: FamilyUseCase) -> Driver<Void> {
         return Driver.merge(input).flatMapLatest({ indexpath -> SharedSequence<DriverSharingStrategy, Void> in
             let result = families.enumerated().map({ (arg) -> SharedSequence<DriverSharingStrategy, Void> in

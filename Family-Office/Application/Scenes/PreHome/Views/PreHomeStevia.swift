@@ -13,7 +13,7 @@ import RxSwift
 
 class Prehome: UIViewX, UserBindable {
     var user: User!
-    var tableView : UITableView = UITableView()
+    var tableView: UITableView = UITableView()
     var topContent = UIImageViewX()
     var photoProfile: UIImageViewX = UIImageViewX()
     var nameLbl: UILabelX! = UILabelX()
@@ -22,10 +22,10 @@ class Prehome: UIViewX, UserBindable {
     var logoutBtn = UIButtonX()
     var creteFamilybtn = UIButtonX()
     convenience init() {
-        self.init(frame:CGRect.zero)
+        self.init(frame: CGRect.zero)
         render()
     }
-    
+
     fileprivate func styleForBtnCreateFamily() -> (UIButtonX) -> Void {
         return { (btn) in
             btn.cornerRadius = 40
@@ -38,7 +38,7 @@ class Prehome: UIViewX, UserBindable {
             btn.shadowRadius = 2
         }
     }
-    
+
     fileprivate func styles() {
         photoProfile.setImage(url: URL(string: "https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg")!, placeholderImage: #imageLiteral(resourceName: "profile_default"))
         settingBtn.style(self.styleBtn).style({ (btn) in
@@ -54,7 +54,7 @@ class Prehome: UIViewX, UserBindable {
         photoProfile.style(self.styleImg)
         creteFamilybtn.style(self.styleForBtnCreateFamily())
     }
-    
+
     func render() {
         sv(
             topContent,
@@ -76,7 +76,7 @@ class Prehome: UIViewX, UserBindable {
             creteFamilybtn,
             ""
         )
-        
+
         topContent.layout(
             70,
             nameLbl.height(20).width(100%),
@@ -97,32 +97,32 @@ class Prehome: UIViewX, UserBindable {
         backgroundColor = #colorLiteral(red: 0.921431005, green: 0.9214526415, blue: 0.9214410186, alpha: 1)
         styles()
         animations()
-        
+
     }
-    
+
     fileprivate func conftable() {
         tableView.refreshControl = UIRefreshControl()
         tableView.estimatedRowHeight = 100
         tableView.rowHeight = 64
         tableView.register(FamilyTableViewCell.self, forCellReuseIdentifier: FamilyTableViewCell.reuseID)
-        
+
         tableView.tableFooterView = UIView()
     }
-    
-    func styleImg(_ img: UIImageViewX) -> Void {
+
+    func styleImg(_ img: UIImageViewX) {
         img.clipsToBounds = true
         img.cornerRadius = 50
         img.borderColor = borderColor
         img.borderWidth = 1
         img.animation = "fadeIn"
     }
-    
-    func styleBtn(_ btn: UIButtonX) -> Void {
+
+    func styleBtn(_ btn: UIButtonX) {
         btn.width(40).height(40)
         btn.animation = "pop"
     }
 
-    func styleTextField(_ text: UILabelX) -> Void {
+    func styleTextField(_ text: UILabelX) {
         text.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         text.height(20)
         text.font = UIFont.systemFont(ofSize: 18.0)
@@ -131,4 +131,3 @@ class Prehome: UIViewX, UserBindable {
         text.textAlignment = .center
     }
 }
-

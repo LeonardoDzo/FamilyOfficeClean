@@ -8,21 +8,21 @@
 
 import Foundation
 
-public struct User : Codable {
-    
+public struct User: Codable {
+
     public var address: Address?
     public var birth: Int = -1
     public var email: String = ""
     public var name: String = ""
     public var phone: String = ""
     public var uid: String = ""
-    public var photo: Photo? = nil
+    public var photo: Photo?
     public var families: [Family] = [Family]()
     public var nss = ""
     public var rfc = ""
     public var bloodyType = ""
     public var user_type = 0
-    
+
     public init(address: Address,
                 email: String,
                 name: String,
@@ -37,9 +37,9 @@ public struct User : Codable {
         self.birth = birth
         self.photo = nil
         self.families = families
-        
+
     }
-    public init(uid: String, name: String, email: String){
+    public init(uid: String, name: String, email: String) {
         self.name = name
         self.uid = uid
         self.email = email
@@ -48,7 +48,7 @@ public struct User : Codable {
         self.photo = nil
         self.address = nil
     }
-    public init(name: String, email: String, phone: String){
+    public init(name: String, email: String, phone: String) {
         self.name = name
         self.uid = ""
         self.email = email
@@ -57,11 +57,10 @@ public struct User : Codable {
         self.photo = nil
         self.address = nil
     }
-    
-    public init(from decoder: Decoder) throws
-    {
-    
-        if  let values = try? decoder.container(keyedBy: CodingKeys.self)  {
+
+    public init(from decoder: Decoder) throws {
+
+        if  let values = try? decoder.container(keyedBy: CodingKeys.self) {
             name = try values.decode(String.self, forKey: .name)
             phone = try values.decodeIfPresent(String.self, forKey: .phone) ?? ""
             uid = try values.decode(String.self, forKey: .uid)
@@ -69,10 +68,9 @@ public struct User : Codable {
             photo = try values.decodeIfPresent(Photo.self, forKey: .photo)
             email = try values.decode(String.self, forKey: .email)
             address = try! values.decodeIfPresent(Address.self, forKey: .address)
-            
+            user_type = try values.decode(Int.self, forKey: .user_type)
             families = try values.decodeIfPresent([[String:Family]].self, forKey: .families)?.flatMap({$0.values.filter({!$0.uid.isEmpty})}) ?? []
         }
-        
 
     }
 
@@ -80,6 +78,6 @@ public struct User : Codable {
 
 extension User: Equatable {
     public static func == (lhs: User, rhs: User) -> Bool {
-        return lhs.uid == rhs.uid 
+        return lhs.uid == rhs.uid
     }
 }

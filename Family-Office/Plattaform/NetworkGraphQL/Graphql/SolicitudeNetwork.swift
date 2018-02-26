@@ -9,18 +9,18 @@
 import Foundation
 import RxSwift
 
-public final class SolicitudeNetwork {
-    private let network: Network<Solicitude>
-    
-    init(network: Network<Solicitude>) {
+public final class ApplicationFamilyNetwork {
+    private let network: Network<ApplicationFamily>
+
+    init(network: Network<ApplicationFamily>) {
         self.network = network
     }
-    
-    func createFamilyApplication(_ solicitude: Solicitude) -> Observable<Solicitude> {
-        return network.postItem(FamilyApplicationMutation(userId: solicitude.to, familyId: solicitude.from))
+
+    func createFamilyApplication(_ solicitude: ApplicationFamily) -> Observable<ApplicationFamily> {
+        return network.postItem(FamilyApplicationMutation(userId: solicitude.user.uid, familyId: solicitude.family.uid))
     }
-    func allFamilyApplications() -> Observable<[Solicitude]>{
+    func allFamilyApplications() -> Observable<[ApplicationFamily]> {
         return network.getItems(FamilyApplicationsQuery())
     }
-   
+
 }

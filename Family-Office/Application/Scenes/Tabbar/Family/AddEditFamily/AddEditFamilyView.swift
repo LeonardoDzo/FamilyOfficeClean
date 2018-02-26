@@ -13,26 +13,26 @@ class AddEditFamily: UIViewX {
     var familyPhoto = imgEditable()
     var cancelBtn = UIButtonX()
     var saveBtn = UIButtonX()
-    
+
     var nameTxt = UITextFieldX()
     fileprivate var colorControl = ColorControl()
-    convenience init(){
-        self.init(frame:CGRect.zero)
+    convenience init() {
+        self.init(frame: CGRect.zero)
         render()
     }
-    
+
     fileprivate func render() {
-        sv(familyPhoto,nameTxt,cancelBtn,saveBtn)
+        sv(familyPhoto, nameTxt, cancelBtn, saveBtn)
         layout(
             0,
             |familyPhoto.width(100%).height(35%)|,
             ""
         )
         nameTxt.top(17.5%).width(100%).centerHorizontally()
-        
+
         saveBtn.width(40).height(40).top(5%).right(5%)
         saveBtn.setImage(#imageLiteral(resourceName: "icons8-save"), for: .normal)
-        
+
         cancelBtn.width(40).height(40).top(5%).left(5%)
         cancelBtn.setImage(#imageLiteral(resourceName: "icons8-expand_arrow"), for: .normal)
         nameTxt.style { (txt) in
@@ -43,7 +43,7 @@ class AddEditFamily: UIViewX {
             txt.attributedPlaceholder = NSAttributedString(string: "Nombre de la Familia",
                                                            attributes: [NSAttributedStringKey.foregroundColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)])
         }
-       
+
         familyPhoto.img.style { (img) in
             colorControl.input(#imageLiteral(resourceName: "icons8-family"))
             img.contentMode = .center
@@ -52,9 +52,9 @@ class AddEditFamily: UIViewX {
                 img.image = self.colorControl.outputUIImage()
             }
         }
-        
+
         backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-        
+
     }
-    
+
 }

@@ -16,18 +16,18 @@ final class RMPending: Object {
     dynamic var title: String = ""
     dynamic var priority: PENDING_PRIORITY = .Low
     dynamic var done: Bool = false
-    dynamic var type : Int = 0
-    dynamic var seen : Bool = false
-    dynamic var boss : String = ""
+    dynamic var type: Int = 0
+    dynamic var seen: Bool = false
+    dynamic var boss: String = ""
     dynamic var assistantId: String = ""
-    dynamic var created_at : Int = 0
-    dynamic var updated_at : Int = 0
-    
+    dynamic var created_at: Int = 0
+    dynamic var updated_at: Int = 0
+
     override class func primaryKey() -> String {
         return "uid"
     }
 }
-extension RMPending : DomainConvertibleType {
+extension RMPending: DomainConvertibleType {
     func asDomain() -> Pending {
         var pending = Pending()
 //        pending.assistantId = assistantId
@@ -41,9 +41,9 @@ extension RMPending : DomainConvertibleType {
         pending.uid = uid
         return pending
     }
-    
+
 }
-extension Pending : RealmRepresentable {
+extension Pending: RealmRepresentable {
     func asRealm() -> RMPending {
         return RMPending.build({ (obj) in
 //            obj.assistantId = assistantId

@@ -17,7 +17,7 @@ class FamilyProfileViewController: UIViewController {
     override func loadView() { // 2
         view = self.v
     }
-    
+
     fileprivate func setupView() {
         self.v = FamilyProfileView()
         self.view = self.v
@@ -32,34 +32,34 @@ class FamilyProfileViewController: UIViewController {
         }
         self.setupView()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.isNavigationBarHidden = true
     }
-    func bindToView() -> Void {
+    func bindToView() {
         let viewWillAppear = rx.sentMessage(#selector(UIViewController.viewDidAppear(_:)))
             .mapToVoid()
             .asDriverOnErrorJustComplete()
-        
+
         let input = FamilyProfileViewModel.Input(familyTrigger: viewWillAppear, tapAddMemberTrigger: self.v.addMemberBtn.rx.tap.asDriver(), backtrigger: self.v.backButton.rx.tap.asDriver())
         let output = viewModel.transform(input: input)
-        
+
         output.back.drive().disposed(by: disposeBag)
         output.family
             .drive(onNext: { family in
                 self.v.bind(family: family)
             })
             .disposed(by: disposeBag)
-        
-        output.members.drive(self.v.tableView.rx.items(cellIdentifier: FamilyMemberTableViewCell.reuseID, cellType: FamilyMemberTableViewCell.self)){
-            i,model,cell in
+
+        output.members.drive(self.v.tableView.rx.items(cellIdentifier: FamilyMemberTableViewCell.reuseID, cellType: FamilyMemberTableViewCell.self)) {
+            i, model, cell in
             cell.bind(user: model)
         }.disposed(by: disposeBag)
-        
+
         output.tapAddMember
             .drive()
             .disposed(by: disposeBag)
-        
+
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

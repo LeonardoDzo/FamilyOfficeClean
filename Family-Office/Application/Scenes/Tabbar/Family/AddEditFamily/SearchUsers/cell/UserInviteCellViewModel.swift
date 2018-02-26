@@ -11,26 +11,26 @@ import RxCocoa
 import RxSwift
 
 final class UserInviteCellViewModel: ViewModelType {
-    let solicitudeUseCase: SolicitudeUseCase!
+    let solicitudeUseCase: ApplicationFamilyUseCase!
     let familyUseCase: FamilyUseCase!
     var family: Family!
-    init(solicitudeUseCase: SolicitudeUseCase, familyUseCase: FamilyUseCase) {
+    init(solicitudeUseCase: ApplicationFamilyUseCase, familyUseCase: FamilyUseCase) {
         self.solicitudeUseCase = solicitudeUseCase
         self.familyUseCase = familyUseCase
         getFamily()
-        
+
     }
     func transform(input: UserInviteCellViewModel.Input) -> UserInviteCellViewModel.Output {
         let tap = input.inviteTrigger.flatMapLatest { (arg0) -> SharedSequence<DriverSharingStrategy, Void> in
             let (_, user) = arg0
-            var solicitude = Solicitude()
-            solicitude.from = user!.uid
-            solicitude.to = self.family.uid
+            var solicitude = ApplicationFamily()
+            solicitude.user = user!
+            solicitude.family = self.family
             return self.solicitudeUseCase.save(solicitude: solicitude).asDriverOnErrorJustComplete()
         }
         return Output(invited: tap)
     }
-    func getFamily() -> Void {
+    func getFamily() {
         self.familyUseCase
             .getFamilyActive()
             .asDriverOnErrorJustComplete()

@@ -11,17 +11,17 @@ import UIKit
 
 protocol AddEditNavigatorPr {
     func toback()
-    func toMe() -> Void
+    func toMe()
 }
 
-class AddEditNavigator: AddEditNavigatorPr{
+class AddEditNavigator: AddEditNavigatorPr {
     private let navigationController: UINavigationController
-    private let service : NetUseCaseProvider!
+    private let service: NetUseCaseProvider!
     init( nc: UINavigationController, service: NetUseCaseProvider = NetUseCaseProvider()) {
         self.navigationController = nc
         self.service = service
     }
-    
+
     func toback() {
          navigationController.dismiss(animated: true)
     }
