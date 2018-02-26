@@ -30,7 +30,7 @@ class PreHomeNav: PreHomeNavigator {
 
     func toMe(user: User) {
           let preHome = PreHomeViewController()
-            let viewModel = PreHomeViewModel(user: user, navigator: self, familyUseCase: RMUseCaseProvider().makeFamilyUseCase(), userUseCase: RMUseCaseProvider().makeUseCase())
+            let viewModel = PreHomeViewModel(user: user, navigator: self, familyUseCase: service.makeFamilyUseCase(), userUseCase: service.makeUseCase())
             preHome.viewModel = viewModel
             preHome.hero.isEnabled = true
             navigationController.hero.navigationAnimationType = .slide(direction: .up)

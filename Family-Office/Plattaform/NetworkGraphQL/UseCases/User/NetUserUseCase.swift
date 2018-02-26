@@ -12,9 +12,11 @@ import RxSwift
 final class NetUserUseCase: UserUseCase {
 
     private let network: UserNetwork
-
-    init(network: UserNetwork) {
+    private let provider: RMUseCaseProvider!
+    
+    init(network: UserNetwork, provider: RMUseCaseProvider = RMUseCaseProvider()) {
         self.network = network
+        self.provider = provider
     }
 
     func save(user: User) -> Observable<Void> {
@@ -32,5 +34,13 @@ final class NetUserUseCase: UserUseCase {
     }
     func getUsers(phones: [String], rol: Int = 0) -> Observable<[User]> {
         return network.getUsers(phones: phones, rol: rol)
+    }
+    
+    func getAssistants() -> Observable<[User]> {
+        return network.getAssistants().do(onNext: { users in
+            users.forEach({ (u) in
+                self.provider.makeUseCase().save(user: u).subscribe().dispose()
+            })
+        })
     }
 }

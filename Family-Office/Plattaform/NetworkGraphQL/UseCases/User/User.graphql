@@ -7,3 +7,11 @@ query allUser($phones: [String], $rol: Int) {
        ...UserDetails
     }
 }
+
+query myAssistants {
+    myAssistants {
+        assistant {
+            ...UserDetails
+        }
+    }
+}

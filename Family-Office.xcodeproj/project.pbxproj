@@ -12,7 +12,6 @@
 		02012DB520360E4E00889401 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02012DB420360E4E00889401 /* NotificationViewController.swift */; };
 		02012DB720360EE500889401 /* NotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02012DB620360EE500889401 /* NotificationsView.swift */; };
 		02012DB92036114100889401 /* NotificationNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02012DB82036114100889401 /* NotificationNavigator.swift */; };
-		02012DBB203618A700889401 /* MenuMainNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02012DBA203618A600889401 /* MenuMainNavigator.swift */; };
 		0202E666203379B6001494D9 /* MainSocketProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0202E665203379B6001494D9 /* MainSocketProvider.swift */; };
 		0207172F202CBAB900A36FEF /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0207172E202CBAB900A36FEF /* Default-568h@2x.png */; };
 		02071732202CBAFF00A36FEF /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02071731202CBAFF00A36FEF /* Constants.swift */; };
@@ -162,6 +161,8 @@
 		02ED6F9D204474A900D880F8 /* RMApplicationAssistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02ED6F9C204474A900D880F8 /* RMApplicationAssistant.swift */; };
 		02ED6F9F2044755900D880F8 /* ApplicationAssistant+Mappable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02ED6F9E2044755900D880F8 /* ApplicationAssistant+Mappable.swift */; };
 		02ED6FA22044777600D880F8 /* AddAssistantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02ED6FA12044777600D880F8 /* AddAssistantViewController.swift */; };
+		02ED6FA620448D5300D880F8 /* AddAssistantNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02ED6FA520448D5300D880F8 /* AddAssistantNavigator.swift */; };
+		02ED6FA820448EF700D880F8 /* MenuMainNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02ED6FA720448EF700D880F8 /* MenuMainNavigator.swift */; };
 		02EDD78D203E096F003DA591 /* UIImage+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EDD787203E096F003DA591 /* UIImage+Ext.swift */; };
 		02EDD78E203E096F003DA591 /* UICollectionViewCell+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EDD788203E096F003DA591 /* UICollectionViewCell+Ext.swift */; };
 		02EDD78F203E096F003DA591 /* Application+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EDD789203E096F003DA591 /* Application+Ext.swift */; };
@@ -227,7 +228,6 @@
 		02012DB420360E4E00889401 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		02012DB620360EE500889401 /* NotificationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsView.swift; sourceTree = "<group>"; };
 		02012DB82036114100889401 /* NotificationNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNavigator.swift; sourceTree = "<group>"; };
-		02012DBA203618A600889401 /* MenuMainNavigator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuMainNavigator.swift; path = ../../../../../../../../../../../.Trash/MenuMainNavigator.swift; sourceTree = "<group>"; };
 		0202E665203379B6001494D9 /* MainSocketProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSocketProvider.swift; sourceTree = "<group>"; };
 		0207172E202CBAB900A36FEF /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		02071731202CBAFF00A36FEF /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -379,6 +379,8 @@
 		02ED6F9C204474A900D880F8 /* RMApplicationAssistant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMApplicationAssistant.swift; sourceTree = "<group>"; };
 		02ED6F9E2044755900D880F8 /* ApplicationAssistant+Mappable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApplicationAssistant+Mappable.swift"; sourceTree = "<group>"; };
 		02ED6FA12044777600D880F8 /* AddAssistantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAssistantViewController.swift; sourceTree = "<group>"; };
+		02ED6FA520448D5300D880F8 /* AddAssistantNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAssistantNavigator.swift; sourceTree = "<group>"; };
+		02ED6FA720448EF700D880F8 /* MenuMainNavigator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuMainNavigator.swift; sourceTree = "<group>"; };
 		02EDD787203E096F003DA591 /* UIImage+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Ext.swift"; sourceTree = "<group>"; };
 		02EDD788203E096F003DA591 /* UICollectionViewCell+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UICollectionViewCell+Ext.swift"; sourceTree = "<group>"; };
 		02EDD789203E096F003DA591 /* Application+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Application+Ext.swift"; sourceTree = "<group>"; };
@@ -937,9 +939,9 @@
 			isa = PBXGroup;
 			children = (
 				02ED6FA02044775700D880F8 /* AddAssistants */,
-				02EF0F09203207230020A133 /* AddEditAssistantView */,
-				02B794FD202E7DFB0083CAB7 /* ProfileAssistant */,
 				02C932E6202CC8C200E64A42 /* Main */,
+				02B794FD202E7DFB0083CAB7 /* ProfileAssistant */,
+				02EF0F09203207230020A133 /* AddEditPendingView */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -948,8 +950,8 @@
 			isa = PBXGroup;
 			children = (
 				02EF0F1C203227E70020A133 /* Views */,
-				02012DBA203618A600889401 /* MenuMainNavigator.swift */,
 				02C932E3202CC84A00E64A42 /* AssistantViewController.swift */,
+				02ED6FA720448EF700D880F8 /* MenuMainNavigator.swift */,
 				02EF0F1A203225ED0020A133 /* PendingViewModel.swift */,
 				02EF0F1D203228050020A133 /* PendingTableViewCell.swift */,
 			);
@@ -1007,6 +1009,7 @@
 			isa = PBXGroup;
 			children = (
 				02ED6FA12044777600D880F8 /* AddAssistantViewController.swift */,
+				02ED6FA520448D5300D880F8 /* AddAssistantNavigator.swift */,
 			);
 			path = AddAssistants;
 			sourceTree = "<group>";
@@ -1043,14 +1046,14 @@
 			path = Utility;
 			sourceTree = "<group>";
 		};
-		02EF0F09203207230020A133 /* AddEditAssistantView */ = {
+		02EF0F09203207230020A133 /* AddEditPendingView */ = {
 			isa = PBXGroup;
 			children = (
 				02EF0EF62031F9A00020A133 /* AddEditPendingViewController.swift */,
 				02EF0F0A203207680020A133 /* AddEditAssistantViewModel.swift */,
 				02EF0F2320322CD80020A133 /* AddEditPendingNavigator.swift */,
 			);
-			path = AddEditAssistantView;
+			path = AddEditPendingView;
 			sourceTree = "<group>";
 		};
 		02EF0F12203218310020A133 /* Pending */ = {
@@ -1530,6 +1533,7 @@
 				0253E95F2040EC850007CC65 /* NotificationViewModel.swift in Sources */,
 				023AAB34201EBB4900F50207 /* Misc.swift in Sources */,
 				023AAB51201EC0BA00F50207 /* UseCaseProvider.swift in Sources */,
+				02ED6FA820448EF700D880F8 /* MenuMainNavigator.swift in Sources */,
 				023AAB58201F8B8600F50207 /* User+Mappable.swift in Sources */,
 				02EF0F262032370F0020A133 /* Pending+Mappable.swift in Sources */,
 				023AAB5C201F8BEC00F50207 /* Family+Mappable.swift in Sources */,
@@ -1598,7 +1602,6 @@
 				02FE57852020F6F400B7E084 /* RunLoopThreadScheduler.swift in Sources */,
 				02FE576A2020E73000B7E084 /* PreHomeViewController.swift in Sources */,
 				02D468A8201FE6FD00D6DF86 /* SignInView.swift in Sources */,
-				02012DBB203618A700889401 /* MenuMainNavigator.swift in Sources */,
 				02F525902024E5D2009F817D /* AddEditFamilyViewController.swift in Sources */,
 				023AAB53201F84EB00F50207 /* Family.swift in Sources */,
 				02E559B62024CDF300D3FC07 /* RMPhoto.swift in Sources */,
@@ -1640,6 +1643,7 @@
 				02F5259D2025261F009F817D /* AddEditFamilyViewModel.swift in Sources */,
 				023AAB44201EBB4900F50207 /* Spring.swift in Sources */,
 				02EF0F0B203207680020A133 /* AddEditAssistantViewModel.swift in Sources */,
+				02ED6FA620448D5300D880F8 /* AddAssistantNavigator.swift in Sources */,
 				023AAB08201EBB0900F50207 /* UILabelX.swift in Sources */,
 				02A5A302202A3F96009133BD /* FamilyTableViewCell.swift in Sources */,
 				02B794FF202E7E2A0083CAB7 /* ProfileAssistantViewController.swift in Sources */,

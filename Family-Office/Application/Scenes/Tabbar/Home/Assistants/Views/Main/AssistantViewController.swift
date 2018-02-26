@@ -9,7 +9,7 @@
 import UIKit
 import RxCocoa
 import RxSwift
-
+import Stevia
 class AssistantViewController: UIViewController {
     private let disposeBag = DisposeBag()
     let back = UIBarButtonItem(image: #imageLiteral(resourceName: "icons8-expand_arrow"), style: .plain, target: self, action: nil)
@@ -17,6 +17,7 @@ class AssistantViewController: UIViewController {
     private var isEdit = false
     var v = MainAssistantViewStevia()
     var viewModel: PendingViewModel!
+    var notExistBtn = UIButtonX()
     override func loadView() { view = v }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +40,7 @@ class AssistantViewController: UIViewController {
         let pull = self.v.table.tableView.refreshControl!.rx
             .controlEvent(.valueChanged)
             .asDriver()
-        let input = PendingViewModel.Input(trigger: Driver.merge(viewWillAppear, pull), editTrigger: editButton.rx.tap.asDriver(), backtrigger: back.rx.tap.asDriver())
+        let input = PendingViewModel.Input(trigger: Driver.merge(viewWillAppear, pull), editTrigger: editButton.rx.tap.asDriver(), backtrigger: back.rx.tap.asDriver(), gotoAddAssistant: notExistBtn.rx.tap.asDriver())
 
         let output = viewModel.transform(input: input)
 
@@ -61,6 +62,8 @@ class AssistantViewController: UIViewController {
             }
             self.isEdit = !self.isEdit
         }).disposed(by: disposeBag)
+        
+        output.assistants.drive().disposed(by: disposeBag)
     }
 
 }

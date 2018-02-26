@@ -20,4 +20,7 @@ public final class UserNetwork {
     public func getUsers(phones: [String], rol: Int) -> Observable<[User]> {
        return network.getItems(AllUserQuery(phones: phones, rol: rol))
    }
+    public func getAssistants() -> Observable<[User]> {
+        return network.getItems(MyAssistantsQuery())
+    }
 }

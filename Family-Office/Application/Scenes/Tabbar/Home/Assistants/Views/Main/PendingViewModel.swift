@@ -12,10 +12,12 @@ import RxCocoa
 
 final class PendingViewModel: ViewModelType {
     private let usecases: PendingUseCase!
+    private let assistantUseCase: UserUseCase!
     private let navigator: AssistantMainNavigator!
-    init(usecases: PendingUseCase, navigator: AssistantMainNavigator) {
+    init(usecases: PendingUseCase, userUseCase: UserUseCase, navigator: AssistantMainNavigator) {
         self.usecases = usecases
         self.navigator = navigator
+        self.assistantUseCase = userUseCase
     }
 
     func transform(input: PendingViewModel.Input) -> PendingViewModel.Output {
@@ -26,9 +28,19 @@ final class PendingViewModel: ViewModelType {
                 .trackError(errorTracker)
                 .asDriverOnErrorJustComplete()
         }
-
+        let assistants = input.trigger.flatMapLatest {
+            return self.assistantUseCase
+                .getAssistants()
+                .asDriverOnErrorJustComplete()
+            }.do(onNext:  {users in
+                if users.isEmpty {
+                    self.navigator.toAddAssistant()
+                }
+            })
+        
         let back = input.backtrigger.do(onNext: self.navigator.toBack)
-        return Output(pendings: pendings, backTrigger: back, modeEdit: input.editTrigger)
+        
+        return Output(pendings: pendings, assistants: assistants, backTrigger: back, modeEdit: input.editTrigger)
     }
 }
 extension PendingViewModel {
@@ -36,9 +48,11 @@ extension PendingViewModel {
         let trigger: Driver<Void>
         let editTrigger: Driver<Void>
         let backtrigger: Driver<Void>
+        let gotoAddAssistant: Driver<Void>
     }
     struct Output {
         let pendings: Driver<[Pending]>
+        let assistants: Driver<[User]>
         let backTrigger: Driver<Void>
         let modeEdit: Driver<Void>
     }

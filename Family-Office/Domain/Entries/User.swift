@@ -68,7 +68,9 @@ public struct User: Codable {
             photo = try values.decodeIfPresent(Photo.self, forKey: .photo)
             email = try values.decode(String.self, forKey: .email)
             address = try! values.decodeIfPresent(Address.self, forKey: .address)
-            user_type = try values.decode(Int.self, forKey: .user_type)
+            if let utype : String = values.decodeSafely(.user_type) {
+                user_type = Int(utype)!
+            }
             families = try values.decodeIfPresent([[String:Family]].self, forKey: .families)?.flatMap({$0.values.filter({!$0.uid.isEmpty})}) ?? []
         }
 

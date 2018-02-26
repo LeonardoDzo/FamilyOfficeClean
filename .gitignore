@@ -30,6 +30,7 @@ xcuserdata/
 *.dSYM
 
 ## Other
+Profile
 *.moved-aside
 *.xcuserstate
 

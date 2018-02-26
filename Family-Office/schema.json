@@ -799,6 +799,22 @@
               "deprecationReason": null
             },
             {
+              "name": "myAssistants",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "BossToAssistant",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "myBosses",
               "description": null,
               "args": [],
@@ -2443,6 +2459,18 @@
                   "name": "ID",
                   "ofType": null
                 }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "status",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
               },
               "isDeprecated": false,
               "deprecationReason": null
@@ -4152,6 +4180,22 @@
           "description": null,
           "fields": [
             {
+              "name": "bossAdded",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "User",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "chatMembershipAdded",
               "description": null,
               "args": [
@@ -4253,6 +4297,22 @@
                 "ofType": {
                   "kind": "OBJECT",
                   "name": "ChatMessage",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "familyApplicationAdded",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "FamilyApplication",
                   "ofType": null
                 }
               },
@@ -4374,7 +4434,18 @@
             {
               "name": "illnessAdded",
               "description": null,
-              "args": [],
+              "args": [
+                {
+                  "name": "family",
+                  "description": null,
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "ID",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                }
+              ],
               "type": {
                 "kind": "NON_NULL",
                 "name": null,
@@ -4390,7 +4461,18 @@
             {
               "name": "illnessRemoved",
               "description": null,
-              "args": [],
+              "args": [
+                {
+                  "name": "family",
+                  "description": null,
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "ID",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                }
+              ],
               "type": {
                 "kind": "NON_NULL",
                 "name": null,

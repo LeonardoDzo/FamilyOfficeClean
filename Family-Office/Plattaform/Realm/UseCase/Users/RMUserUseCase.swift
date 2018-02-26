@@ -33,4 +33,7 @@ final class RMUserUseCase<Repository>: UserUseCase where Repository: AbstractRep
     func getUsers(phones: [String], rol: Int) -> Observable<[User]> {
         return repository.queryAll()
     }
+    func getAssistants() -> Observable<[User]> {
+        return repository.query(with: NSPredicate(format: "user_type = 1"), sortDescriptors: [])
+    }
 }
