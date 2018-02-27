@@ -26,7 +26,7 @@ class SearchUserNavigator: SearchUserNavPr {
 
     func toMe(family: Family) {
         let view = SearchUsersViewController()
-        view.viewModel = SearchUserViewModel(userUseCase: service.makeUseCase(), navigator: self, rmsolicitude: rmService.makeApplicationFamilyUseCase())
+        view.viewModel = SearchUserViewModel(userUseCase: service.makeUseCase(), navigator: self, rmsolicitude: rmService.makeApplicationUseCase())
         view.viewModel.famiy = family
         navigateController.pushViewController(view, animated: true)
     }

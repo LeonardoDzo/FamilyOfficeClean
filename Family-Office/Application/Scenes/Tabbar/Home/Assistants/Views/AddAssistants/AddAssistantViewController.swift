@@ -12,15 +12,41 @@ import RxSwift
 class AddAssistantViewController: UIViewController {
     private var disposeBag = DisposeBag()
     var v = SearchUserView()
+    var viewModel: AddAssistantViewModel!
+    fileprivate func setupView() {
+        self.v = SearchUserView()
+        v.background.image = #imageLiteral(resourceName: "Blog_Admin_Assistant")
+        v.background.contentMode = .scaleAspectFill
+        self.navigationController?.isNavigationBarHidden = true
+        self.v.tableView.register(AssistantInviteTableViewCell.self, forCellReuseIdentifier: AssistantInviteTableViewCell.reuseID)
+        self.view = v
+        self.bindToView()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        v.background.image = #imageLiteral(resourceName: "Blog_Admin_Assistant")
-        self.view = v
-        //bindToModel()
-        // Do any additional setup after loading the view.
+        on("INJECTION_BUNDLE_NOTIFICATION") {
+            self.setupView()
+        }
+        setupView()
     }
-
+    
+    func bindToView() -> Void {
+        let viewWillAppear = rx.sentMessage(#selector(UIViewController.viewDidAppear(_:)))
+            .mapToVoid()
+            .asDriverOnErrorJustComplete()
+        let input = AddAssistantViewModel.Input(trigger: viewWillAppear)
+        let output = viewModel.transform(input: input)
+        
+        output.assistants.drive(self.v.tableView.rx.items(cellIdentifier: AssistantInviteTableViewCell.reuseID, cellType: AssistantInviteTableViewCell.self)) {
+            i,model,cell in
+            cell.bind(user: model)
+            cell.bindInviteBtn(isInvited: false)
+        }.disposed(by: disposeBag)
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        self.navigationController?.isNavigationBarHidden = false
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

@@ -21,7 +21,7 @@ class NotificationNavigator: NotNavigator {
     }
     func toMain() {
         let notView = NotificationViewController()
-        notView.viewModel = NotificationViewModel(applicationUseCase: NetUseCaseProvider().makeApplicationFamilyUseCase())
+        notView.viewModel = NotificationViewModel(applicationUseCase: NetUseCaseProvider().makeApplicationUseCase())
         navigationController.pushViewController(notView, animated: true)
     }
 }

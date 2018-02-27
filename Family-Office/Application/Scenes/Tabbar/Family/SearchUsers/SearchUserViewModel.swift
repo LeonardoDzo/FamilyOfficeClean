@@ -15,12 +15,12 @@ import ContactsUI
 final class SearchUserViewModel: ViewModelType {
     let userUseCase: UserUseCase!
     let navigator: SearchUserNavigator!
-    let rmsolicitudeUseCase: ApplicationFamilyUseCase!
+    let rmsolicitudeUseCase: ApplicationUseCase!
     var contacts: [String] = []
     var solicitudes = [ApplicationFamily]()
 
     var famiy: Family!
-    init(userUseCase: UserUseCase, navigator: SearchUserNavigator, rmsolicitude: ApplicationFamilyUseCase) {
+    init(userUseCase: UserUseCase, navigator: SearchUserNavigator, rmsolicitude: ApplicationUseCase) {
         self.userUseCase = userUseCase
         self.navigator = navigator
         self.rmsolicitudeUseCase = rmsolicitude

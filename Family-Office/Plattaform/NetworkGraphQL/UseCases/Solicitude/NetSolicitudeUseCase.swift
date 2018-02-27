@@ -8,21 +8,21 @@
 
 import Foundation
 import RxSwift
-final class NetApplicationFamilyUseCase: ApplicationFamilyUseCase {
-
+final class NetApplicationUseCase: ApplicationUseCase {
+    
     private let provider: RMUseCaseProvider!
-    private let network: ApplicationFamilyNetwork!
-    init(network: ApplicationFamilyNetwork, provider: RMUseCaseProvider = RMUseCaseProvider()) {
+    private let network: ApplicationsNetwork!
+    init(network: ApplicationsNetwork, provider: RMUseCaseProvider = RMUseCaseProvider()) {
         self.network = network
         self.provider = provider
     }
 
     func save(solicitude: ApplicationFamily) -> Observable<Void> {
         return network.createFamilyApplication(solicitude).do(onNext: { solicitude in
-            self.provider.makeApplicationFamilyUseCase().save(solicitude: solicitude).subscribe().dispose()
+            self.provider.makeApplicationUseCase().save(solicitude: solicitude).subscribe().dispose()
         }).mapToVoid()
     }
-
+    
     func getFamilyApplications() -> Observable<[ApplicationFamily]> {
         return network.allFamilyApplications()
     }

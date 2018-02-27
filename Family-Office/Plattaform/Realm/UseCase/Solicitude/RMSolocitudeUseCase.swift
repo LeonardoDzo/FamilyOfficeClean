@@ -11,7 +11,8 @@ import RxSwift
 import Realm
 import RealmSwift
 
-final class RMApplicationFamilyUseCase<Repository>: ApplicationFamilyUseCase where Repository: AbstractRepository, Repository.T == ApplicationFamily {
+final class RMApplicationUseCase<Repository>: ApplicationUseCase where Repository: AbstractRepository, Repository.T == ApplicationFamily {
+ 
 
     private let repository: Repository!
 

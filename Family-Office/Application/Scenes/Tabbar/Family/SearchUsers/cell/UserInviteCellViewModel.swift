@@ -11,10 +11,10 @@ import RxCocoa
 import RxSwift
 
 final class UserInviteCellViewModel: ViewModelType {
-    let solicitudeUseCase: ApplicationFamilyUseCase!
+    let solicitudeUseCase: ApplicationUseCase!
     let familyUseCase: FamilyUseCase!
     var family: Family!
-    init(solicitudeUseCase: ApplicationFamilyUseCase, familyUseCase: FamilyUseCase) {
+    init(solicitudeUseCase: ApplicationUseCase, familyUseCase: FamilyUseCase) {
         self.solicitudeUseCase = solicitudeUseCase
         self.familyUseCase = familyUseCase
         getFamily()

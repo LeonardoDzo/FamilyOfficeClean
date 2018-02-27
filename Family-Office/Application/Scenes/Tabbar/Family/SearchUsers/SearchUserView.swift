@@ -26,7 +26,7 @@ final class SearchUserView: UIViewX {
         layout(
             0,
             |background.width(100%).height(25%)|,
-            0,
+            4,
             |-0-tableView.height(70%)-0-|,
             0
         )

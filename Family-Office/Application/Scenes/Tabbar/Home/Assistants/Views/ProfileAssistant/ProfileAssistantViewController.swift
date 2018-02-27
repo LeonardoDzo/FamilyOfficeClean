@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class ProfileAssistantViewController: UIViewController {
-
+    private let disposeBag = DisposeBag()
     var v = ProfileAssistantStevia()
-
+    var viewModel: ProfileAsssistantViewModel!
     override func loadView() { view = v }
     override func viewDidLoad() {
 
@@ -23,7 +25,19 @@ class ProfileAssistantViewController: UIViewController {
         }
         v.topview.callBtn.btn.addTarget(self, action: #selector(self.call(_:)), for: .touchUpInside)
         self.navigationItem.leftBarButtonItem = self.backBtn
-
+        bindToView()
+    }
+    
+    func bindToView() -> Void {
+        let viewWillAppear = rx.methodInvoked(#selector(self.viewWillAppear(_:)))
+            .asDriverOnErrorJustComplete()
+            .mapToVoid()
+        let input = ProfileAsssistantViewModel.Input(trigger: viewWillAppear)
+        let output = viewModel.transform(input: input)
+        output.assistant
+            .drive(onNext: { assistant in
+                self.v.topview.bind(user: assistant)
+            }).disposed(by: disposeBag)
     }
     @objc func call(_ sender: UIButtonX) {
         if let url = URL(string: "tel://\(sender.tag)"), UIApplication.shared.canOpenURL(url) {

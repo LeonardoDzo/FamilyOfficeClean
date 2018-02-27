@@ -38,9 +38,9 @@ class HomeNavigator: HomeNavigatorPr {
             mainNavigationController.tabBarItem = UITabBarItem(title: "Tareas", image: #imageLiteral(resourceName: "task_completed"), selectedImage: nil)
             let mainNavigator = AssistantMainNavigator(service: SuperProvider(), nc: mainNavigationController)
 
-            let profileAssistant = UINavigationController(rootViewController: ProfileAssistantViewController())
+            let profileAssistant = UINavigationController( )
             profileAssistant.tabBarItem = UITabBarItem(title: "Asistente", image: #imageLiteral(resourceName: "clipboard"), selectedImage: nil)
-
+            let profileAssitantNavigator = ProfileAssistantNavigator(service: RMUseCaseProvider(), nc: profileAssistant)
             let addeditPendingNavigationController = UINavigationController()
 
             let adPendingNavigator = AddeditPendingNavigator(service: SuperProvider(), nc: addeditPendingNavigationController)
@@ -61,6 +61,7 @@ class HomeNavigator: HomeNavigatorPr {
             navigationController.present(tabBarController, animated: true, completion: nil)
             mainNavigator.toMain()
             adPendingNavigator.toMain(pending: Pending())
+            profileAssitantNavigator.toMain()
             break
         default:
             break

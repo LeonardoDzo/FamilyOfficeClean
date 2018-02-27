@@ -34,8 +34,13 @@ public final class RMUseCaseProvider: UseCaseProvider {
         return RMPendingUseCase(repository: repository)
     }
     
-    public func makeApplicationFamilyUseCase() -> ApplicationFamilyUseCase {
+    public func makeApplicationUseCase() -> ApplicationUseCase {
         let repository = Repository<ApplicationFamily>(configuration: configuration)
-        return RMApplicationFamilyUseCase(repository: repository)
+        return RMApplicationUseCase(repository: repository)
+    }
+    
+    public func makeApplicationAssistantUseCase() -> ApplicationAssistantUseCase {
+        let repository = Repository<ApplicationAssistant>(configuration: configuration)
+        return RMApplicationAssistantUseCase(repository: repository)
     }
 }

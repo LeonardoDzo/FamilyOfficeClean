@@ -37,7 +37,7 @@ extension ViewModelType {
         })
     }
 
-    func getUser(_ input: Driver<Void>, _ userUseCase: UserUseCase, _ uid: String) -> Driver<User> {
+    func getUser(_ input: Driver<Void>, _ userUseCase: UserUseCase, _ uid: String = UserDefaults().value(forKey: "uid") as? String ?? "") -> Driver<User> {
          let errorTracker = ErrorTracker()
          return input.flatMapLatest ({_ in
             return userUseCase.getUser(by: uid)

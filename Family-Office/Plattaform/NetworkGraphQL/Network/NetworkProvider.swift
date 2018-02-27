@@ -46,8 +46,12 @@ final class NetworkProvider {
         return PendingNetwork(network: network)
     }
 
-    public func makeSApplicationFamilyNetwork() -> ApplicationFamilyNetwork {
+    public func makeSApplicationsNetwork() -> ApplicationsNetwork {
         let network = Network<ApplicationFamily>(apollo)
-        return ApplicationFamilyNetwork(network: network)
+        return ApplicationsNetwork(network: network)
+    }
+    public func makeApplicationsAssistantNetwork() -> ApplicationAssistantNetwork {
+        let network = Network<ApplicationAssistant>(apollo)
+        return ApplicationAssistantNetwork(network: network)
     }
 }

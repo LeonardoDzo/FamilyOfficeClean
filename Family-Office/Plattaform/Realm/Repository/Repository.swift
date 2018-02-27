@@ -63,7 +63,7 @@ final class Repository<T: RealmRepresentable>: AbstractRepository where T == T.R
                sortDescriptors: [NSSortDescriptor] = []) -> Observable<[T]> {
         return Observable.deferred {
             let realm = self.realm
-            let objects = realm.objects(T.RealmType.self)
+            let objects = realm.objects(T.RealmType.self).filter(predicate)
             return Observable.array(from: objects)
                 .mapToDomain()
             }

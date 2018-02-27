@@ -13,6 +13,7 @@ protocol UserBindable: AnyObject {
     var user: User! {get set}
     var nameLbl: UILabelX! {get}
     var emailLbl: UILabelX! {get}
+    var phoneLbl: UILabelX! {get}
     var photoProfile: UIImageViewX! {get}
     var phoneV: InfoLineView! {get}
     var birthdayV: InfoLineView! {get}
@@ -26,6 +27,7 @@ extension UserBindable {
     var nameLbl: UILabelX! {return nil}
     var emailLbl: UILabelX! {return nil}
     var photoProfile: UIImageViewX! {return nil}
+    var phoneLbl: UILabelX! {return nil}
     var phoneV: InfoLineView! {return nil}
     var birthdayV: InfoLineView! {return nil}
     var bloodtypeV: InfoLineView! {return nil}
@@ -54,7 +56,6 @@ extension UserBindable {
             } else {
                 photo.image = #imageLiteral(resourceName: "profile_default")
             }
-            photo.cornerRadius = 50
         }
         if let view = self.rfcV {
             view.photo.image = #imageLiteral(resourceName: "rfc_profile")
@@ -79,6 +80,9 @@ extension UserBindable {
                 view.textline.text = self.user.birth.toDate().string(with: .ddMMMyyyy)
             }
 
+        }
+        if let phoneLbl = self.phoneLbl {
+            phoneLbl.text = self.user.phone
         }
     }
 }

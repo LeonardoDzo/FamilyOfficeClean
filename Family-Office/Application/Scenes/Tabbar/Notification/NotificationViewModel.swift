@@ -11,9 +11,9 @@ import RxSwift
 import RxCocoa
 
 final class NotificationViewModel: ViewModelType {
-    let applicationsUseCase: ApplicationFamilyUseCase!
+    let applicationsUseCase: ApplicationUseCase!
 
-    init(applicationUseCase: ApplicationFamilyUseCase) {
+    init(applicationUseCase: ApplicationUseCase) {
         self.applicationsUseCase = applicationUseCase
     }
 

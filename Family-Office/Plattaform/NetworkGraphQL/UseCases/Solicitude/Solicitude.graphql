@@ -1,16 +1,27 @@
-
-
 mutation FamilyApplication($userId: ID!, $familyId: ID!) {
     createFamilyApplication(family: $familyId, user: $userId) {
         ...SolicitudeFDetails
     }
 }
 
+
 query FamilyApplications {
     allFamilyApplications {
         ...SolicitudeFDetails
     }
 }
+query AllApplicationsAssistants {
+    allSolicitudes {
+        ...SolicitudeADetails
+    }
+}
+
+mutation AssitantApplications($aid: ID!){
+    createSolicitude(assistant: $aid) {
+        ...SolicitudeADetails
+    }
+}
+
 
 fragment SolicitudeFDetails on FamilyApplication {
         id,
@@ -21,4 +32,14 @@ fragment SolicitudeFDetails on FamilyApplication {
         ...UserDetails
         },
         status
+}
+fragment SolicitudeADetails on Solicitude {
+    id,
+    assistant {
+    ...UserDetails
+    },
+    boss{
+    ...UserDetails
+    },
+    status
 }

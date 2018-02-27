@@ -19,13 +19,16 @@ final class NetAuthUseCase: AuthUseCase {
 
     fileprivate func afterLogin(_ authmodel: (AuthModel), pass: String) {
         UserDefaults().set(authmodel.token, forKey: "token")
+        UserDefaults().set(authmodel.user.uid, forKey: "uid")
         UserDefaults().set(authmodel.user.email, forKey: "email")
         UserDefaults().set(pass, forKey: "password")
-
+        
         MainSocket.shareIntstance.channel.action("execute", with: UserSubscription(authmodel.user))
         MainSocket.shareIntstance.channel.action("execute", with: PendingAddedSubscription())
         self.provider.makeUseCase().save(user: authmodel.user).subscribe().dispose()
-
+        
+        NetUseCaseProvider().makeUseCase().getAssistants().subscribe().dispose()
+        
         authmodel.user.families.forEach({ (family) in
             MainSocket.shareIntstance.channel.action("execute", with: FamilySubscription(family))
             self.provider.makeFamilyUseCase().save(fam: family).subscribe().dispose()

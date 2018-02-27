@@ -11,7 +11,7 @@ import Foundation
 extension ApplicationAssistant: Mappable {
     
     enum CodingKeys: String, CodingKey {
-        case user,
+        case user = "boss",
         assistant,
         status,
         uid = "id"

@@ -20,12 +20,12 @@ extension STATUS_SOLICITUDE {
         case unknownValue
     }
     init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: Key.self)
-        let rawValue = try container.decode(Int.self, forKey: .rawValue)
+        let rawValue = try decoder.singleValueContainer().decode(String.self)
+        
         switch rawValue {
-        case 0:
+        case "Accepted":
             self = .Accepted
-        case 1:
+        case "Pending":
             self = .Pending
         default:
             throw CodingError.unknownValue

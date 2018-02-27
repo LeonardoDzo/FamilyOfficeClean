@@ -33,7 +33,11 @@ public final class NetUseCaseProvider: AuthUseCaseProvider, UseCaseProvider {
         return NetPendingUseCase(network: networkProvider.makePendingNetwork())
     }
 
-    public func makeApplicationFamilyUseCase() -> ApplicationFamilyUseCase {
-        return NetApplicationFamilyUseCase(network: networkProvider.makeSApplicationFamilyNetwork())
+    public func makeApplicationUseCase() -> ApplicationUseCase {
+        return NetApplicationUseCase(network: networkProvider.makeSApplicationsNetwork())
     }
+    public func makeApplicationAssistantUseCase() -> ApplicationAssistantUseCase {
+        return NetApplicationAssistantUseCase(network: networkProvider.makeApplicationsAssistantNetwork())
+    }
+    
 }

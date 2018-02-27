@@ -9,14 +9,16 @@
 import Foundation
 import Stevia
 
-class TopViewProfileAssistant: UIViewX {
+class TopViewProfileAssistant: UIViewX, UserBindable {
+    
+    var user: User!
 
     var profileImage: UIImageViewX! = UIImageViewX()
-    var titleLbl: UILabel! = UILabel()
+    var nameLbl: UILabelX! = UILabelX()
     var taskCompleteBtn: BtnWithLbl! = BtnWithLbl()
     var allTaskBtn: BtnWithLbl! = BtnWithLbl()
     var callBtn: BtnWithLbl! = BtnWithLbl()
-    var phoneLbl: UILabel! = UILabel()
+    var phoneLbl: UILabelX! = UILabelX()
 
     convenience init() {
         self.init(frame: CGRect.zero)
@@ -39,7 +41,7 @@ class TopViewProfileAssistant: UIViewX {
 
         sv(
             profileImage,
-            titleLbl,
+            nameLbl,
             taskCompleteBtn,
             allTaskBtn,
             callBtn
@@ -49,7 +51,7 @@ class TopViewProfileAssistant: UIViewX {
             70,
             profileImage,
             5,
-            titleLbl,
+            nameLbl,
             10,
             |-30-allTaskBtn.width(30%)-60-taskCompleteBtn.width(30%)-60-callBtn.width(30%),
             ""
@@ -57,10 +59,10 @@ class TopViewProfileAssistant: UIViewX {
         taskCompleteBtn.centerHorizontally()
         profileImage.style(self.setStyleImage)
         profileImage.image = #imageLiteral(resourceName: "icons8-businessman").maskWithColor(color: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0))
-        titleLbl.centerHorizontally()
-        titleLbl.font =  UIFont(name: "Roboto", size: 20)
-        titleLbl.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-        titleLbl.text("DUY LOCO HERNANDEZ")
+        nameLbl.centerHorizontally()
+        nameLbl.font =  UIFont(name: "Roboto", size: 20)
+        nameLbl.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        nameLbl.text("DUY LOCO HERNANDEZ")
         allTaskBtn.setFeatures { view in
             view.btn.setTitle("17", for: .normal)
             view.btn.style(self.setStyleBtn)

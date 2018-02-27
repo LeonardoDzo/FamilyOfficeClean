@@ -23,6 +23,18 @@ public struct ApplicationAssistant : Base, Decodable {
     
     var status: STATUS_SOLICITUDE! = .Pending
     
+    public init(from decoder: Decoder) throws {
+        
+        if  let values = try? decoder.container(keyedBy: CodingKeys.self) {
+            uid = values.decodeSafely(.uid)!
+            assistant = values.decodeSafely(User.self, forKey: .assistant)
+            user = values.decodeSafely(User.self, forKey: .user)
+            status = values.decodeSafely(STATUS_SOLICITUDE.self, forKey: .status)
+        }
+        
+    }
+    init() {
+    }
 }
 extension ApplicationAssistant: Equatable {
     public static func == (lhs: ApplicationAssistant, rhs: ApplicationAssistant) -> Bool {

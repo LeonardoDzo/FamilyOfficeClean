@@ -17,7 +17,7 @@ class UserInviteTableViewCell: UITableViewCellX, UserBindable {
     var nameLbl: UILabelX! = UILabelX()
     var photoProfile: UIImageViewX! = UIImageViewX()
     var btnInvite = UIButtonX()
-    var viewModel = UserInviteCellViewModel(solicitudeUseCase: NetUseCaseProvider().makeApplicationFamilyUseCase(), familyUseCase: RMUseCaseProvider().makeFamilyUseCase())
+    var viewModel = UserInviteCellViewModel(solicitudeUseCase: NetUseCaseProvider().makeApplicationUseCase(), familyUseCase: RMUseCaseProvider().makeFamilyUseCase())
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

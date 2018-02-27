@@ -15,7 +15,7 @@ protocol AssistantNavigatorPr {
     func toBack()
 }
 class AddAssistantNavigator: AssistantNavigatorPr {
-
+    private let disposeBag = DisposeBag()
     private let navigationController: UINavigationController
     private let service: NetUseCaseProvider!
     init(service: NetUseCaseProvider, nc: UINavigationController) {
@@ -25,7 +25,14 @@ class AddAssistantNavigator: AssistantNavigatorPr {
     
     func toMain() {
         let view = AddAssistantViewController()
-        navigationController.pushViewController(view, animated: true)
+       
+        let result = RMUseCaseProvider().makeApplicationAssistantUseCase()
+            .getAssistantsApplications()
+            .asDriverOnErrorJustComplete()
+        result.drive(onNext: { applications in
+            view.viewModel = AddAssistantViewModel(userUseCase: self.service.makeUseCase(), navigator: self,applications: applications )
+            self.navigationController.pushViewController(view, animated: true)}).disposed(by: disposeBag)
+       
     }
     
     func toBack() -> Void {
