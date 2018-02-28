@@ -9,6 +9,8 @@
 import Foundation
 import RxCocoa
 import RxSwift
+import RealmSwift
+
 protocol ViewModelType {
     associatedtype Input
     associatedtype Output
@@ -26,6 +28,14 @@ extension ViewModelType {
                 .trackError(errorTracker)
                 .asDriverOnErrorJustComplete()
         })
+    }
+    
+    func getMyFamilies(_ familyUseCase: FamilyUseCase, _ uid: String = UserDefaults().value(forKey: "uid") as? String ?? "") -> SharedSequence<DriverSharingStrategy, [Family]> {
+        let errorTracker = ErrorTracker()
+        return familyUseCase.getMyFamilies(uid: uid)
+            .trackError(errorTracker)
+            .asDriverOnErrorJustComplete()
+     
     }
 
     func getFamily(_ input: Driver<Void>, _ familyUseCase: FamilyUseCase, _ id: String) -> SharedSequence<DriverSharingStrategy, Family> {
@@ -55,5 +65,14 @@ extension ViewModelType {
             })
             return Driver.merge(result)
         })
+    }
+    func logout() -> Void {
+        let realm = try! Realm(configuration: Realm.Configuration())
+        try! realm.write({
+            realm.deleteAll()
+        })
+        UserDefaults().removeObject(forKey: "token")
+        UserDefaults().removeObject(forKey: "password")
+        UserDefaults().removeObject(forKey: "id")
     }
 }

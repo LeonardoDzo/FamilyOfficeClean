@@ -35,4 +35,7 @@ final class NetFamilyUseCase: FamilyUseCase {
     func getFamilyActive() -> Observable<Family> {
         return Variable(Family(name: "")).asObservable()
     }
+    func getMyFamilies(uid: String) -> Observable<[Family]> {
+        return Variable([]).asObservable()
+    }
 }

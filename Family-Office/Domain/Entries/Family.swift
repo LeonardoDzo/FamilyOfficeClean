@@ -42,8 +42,9 @@ public struct Family: Codable {
             uid = try values.decode(String.self, forKey: .uid)
 
             photo = try! values.decodeIfPresent(Photo.self, forKey: .photo)
-            members = try values.decodeIfPresent([[String:User]].self, forKey: .members)?.flatMap({$0.values.filter({
-            !$0.uid.isEmpty})}) ?? []
+            members = values.decodeSafely([[String:User]].self, forKey: .members)?
+                .flatMap({$0.flatMap({$0.value})})
+                .filter({!$0.uid.isEmpty}) ?? []
         }
 
 //        members = try values.decode()

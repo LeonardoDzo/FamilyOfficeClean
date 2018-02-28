@@ -18,7 +18,8 @@ final class Network<T: Decodable> {
        self.apollo = apollo
     self.scheduler = ConcurrentDispatchQueueScheduler(qos: DispatchQoS(qosClass: DispatchQoS.QoSClass.background, relativePriority: 1))
     }
-
+    
+    
     func getItems<Q: GraphQLQuery>(_ query: Q) -> Observable<[T]> {
         return apollo.rx.fetch(query: query)
             .debug()
@@ -28,6 +29,22 @@ final class Network<T: Decodable> {
                 return result
             }.asObservable()
     }
+    
+    /// Se espera recibir de API json tipo [String: [String:[T]]]
+    ///
+    /// - Parameter query: GraphqlQuery
+    /// - Returns: [T]
+    func getItems_v2<Q: GraphQLQuery>(_ query: Q) -> Observable<[T]> {
+        
+        return apollo.rx.fetch(query: query)
+            .debug()
+            .observeOn(scheduler)
+            .map { (data) -> [T] in
+                let result = try JSONDecoder().decode([String: [[String: T]]].self, from: data.snapshot.jsonObject.jsonToData()!).flatMap({$0.value.flatMap({$0.flatMap({$0.value})})})
+                return result
+            }.asObservable()
+    }
+
 
     func getItem<Q: GraphQLQuery>(_ query: Q) -> Observable<T> {
 

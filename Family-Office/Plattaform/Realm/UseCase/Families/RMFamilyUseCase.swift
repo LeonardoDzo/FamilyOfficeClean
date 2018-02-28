@@ -44,6 +44,14 @@ final class RMFamilyUseCase<Repository>: FamilyUseCase where Repository: Abstrac
     }
 
     func getFamilyActive() -> Observable<Family> {
-        return repository.query(with: NSPredicate(format: "isSelected == true"), sortDescriptors: []).map({$0.filter({$0.isSelected}).first ?? $0.first ?? Family(name: "Cargando ...")})
+        return repository.queryAll().map({ (family)  in
+            return family.filter({$0.isSelected}).first ??  family.first ?? Family(name: "No hay familia")
+        })
+    }
+    
+    func getMyFamilies(uid: String) -> Observable<[Family]> {
+        let predicate = NSPredicate(format: "ANY members.uid == %@", uid)
+        return repository.query(with: predicate, sortDescriptors: [])
+        
     }
 }

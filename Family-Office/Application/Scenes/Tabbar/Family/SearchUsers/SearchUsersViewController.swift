@@ -17,7 +17,10 @@ class SearchUsersViewController: UIViewController {
     let backBt = UIBarButtonItem(image: #imageLiteral(resourceName: "back-27x20"), style: .plain, target: self, action: nil)
     override func viewDidLoad() {
         super.viewDidLoad()
+        v.titlelbl.text = "Encuentra algún miembro para tu familia"
+        v.titlelbl.sizeToFit()
         self.view = v
+        
         bindToModel()
     }
 
@@ -25,7 +28,7 @@ class SearchUsersViewController: UIViewController {
         let viewWillAppear = rx.sentMessage(#selector(UIViewController.viewDidAppear(_:)))
             .mapToVoid()
             .asDriverOnErrorJustComplete()
-        let input = SearchUserViewModel.Input(trigger: viewWillAppear, backTrigger: self.backBt.rx.tap.asDriver())
+        let input = SearchUserViewModel.Input(trigger: viewWillAppear, backTrigger: self.v.backButton.rx.tap.asDriver())
         let output = viewModel.transform(input: input)
         output.applications.drive(self.v.tableView.rx.items(cellIdentifier: UserInviteTableViewCell.reuseID, cellType: UserInviteTableViewCell.self)) {
                 i, model, cell in

@@ -38,7 +38,8 @@ final class AddAssistantViewModel: ViewModelType {
                     }
                 })
         }
-        return Output(assistants: applications)
+        let back = input.back.do(onNext: {self.navigator.toBack()})
+        return Output(assistants: applications, back: back)
     }
     func getContacts() {
         let store = CNContactStore()
@@ -57,8 +58,10 @@ final class AddAssistantViewModel: ViewModelType {
 extension AddAssistantViewModel {
     struct Input {
         let trigger: Driver<Void>
+        let back: Driver<Void>
     }
     struct Output {
         let assistants: Driver<[User]>
+        let back: Driver<Void>
     }
 }

@@ -106,6 +106,9 @@
 		028B667C20228577003EC625 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028B667B20228577003EC625 /* SignUpViewController.swift */; };
 		028B667E2022858B003EC625 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028B667D2022858B003EC625 /* SignUpViewModel.swift */; };
 		028B6680202285A0003EC625 /* SignUpNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028B667F202285A0003EC625 /* SignUpNavigator.swift */; };
+		028F3E8F20461E3D00B7CB25 /* UILabel+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028F3E8E20461E3D00B7CB25 /* UILabel+Ext.swift */; };
+		028F3E9120462FCC00B7CB25 /* SolicitudeAssistant.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 028F3E9020462FCC00B7CB25 /* SolicitudeAssistant.graphql */; };
+		028F3E93204631DF00B7CB25 /* ApplicationSolicitudeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028F3E92204631DF00B7CB25 /* ApplicationSolicitudeViewModel.swift */; };
 		0291AE6C203509A300CD1FB3 /* FamilyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0291AE6B203509A300CD1FB3 /* FamilyViewController.swift */; };
 		0291AE6E203509B400CD1FB3 /* FamilyStevia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0291AE6D203509B400CD1FB3 /* FamilyStevia.swift */; };
 		0298C7AF202B85F50035D493 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0298C7AE202B85F50035D493 /* UserViewModel.swift */; };
@@ -134,6 +137,8 @@
 		02B79505202E7EC60083CAB7 /* TopViewProfileAssistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B79504202E7EC60083CAB7 /* TopViewProfileAssistant.swift */; };
 		02BF68B5204250C600D03CDA /* Decodable+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BF68B4204250C600D03CDA /* Decodable+Ext.swift */; };
 		02BF68B7204251A500D03CDA /* RMApplicationFamily.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BF68B6204251A500D03CDA /* RMApplicationFamily.swift */; };
+		02C68B682045F1B4002003FF /* ContrastColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C68B672045F1B4002003FF /* ContrastColor.swift */; };
+		02C68B6A2045F1D5002003FF /* Brightness.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C68B692045F1D5002003FF /* Brightness.swift */; };
 		02C932E4202CC84A00E64A42 /* AssistantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C932E3202CC84A00E64A42 /* AssistantViewController.swift */; };
 		02C932E8202CC8F000E64A42 /* MainAssistantView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C932E7202CC8F000E64A42 /* MainAssistantView.swift */; };
 		02C932EA202CC90300E64A42 /* MenuMainStevia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C932E9202CC90300E64A42 /* MenuMainStevia.swift */; };
@@ -331,6 +336,9 @@
 		028B667B20228577003EC625 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		028B667D2022858B003EC625 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		028B667F202285A0003EC625 /* SignUpNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpNavigator.swift; sourceTree = "<group>"; };
+		028F3E8E20461E3D00B7CB25 /* UILabel+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Ext.swift"; sourceTree = "<group>"; };
+		028F3E9020462FCC00B7CB25 /* SolicitudeAssistant.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = SolicitudeAssistant.graphql; sourceTree = "<group>"; };
+		028F3E92204631DF00B7CB25 /* ApplicationSolicitudeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationSolicitudeViewModel.swift; sourceTree = "<group>"; };
 		0291AE6B203509A300CD1FB3 /* FamilyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilyViewController.swift; sourceTree = "<group>"; };
 		0291AE6D203509B400CD1FB3 /* FamilyStevia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilyStevia.swift; sourceTree = "<group>"; };
 		0298C7AE202B85F50035D493 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
@@ -359,6 +367,8 @@
 		02B79504202E7EC60083CAB7 /* TopViewProfileAssistant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopViewProfileAssistant.swift; sourceTree = "<group>"; };
 		02BF68B4204250C600D03CDA /* Decodable+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Decodable+Ext.swift"; sourceTree = "<group>"; };
 		02BF68B6204251A500D03CDA /* RMApplicationFamily.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMApplicationFamily.swift; sourceTree = "<group>"; };
+		02C68B672045F1B4002003FF /* ContrastColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContrastColor.swift; sourceTree = "<group>"; };
+		02C68B692045F1D5002003FF /* Brightness.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Brightness.swift; sourceTree = "<group>"; };
 		02C932E3202CC84A00E64A42 /* AssistantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistantViewController.swift; sourceTree = "<group>"; };
 		02C932E7202CC8F000E64A42 /* MainAssistantView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainAssistantView.swift; sourceTree = "<group>"; };
 		02C932E9202CC90300E64A42 /* MenuMainStevia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuMainStevia.swift; sourceTree = "<group>"; };
@@ -488,8 +498,8 @@
 				0253E95D2040EC5E0007CC65 /* cells */,
 				02012DB420360E4E00889401 /* NotificationViewController.swift */,
 				02012DB620360EE500889401 /* NotificationsView.swift */,
-				02012DB82036114100889401 /* NotificationNavigator.swift */,
 				0253E95E2040EC850007CC65 /* NotificationViewModel.swift */,
+				02012DB82036114100889401 /* NotificationNavigator.swift */,
 			);
 			path = Notification;
 			sourceTree = "<group>";
@@ -766,6 +776,7 @@
 			isa = PBXGroup;
 			children = (
 				0253E95B2040EC200007CC65 /* SolicitudeTableViewCell.swift */,
+				028F3E92204631DF00B7CB25 /* ApplicationSolicitudeViewModel.swift */,
 			);
 			path = cells;
 			sourceTree = "<group>";
@@ -864,10 +875,10 @@
 			isa = PBXGroup;
 			children = (
 				022FE36B202CDAF9009029AD /* cell */,
-				0298C7B2202B8E0E0035D493 /* HomeViewController.swift */,
 				0298C7B4202B8E1B0035D493 /* HomeView.swift */,
-				02D6BF7A202BC33C00141AAB /* HomeNavigator.swift */,
+				0298C7B2202B8E0E0035D493 /* HomeViewController.swift */,
 				022FE369202CCD58009029AD /* HomeViewModel.swift */,
+				02D6BF7A202BC33C00141AAB /* HomeNavigator.swift */,
 			);
 			path = Homeview;
 			sourceTree = "<group>";
@@ -934,11 +945,11 @@
 		02B794FD202E7DFB0083CAB7 /* ProfileAssistant */ = {
 			isa = PBXGroup;
 			children = (
-				02B794FE202E7E2A0083CAB7 /* ProfileAssistantViewController.swift */,
 				02B79500202E7E500083CAB7 /* ProfileAssistantView.swift */,
-				02B79502202E7EA50083CAB7 /* btnWithLbl.swift */,
-				023858482044DECB00D1CDB3 /* ProfileAssistantViewModel.swift */,
 				02B79504202E7EC60083CAB7 /* TopViewProfileAssistant.swift */,
+				02B79502202E7EA50083CAB7 /* btnWithLbl.swift */,
+				02B794FE202E7E2A0083CAB7 /* ProfileAssistantViewController.swift */,
+				023858482044DECB00D1CDB3 /* ProfileAssistantViewModel.swift */,
 				0238584A2044E20000D1CDB3 /* ProfileAssitantNavigator.swift */,
 			);
 			path = ProfileAssistant;
@@ -967,10 +978,10 @@
 			isa = PBXGroup;
 			children = (
 				02EF0F1C203227E70020A133 /* Views */,
-				02C932E3202CC84A00E64A42 /* AssistantViewController.swift */,
-				02ED6FA720448EF700D880F8 /* MenuMainNavigator.swift */,
-				02EF0F1A203225ED0020A133 /* PendingViewModel.swift */,
 				02EF0F1D203228050020A133 /* PendingTableViewCell.swift */,
+				02C932E3202CC84A00E64A42 /* AssistantViewController.swift */,
+				02EF0F1A203225ED0020A133 /* PendingViewModel.swift */,
+				02ED6FA720448EF700D880F8 /* MenuMainNavigator.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -979,6 +990,7 @@
 			isa = PBXGroup;
 			children = (
 				02CD29D02044A72300879308 /* NetAssistantApplicationUseCase.swift */,
+				028F3E9020462FCC00B7CB25 /* SolicitudeAssistant.graphql */,
 			);
 			path = AssistantSolicitude;
 			sourceTree = "<group>";
@@ -1017,8 +1029,8 @@
 				02EDD793203E097B003DA591 /* cell */,
 				02D55FAD203B6D2200858D1B /* FamilyView.swift */,
 				02D55FAB203B6D1700858D1B /* FamilyProfileViewController.swift */,
-				02D55FAF203B6D2C00858D1B /* FamilyNavigator.swift */,
 				02D55FB1203B6D3700858D1B /* FamilyProfileViewModel.swift */,
+				02D55FAF203B6D2C00858D1B /* FamilyNavigator.swift */,
 			);
 			path = FamilyProfile;
 			sourceTree = "<group>";
@@ -1036,8 +1048,8 @@
 			children = (
 				02ED6FAB204491A600D880F8 /* cells */,
 				02ED6FA12044777600D880F8 /* AddAssistantViewController.swift */,
-				02ED6FA520448D5300D880F8 /* AddAssistantNavigator.swift */,
 				02ED6FA92044908900D880F8 /* AddAssistantViewModel.swift */,
+				02ED6FA520448D5300D880F8 /* AddAssistantNavigator.swift */,
 			);
 			path = AddAssistants;
 			sourceTree = "<group>";
@@ -1060,6 +1072,7 @@
 				02EDD78A203E096F003DA591 /* Eureka+Ext.swift */,
 				02EDD78B203E096F003DA591 /* UIViewController+Ext.swift */,
 				02EDD78C203E096F003DA591 /* UIView+Ext.swift */,
+				028F3E8E20461E3D00B7CB25 /* UILabel+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1185,6 +1198,8 @@
 			children = (
 				02F525952025015A009F817D /* ColorControl.swift */,
 				02F525972025018D009F817D /* Processable.swift */,
+				02C68B672045F1B4002003FF /* ContrastColor.swift */,
+				02C68B692045F1D5002003FF /* Brightness.swift */,
 			);
 			path = Coreimage;
 			sourceTree = "<group>";
@@ -1396,6 +1411,7 @@
 				02D338E720409100007FDF7B /* schema.json in Resources */,
 				022DD8C82028E062008ED417 /* Family.graphql in Resources */,
 				023AAB41201EBB4900F50207 /* LoadingView.xib in Resources */,
+				028F3E9120462FCC00B7CB25 /* SolicitudeAssistant.graphql in Resources */,
 				02590721202CB68F004920D4 /* GoogleService-Info.plist in Resources */,
 				02D338E520408F96007FDF7B /* Solicitude.graphql in Resources */,
 				02EF0F1920321AE80020A133 /* Pending.graphql in Resources */,
@@ -1645,6 +1661,7 @@
 				02E559B62024CDF300D3FC07 /* RMPhoto.swift in Sources */,
 				02C932EA202CC90300E64A42 /* MenuMainStevia.swift in Sources */,
 				023AAB4B201EBF6E00F50207 /* User.swift in Sources */,
+				028F3E93204631DF00B7CB25 /* ApplicationSolicitudeViewModel.swift in Sources */,
 				02A123DE203514C40013508F /* FamilyCollectionViewCell.swift in Sources */,
 				02EF0F0D20320E710020A133 /* SuperProvider.swift in Sources */,
 				02ED6F9F2044755900D880F8 /* ApplicationAssistant+Mappable.swift in Sources */,
@@ -1673,12 +1690,14 @@
 				02D338E12040841F007FDF7B /* NetSolicitudeUseCase.swift in Sources */,
 				023AAB2E201EBB4900F50207 /* SoundPlayer.swift in Sources */,
 				023AAB6F201FBCC300F50207 /* NetAuthUseCase.swift in Sources */,
+				02C68B6A2045F1D5002003FF /* Brightness.swift in Sources */,
 				028B667C20228577003EC625 /* SignUpViewController.swift in Sources */,
 				023AAB06201EBB0900F50207 /* UIViewAnchorPoint.swift in Sources */,
 				02BF68B5204250C600D03CDA /* Decodable+Ext.swift in Sources */,
 				025742E4203F3D2F00215A56 /* SearchUserViewModel.swift in Sources */,
 				02EF0F1B203225ED0020A133 /* PendingViewModel.swift in Sources */,
 				02D338EC20409F91007FDF7B /* SolicitudeViewModel.swift in Sources */,
+				028F3E8F20461E3D00B7CB25 /* UILabel+Ext.swift in Sources */,
 				02CD29CE20449BFF00879308 /* AssitantTableViewCellViewModel.swift in Sources */,
 				02F5259D2025261F009F817D /* AddEditFamilyViewModel.swift in Sources */,
 				023AAB44201EBB4900F50207 /* Spring.swift in Sources */,
@@ -1719,6 +1738,7 @@
 				02012DB12036033500889401 /* menuNavigator.swift in Sources */,
 				025742ED203F616C00215A56 /* UserInviteTableViewCell.swift in Sources */,
 				0298C7AF202B85F50035D493 /* UserViewModel.swift in Sources */,
+				02C68B682045F1B4002003FF /* ContrastColor.swift in Sources */,
 				02CD29D32044A8F400879308 /* RMApplicationAssistantUseCase.swift in Sources */,
 				02FE576D2020E77200B7E084 /* PreHomeStevia.swift in Sources */,
 				023AAB3B201EBB4900F50207 /* SpringButton.swift in Sources */,

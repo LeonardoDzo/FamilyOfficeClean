@@ -34,9 +34,10 @@ class NotificationViewController: UIViewController {
 
         let input = NotificationViewModel.Input(trigger: willAppear)
         let output = self.viewModel.transform(input: input)
-
+        
         output.solicitudes.drive(self.v.tableView.rx.items(cellIdentifier: SolicitudeTableViewCell.reuseID, cellType: SolicitudeTableViewCell.self)) {i, model, cell in
-            cell.details.text = "WORKS!!!"
+            self.v.tableView.backgroundView = nil
+            cell.bind(app: model)
             }.disposed(by: disposeBag)
     }
 }

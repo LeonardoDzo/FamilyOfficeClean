@@ -26,17 +26,7 @@ final class PreHomeViewModel: ViewModelType {
         self.familyUseCase = familyUseCase
     }
 
-    fileprivate func Logout(_ input: PreHomeViewModel.Input) -> SharedSequence<DriverSharingStrategy, Void> {
-        return input.logoutTrigger.do(onNext: {
-            let realm = try! Realm(configuration: Realm.Configuration())
-            try! realm.write({
-                realm.deleteAll()
-            })
-            UserDefaults().removeObject(forKey: "token")
-            UserDefaults().removeObject(forKey: "password")
-            self.navigator.toSignIn()
-        })
-    }
+
 
     fileprivate func SelectFamily(_ input: PreHomeViewModel.Input, _ families: SharedSequence<DriverSharingStrategy, [Family]>) -> SharedSequence<DriverSharingStrategy, Family> {
         return input.selection
@@ -49,15 +39,18 @@ final class PreHomeViewModel: ViewModelType {
 
         let user = self.getUser(input.trigger, self.userUseCase, self.user.uid)
 
-        let families = self.getFamilies(input.trigger, self.familyUseCase).do(onNext: { fams in
-            self.families = fams
-        })
-
+        let families = input.trigger.flatMapLatest {
+            return self.getMyFamilies(self.familyUseCase)
+            }.do(onNext: {self.families = $0})
+    
         let gotoProfile = input.profileViewTrigger.do(onNext: {_ in
             self.navigator.toProfile(user: self.user)
         })
 
-        let logout = Logout(input)
+        let logout = input.logoutTrigger.do(onNext: {
+            self.logout()
+            self.navigator.toSignIn()
+        })
 
         let selectedFamily = input.selection.flatMapLatest { (indexpath) in
             return self.familyUseCase

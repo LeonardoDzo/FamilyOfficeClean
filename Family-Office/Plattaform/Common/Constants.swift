@@ -10,18 +10,18 @@ import Foundation
 
 enum ip: String {
     case Dev = "0960d911.ngrok.io"
-    case Prod = ""
+    case COT = "192.168.1.191"
 }
 
-let uri = ip.Dev
+let uri = ip.COT
 
 extension ip {
     func getPort() -> String {
         switch self {
         case .Dev:
-            return ":3000/"
-        case .Prod:
             return "/"
+        case .COT:
+            return ":3000/"
         }
     }
 }
@@ -30,8 +30,8 @@ struct Constants {
         static let CLIENTID = "775446450455-us63mmd4kpla61h9edf4qjpbo7ao3gct.apps.googleusercontent.com"
     }
     struct url {
-        static let url = "http://\(uri.rawValue)/graphql"
-        static let ws = "ws://\(uri.rawValue)/websocket"
+        static let url = "http://\(uri.rawValue.appending(uri.getPort()))graphql"
+        static let ws = "ws://\(uri.rawValue.appending(uri.getPort()))websocket"
     }
 }
 

@@ -27,7 +27,9 @@ final class NetUserUseCase: UserUseCase {
 //        
 //    }
     func getUser(by id: String) -> Observable<User> {
-        return Variable(User(uid: "", name: "", email: "")).asObservable()
+        return network.getUser(id: id).do(onNext: { u in
+            self.provider.makeUseCase().save(user: u).subscribe().dispose()
+        })
     }
     func getUsers(byFamily: Family) -> Observable<[User]> {
         return Variable([]).asObservable()
@@ -38,7 +40,7 @@ final class NetUserUseCase: UserUseCase {
     
     func getAssistants() -> Observable<[User]> {
         return network.getAssistants().do(onNext: { users in
-            users.forEach({ (u) in
+            users.filter({!$0.uid.isEmpty}).forEach({ (u) in
                 self.provider.makeUseCase().save(user: u).subscribe().dispose()
             })
         })

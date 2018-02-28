@@ -20,8 +20,7 @@ final class NotificationViewModel: ViewModelType {
     func transform(input: NotificationViewModel.Input) -> NotificationViewModel.Output {
         let result = input.trigger.flatMapLatest({_ in
             return self.applicationsUseCase
-                        .getFamilyApplications()
-                        .asDriverOnErrorJustComplete()
+                        .getFamilyApplications().asDriverOnErrorJustComplete()
         })
         return Output(solicitudes: result)
     }

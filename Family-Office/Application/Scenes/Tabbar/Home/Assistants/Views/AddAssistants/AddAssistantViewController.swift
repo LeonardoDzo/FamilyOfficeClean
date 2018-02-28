@@ -17,6 +17,10 @@ class AddAssistantViewController: UIViewController {
         self.v = SearchUserView()
         v.background.image = #imageLiteral(resourceName: "Blog_Admin_Assistant")
         v.background.contentMode = .scaleAspectFill
+        v.background.style(v.styleImg)
+        v.titlelbl.text = "Encuentra tu asistente"
+        v.titlelbl.sizeToFit()
+        
         self.navigationController?.isNavigationBarHidden = true
         self.v.tableView.register(AssistantInviteTableViewCell.self, forCellReuseIdentifier: AssistantInviteTableViewCell.reuseID)
         self.view = v
@@ -35,7 +39,7 @@ class AddAssistantViewController: UIViewController {
         let viewWillAppear = rx.sentMessage(#selector(UIViewController.viewDidAppear(_:)))
             .mapToVoid()
             .asDriverOnErrorJustComplete()
-        let input = AddAssistantViewModel.Input(trigger: viewWillAppear)
+        let input = AddAssistantViewModel.Input(trigger: viewWillAppear, back: self.v.backButton.rx.tap.asDriver())
         let output = viewModel.transform(input: input)
         
         output.assistants.drive(self.v.tableView.rx.items(cellIdentifier: AssistantInviteTableViewCell.reuseID, cellType: AssistantInviteTableViewCell.self)) {
@@ -43,6 +47,7 @@ class AddAssistantViewController: UIViewController {
             cell.bind(user: model)
             cell.bindInviteBtn(isInvited: false)
         }.disposed(by: disposeBag)
+        output.back.drive().disposed(by: disposeBag)
     }
     override func viewWillDisappear(_ animated: Bool) {
         self.navigationController?.isNavigationBarHidden = false

@@ -23,6 +23,9 @@ public final class ApplicationsNetwork {
     func allFamilyApplications() -> Observable<[ApplicationFamily]> {
         return network.getItems(FamilyApplicationsQuery())
     }
+    func approve(aid: String) -> Observable<ApplicationFamily> {
+        return network.postItem(AcceptFamilyApplicationMutation(id: aid))
+    }
 
 }
 

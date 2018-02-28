@@ -14,7 +14,8 @@ import RealmSwift
 final class RMFamily: Object {
     dynamic var uid: String = ""
     dynamic var name: String = ""
-    dynamic var members = List<RMUser>()
+    //dynamic var members = List<RMUser>()
+    let members = LinkingObjects(fromType: RMUser.self, property: "families")
     dynamic var isSelected = false
     override class func primaryKey() -> String {
         return "uid"
@@ -34,7 +35,7 @@ extension Family: RealmRepresentable {
         let family = RMFamily()
         family.uid = uid
         family.name = name
-        family.members.append(objectsIn: members.map({$0.asRealm()}))
+        //family.members.append(objectsIn: members.map({$0.asRealm()}))
         family.isSelected = isSelected
         return family
     }

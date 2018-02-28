@@ -22,15 +22,17 @@ class FamilyProfileViewModel: ViewModelType {
     }
     func transform(input: FamilyProfileViewModel.Input) -> FamilyProfileViewModel.Output {
         let back = input.backtrigger.do(onNext: {self.navigator.toBack()})
-        let family = input.familyTrigger.flatMapLatest({_ in
-            return self.familyUseCase.getFamilyActive().asDriverOnErrorJustComplete()
+        let f = input.familyTrigger.flatMapLatest({_ in
+            return self.familyUseCase
+                .getFamilyActive()
+                .asDriverOnErrorJustComplete()
         }).do(onNext: {self.family = $0})
         let tapAdd = input.tapAddMemberTrigger.do(onNext: {self.navigator.addMember(family: self.family)})
-        let members = family.flatMapLatest { (family) in
-            return self.userUseCase.getUsers(byFamily: family).asDriverOnErrorJustComplete()
+        let members = f.flatMapLatest { (family) in
+            return BehaviorRelay(value: family.members).asDriver()
         }
 
-        return Output(family: family, tapAddMember: tapAdd, back: back, members: members)
+        return Output(family: f, tapAddMember: tapAdd, back: back, members: members)
     }
 
 }

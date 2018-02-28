@@ -27,7 +27,8 @@ final class RMUserUseCase<Repository>: UserUseCase where Repository: AbstractRep
         return repository.query(uid: id)
     }
     func getUsers(byFamily: Family) -> Observable<[User]> {
-        return repository.queryAll().filter({$0.contains(where: {$0.families.contains(where: {$0 == byFamily})})})
+        let predicate = NSPredicate(format: "ANY families.uid == %@", byFamily.uid)
+        return repository.query(with: predicate, sortDescriptors: [])
     }
 
     func getUsers(phones: [String], rol: Int) -> Observable<[User]> {

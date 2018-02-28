@@ -35,7 +35,7 @@ extension Processable {
         if let outputImage = self.filter.outputImage {
             let openGLContext = EAGLContext(api: .openGLES3)!
             let ciImageContext = CIContext(eaglContext: openGLContext)
-
+            
             if let cgImageNew = ciImageContext.createCGImage(outputImage, from: outputImage.extent) {
                 return UIImage(cgImage: cgImageNew)
             }

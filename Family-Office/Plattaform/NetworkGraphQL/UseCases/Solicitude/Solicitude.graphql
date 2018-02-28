@@ -4,21 +4,15 @@ mutation FamilyApplication($userId: ID!, $familyId: ID!) {
     }
 }
 
+mutation AcceptFamilyApplication($id: ID!){
+    approveFamilyApplication(familyApplicationId: $id){
+        ...SolicitudeFDetails
+    }
+}
 
 query FamilyApplications {
     allFamilyApplications {
         ...SolicitudeFDetails
-    }
-}
-query AllApplicationsAssistants {
-    allSolicitudes {
-        ...SolicitudeADetails
-    }
-}
-
-mutation AssitantApplications($aid: ID!){
-    createSolicitude(assistant: $aid) {
-        ...SolicitudeADetails
     }
 }
 
@@ -33,13 +27,4 @@ fragment SolicitudeFDetails on FamilyApplication {
         },
         status
 }
-fragment SolicitudeADetails on Solicitude {
-    id,
-    assistant {
-    ...UserDetails
-    },
-    boss{
-    ...UserDetails
-    },
-    status
-}
+

@@ -21,9 +21,13 @@ final class RMApplicationUseCase<Repository>: ApplicationUseCase where Repositor
     }
 
     func getFamilyApplications() -> Observable<[ApplicationFamily]> {
-        return repository.query(with: NSPredicate(format: "stype = 0"), sortDescriptors: [])
+        return repository.queryAll()
     }
     func save(solicitude: ApplicationFamily) -> Observable<Void> {
         return repository.save(entity: solicitude)
+    }
+    
+    func approve(application: ApplicationFamily) -> Observable<Void> {
+        return repository.save(entity: application)
     }
 }

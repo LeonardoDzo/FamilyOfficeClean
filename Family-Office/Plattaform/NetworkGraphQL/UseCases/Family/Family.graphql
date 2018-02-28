@@ -4,12 +4,7 @@ mutation CreateFamily($name:String!) {
         ...FamilyDetails,
         members{
             user{
-                ...UserDetails,
-                families {
-                    family{
-                        ...FamilyDetails
-                    }
-                }
+                ...UserDetails
             }
         }
     }

@@ -22,10 +22,14 @@ final class MenuViewModel: ViewModelType {
 
     func transform(input: MenuViewModel.Input) -> MenuViewModel.Output {
 
-        let families = self.getFamilies(input.trigger, self.familyUseCase).do(onNext: {(families) in
-            self.families = families
-        })
-        let logout = input.triggerLogout.do(onNext: navigator.logout)
+        let families = input.trigger.flatMapLatest {
+             return self.getMyFamilies(self.familyUseCase)
+            }.do(onNext: {self.families = $0})
+        let logout = input.triggerLogout
+            .do(onNext: {
+                self.logout()
+                self.navigator.logout()
+            })
         let selected = input.triggerSelected.flatMapLatest { (indexpath) in
             return self.familyUseCase
                 .changeFamilyActive(family: self.families[indexpath.row])

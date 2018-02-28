@@ -6,21 +6,7 @@ mutation SignInUser($e:String!, $p:String!) {
         }) {
         token,
         user {
-            ...UserDetails,
-            families {
-                family {
-                    photo{
-                        ...PhotoDetails
-                    },
-                    name,
-                    id,
-                    members {
-                        user {
-                            ...UserDetails
-                        }
-                    }
-                }
-            }
+            ...UserDetails
         }
 
     }
@@ -54,7 +40,12 @@ fragment UserDetails on User {
     name,
     email,
     phone,
-    user_type
+    user_type,
+    families {
+        family {
+            ...FamilyDetails
+        }
+    }
 }
 
 

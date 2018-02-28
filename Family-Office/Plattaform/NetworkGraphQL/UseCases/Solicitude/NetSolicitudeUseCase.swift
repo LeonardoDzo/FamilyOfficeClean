@@ -24,7 +24,17 @@ final class NetApplicationUseCase: ApplicationUseCase {
     }
     
     func getFamilyApplications() -> Observable<[ApplicationFamily]> {
-        return network.allFamilyApplications()
+        return network.allFamilyApplications().do(onNext: { (applications) in
+            applications.filter({!$0.uid.isEmpty}).forEach({ (af) in
+                 self.provider.makeApplicationUseCase().save(solicitude: af).subscribe().dispose()
+            })
+           
+        })
+    }
+    func approve(application: ApplicationFamily) -> Observable<Void> {
+        return network.approve(aid: application.uid).do(onNext: { app in
+            self.provider.makeApplicationUseCase().approve(application: app).subscribe().dispose()
+        }).mapToVoid()
     }
 
 }

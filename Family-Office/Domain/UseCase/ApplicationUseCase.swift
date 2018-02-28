@@ -12,7 +12,7 @@ import RxSwift
 public protocol ApplicationUseCase {
      func save(solicitude: ApplicationFamily) -> Observable<Void>
      func getFamilyApplications() -> Observable<[ApplicationFamily]>
-     //func getAssistantsApplications() -> Observable<[Solicitude]>
+     func approve(application: ApplicationFamily) -> Observable<Void>
 }
 
 public protocol ApplicationAssistantUseCase {

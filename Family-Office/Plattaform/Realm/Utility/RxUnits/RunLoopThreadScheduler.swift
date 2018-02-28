@@ -5,9 +5,7 @@ final class RunLoopThreadScheduler: ImmediateSchedulerType {
     private let thread: Thread
     private let target: ThreadTarget
 
-    static let sharedInstance = RunLoopThreadScheduler(threadName: "Family-Office-RealmPlatform-Repository")
-
-    private init(threadName: String) {
+     init(threadName: String) {
         self.target = ThreadTarget()
         self.thread = Thread(target: target,
                              selector: #selector(ThreadTarget.threadEntryPoint),

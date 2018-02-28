@@ -34,8 +34,8 @@ final class Repository<T: RealmRepresentable>: AbstractRepository where T == T.R
 
     init(configuration: Realm.Configuration) {
         self.configuration = configuration
-        self.scheduler = RunLoopThreadScheduler.sharedInstance
-        print("File 📁 url: \(RLMRealmPathForFile("default.realm"))")
+        let name = "com.FamilyOffice.RealmPlatform.Repository"
+        self.scheduler = RunLoopThreadScheduler(threadName: name)
     }
 
     func queryAll() -> Observable<[T]> {
@@ -67,7 +67,7 @@ final class Repository<T: RealmRepresentable>: AbstractRepository where T == T.R
             return Observable.array(from: objects)
                 .mapToDomain()
             }
-            .subscribeOn(scheduler)
+            .observeOn(scheduler)
     }
 
     func save(entity: T) ->  Observable<Void> {

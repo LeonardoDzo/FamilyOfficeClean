@@ -29,7 +29,7 @@ class NotificationsView: UIViewX {
 
     fileprivate func conftable() {
         tableView.estimatedRowHeight = 100
-        tableView.rowHeight = 64
+        tableView.rowHeight = 100
         tableView.register(SolicitudeTableViewCell.self, forCellReuseIdentifier: SolicitudeTableViewCell.reuseID)
 
         tableView.tableFooterView = UIView()

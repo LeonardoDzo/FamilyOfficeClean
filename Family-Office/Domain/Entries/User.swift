@@ -71,7 +71,9 @@ public struct User: Codable {
             if let utype : String = values.decodeSafely(.user_type) {
                 user_type = Int(utype)!
             }
-            families = try values.decodeIfPresent([[String:Family]].self, forKey: .families)?.flatMap({$0.values.filter({!$0.uid.isEmpty})}) ?? []
+            families = values.decodeSafely([[String:Family]].self, forKey: .families)?
+                .flatMap({$0.flatMap({$0.value})})
+                .filter({!$0.uid.isEmpty}) ?? []
         }
 
     }
