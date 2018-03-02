@@ -15,8 +15,9 @@ final class Network<T: Decodable> {
     private let scheduler: ConcurrentDispatchQueueScheduler
 
     init(_ apollo: ApolloClient) {
-       self.apollo = apollo
-    self.scheduler = ConcurrentDispatchQueueScheduler(qos: DispatchQoS(qosClass: DispatchQoS.QoSClass.background, relativePriority: 1))
+        self.apollo = apollo
+        
+        self.scheduler = ConcurrentDispatchQueueScheduler(qos: DispatchQoS(qosClass: DispatchQoS.QoSClass.background, relativePriority: 1))
     }
     
     

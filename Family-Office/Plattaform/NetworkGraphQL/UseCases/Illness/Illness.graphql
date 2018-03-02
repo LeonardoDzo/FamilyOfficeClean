@@ -1,0 +1,39 @@
+mutation CreateIllness($name: String!, $description: String!, $medicines: String!, $type: Int!, $user: ID, $family: ID){
+    createIllness(name: $name, description: $description, medicines: $medicines, type: $type, user: $user, family: $family ){
+       ...IllnessDetails
+    }
+}
+
+mutation EditIllness($id: ID!, $name: String, $description: String, $medicines: String, $type: Int){
+editIllness(id: $id, name: $name, description: $description, medicines: $medicines, type: $type){
+        ...IllnessDetails
+    }
+}
+
+mutation DeleteIllness($id: ID!){
+    deleteIllness(id: $id){
+        ...IllnessDetails
+    }
+}
+
+query AllIllness($fid: ID) {
+    allIllnesses(familyId: $fid) {
+        ...IllnessDetails
+    }
+}
+
+
+fragment IllnessDetails on Illness {
+    id,
+    name,
+    description,
+    medicines,
+    name,
+    type,
+    family {
+        ...FamilyDetails
+    },
+    creator {
+        ...UserDetails
+    }
+}

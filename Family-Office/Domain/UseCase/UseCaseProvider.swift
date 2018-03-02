@@ -17,4 +17,5 @@ public protocol UseCaseProvider {
     func makePendingUseCase() -> PendingUseCase
     func makeApplicationUseCase() -> ApplicationUseCase
     func makeApplicationAssistantUseCase() -> ApplicationAssistantUseCase
+    func makeIllnessUseCase() -> IllnessUseCase
  }

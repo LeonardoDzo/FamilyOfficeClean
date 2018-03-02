@@ -50,8 +50,14 @@ final class NetworkProvider {
         let network = Network<ApplicationFamily>(apollo)
         return ApplicationsNetwork(network: network)
     }
+    
     public func makeApplicationsAssistantNetwork() -> ApplicationAssistantNetwork {
         let network = Network<ApplicationAssistant>(apollo)
         return ApplicationAssistantNetwork(network: network)
+    }
+    
+    public func makeIllnessNetwork() -> IllnessNetwork {
+        let network = Network<Illness>(apollo)
+        return IllnessNetwork(network: network)
     }
 }

@@ -40,4 +40,7 @@ public final class NetUseCaseProvider: AuthUseCaseProvider, UseCaseProvider {
         return NetApplicationAssistantUseCase(network: networkProvider.makeApplicationsAssistantNetwork())
     }
     
+    public func makeIllnessUseCase() -> IllnessUseCase {
+        return NetIllnessUseCase(network: networkProvider.makeIllnessNetwork())
+    }
 }

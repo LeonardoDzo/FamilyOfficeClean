@@ -33,35 +33,40 @@ class HomeNavigator: HomeNavigatorPr {
 
         tabBarController.tabBar.tintColor = homeBtn.color
         switch homeBtn.module.hashValue {
-        case MODULE.ASSISTANT.hashValue:
+            case MODULE.ASSISTANT.hashValue:
 
-            mainNavigationController.tabBarItem = UITabBarItem(title: "Tareas", image: #imageLiteral(resourceName: "task_completed"), selectedImage: nil)
-            let mainNavigator = AssistantMainNavigator(service: SuperProvider(), nc: mainNavigationController)
+                mainNavigationController.tabBarItem = UITabBarItem(title: "Tareas", image: #imageLiteral(resourceName: "task_completed"), selectedImage: nil)
+                let mainNavigator = AssistantMainNavigator(service: SuperProvider(), nc: mainNavigationController)
 
-            let profileAssistant = UINavigationController( )
-            profileAssistant.tabBarItem = UITabBarItem(title: "Asistente", image: #imageLiteral(resourceName: "clipboard"), selectedImage: nil)
-            let profileAssitantNavigator = ProfileAssistantNavigator(service: RMUseCaseProvider(), nc: profileAssistant)
-            let addeditPendingNavigationController = UINavigationController()
+                let profileAssistant = UINavigationController( )
+                profileAssistant.tabBarItem = UITabBarItem(title: "Asistente", image: #imageLiteral(resourceName: "clipboard"), selectedImage: nil)
+                let profileAssitantNavigator = ProfileAssistantNavigator(service: RMUseCaseProvider(), nc: profileAssistant)
+                let addeditPendingNavigationController = UINavigationController()
 
-            let adPendingNavigator = AddeditPendingNavigator(service: SuperProvider(), nc: addeditPendingNavigationController)
-            addeditPendingNavigationController.tabBarItem = UITabBarItem(title: "Agregar", image: #imageLiteral(resourceName: "icons8-plus_2_math"), selectedImage: nil)
+                let adPendingNavigator = AddeditPendingNavigator(service: SuperProvider(), nc: addeditPendingNavigationController)
+                addeditPendingNavigationController.tabBarItem = UITabBarItem(title: "Agregar", image: #imageLiteral(resourceName: "icons8-plus_2_math"), selectedImage: nil)
 
-            tabBarController.viewControllers = [
-                mainNavigationController,
-                profileAssistant,
-                addeditPendingNavigationController]
+                tabBarController.viewControllers = [
+                    mainNavigationController,
+                    profileAssistant,
+                    addeditPendingNavigationController]
 
-            tabBarController.viewControllers?.forEach({ (vc) in
-                if let nc = vc as? UINavigationController {
-                    nc.navigationBar.barTintColor = homeBtn.color
-                    nc.navigationBar.tintColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-                }
-            })
-
-            navigationController.present(tabBarController, animated: true, completion: nil)
-            mainNavigator.toMain()
-            adPendingNavigator.toMain(pending: Pending())
-            profileAssitantNavigator.toMain()
+                tabBarController.viewControllers?.forEach({ (vc) in
+                    if let nc = vc as? UINavigationController {
+                        nc.navigationBar.barTintColor = homeBtn.color
+                        nc.navigationBar.tintColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+                    }
+                })
+                mainNavigator.toMain()
+                adPendingNavigator.toMain(pending: Pending())
+                profileAssitantNavigator.toMain()
+                navigationController.present(tabBarController, animated: true, completion: nil)
+                
+            break
+        case MODULE.FIRSTKIT.hashValue:
+            let navigator = MainIllnessNavigator(nc: mainNavigationController)
+            navigator.toMain()
+            navigationController.present(mainNavigationController, animated: true, completion: nil)
             break
         default:
             break

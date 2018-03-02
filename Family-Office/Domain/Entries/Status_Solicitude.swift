@@ -12,6 +12,7 @@ import Foundation
     case Accepted,
     Pending
 }
+
 extension STATUS_SOLICITUDE {
     enum Key: CodingKey {
         case rawValue

@@ -32,7 +32,7 @@ public final class ApolloReactiveExtensions {
     /// - Returns: A `Maybe` that emits the results of the query.
     public func fetch<Query: GraphQLQuery>(
         query: Query,
-        cachePolicy: CachePolicy = .returnCacheDataElseFetch,
+        cachePolicy: CachePolicy = .fetchIgnoringCacheData,
         queue: DispatchQueue = DispatchQueue.main) -> Maybe<Query.Data> {
         return Maybe.create { maybe in
             let cancellable = self.client.fetch(query: query, cachePolicy: cachePolicy, queue: queue) { result, error in
