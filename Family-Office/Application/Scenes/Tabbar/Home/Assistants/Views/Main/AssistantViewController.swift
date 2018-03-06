@@ -40,6 +40,7 @@ class AssistantViewController: UIViewController {
         let pull = self.v.table.tableView.refreshControl!.rx
             .controlEvent(.valueChanged)
             .asDriver()
+    
         let input = PendingViewModel.Input(trigger: Driver.merge(viewWillAppear, pull), editTrigger: editButton.rx.tap.asDriver(), backtrigger: back.rx.tap.asDriver(), gotoAddAssistant: notExistBtn.rx.tap.asDriver())
 
         let output = viewModel.transform(input: input)

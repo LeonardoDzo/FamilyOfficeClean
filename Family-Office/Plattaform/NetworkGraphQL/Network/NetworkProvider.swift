@@ -60,4 +60,8 @@ final class NetworkProvider {
         let network = Network<Illness>(apollo)
         return IllnessNetwork(network: network)
     }
+    public func makeInsuranceNetwork() -> InsuranceNetwork {
+        let network = Network<Insurance>(apollo)
+        return InsuranceNetwork(network: network)
+    }
 }

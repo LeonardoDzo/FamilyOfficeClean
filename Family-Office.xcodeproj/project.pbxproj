@@ -15,6 +15,12 @@
 		0202E666203379B6001494D9 /* MainSocketProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0202E665203379B6001494D9 /* MainSocketProvider.swift */; };
 		0207172F202CBAB900A36FEF /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0207172E202CBAB900A36FEF /* Default-568h@2x.png */; };
 		02071732202CBAFF00A36FEF /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02071731202CBAFF00A36FEF /* Constants.swift */; };
+		0216900E204DBFFE0097F150 /* NetInsuranceUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0216900D204DBFFE0097F150 /* NetInsuranceUseCase.swift */; };
+		02169011204DC1C40097F150 /* RMInsuranceUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02169010204DC1C40097F150 /* RMInsuranceUseCase.swift */; };
+		02169013204DC3580097F150 /* RMInsurance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02169012204DC3580097F150 /* RMInsurance.swift */; };
+		02169017204DD9B70097F150 /* InsuresBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02169016204DD9B70097F150 /* InsuresBtn.swift */; };
+		02169019204DE17D0097F150 /* Insurance.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 02169018204DE17D0097F150 /* Insurance.graphql */; };
+		0216901B204DE1F80097F150 /* Attachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0216901A204DE1F80097F150 /* Attachment.swift */; };
 		022DD8BB2028D3ED008ED417 /* UserNethwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022DD8BA2028D3ED008ED417 /* UserNethwork.swift */; };
 		022DD8C02028DADF008ED417 /* FamilyUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022DD8BF2028DADF008ED417 /* FamilyUseCase.swift */; };
 		022DD8C22028DBF1008ED417 /* FamilyNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022DD8C12028DBF1008ED417 /* FamilyNetwork.swift */; };
@@ -22,6 +28,16 @@
 		022DD8C62028DFFC008ED417 /* NetFamilyUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022DD8C52028DFFC008ED417 /* NetFamilyUseCase.swift */; };
 		022DD8C82028E062008ED417 /* Family.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 022DD8C72028E062008ED417 /* Family.graphql */; };
 		022F5AAC20433A7D00BDDD7E /* Status_Solicitude.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022F5AAB20433A7D00BDDD7E /* Status_Solicitude.swift */; };
+		022FCEDC204DB11900070546 /* MainInsuranceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022FCEDB204DB11900070546 /* MainInsuranceViewController.swift */; };
+		022FCEDE204DB12A00070546 /* MainInsuranceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022FCEDD204DB12A00070546 /* MainInsuranceViewModel.swift */; };
+		022FCEE0204DB13900070546 /* MainInsuranceNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022FCEDF204DB13900070546 /* MainInsuranceNavigator.swift */; };
+		022FCEE2204DB1A900070546 /* InsuranceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022FCEE1204DB1A900070546 /* InsuranceView.swift */; };
+		022FCEE4204DBB2E00070546 /* InsuranceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022FCEE3204DBB2E00070546 /* InsuranceType.swift */; };
+		022FCEE7204DBC5700070546 /* Insurance+Bindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022FCEE6204DBC5700070546 /* Insurance+Bindable.swift */; };
+		022FCEE9204DBC7A00070546 /* Insurance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022FCEE8204DBC7A00070546 /* Insurance.swift */; };
+		022FCEEB204DBCD400070546 /* Insurance+Mappable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022FCEEA204DBCD400070546 /* Insurance+Mappable.swift */; };
+		022FCEED204DBD4200070546 /* InsuranceUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022FCEEC204DBD4200070546 /* InsuranceUseCase.swift */; };
+		022FCEEF204DBD9500070546 /* InsuranceNethwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022FCEEE204DBD9500070546 /* InsuranceNethwork.swift */; };
 		022FE36A202CCD58009029AD /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022FE369202CCD58009029AD /* HomeViewModel.swift */; };
 		022FE36D202CDB09009029AD /* HomeCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022FE36C202CDB09009029AD /* HomeCellViewModel.swift */; };
 		023858492044DECB00D1CDB3 /* ProfileAssistantViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023858482044DECB00D1CDB3 /* ProfileAssistantViewModel.swift */; };
@@ -87,6 +103,10 @@
 		023AAB6F201FBCC300F50207 /* NetAuthUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023AAB6E201FBCC300F50207 /* NetAuthUseCase.swift */; };
 		023AAB76201FC2FF00F50207 /* Auth.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 023AAB75201FC2FF00F50207 /* Auth.graphql */; };
 		0242D4B0202E2C8E00B11E03 /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0242D4AF202E2C8E00B11E03 /* MenuViewModel.swift */; };
+		0242E94F204E10C700C46D00 /* DetailsinsuranceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0242E94E204E10C700C46D00 /* DetailsinsuranceView.swift */; };
+		0242E951204E10DF00C46D00 /* DetailsInsuranceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0242E950204E10DF00C46D00 /* DetailsInsuranceViewController.swift */; };
+		0242E953204E115B00C46D00 /* DetailsInsuranceNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0242E952204E115B00C46D00 /* DetailsInsuranceNavigator.swift */; };
+		0242E955204E116F00C46D00 /* DetailsInsuranceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0242E954204E116F00C46D00 /* DetailsInsuranceViewModel.swift */; };
 		02508D9A201ABAD600C6F030 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02508D99201ABAD600C6F030 /* API.swift */; };
 		0252DBE62048D3DC008CB454 /* IllnessTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0252DBE52048D3DC008CB454 /* IllnessTableViewCell.swift */; };
 		0252DBE82048D405008CB454 /* Illness+Bindible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0252DBE72048D405008CB454 /* Illness+Bindible.swift */; };
@@ -109,6 +129,7 @@
 		028B667C20228577003EC625 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028B667B20228577003EC625 /* SignUpViewController.swift */; };
 		028B667E2022858B003EC625 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028B667D2022858B003EC625 /* SignUpViewModel.swift */; };
 		028B6680202285A0003EC625 /* SignUpNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028B667F202285A0003EC625 /* SignUpNavigator.swift */; };
+		028D0FA6204E14400095A744 /* DetailsInsuranceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028D0FA5204E14400095A744 /* DetailsInsuranceTableViewCell.swift */; };
 		028F3E8F20461E3D00B7CB25 /* UILabel+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028F3E8E20461E3D00B7CB25 /* UILabel+Ext.swift */; };
 		028F3E9120462FCC00B7CB25 /* SolicitudeAssistant.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 028F3E9020462FCC00B7CB25 /* SolicitudeAssistant.graphql */; };
 		028F3E93204631DF00B7CB25 /* ApplicationSolicitudeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028F3E92204631DF00B7CB25 /* ApplicationSolicitudeViewModel.swift */; };
@@ -132,7 +153,6 @@
 		02A5A304202A4429009133BD /* Family+Bindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A5A303202A4429009133BD /* Family+Bindable.swift */; };
 		02A5A306202A4F62009133BD /* Graphql+Mappable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A5A305202A4F62009133BD /* Graphql+Mappable.swift */; };
 		02A9DCBA20364EC500F43C85 /* infoLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A9DCB920364EC500F43C85 /* infoLineView.swift */; };
-		02AF66022023ECC700FE90F2 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AF66012023ECC700FE90F2 /* Photo.swift */; };
 		02AF66042023F2F800FE90F2 /* RMFamily.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AF66032023F2F800FE90F2 /* RMFamily.swift */; };
 		02B794FF202E7E2A0083CAB7 /* ProfileAssistantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B794FE202E7E2A0083CAB7 /* ProfileAssistantViewController.swift */; };
 		02B79501202E7E500083CAB7 /* ProfileAssistantView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B79500202E7E500083CAB7 /* ProfileAssistantView.swift */; };
@@ -174,14 +194,14 @@
 		02DD50052047401000E9B63D /* RMIllness.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DD50042047401000E9B63D /* RMIllness.swift */; };
 		02DD50072047446300E9B63D /* IllnessUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DD50062047446300E9B63D /* IllnessUseCase.swift */; };
 		02DD500A204744F000E9B63D /* RMIllnessUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DD5009204744F000E9B63D /* RMIllnessUseCase.swift */; };
-		02DD500D2047479500E9B63D /* illnessUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DD500C2047479500E9B63D /* illnessUseCase.swift */; };
+		02DD500D2047479500E9B63D /* NetillnessUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DD500C2047479500E9B63D /* NetillnessUseCase.swift */; };
 		02DD500F204747B000E9B63D /* IllnessNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DD500E204747B000E9B63D /* IllnessNetwork.swift */; };
 		02DD501520477BFD00E9B63D /* MainIllnessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DD501420477BFD00E9B63D /* MainIllnessViewController.swift */; };
 		02DD501720477C0900E9B63D /* MainIllnessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DD501620477C0900E9B63D /* MainIllnessView.swift */; };
 		02DD501920477C1C00E9B63D /* MainIllnessNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DD501820477C1C00E9B63D /* MainIllnessNavigator.swift */; };
 		02DD501B20477C2900E9B63D /* MainIllnessViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DD501A20477C2900E9B63D /* MainIllnessViewModel.swift */; };
 		02DD501D204781DB00E9B63D /* NavigatorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DD501C204781DB00E9B63D /* NavigatorType.swift */; };
-		02E559B62024CDF300D3FC07 /* RMPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E559B52024CDF300D3FC07 /* RMPhoto.swift */; };
+		02E559B62024CDF300D3FC07 /* RMAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E559B52024CDF300D3FC07 /* RMAttachment.swift */; };
 		02ED6F9B2044741300D880F8 /* ApplicationAssistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02ED6F9A2044741300D880F8 /* ApplicationAssistant.swift */; };
 		02ED6F9D204474A900D880F8 /* RMApplicationAssistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02ED6F9C204474A900D880F8 /* RMApplicationAssistant.swift */; };
 		02ED6F9F2044755900D880F8 /* ApplicationAssistant+Mappable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02ED6F9E2044755900D880F8 /* ApplicationAssistant+Mappable.swift */; };
@@ -262,6 +282,12 @@
 		0202E665203379B6001494D9 /* MainSocketProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSocketProvider.swift; sourceTree = "<group>"; };
 		0207172E202CBAB900A36FEF /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		02071731202CBAFF00A36FEF /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		0216900D204DBFFE0097F150 /* NetInsuranceUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetInsuranceUseCase.swift; sourceTree = "<group>"; };
+		02169010204DC1C40097F150 /* RMInsuranceUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMInsuranceUseCase.swift; sourceTree = "<group>"; };
+		02169012204DC3580097F150 /* RMInsurance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMInsurance.swift; sourceTree = "<group>"; };
+		02169016204DD9B70097F150 /* InsuresBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsuresBtn.swift; sourceTree = "<group>"; };
+		02169018204DE17D0097F150 /* Insurance.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = Insurance.graphql; sourceTree = "<group>"; };
+		0216901A204DE1F80097F150 /* Attachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attachment.swift; sourceTree = "<group>"; };
 		022DD8BA2028D3ED008ED417 /* UserNethwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNethwork.swift; sourceTree = "<group>"; };
 		022DD8BF2028DADF008ED417 /* FamilyUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilyUseCase.swift; sourceTree = "<group>"; };
 		022DD8C12028DBF1008ED417 /* FamilyNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilyNetwork.swift; sourceTree = "<group>"; };
@@ -269,6 +295,16 @@
 		022DD8C52028DFFC008ED417 /* NetFamilyUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetFamilyUseCase.swift; sourceTree = "<group>"; };
 		022DD8C72028E062008ED417 /* Family.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = Family.graphql; sourceTree = "<group>"; };
 		022F5AAB20433A7D00BDDD7E /* Status_Solicitude.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Status_Solicitude.swift; sourceTree = "<group>"; };
+		022FCEDB204DB11900070546 /* MainInsuranceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainInsuranceViewController.swift; sourceTree = "<group>"; };
+		022FCEDD204DB12A00070546 /* MainInsuranceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainInsuranceViewModel.swift; sourceTree = "<group>"; };
+		022FCEDF204DB13900070546 /* MainInsuranceNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainInsuranceNavigator.swift; sourceTree = "<group>"; };
+		022FCEE1204DB1A900070546 /* InsuranceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsuranceView.swift; sourceTree = "<group>"; };
+		022FCEE3204DBB2E00070546 /* InsuranceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsuranceType.swift; sourceTree = "<group>"; };
+		022FCEE6204DBC5700070546 /* Insurance+Bindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Insurance+Bindable.swift"; sourceTree = "<group>"; };
+		022FCEE8204DBC7A00070546 /* Insurance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Insurance.swift; sourceTree = "<group>"; };
+		022FCEEA204DBCD400070546 /* Insurance+Mappable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Insurance+Mappable.swift"; sourceTree = "<group>"; };
+		022FCEEC204DBD4200070546 /* InsuranceUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsuranceUseCase.swift; sourceTree = "<group>"; };
+		022FCEEE204DBD9500070546 /* InsuranceNethwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsuranceNethwork.swift; sourceTree = "<group>"; };
 		022FE369202CCD58009029AD /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		022FE36C202CDB09009029AD /* HomeCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCellViewModel.swift; sourceTree = "<group>"; };
 		0237D519201A6A8B00895DF5 /* Family-Office.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Family-Office.entitlements"; sourceTree = "<group>"; };
@@ -336,6 +372,10 @@
 		023AAB6E201FBCC300F50207 /* NetAuthUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetAuthUseCase.swift; sourceTree = "<group>"; };
 		023AAB75201FC2FF00F50207 /* Auth.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = Auth.graphql; sourceTree = "<group>"; };
 		0242D4AF202E2C8E00B11E03 /* MenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
+		0242E94E204E10C700C46D00 /* DetailsinsuranceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsinsuranceView.swift; sourceTree = "<group>"; };
+		0242E950204E10DF00C46D00 /* DetailsInsuranceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsInsuranceViewController.swift; sourceTree = "<group>"; };
+		0242E952204E115B00C46D00 /* DetailsInsuranceNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsInsuranceNavigator.swift; sourceTree = "<group>"; };
+		0242E954204E116F00C46D00 /* DetailsInsuranceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsInsuranceViewModel.swift; sourceTree = "<group>"; };
 		02508D99201ABAD600C6F030 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		0252DBE52048D3DC008CB454 /* IllnessTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IllnessTableViewCell.swift; sourceTree = "<group>"; };
 		0252DBE72048D405008CB454 /* Illness+Bindible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Illness+Bindible.swift"; sourceTree = "<group>"; };
@@ -358,6 +398,7 @@
 		028B667B20228577003EC625 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		028B667D2022858B003EC625 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		028B667F202285A0003EC625 /* SignUpNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpNavigator.swift; sourceTree = "<group>"; };
+		028D0FA5204E14400095A744 /* DetailsInsuranceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsInsuranceTableViewCell.swift; sourceTree = "<group>"; };
 		028F3E8E20461E3D00B7CB25 /* UILabel+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Ext.swift"; sourceTree = "<group>"; };
 		028F3E9020462FCC00B7CB25 /* SolicitudeAssistant.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = SolicitudeAssistant.graphql; sourceTree = "<group>"; };
 		028F3E92204631DF00B7CB25 /* ApplicationSolicitudeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationSolicitudeViewModel.swift; sourceTree = "<group>"; };
@@ -381,7 +422,6 @@
 		02A5A303202A4429009133BD /* Family+Bindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Family+Bindable.swift"; sourceTree = "<group>"; };
 		02A5A305202A4F62009133BD /* Graphql+Mappable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Graphql+Mappable.swift"; sourceTree = "<group>"; };
 		02A9DCB920364EC500F43C85 /* infoLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = infoLineView.swift; sourceTree = "<group>"; };
-		02AF66012023ECC700FE90F2 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		02AF66032023F2F800FE90F2 /* RMFamily.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMFamily.swift; sourceTree = "<group>"; };
 		02B794FE202E7E2A0083CAB7 /* ProfileAssistantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAssistantViewController.swift; sourceTree = "<group>"; };
 		02B79500202E7E500083CAB7 /* ProfileAssistantView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAssistantView.swift; sourceTree = "<group>"; };
@@ -423,14 +463,14 @@
 		02DD50042047401000E9B63D /* RMIllness.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMIllness.swift; sourceTree = "<group>"; };
 		02DD50062047446300E9B63D /* IllnessUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IllnessUseCase.swift; sourceTree = "<group>"; };
 		02DD5009204744F000E9B63D /* RMIllnessUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMIllnessUseCase.swift; sourceTree = "<group>"; };
-		02DD500C2047479500E9B63D /* illnessUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = illnessUseCase.swift; sourceTree = "<group>"; };
+		02DD500C2047479500E9B63D /* NetillnessUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetillnessUseCase.swift; sourceTree = "<group>"; };
 		02DD500E204747B000E9B63D /* IllnessNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IllnessNetwork.swift; sourceTree = "<group>"; };
 		02DD501420477BFD00E9B63D /* MainIllnessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainIllnessViewController.swift; sourceTree = "<group>"; };
 		02DD501620477C0900E9B63D /* MainIllnessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainIllnessView.swift; sourceTree = "<group>"; };
 		02DD501820477C1C00E9B63D /* MainIllnessNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainIllnessNavigator.swift; sourceTree = "<group>"; };
 		02DD501A20477C2900E9B63D /* MainIllnessViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainIllnessViewModel.swift; sourceTree = "<group>"; };
 		02DD501C204781DB00E9B63D /* NavigatorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigatorType.swift; sourceTree = "<group>"; };
-		02E559B52024CDF300D3FC07 /* RMPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMPhoto.swift; sourceTree = "<group>"; };
+		02E559B52024CDF300D3FC07 /* RMAttachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMAttachment.swift; sourceTree = "<group>"; };
 		02ED6F9A2044741300D880F8 /* ApplicationAssistant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationAssistant.swift; sourceTree = "<group>"; };
 		02ED6F9C204474A900D880F8 /* RMApplicationAssistant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMApplicationAssistant.swift; sourceTree = "<group>"; };
 		02ED6F9E2044755900D880F8 /* ApplicationAssistant+Mappable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApplicationAssistant+Mappable.swift"; sourceTree = "<group>"; };
@@ -552,6 +592,23 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
+		0216900C204DBFEE0097F150 /* Insurance */ = {
+			isa = PBXGroup;
+			children = (
+				0216900D204DBFFE0097F150 /* NetInsuranceUseCase.swift */,
+				02169018204DE17D0097F150 /* Insurance.graphql */,
+			);
+			path = Insurance;
+			sourceTree = "<group>";
+		};
+		0216900F204DC1B20097F150 /* Insurance */ = {
+			isa = PBXGroup;
+			children = (
+				02169010204DC1C40097F150 /* RMInsuranceUseCase.swift */,
+			);
+			path = Insurance;
+			sourceTree = "<group>";
+		};
 		022DD8BC2028DAA3008ED417 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
@@ -579,6 +636,24 @@
 				025742E7203F57F200215A56 /* User.graphql */,
 			);
 			path = User;
+			sourceTree = "<group>";
+		};
+		022FCEDA204DB09C00070546 /* Insurance */ = {
+			isa = PBXGroup;
+			children = (
+				0242E94D204E109700C46D00 /* index */,
+				0242E94C204E108A00C46D00 /* details */,
+			);
+			path = Insurance;
+			sourceTree = "<group>";
+		};
+		022FCEE5204DBB6C00070546 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				022F5AAB20433A7D00BDDD7E /* Status_Solicitude.swift */,
+				022FCEE3204DBB2E00070546 /* InsuranceType.swift */,
+			);
+			path = Enums;
 			sourceTree = "<group>";
 		};
 		022FE36B202CDAF9009029AD /* cell */ = {
@@ -667,17 +742,18 @@
 		023AAAED201EB96500F50207 /* Entries */ = {
 			isa = PBXGroup;
 			children = (
+				022FCEE5204DBB6C00070546 /* Enums */,
 				023AAB4A201EBF6E00F50207 /* User.swift */,
 				023AAB4C201EBF9100F50207 /* Address.swift */,
 				023AAB52201F84EB00F50207 /* Family.swift */,
 				02FE57642020E0C100B7E084 /* AuthModel.swift */,
-				02AF66012023ECC700FE90F2 /* Photo.swift */,
 				02EF0EF82031F9DD0020A133 /* Pending.swift */,
 				02EF0EFA2031FA800020A133 /* Base.swift */,
 				0263404220423E0B0092D33D /* ApplicationFamily.swift */,
 				02ED6F9A2044741300D880F8 /* ApplicationAssistant.swift */,
-				022F5AAB20433A7D00BDDD7E /* Status_Solicitude.swift */,
 				02DD500020473CF700E9B63D /* Illness.swift */,
+				022FCEE8204DBC7A00070546 /* Insurance.swift */,
+				0216901A204DE1F80097F150 /* Attachment.swift */,
 			);
 			path = Entries;
 			sourceTree = "<group>";
@@ -692,6 +768,7 @@
 				0282D3A8203FA57C00FF6663 /* ApplicationUseCase.swift */,
 				02FE57972021445800B7E084 /* Error.swift */,
 				02DD50062047446300E9B63D /* IllnessUseCase.swift */,
+				022FCEEC204DBD4200070546 /* InsuranceUseCase.swift */,
 				023AAB50201EC0BA00F50207 /* UseCaseProvider.swift */,
 			);
 			path = UseCase;
@@ -772,6 +849,7 @@
 				0282D3A3203F998600FF6663 /* ApplicationFamily+Codable.swift */,
 				02ED6F9E2044755900D880F8 /* ApplicationAssistant+Mappable.swift */,
 				02DD500220473D8B00E9B63D /* Illness+Mappable.swift */,
+				022FCEEA204DBCD400070546 /* Insurance+Mappable.swift */,
 			);
 			path = Entries;
 			sourceTree = "<group>";
@@ -797,6 +875,7 @@
 				02EF0F1620321A610020A133 /* PendingNetwork.swift */,
 				02D338E220408E55007FDF7B /* SolicitudeNetwork.swift */,
 				02DD500E204747B000E9B63D /* IllnessNetwork.swift */,
+				022FCEEE204DBD9500070546 /* InsuranceNethwork.swift */,
 			);
 			path = Graphql;
 			sourceTree = "<group>";
@@ -804,6 +883,7 @@
 		023AAB6D201FBC9F00F50207 /* UseCases */ = {
 			isa = PBXGroup;
 			children = (
+				0216900C204DBFEE0097F150 /* Insurance */,
 				02DD500B2047478500E9B63D /* Illness */,
 				02CD29CF2044A70D00879308 /* AssistantSolicitude */,
 				0282D3A5203FA12100FF6663 /* Solicitude */,
@@ -814,6 +894,29 @@
 				02FE57622020D77900B7E084 /* NetUseCaseProvider.swift */,
 			);
 			path = UseCases;
+			sourceTree = "<group>";
+		};
+		0242E94C204E108A00C46D00 /* details */ = {
+			isa = PBXGroup;
+			children = (
+				0242E94E204E10C700C46D00 /* DetailsinsuranceView.swift */,
+				0242E950204E10DF00C46D00 /* DetailsInsuranceViewController.swift */,
+				0242E954204E116F00C46D00 /* DetailsInsuranceViewModel.swift */,
+				0242E952204E115B00C46D00 /* DetailsInsuranceNavigator.swift */,
+				028D0FA5204E14400095A744 /* DetailsInsuranceTableViewCell.swift */,
+			);
+			path = details;
+			sourceTree = "<group>";
+		};
+		0242E94D204E109700C46D00 /* index */ = {
+			isa = PBXGroup;
+			children = (
+				022FCEE1204DB1A900070546 /* InsuranceView.swift */,
+				022FCEDB204DB11900070546 /* MainInsuranceViewController.swift */,
+				022FCEDD204DB12A00070546 /* MainInsuranceViewModel.swift */,
+				022FCEDF204DB13900070546 /* MainInsuranceNavigator.swift */,
+			);
+			path = index;
 			sourceTree = "<group>";
 		};
 		0252DBE42048D3C5008CB454 /* cells */ = {
@@ -889,6 +992,8 @@
 				02EF0F1F203228600020A133 /* Pending+Bindable.swift */,
 				0252DBE72048D405008CB454 /* Illness+Bindible.swift */,
 				0252DBE92048D691008CB454 /* ILLNESSTYPE+EXT.swift */,
+				022FCEE6204DBC5700070546 /* Insurance+Bindable.swift */,
+				02169016204DD9B70097F150 /* InsuresBtn.swift */,
 			);
 			path = Entries;
 			sourceTree = "<group>";
@@ -922,6 +1027,7 @@
 				0298C7B1202B8DEA0035D493 /* Homeview */,
 				02C932E2202CC7FD00E64A42 /* Assistants */,
 				02DD5010204778E400E9B63D /* FirstAidKit */,
+				022FCEDA204DB09C00070546 /* Insurance */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -960,6 +1066,7 @@
 		02A277CB202D0CE500321FBD /* UseCase */ = {
 			isa = PBXGroup;
 			children = (
+				0216900F204DC1B20097F150 /* Insurance */,
 				02DD5008204744DF00E9B63D /* Illness */,
 				02D338E8204097E2007FDF7B /* Solicitude */,
 				02EF0F12203218310020A133 /* Pending */,
@@ -1110,7 +1217,7 @@
 		02DD500B2047478500E9B63D /* Illness */ = {
 			isa = PBXGroup;
 			children = (
-				02DD500C2047479500E9B63D /* illnessUseCase.swift */,
+				02DD500C2047479500E9B63D /* NetillnessUseCase.swift */,
 				02F5D05120487F7D009211BB /* Illness.graphql */,
 			);
 			path = Illness;
@@ -1378,11 +1485,12 @@
 				02FE57782020F04300B7E084 /* Convertion */,
 				02FE577E2020F09900B7E084 /* RMUser.swift */,
 				02AF66032023F2F800FE90F2 /* RMFamily.swift */,
-				02E559B52024CDF300D3FC07 /* RMPhoto.swift */,
+				02E559B52024CDF300D3FC07 /* RMAttachment.swift */,
 				02EF0EFC2031FAB10020A133 /* RMPending.swift */,
 				02BF68B6204251A500D03CDA /* RMApplicationFamily.swift */,
 				02ED6F9C204474A900D880F8 /* RMApplicationAssistant.swift */,
 				02DD50042047401000E9B63D /* RMIllness.swift */,
+				02169012204DC3580097F150 /* RMInsurance.swift */,
 			);
 			name = Entries;
 			path = ..;
@@ -1513,6 +1621,7 @@
 				023AAB76201FC2FF00F50207 /* Auth.graphql in Resources */,
 				025742E8203F57F200215A56 /* User.graphql in Resources */,
 				02F5D05220487F7D009211BB /* Illness.graphql in Resources */,
+				02169019204DE17D0097F150 /* Insurance.graphql in Resources */,
 				02F2E4EA201A5DFC002E360E /* Assets.xcassets in Resources */,
 				02D338E720409100007FDF7B /* schema.json in Resources */,
 				022DD8C82028E062008ED417 /* Family.graphql in Resources */,
@@ -1647,6 +1756,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0242E955204E116F00C46D00 /* DetailsInsuranceViewModel.swift in Sources */,
 				02EDD78F203E096F003DA591 /* Application+Ext.swift in Sources */,
 				02D338DF2040823B007FDF7B /* ServiceLocator.swift in Sources */,
 				023AAB40201EBB4900F50207 /* DesignableTabBarController.swift in Sources */,
@@ -1693,10 +1803,12 @@
 				023AAB61201F946200F50207 /* Mapplable.swift in Sources */,
 				023AAB3A201EBB4900F50207 /* UnwindSegue.swift in Sources */,
 				02B79505202E7EC60083CAB7 /* TopViewProfileAssistant.swift in Sources */,
-				02DD500D2047479500E9B63D /* illnessUseCase.swift in Sources */,
+				0216900E204DBFFE0097F150 /* NetInsuranceUseCase.swift in Sources */,
+				02DD500D2047479500E9B63D /* NetillnessUseCase.swift in Sources */,
 				02FE57882020F72A00B7E084 /* Observable+Ext.swift in Sources */,
 				0253E95F2040EC850007CC65 /* NotificationViewModel.swift in Sources */,
 				023AAB34201EBB4900F50207 /* Misc.swift in Sources */,
+				022FCEED204DBD4200070546 /* InsuranceUseCase.swift in Sources */,
 				023AAB51201EC0BA00F50207 /* UseCaseProvider.swift in Sources */,
 				02ED6FA820448EF700D880F8 /* MenuMainNavigator.swift in Sources */,
 				023AAB58201F8B8600F50207 /* User+Mappable.swift in Sources */,
@@ -1709,8 +1821,10 @@
 				02FE5794202105EA00B7E084 /* PreHomeNavigator.swift in Sources */,
 				02C932E4202CC84A00E64A42 /* AssistantViewController.swift in Sources */,
 				0298C7B9202B94160035D493 /* HomeBtnCollectionViewCell.swift in Sources */,
+				022FCEE0204DB13900070546 /* MainInsuranceNavigator.swift in Sources */,
 				02EF0F002031FAFF0020A133 /* Int+Ext.swift in Sources */,
 				023AAAF4201EB9F600F50207 /* ErrorTracker.swift in Sources */,
+				0242E94F204E10C700C46D00 /* DetailsinsuranceView.swift in Sources */,
 				023AAB66201FAA5000F50207 /* NetworkProvider.swift in Sources */,
 				02FE579620210C9B00B7E084 /* Application.swift in Sources */,
 				02C932EC202CC91300E64A42 /* TaskTableView.swift in Sources */,
@@ -1735,6 +1849,7 @@
 				02D55FA5203B54E000858D1B /* UserSubscription.swift in Sources */,
 				02EDD790203E096F003DA591 /* Eureka+Ext.swift in Sources */,
 				02704BC3203759EF0070D6DA /* ProfileNavigator.swift in Sources */,
+				022FCEDC204DB11900070546 /* MainInsuranceViewController.swift in Sources */,
 				0252DBEA2048D691008CB454 /* ILLNESSTYPE+EXT.swift in Sources */,
 				02012DB520360E4E00889401 /* NotificationViewController.swift in Sources */,
 				02FE576F2020E92100B7E084 /* PreHomeViewModel.swift in Sources */,
@@ -1742,6 +1857,7 @@
 				022DD8C62028DFFC008ED417 /* NetFamilyUseCase.swift in Sources */,
 				023AAB6A201FB35C00F50207 /* RxApollo.swift in Sources */,
 				02A277D3202D103C00321FBD /* RMUserUseCase.swift in Sources */,
+				022FCEE2204DB1A900070546 /* InsuranceView.swift in Sources */,
 				023AAAF2201EB9D700F50207 /* ActivityIndicator.swift in Sources */,
 				023AAB42201EBB4900F50207 /* AsyncImageView.swift in Sources */,
 				023AAB3D201EBB4900F50207 /* BlurView.swift in Sources */,
@@ -1757,9 +1873,9 @@
 				02D6BF7B202BC33C00141AAB /* HomeNavigator.swift in Sources */,
 				023AAB6C201FB73A00F50207 /* Dictionary.swift in Sources */,
 				023AAB3F201EBB4900F50207 /* SpringAnimation.swift in Sources */,
+				02169011204DC1C40097F150 /* RMInsuranceUseCase.swift in Sources */,
 				02C932E8202CC8F000E64A42 /* MainAssistantView.swift in Sources */,
 				02DD501D204781DB00E9B63D /* NavigatorType.swift in Sources */,
-				02AF66022023ECC700FE90F2 /* Photo.swift in Sources */,
 				02DD501B20477C2900E9B63D /* MainIllnessViewModel.swift in Sources */,
 				0291AE6C203509A300CD1FB3 /* FamilyViewController.swift in Sources */,
 				02012DB720360EE500889401 /* NotificationsView.swift in Sources */,
@@ -1767,8 +1883,10 @@
 				023AAB39201EBB4900F50207 /* SpringTextField.swift in Sources */,
 				02FE578E2020F86800B7E084 /* UserUseCase.swift in Sources */,
 				025742E6203F3D3A00215A56 /* SearchUserNavigator.swift in Sources */,
+				022FCEE4204DBB2E00070546 /* InsuranceType.swift in Sources */,
 				023AAB68201FAB7300F50207 /* AuthNetwork.swift in Sources */,
 				02EF0EF72031F9A10020A133 /* AddEditPendingViewController.swift in Sources */,
+				02169013204DC3580097F150 /* RMInsurance.swift in Sources */,
 				0263404320423E0B0092D33D /* ApplicationFamily.swift in Sources */,
 				028B6680202285A0003EC625 /* SignUpNavigator.swift in Sources */,
 				02071732202CBAFF00A36FEF /* Constants.swift in Sources */,
@@ -1778,12 +1896,13 @@
 				02F525902024E5D2009F817D /* AddEditFamilyViewController.swift in Sources */,
 				02DD50072047446300E9B63D /* IllnessUseCase.swift in Sources */,
 				023AAB53201F84EB00F50207 /* Family.swift in Sources */,
-				02E559B62024CDF300D3FC07 /* RMPhoto.swift in Sources */,
+				02E559B62024CDF300D3FC07 /* RMAttachment.swift in Sources */,
 				02C932EA202CC90300E64A42 /* MenuMainStevia.swift in Sources */,
 				023AAB4B201EBF6E00F50207 /* User.swift in Sources */,
 				02F5D04E204865AA009211BB /* IllnessAddViewModel.swift in Sources */,
 				028F3E93204631DF00B7CB25 /* ApplicationSolicitudeViewModel.swift in Sources */,
 				02A123DE203514C40013508F /* FamilyCollectionViewCell.swift in Sources */,
+				0216901B204DE1F80097F150 /* Attachment.swift in Sources */,
 				02EF0F0D20320E710020A133 /* SuperProvider.swift in Sources */,
 				02ED6F9F2044755900D880F8 /* ApplicationAssistant+Mappable.swift in Sources */,
 				02EF0F22203229BF0020A133 /* UITableViewX.swift in Sources */,
@@ -1791,6 +1910,7 @@
 				0298C7B7202B91620035D493 /* HomeBtn+UIBtn.swift in Sources */,
 				02D55FA7203B54FD00858D1B /* FamilySubscription.swift in Sources */,
 				025742E2203F3D2400215A56 /* SearchUserView.swift in Sources */,
+				022FCEEB204DBCD400070546 /* Insurance+Mappable.swift in Sources */,
 				0282D3A9203FA57C00FF6663 /* ApplicationUseCase.swift in Sources */,
 				022DD8C42028DCDA008ED417 /* NetUserUseCase.swift in Sources */,
 				02D55FB2203B6D3700858D1B /* FamilyProfileViewModel.swift in Sources */,
@@ -1806,6 +1926,7 @@
 				023AAB04201EBB0900F50207 /* UISliderX.swift in Sources */,
 				023AAB2D201EBB4900F50207 /* DesignableView.swift in Sources */,
 				02A277D8202D4FF500321FBD /* ProfileView.swift in Sources */,
+				02169017204DD9B70097F150 /* InsuresBtn.swift in Sources */,
 				02F2E4E5201A5DFC002E360E /* ViewController.swift in Sources */,
 				023AAB0D201EBB0900F50207 /* UIViewXRadialGradient.swift in Sources */,
 				02BF68B7204251A500D03CDA /* RMApplicationFamily.swift in Sources */,
@@ -1814,8 +1935,10 @@
 				023AAB6F201FBCC300F50207 /* NetAuthUseCase.swift in Sources */,
 				02C68B6A2045F1D5002003FF /* Brightness.swift in Sources */,
 				028B667C20228577003EC625 /* SignUpViewController.swift in Sources */,
+				0242E953204E115B00C46D00 /* DetailsInsuranceNavigator.swift in Sources */,
 				023AAB06201EBB0900F50207 /* UIViewAnchorPoint.swift in Sources */,
 				02BF68B5204250C600D03CDA /* Decodable+Ext.swift in Sources */,
+				022FCEDE204DB12A00070546 /* MainInsuranceViewModel.swift in Sources */,
 				025742E4203F3D2F00215A56 /* SearchUserViewModel.swift in Sources */,
 				02EF0F1B203225ED0020A133 /* PendingViewModel.swift in Sources */,
 				02D338EC20409F91007FDF7B /* SolicitudeViewModel.swift in Sources */,
@@ -1824,6 +1947,8 @@
 				02F5259D2025261F009F817D /* AddEditFamilyViewModel.swift in Sources */,
 				023AAB44201EBB4900F50207 /* Spring.swift in Sources */,
 				02EF0F0B203207680020A133 /* AddEditAssistantViewModel.swift in Sources */,
+				028D0FA6204E14400095A744 /* DetailsInsuranceTableViewCell.swift in Sources */,
+				022FCEEF204DBD9500070546 /* InsuranceNethwork.swift in Sources */,
 				02ED6FA620448D5300D880F8 /* AddAssistantNavigator.swift in Sources */,
 				023AAB08201EBB0900F50207 /* UILabelX.swift in Sources */,
 				02A5A302202A3F96009133BD /* FamilyTableViewCell.swift in Sources */,
@@ -1850,6 +1975,7 @@
 				02EDD78E203E096F003DA591 /* UICollectionViewCell+Ext.swift in Sources */,
 				02D55FAE203B6D2200858D1B /* FamilyView.swift in Sources */,
 				023AAAF8201EBA2B00F50207 /* Reusable.swift in Sources */,
+				0242E951204E10DF00C46D00 /* DetailsInsuranceViewController.swift in Sources */,
 				023AAB36201EBB4900F50207 /* SpringLabel.swift in Sources */,
 				023AAB0B201EBB0900F50207 /* UIButtonX.swift in Sources */,
 				02EDD78D203E096F003DA591 /* UIImage+Ext.swift in Sources */,
@@ -1860,6 +1986,7 @@
 				026F44AE2034A25F0056CD7D /* FindObject.swift in Sources */,
 				02012DB12036033500889401 /* menuNavigator.swift in Sources */,
 				025742ED203F616C00215A56 /* UserInviteTableViewCell.swift in Sources */,
+				022FCEE9204DBC7A00070546 /* Insurance.swift in Sources */,
 				0298C7AF202B85F50035D493 /* UserViewModel.swift in Sources */,
 				02C68B682045F1B4002003FF /* ContrastColor.swift in Sources */,
 				02CD29D32044A8F400879308 /* RMApplicationAssistantUseCase.swift in Sources */,
@@ -1871,6 +1998,7 @@
 				02508D9A201ABAD600C6F030 /* API.swift in Sources */,
 				02A5A306202A4F62009133BD /* Graphql+Mappable.swift in Sources */,
 				022FE36A202CCD58009029AD /* HomeViewModel.swift in Sources */,
+				022FCEE7204DBC5700070546 /* Insurance+Bindable.swift in Sources */,
 				023AAAF6201EBA1100F50207 /* Observable+Extension.swift in Sources */,
 				02FE577F2020F09900B7E084 /* RMUser.swift in Sources */,
 				02F2E4E3201A5DFC002E360E /* AppDelegate.swift in Sources */,

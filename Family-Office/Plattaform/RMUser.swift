@@ -17,7 +17,7 @@ final class RMUser: Object {
     dynamic var email: String = ""
     dynamic var name: String = ""
     dynamic var phone: String = ""
-    dynamic var photo: RMPhoto?
+    dynamic var photo: RMAttachment?
     dynamic var families = List<RMFamily>()
     dynamic var user_type = 0
 

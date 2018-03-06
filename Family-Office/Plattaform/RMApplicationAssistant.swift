@@ -28,7 +28,7 @@ extension RMApplicationAssistant: DomainConvertibleType {
         var solicitude = ApplicationAssistant()
         solicitude.updated_at = updated_at
         solicitude.assistant = assistant.asDomain()
-        solicitude.user = user.asDomain()
+        solicitude.user =  user.asDomain()
         solicitude.status = status
         solicitude.created_at = created_at
         return solicitude
@@ -36,10 +36,11 @@ extension RMApplicationAssistant: DomainConvertibleType {
 }
 extension ApplicationAssistant: RealmRepresentable {
     func asRealm() -> RMApplicationAssistant {
+        let realm = try! Realm()
         return RMApplicationAssistant.build({ (obj) in
             obj.uid = uid
-            obj.assistant = assistant.asRealm()
-            obj.user = user.asRealm()
+            obj.assistant = realm.object(ofType: RMUser.self, forPrimaryKey: assistant.uid)
+            obj.user = realm.object(ofType: RMUser.self, forPrimaryKey: user.uid)
             obj.status = status
             obj.updated_at = updated_at
             obj.created_at = created_at

@@ -12,7 +12,7 @@ public struct Family: Codable {
 
     public var uid: String = ""
     public var name: String = ""
-    public var photo: Photo?
+    public var photo: Attachment?
     public var admin: String? = ""
     public var members = [User]()
     public var isSelected = false
@@ -41,7 +41,7 @@ public struct Family: Codable {
 
             uid = try values.decode(String.self, forKey: .uid)
 
-            photo = try! values.decodeIfPresent(Photo.self, forKey: .photo)
+            photo = try! values.decodeIfPresent(Attachment.self, forKey: .photo)
             members = values.decodeSafely([[String:User]].self, forKey: .members)?
                 .flatMap({$0.flatMap({$0.value})})
                 .filter({!$0.uid.isEmpty}) ?? []

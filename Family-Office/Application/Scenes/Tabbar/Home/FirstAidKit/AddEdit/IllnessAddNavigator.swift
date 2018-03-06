@@ -22,6 +22,7 @@ final class IllnessAddNavigator: NavigatorType {
         if let model = sender as? Illness {
             view.model = Variable(model)
         }
+        
         view.viewModel = IllnessAddViewModel(navigator: self, useCase: NetUseCaseProvider().makeIllnessUseCase())
         navigationController?.pushViewController(view, animated: true)
     }

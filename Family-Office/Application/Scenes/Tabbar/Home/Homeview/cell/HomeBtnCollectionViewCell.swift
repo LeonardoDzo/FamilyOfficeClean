@@ -11,7 +11,7 @@ import Stevia
 import RxSwift
 import RxCocoa
 
-class HomeBtnCollectionViewCell: UICollectionViewX {
+class HomeBtnCollectionViewCell: UICollectionViewCellX {
     var btn: UIButtonX! = UIButtonX()
     var model: HomeBtn!
     var viewModel: HomeCellViewmodel!

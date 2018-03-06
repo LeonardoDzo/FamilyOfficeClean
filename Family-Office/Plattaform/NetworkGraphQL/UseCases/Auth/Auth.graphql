@@ -26,7 +26,7 @@ mutation SignUp($name: String!, $email:String!, $password: String!, $phone: Stri
             families {
                 family {
                     photo{
-                    ...PhotoDetails
+                    ...AttachmentDetails
                     },
                     name,
                     id
@@ -41,6 +41,9 @@ fragment UserDetails on User {
     email,
     phone,
     user_type,
+    photo {
+     ...AttachmentDetails
+    },
     families {
         family {
             ...FamilyDetails

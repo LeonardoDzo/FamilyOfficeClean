@@ -10,17 +10,18 @@ mutation CreateFamily($name:String!) {
     }
 }
 
-fragment PhotoDetails on Attachment {
+fragment AttachmentDetails on Attachment {
     mime,
     ext,
     url,
-    name
+    name,
+    routes
 }
 
 fragment FamilyDetails on Family {
     id,
     name,
     photo{
-    ...PhotoDetails
+    ...AttachmentDetails
     }
 }

@@ -16,14 +16,12 @@ final class MainIllnessNavigator: NavigatorType {
     weak var navigationController: UINavigationController?
     
     init(nc: UINavigationController) {
-        self.navigationController = nc
-        navigationController?.navigationBar.barTintColor = MODULE.FIRSTKIT.color()
-        navigationController?.navigationBar.tintColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-       
+        self.navigationController = nc       
     }
     func toMain(sender: Any? = nil) {
         let view = MainIllnessViewController()
         view.viewModel = MainIllnessViewModel(navigator: self, useCase: NetUseCaseProvider().makeIllnessUseCase())
+        
         self.navigationController?.pushViewController(view, animated: true)
     }
     

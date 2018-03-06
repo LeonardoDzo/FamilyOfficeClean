@@ -1,0 +1,12 @@
+query AllInsurances{
+    allInsurances {
+        id,
+        name,
+        policy,
+        telephone,
+        type,
+        attachment {
+            ...AttachmentDetails
+        }
+    }
+}

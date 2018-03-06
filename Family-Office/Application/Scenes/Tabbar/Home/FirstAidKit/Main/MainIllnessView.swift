@@ -57,6 +57,6 @@ class MainIllness: UIViewX {
     }
 
     func styleTabbar(_ tabbar: UITabBar) -> Void {
-        tabbar.tintColor = MODULE.FIRSTKIT.color()
+        tabbar.tintColor = MODULE.FIRSTKIT.color
     }
 }

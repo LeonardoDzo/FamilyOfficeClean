@@ -16,9 +16,29 @@ enum MODULE {
         INSURANCE,
         FIRSTKIT,
         ASSISTANT
+    
+    var color: UIColor {
+        switch self {
+        case .CALENDAR:
+            return #colorLiteral(red: 1, green: 0.2901960784, blue: 0.3529411765, alpha: 1)
+        case .CHAT:
+            return #colorLiteral(red: 0.01568627451, green: 0.7019607843, blue: 0.9960784314, alpha: 1)
+        case .SAFEBOX:
+            return #colorLiteral(red: 0.9607843137, green: 0.7215686275, blue: 0.1176470588, alpha: 1)
+        case .INSURANCE:
+            return #colorLiteral(red: 0.1137254902, green: 0.7176470588, blue: 0.4352941176, alpha: 1)
+        case .FIRSTKIT:
+            return #colorLiteral(red: 0.5490196078, green: 0.5294117647, blue: 0.7843137255, alpha: 1)
+        case .ASSISTANT:
+            return #colorLiteral(red: 0.9529411765, green: 0.5137254902, blue: 0.3529411765, alpha: 1)
+        }
+    }
+   
 }
 extension MODULE {
-
+    
+    
+    
     public func iconBtn() -> UIImage {
         switch self {
         case .CALENDAR:
@@ -37,32 +57,15 @@ extension MODULE {
         }
     }
 
-    public func color() -> UIColor {
-        switch self {
-        case .CALENDAR:
-            return #colorLiteral(red: 1, green: 0.2901960784, blue: 0.3529411765, alpha: 1)
-        case .CHAT:
-            return #colorLiteral(red: 0.01568627451, green: 0.7019607843, blue: 0.9960784314, alpha: 1)
-        case .SAFEBOX:
-            return #colorLiteral(red: 0.9607843137, green: 0.7215686275, blue: 0.1176470588, alpha: 1)
-        case .INSURANCE:
-            return #colorLiteral(red: 0.1137254902, green: 0.7176470588, blue: 0.4352941176, alpha: 1)
-        case .FIRSTKIT:
-            return #colorLiteral(red: 0.5490196078, green: 0.5294117647, blue: 0.7843137255, alpha: 1)
-        case .ASSISTANT:
-            return #colorLiteral(red: 0.9529411765, green: 0.5137254902, blue: 0.3529411765, alpha: 1)
-        }
-    }
-
 }
 
 struct HomeBtn {
     var photo: UIImage!
     var color: UIColor!
-    var module: MODULE!
+    var module: MODULE
     init(_ module: MODULE) {
         self.photo = module.iconBtn()
-        self.color = module.color()
+        self.color = module.color
         self.module = module
     }
     static let btns: [HomeBtn] = {

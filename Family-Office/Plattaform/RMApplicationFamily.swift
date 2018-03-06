@@ -36,10 +36,11 @@ extension RMApplicationFamily: DomainConvertibleType {
 }
 extension ApplicationFamily: RealmRepresentable {
     func asRealm() -> RMApplicationFamily {
+         let realm = try! Realm()
         return RMApplicationFamily.build({ (obj) in
             obj.uid = uid
-            obj.family = family.asRealm()
-            obj.user = user.asRealm()
+            obj.family = realm.object(ofType: RMFamily.self, forPrimaryKey: family.uid)
+            obj.user = realm.object(ofType: RMUser.self, forPrimaryKey: user.uid)
             obj.status = status
             obj.updated_at = updated_at
             obj.created_at = created_at

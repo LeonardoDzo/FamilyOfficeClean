@@ -43,8 +43,14 @@ public final class RMUseCaseProvider: UseCaseProvider {
         let repository = Repository<ApplicationAssistant>(configuration: configuration)
         return RMApplicationAssistantUseCase(repository: repository)
     }
+    
     public func makeIllnessUseCase() -> IllnessUseCase {
         let repository = Repository<Illness>(configuration: configuration)
         return RMIllnessUseCase(repository: repository)
+    }
+    
+    public func makeInsuranceUseCase() -> InsuranceUseCase {
+        let repository = Repository<Insurance>(configuration: configuration)
+        return RMInsuranceUseCase(repository: repository)
     }
 }

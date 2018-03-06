@@ -16,7 +16,7 @@ public struct User: Codable {
     public var name: String = ""
     public var phone: String = ""
     public var uid: String = ""
-    public var photo: Photo?
+    public var photo: Attachment?
     public var families: [Family] = [Family]()
     public var nss = ""
     public var rfc = ""
@@ -65,7 +65,7 @@ public struct User: Codable {
             phone = try values.decodeIfPresent(String.self, forKey: .phone) ?? ""
             uid = try values.decode(String.self, forKey: .uid)
             birth = try values.decodeIfPresent(Int.self, forKey: .birth) ?? -1
-            photo = try values.decodeIfPresent(Photo.self, forKey: .photo)
+            photo = try values.decodeIfPresent(Attachment.self, forKey: .photo)
             email = try values.decode(String.self, forKey: .email)
             address = try! values.decodeIfPresent(Address.self, forKey: .address)
             if let utype : String = values.decodeSafely(.user_type) {

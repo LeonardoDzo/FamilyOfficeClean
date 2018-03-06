@@ -38,7 +38,7 @@ class IllnessViewController: FormViewController {
             <<< AlertRow<ILLNESSTYPE>() { row in
                 row.title = "Que tipo es?"
                 row.options = [ILLNESSTYPE.Disease, ILLNESSTYPE.Pain]
-                row.value = .Disease
+                row.value = model.value.type
                 
                 }.onChange {
                     self.model.value.type = $0.value ?? .Disease
@@ -47,6 +47,7 @@ class IllnessViewController: FormViewController {
             <<< TextRow(){ row in
                 row.placeholder = "Nombre del dolor/enfermedad"
                 row.add(ruleSet: rules)
+                row.value = model.value.name
                 }.onChange {
                     self.model.value.name = $0.value ?? ""
             }
@@ -54,6 +55,7 @@ class IllnessViewController: FormViewController {
                 row.title = "Medicina(s)"
                 row.placeholder = "Ingrese la medicina para dolor/enfermedad"
                 row.add(ruleSet: rules)
+                row.value = model.value.medicines
                 }.onChange {
                     self.model.value.medicines = $0.value ?? ""
             }
@@ -62,6 +64,7 @@ class IllnessViewController: FormViewController {
                 row.title = "Dosis/Detalles"
                 row.placeholder = "Ingrese la dosis y/o detalles"
                 row.add(ruleSet: rules)
+                row.value = model.value.details
                 }.onChange {
                     self.model.value.details = $0.value ?? ""
                 }

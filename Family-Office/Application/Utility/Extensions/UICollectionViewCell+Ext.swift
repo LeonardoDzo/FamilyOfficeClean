@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-class UICollectionViewX: UICollectionViewCell, Springable {
+class UICollectionViewCellX: UICollectionViewCell, Springable {
 
     @IBInspectable public var autostart: Bool = false
     @IBInspectable public var autohide: Bool = false

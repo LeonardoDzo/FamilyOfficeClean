@@ -28,12 +28,11 @@ final class RMIllness: Object {
 extension RMIllness: DomainConvertibleType {
     
     func asDomain() -> Illness {
-        let realm = try! Realm()
         var illness = Illness()
         illness.creator = creator.asDomain()
         illness.details = details
         illness.uid = uid
-        illness.family = realm.object(ofType: RMFamily.self, forPrimaryKey: family.uid)?.asDomain()
+        illness.family = family.asDomain()
         illness.medicines = medicines
         illness.type = type
         illness.name = name
@@ -47,7 +46,7 @@ extension Illness: RealmRepresentable {
         return RMIllness.build({ (obj) in
             obj.details = details
             obj.family = realm.object(ofType: RMFamily.self, forPrimaryKey: family.uid)
-            obj.creator = creator.asRealm()
+            obj.creator = realm.object(ofType: RMUser.self, forPrimaryKey: creator.uid)
             obj.medicines = medicines
             obj.name = name
         })
