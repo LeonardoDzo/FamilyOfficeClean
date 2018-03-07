@@ -15,6 +15,8 @@
 		0202E666203379B6001494D9 /* MainSocketProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0202E665203379B6001494D9 /* MainSocketProvider.swift */; };
 		0207172F202CBAB900A36FEF /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0207172E202CBAB900A36FEF /* Default-568h@2x.png */; };
 		02071732202CBAFF00A36FEF /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02071731202CBAFF00A36FEF /* Constants.swift */; };
+		0211E7BA204F049200D3766E /* webViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0211E7B9204F049200D3766E /* webViewViewModel.swift */; };
+		0211E7C0204F24D700D3766E /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0211E7BF204F24D700D3766E /* ChatViewController.swift */; };
 		0216900E204DBFFE0097F150 /* NetInsuranceUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0216900D204DBFFE0097F150 /* NetInsuranceUseCase.swift */; };
 		02169011204DC1C40097F150 /* RMInsuranceUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02169010204DC1C40097F150 /* RMInsuranceUseCase.swift */; };
 		02169013204DC3580097F150 /* RMInsurance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02169012204DC3580097F150 /* RMInsurance.swift */; };
@@ -160,6 +162,9 @@
 		02B79505202E7EC60083CAB7 /* TopViewProfileAssistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B79504202E7EC60083CAB7 /* TopViewProfileAssistant.swift */; };
 		02BF68B5204250C600D03CDA /* Decodable+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BF68B4204250C600D03CDA /* Decodable+Ext.swift */; };
 		02BF68B7204251A500D03CDA /* RMApplicationFamily.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BF68B6204251A500D03CDA /* RMApplicationFamily.swift */; };
+		02C24011204F021000BD64D3 /* webView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C24010204F021000BD64D3 /* webView.swift */; };
+		02C24013204F022600BD64D3 /* webViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C24012204F022600BD64D3 /* webViewController.swift */; };
+		02C24015204F026E00BD64D3 /* webNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C24014204F026E00BD64D3 /* webNavigator.swift */; };
 		02C68B682045F1B4002003FF /* ContrastColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C68B672045F1B4002003FF /* ContrastColor.swift */; };
 		02C68B6A2045F1D5002003FF /* Brightness.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C68B692045F1D5002003FF /* Brightness.swift */; };
 		02C932E4202CC84A00E64A42 /* AssistantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C932E3202CC84A00E64A42 /* AssistantViewController.swift */; };
@@ -188,6 +193,7 @@
 		02D55FAE203B6D2200858D1B /* FamilyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D55FAD203B6D2200858D1B /* FamilyView.swift */; };
 		02D55FB0203B6D2C00858D1B /* FamilyNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D55FAF203B6D2C00858D1B /* FamilyNavigator.swift */; };
 		02D55FB2203B6D3700858D1B /* FamilyProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D55FB1203B6D3700858D1B /* FamilyProfileViewModel.swift */; };
+		02D5DF9F204F6E3200303C98 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5DF9E204F6E3200303C98 /* MessageTableViewCell.swift */; };
 		02D6BF7B202BC33C00141AAB /* HomeNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D6BF7A202BC33C00141AAB /* HomeNavigator.swift */; };
 		02DD500120473CF700E9B63D /* Illness.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DD500020473CF700E9B63D /* Illness.swift */; };
 		02DD500320473D8B00E9B63D /* Illness+Mappable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DD500220473D8B00E9B63D /* Illness+Mappable.swift */; };
@@ -282,6 +288,8 @@
 		0202E665203379B6001494D9 /* MainSocketProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSocketProvider.swift; sourceTree = "<group>"; };
 		0207172E202CBAB900A36FEF /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		02071731202CBAFF00A36FEF /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		0211E7B9204F049200D3766E /* webViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = webViewViewModel.swift; sourceTree = "<group>"; };
+		0211E7BF204F24D700D3766E /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		0216900D204DBFFE0097F150 /* NetInsuranceUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetInsuranceUseCase.swift; sourceTree = "<group>"; };
 		02169010204DC1C40097F150 /* RMInsuranceUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMInsuranceUseCase.swift; sourceTree = "<group>"; };
 		02169012204DC3580097F150 /* RMInsurance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMInsurance.swift; sourceTree = "<group>"; };
@@ -429,6 +437,9 @@
 		02B79504202E7EC60083CAB7 /* TopViewProfileAssistant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopViewProfileAssistant.swift; sourceTree = "<group>"; };
 		02BF68B4204250C600D03CDA /* Decodable+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Decodable+Ext.swift"; sourceTree = "<group>"; };
 		02BF68B6204251A500D03CDA /* RMApplicationFamily.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMApplicationFamily.swift; sourceTree = "<group>"; };
+		02C24010204F021000BD64D3 /* webView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = webView.swift; sourceTree = "<group>"; };
+		02C24012204F022600BD64D3 /* webViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = webViewController.swift; sourceTree = "<group>"; };
+		02C24014204F026E00BD64D3 /* webNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = webNavigator.swift; sourceTree = "<group>"; };
 		02C68B672045F1B4002003FF /* ContrastColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContrastColor.swift; sourceTree = "<group>"; };
 		02C68B692045F1D5002003FF /* Brightness.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Brightness.swift; sourceTree = "<group>"; };
 		02C932E3202CC84A00E64A42 /* AssistantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistantViewController.swift; sourceTree = "<group>"; };
@@ -457,6 +468,7 @@
 		02D55FAD203B6D2200858D1B /* FamilyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilyView.swift; sourceTree = "<group>"; };
 		02D55FAF203B6D2C00858D1B /* FamilyNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilyNavigator.swift; sourceTree = "<group>"; };
 		02D55FB1203B6D3700858D1B /* FamilyProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilyProfileViewModel.swift; sourceTree = "<group>"; };
+		02D5DF9E204F6E3200303C98 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
 		02D6BF7A202BC33C00141AAB /* HomeNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNavigator.swift; sourceTree = "<group>"; };
 		02DD500020473CF700E9B63D /* Illness.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Illness.swift; sourceTree = "<group>"; };
 		02DD500220473D8B00E9B63D /* Illness+Mappable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Illness+Mappable.swift"; sourceTree = "<group>"; };
@@ -592,6 +604,39 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
+		0211E7BB204F23A200D3766E /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				02D5DF9D204F6E1800303C98 /* cell */,
+				0211E7BC204F245F00D3766E /* chats */,
+				0211E7BD204F24AD00D3766E /* groups */,
+				0211E7BE204F24B600D3766E /* members */,
+				0211E7BF204F24D700D3766E /* ChatViewController.swift */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
+		0211E7BC204F245F00D3766E /* chats */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = chats;
+			sourceTree = "<group>";
+		};
+		0211E7BD204F24AD00D3766E /* groups */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = groups;
+			sourceTree = "<group>";
+		};
+		0211E7BE204F24B600D3766E /* members */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = members;
+			sourceTree = "<group>";
+		};
 		0216900C204DBFEE0097F150 /* Insurance */ = {
 			isa = PBXGroup;
 			children = (
@@ -643,6 +688,7 @@
 			children = (
 				0242E94D204E109700C46D00 /* index */,
 				0242E94C204E108A00C46D00 /* details */,
+				02C2400F204F01E800BD64D3 /* viewInsurance */,
 			);
 			path = Insurance;
 			sourceTree = "<group>";
@@ -1025,9 +1071,10 @@
 			children = (
 				02A0C49E202E221C0045B6B6 /* Menus */,
 				0298C7B1202B8DEA0035D493 /* Homeview */,
-				02C932E2202CC7FD00E64A42 /* Assistants */,
-				02DD5010204778E400E9B63D /* FirstAidKit */,
+				0211E7BB204F23A200D3766E /* Chat */,
 				022FCEDA204DB09C00070546 /* Insurance */,
+				02DD5010204778E400E9B63D /* FirstAidKit */,
+				02C932E2202CC7FD00E64A42 /* Assistants */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -1118,6 +1165,17 @@
 			path = ProfileAssistant;
 			sourceTree = "<group>";
 		};
+		02C2400F204F01E800BD64D3 /* viewInsurance */ = {
+			isa = PBXGroup;
+			children = (
+				02C24010204F021000BD64D3 /* webView.swift */,
+				02C24012204F022600BD64D3 /* webViewController.swift */,
+				0211E7B9204F049200D3766E /* webViewViewModel.swift */,
+				02C24014204F026E00BD64D3 /* webNavigator.swift */,
+			);
+			path = viewInsurance;
+			sourceTree = "<group>";
+		};
 		02C932E2202CC7FD00E64A42 /* Assistants */ = {
 			isa = PBXGroup;
 			children = (
@@ -1202,6 +1260,14 @@
 			isa = PBXGroup;
 			children = (
 				02A123DD203514C40013508F /* FamilyCollectionViewCell.swift */,
+			);
+			path = cell;
+			sourceTree = "<group>";
+		};
+		02D5DF9D204F6E1800303C98 /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				02D5DF9E204F6E3200303C98 /* MessageTableViewCell.swift */,
 			);
 			path = cell;
 			sourceTree = "<group>";
@@ -1661,6 +1727,7 @@
 				"${BUILT_PRODUCTS_DIR}/ActionCableClient/ActionCableClient.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Apollo/Apollo.framework",
+				"${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework",
 				"${BUILT_PRODUCTS_DIR}/Eureka/Eureka.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
@@ -1675,9 +1742,12 @@
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
+				"${BUILT_PRODUCTS_DIR}/RxDataSources/RxDataSources.framework",
 				"${BUILT_PRODUCTS_DIR}/RxRealm/RxRealm.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/RxWebKit/RxWebKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SideMenu/SideMenu.framework",
+				"${BUILT_PRODUCTS_DIR}/SlackTextViewController/SlackTextViewController.framework",
 				"${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework",
 				"${BUILT_PRODUCTS_DIR}/SteviaLayout/Stevia.framework",
 				"${BUILT_PRODUCTS_DIR}/Whisper/Whisper.framework",
@@ -1687,6 +1757,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ActionCableClient.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Apollo.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Differentiator.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Eureka.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
@@ -1701,9 +1772,12 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxDataSources.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxRealm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxWebKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SideMenu.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SlackTextViewController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Starscream.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Stevia.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Whisper.framework",
@@ -1776,6 +1850,7 @@
 				02A123DC20350EB40013508F /* FamilyViewModel.swift in Sources */,
 				023AAAF0201EB9B300F50207 /* ViewModelType.swift in Sources */,
 				023AAB63201FA9ED00F50207 /* Network.swift in Sources */,
+				0211E7BA204F049200D3766E /* webViewViewModel.swift in Sources */,
 				0252DBE82048D405008CB454 /* Illness+Bindible.swift in Sources */,
 				023AAB3C201EBB4900F50207 /* KeyboardLayoutConstraint.swift in Sources */,
 				02D338EE2040AE0A007FDF7B /* UserInviteCellViewModel.swift in Sources */,
@@ -1882,6 +1957,7 @@
 				023AAB35201EBB4900F50207 /* DesignableTextField.swift in Sources */,
 				023AAB39201EBB4900F50207 /* SpringTextField.swift in Sources */,
 				02FE578E2020F86800B7E084 /* UserUseCase.swift in Sources */,
+				02C24015204F026E00BD64D3 /* webNavigator.swift in Sources */,
 				025742E6203F3D3A00215A56 /* SearchUserNavigator.swift in Sources */,
 				022FCEE4204DBB2E00070546 /* InsuranceType.swift in Sources */,
 				023AAB68201FAB7300F50207 /* AuthNetwork.swift in Sources */,
@@ -1932,11 +2008,15 @@
 				02BF68B7204251A500D03CDA /* RMApplicationFamily.swift in Sources */,
 				02D338E12040841F007FDF7B /* NetSolicitudeUseCase.swift in Sources */,
 				023AAB2E201EBB4900F50207 /* SoundPlayer.swift in Sources */,
+				0211E7C0204F24D700D3766E /* ChatViewController.swift in Sources */,
 				023AAB6F201FBCC300F50207 /* NetAuthUseCase.swift in Sources */,
+				02D5DF9F204F6E3200303C98 /* MessageTableViewCell.swift in Sources */,
 				02C68B6A2045F1D5002003FF /* Brightness.swift in Sources */,
 				028B667C20228577003EC625 /* SignUpViewController.swift in Sources */,
 				0242E953204E115B00C46D00 /* DetailsInsuranceNavigator.swift in Sources */,
+				02C24011204F021000BD64D3 /* webView.swift in Sources */,
 				023AAB06201EBB0900F50207 /* UIViewAnchorPoint.swift in Sources */,
+				02C24013204F022600BD64D3 /* webViewController.swift in Sources */,
 				02BF68B5204250C600D03CDA /* Decodable+Ext.swift in Sources */,
 				022FCEDE204DB12A00070546 /* MainInsuranceViewModel.swift in Sources */,
 				025742E4203F3D2F00215A56 /* SearchUserViewModel.swift in Sources */,

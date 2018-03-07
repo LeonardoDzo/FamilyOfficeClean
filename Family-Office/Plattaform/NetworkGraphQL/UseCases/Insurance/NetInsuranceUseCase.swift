@@ -26,4 +26,3 @@ final class NetInsuranceUseCase: InsuranceUseCase {
         return Variable(()).asObservable()
     }
 }
-

@@ -13,7 +13,7 @@ class TopViewProfileAssistant: UIViewX, UserBindable {
     
     var user: User!
 
-    var profileImage: UIImageViewX! = UIImageViewX()
+    var photoProfile: UIImageViewX! = UIImageViewX()
     var nameLbl: UILabelX! = UILabelX()
     var taskCompleteBtn: BtnWithLbl! = BtnWithLbl()
     var allTaskBtn: BtnWithLbl! = BtnWithLbl()
@@ -40,7 +40,7 @@ class TopViewProfileAssistant: UIViewX, UserBindable {
     func render() {
 
         sv(
-            profileImage,
+            photoProfile,
             nameLbl,
             taskCompleteBtn,
             allTaskBtn,
@@ -49,7 +49,7 @@ class TopViewProfileAssistant: UIViewX, UserBindable {
 
         layout(
             70,
-            profileImage,
+            photoProfile,
             5,
             nameLbl,
             10,
@@ -57,8 +57,7 @@ class TopViewProfileAssistant: UIViewX, UserBindable {
             ""
         )
         taskCompleteBtn.centerHorizontally()
-        profileImage.style(self.setStyleImage)
-        profileImage.image = #imageLiteral(resourceName: "icons8-businessman").maskWithColor(color: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0))
+        photoProfile.style(self.setStyleImage)
         nameLbl.centerHorizontally()
         nameLbl.font =  UIFont(name: "Roboto", size: 20)
         nameLbl.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)

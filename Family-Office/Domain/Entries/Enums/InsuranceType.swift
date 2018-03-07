@@ -8,11 +8,24 @@
 
 import Foundation
 
-@objc enum INSURANCETYPE: Int, Decodable  {
+@objc enum INSURANCETYPE: Int, Decodable, CustomStringConvertible  {
     case cars,
          homes,
          lifes,
          med
+    
+    var description: String {
+        switch self {
+        case .cars:
+            return "Seguros de Autos"
+        case .homes:
+            return "Seguros de Hogar"
+        case .lifes:
+            return "Seguro de Vida"
+        case .med:
+            return "Seguro de Médico"
+        }
+    }
     
 }
 extension INSURANCETYPE {

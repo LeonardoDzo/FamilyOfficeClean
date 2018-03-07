@@ -25,13 +25,14 @@ class DetailsInsuranceViewController: UIViewController {
     func setupView() -> Void {
         self.myCustomView = DetailsInsuranceView()
         self.view = self.myCustomView
+        self.title = viewModel.type.description
         bindToViewModel()
     }
     func bindToViewModel() -> Void {
         let willAppear = rx.methodInvoked(#selector(self.viewWillAppear))
             .asDriverOnErrorJustComplete()
             .mapToVoid()
-        let input = DetailsInsurancesViewModel.Input(trigger: willAppear)
+        let input = DetailsInsurancesViewModel.Input(trigger: willAppear, selectedTrigger: self.myCustomView.tableView.rx.itemSelected.asDriver())
         let output = viewModel.transform(input: input)
         
         output.insurances.drive(self.myCustomView.tableView.rx.items(cellIdentifier: DetailsInsuranceTableViewCell.reuseID, cellType: DetailsInsuranceTableViewCell.self)) {
@@ -39,6 +40,8 @@ class DetailsInsuranceViewController: UIViewController {
             cell.bind(insurance: model)
             self.myCustomView.tableView.backgroundView = nil
         }.disposed(by: disposeBag)
+        
+        output.selected.drive().disposed(by: disposeBag)
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

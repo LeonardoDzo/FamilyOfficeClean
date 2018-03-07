@@ -7,6 +7,12 @@ target 'Family-Office' do
 
   # Pods for Family-Office
 	pod 'ReactiveSwift'
+    pod 'RxSwift',    '~> 4.0'
+    pod 'RxCocoa',    '~> 4.0'
+    pod 'RxWebKit'
+    pod 'RxDataSources'
+    pod 'RxRealm'
+    
 	pod 'SteviaLayout'
 	pod 'Whisper'
 	pod 'ImagePicker'
@@ -16,12 +22,11 @@ target 'Family-Office' do
     pod 'GenericPasswordRow', '~> 3.0'
 	pod 'Kingfisher', '~> 4.0'
     pod 'Alamofire'
-	pod 'RxSwift',    '~> 4.0'
-    pod 'RxCocoa',    '~> 4.0'
+	
 	pod 'Apollo', '~> 0.7.0'
     pod 'SideMenu'
-	pod 'RxRealm'
     pod 'GoogleSignIn'
     pod 'ActionCableClient'
     pod 'Hero'
+    pod 'SlackTextViewController'
 end

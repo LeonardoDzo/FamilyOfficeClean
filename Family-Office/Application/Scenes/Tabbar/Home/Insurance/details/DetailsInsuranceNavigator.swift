@@ -22,4 +22,8 @@ final class DetailsInsuranceNavigator: NavigatorType {
             navigationController?.pushViewController(view, animated: true)
         }
     }
+    func toWebView(url: String?) -> Void {
+        let navigator = webNavigator(navigationController: navigationController!)
+        navigator.toMain(sender: url)
+    }
 }

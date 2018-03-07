@@ -51,7 +51,7 @@ extension UserBindable {
             emailLbl.text = user.email
         }
         if let photo = photoProfile {
-            if let url  = URL(string: "") {
+            if let url = URL(string: user.photo?.routes[2] ?? "") {
                 photo.kf.setImage(with: url)
             } else {
                 photo.image = #imageLiteral(resourceName: "profile_default")

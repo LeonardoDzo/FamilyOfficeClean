@@ -84,6 +84,10 @@ class HomeNavigator: HomeNavigatorPr {
                 navigator.toMain()
                 navigationController.present(mainNavigationController, animated: true, completion: nil)
             break
+            case .CHAT:
+                let view = ChatViewController()
+                self.navigationController.pushViewController(view, animated: true)
+                break
         default:
             break
         }
