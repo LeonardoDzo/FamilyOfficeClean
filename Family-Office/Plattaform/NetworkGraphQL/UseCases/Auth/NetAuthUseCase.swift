@@ -9,7 +9,7 @@
 import Foundation
 import RxSwift
 final class NetAuthUseCase: AuthUseCase {
-
+    private let disposeBag = DisposeBag()
     private let network: AuthNetwork!
     private let provider: RMUseCaseProvider!
     init(_ network: AuthNetwork, provider: RMUseCaseProvider = RMUseCaseProvider()) {
@@ -32,14 +32,7 @@ final class NetAuthUseCase: AuthUseCase {
         self.provider.makeUseCase().save(user: authmodel.user).subscribe().dispose()
         
         NetUseCaseProvider().makeUseCase().getAssistants().subscribe().dispose()
-        
-        authmodel.user.families.forEach({ (family) in
-            MainSocket.shareIntstance.channel.action("execute", with: FamilySubscription(family))
-            family.members.forEach({ (u) in
-                self.provider.makeUseCase().save(user: u).subscribe().dispose()
-            })
-
-        })
+        NetUseCaseProvider().makeFamilyUseCase().getMyFamilies(uid: authmodel.user.uid).subscribe().disposed(by: disposeBag)
     }
 
     func signIn(email: String, password: String) -> Observable<User> {

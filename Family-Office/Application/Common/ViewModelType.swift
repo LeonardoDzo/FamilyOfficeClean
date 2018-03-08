@@ -30,10 +30,11 @@ extension ViewModelType {
         })
     }
     
-    func getMyFamilies(_ familyUseCase: FamilyUseCase, _ uid: String = UserDefaults().value(forKey: "uid") as? String ?? "") -> SharedSequence<DriverSharingStrategy, [Family]> {
+    func getMyFamilies(_ familyUseCase: FamilyMembershipUseCase, _ uid: String = UserDefaults().value(forKey: "uid") as? String ?? "") -> SharedSequence<DriverSharingStrategy, [Family]> {
         let errorTracker = ErrorTracker()
-        return familyUseCase.getMyFamilies(uid: uid)
+        return familyUseCase.get(byUser: uid)
             .trackError(errorTracker)
+            .map({$0.flatMap({$0.family})})
             .asDriverOnErrorJustComplete()
      
     }
@@ -45,6 +46,14 @@ extension ViewModelType {
                 .trackError(errorTracker)
                 .asDriverOnErrorJustComplete()
         })
+    }
+    
+    func getMembers(family: Family) -> SharedSequence<DriverSharingStrategy, [User]> {
+        return RMUseCaseProvider().makeFamilyMembershipUseCase()
+            .get(byFamily: family.uid)
+            .map({$0.flatMap({$0.user})})
+            .asDriverOnErrorJustComplete()
+        
     }
 
     func getUser(_ input: Driver<Void>, _ userUseCase: UserUseCase, _ uid: String = UserDefaults().value(forKey: "uid") as? String ?? "") -> Driver<User> {

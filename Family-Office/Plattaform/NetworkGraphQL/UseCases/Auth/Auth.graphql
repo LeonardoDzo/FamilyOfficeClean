@@ -43,11 +43,18 @@ fragment UserDetails on User {
     user_type,
     photo {
      ...AttachmentDetails
+    }
+}
+
+fragment FamilyMembershipDetails on FamilyMembership {
+    id,
+    added_at,
+    is_admin,
+    user {
+        ...UserDetails
     },
-    families {
-        family {
-            ...FamilyDetails
-        }
+    family {
+        ...FamilyDetails
     }
 }
 

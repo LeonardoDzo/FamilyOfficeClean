@@ -35,7 +35,13 @@ final class NetFamilyUseCase: FamilyUseCase {
     func getFamilyActive() -> Observable<Family> {
         return Variable(Family(name: "")).asObservable()
     }
-    func getMyFamilies(uid: String) -> Observable<[Family]> {
-        return Variable([]).asObservable()
+    func getMyFamilies(uid: String = "") -> Observable<[Family]> {
+        return network.myFamilies().do(onNext: {fams in
+            fams.forEach({
+                $0.members.forEach({MainSocket.shareIntstance.channel.action("execute", with: UserSubscription($0.user))})
+                MainSocket.shareIntstance.channel.action("execute", with: FamilySubscription($0))
+                self.provider.makeFamilyUseCase().save(fam: $0).subscribe().dispose()
+            })
+        })
     }
 }

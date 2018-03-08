@@ -50,7 +50,7 @@ final class RMFamilyUseCase<Repository>: FamilyUseCase where Repository: Abstrac
     }
     
     func getMyFamilies(uid: String) -> Observable<[Family]> {
-        let predicate = NSPredicate(format: "ANY members.uid == %@", uid)
+        let predicate = NSPredicate(format: "ANY members.user.uid == %@", uid)
         return repository.query(with: predicate, sortDescriptors: [])
         
     }

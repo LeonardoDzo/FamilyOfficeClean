@@ -18,12 +18,15 @@ final class PreHomeViewModel: ViewModelType {
     private var families = [Family]()
     private let userUseCase: UserUseCase!
     private let familyUseCase: FamilyUseCase!
+    private let familyMembershipUseCase: FamilyMembershipUseCase!
+    
 
-    init(user: User, navigator: PreHomeNav, familyUseCase: FamilyUseCase, userUseCase: UserUseCase) {
+    init(user: User, navigator: PreHomeNav, familyMembershipUseCase: FamilyMembershipUseCase, familyUseCase: FamilyUseCase, userUseCase: UserUseCase) {
         self.user = user
         self.userUseCase = userUseCase
         self.navigator = navigator
         self.familyUseCase = familyUseCase
+        self.familyMembershipUseCase = familyMembershipUseCase
     }
 
 
@@ -39,8 +42,8 @@ final class PreHomeViewModel: ViewModelType {
 
         let user = self.getUser(input.trigger, self.userUseCase, self.user.uid)
 
-        let families = input.trigger.flatMapLatest {
-            return self.getMyFamilies(self.familyUseCase)
+        let families = input.trigger.flatMapLatest {_ in
+            return self.getMyFamilies(self.familyMembershipUseCase)
             }.do(onNext: {self.families = $0})
     
         let gotoProfile = input.profileViewTrigger.do(onNext: {_ in

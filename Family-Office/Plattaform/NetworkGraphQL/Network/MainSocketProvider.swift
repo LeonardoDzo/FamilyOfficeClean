@@ -11,6 +11,7 @@ import ActionCableClient
 import Starscream
 import RealmSwift
 final class MainSocket {
+    
     var request = URL(string: Curl.ws)!
     var client: ActionCableClient!
     var channel: Channel!
@@ -42,12 +43,17 @@ final class MainSocket {
                                     }
                                     break
                             case "familyChanged":
-                                if let family = FindObject<Family>().decoder(data: data) {
+                                if var family = FindObject<Family>().decoder(data: data) {
+                                    let realm = try! Realm()
+                                    if let fam = realm.object(ofType: RMFamily.self, forPrimaryKey: family.uid) {
+                                        family.isSelected = fam.isSelected
+                                    }
                                     provider.makeFamilyUseCase().save(fam: family).subscribe().dispose()
                                 }
                                 break
                             case "pendingAdded":
                                 if let model = FindObject<Pending>().decoder(data: data) {
+                                    
                                     provider.makePendingUseCase().save(pending: model).subscribe().dispose()
                                 }
                                 break

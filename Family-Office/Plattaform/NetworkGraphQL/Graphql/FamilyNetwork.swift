@@ -19,4 +19,8 @@ public final class FamilyNetwork {
     public func createFamily(family: Family) -> Observable<Family> {
         return network.postItem(CreateFamilyMutation(name: family.name))
     }
+    
+    func myFamilies() -> Observable<[Family]> {
+        return network.getItems(MyFamiliesQuery())
+    }
 }

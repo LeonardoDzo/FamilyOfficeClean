@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct User: Codable {
+public struct User: Decodable {
 
     public var address: Address?
     public var birth: Int = -1
@@ -17,28 +17,13 @@ public struct User: Codable {
     public var phone: String = ""
     public var uid: String = ""
     public var photo: Attachment?
-    public var families: [Family] = [Family]()
+    public var families = [FamilyMembership]()
     public var nss = ""
     public var rfc = ""
     public var bloodyType = ""
     public var user_type = 0
 
-    public init(address: Address,
-                email: String,
-                name: String,
-                uid: String,
-                birth: Int,
-                families: [Family] ) {
-        self.address = address
-        self.email = email
-        self.name = name
-        self.phone = ""
-        self.uid = uid
-        self.birth = birth
-        self.photo = nil
-        self.families = families
 
-    }
     public init(uid: String, name: String, email: String) {
         self.name = name
         self.uid = uid
@@ -66,14 +51,12 @@ public struct User: Codable {
             uid = try values.decode(String.self, forKey: .uid)
             birth = try values.decodeIfPresent(Int.self, forKey: .birth) ?? -1
             photo = try values.decodeIfPresent(Attachment.self, forKey: .photo)
-            email = try values.decode(String.self, forKey: .email)
+            email = values.decodeSafely(.email) ?? ""
             address = try! values.decodeIfPresent(Address.self, forKey: .address)
             if let utype : String = values.decodeSafely(.user_type) {
                 user_type = Int(utype)!
             }
-            families = values.decodeSafely([[String:Family]].self, forKey: .families)?
-                .flatMap({$0.flatMap({$0.value})})
-                .filter({!$0.uid.isEmpty}) ?? []
+            families = values.decodeSafely([FamilyMembership].self, forKey: .families) ?? []
         }
 
     }

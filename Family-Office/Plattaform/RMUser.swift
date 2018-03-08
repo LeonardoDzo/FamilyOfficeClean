@@ -18,7 +18,7 @@ final class RMUser: Object {
     dynamic var name: String = ""
     dynamic var phone: String = ""
     dynamic var photo: RMAttachment?
-    dynamic var families = List<RMFamily>()
+    dynamic var families = List<RMFamilyMembership>()
     dynamic var user_type = 0
 
     override class func primaryKey() -> String {

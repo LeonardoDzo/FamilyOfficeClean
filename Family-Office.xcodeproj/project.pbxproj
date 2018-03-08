@@ -44,6 +44,22 @@
 		022FE36D202CDB09009029AD /* HomeCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022FE36C202CDB09009029AD /* HomeCellViewModel.swift */; };
 		023858492044DECB00D1CDB3 /* ProfileAssistantViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023858482044DECB00D1CDB3 /* ProfileAssistantViewModel.swift */; };
 		0238584B2044E20000D1CDB3 /* ProfileAssitantNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0238584A2044E20000D1CDB3 /* ProfileAssitantNavigator.swift */; };
+		023A36F020505B020046FCDE /* MessageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023A36EF20505B020046FCDE /* MessageType.swift */; };
+		023A36F220505B3C0046FCDE /* MessageData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023A36F120505B3C0046FCDE /* MessageData.swift */; };
+		023A36F420505B790046FCDE /* MockMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023A36F320505B790046FCDE /* MockMessage.swift */; };
+		023A36F720505BB50046FCDE /* Sender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023A36F620505BB50046FCDE /* Sender.swift */; };
+		023A36FA20505ED00046FCDE /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023A36F920505ED00046FCDE /* Message.swift */; };
+		023A36FC205061280046FCDE /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023A36FB205061280046FCDE /* Chat.swift */; };
+		023A36FF2050620C0046FCDE /* ChatGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023A36FE2050620C0046FCDE /* ChatGroup.swift */; };
+		023A3701205062BD0046FCDE /* ChatMembership.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023A3700205062BD0046FCDE /* ChatMembership.swift */; };
+		023A370420506A890046FCDE /* RMMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023A370320506A890046FCDE /* RMMessage.swift */; };
+		023A370620506A950046FCDE /* RMChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023A370520506A950046FCDE /* RMChat.swift */; };
+		023A370820506AEB0046FCDE /* RMSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023A370720506AEB0046FCDE /* RMSender.swift */; };
+		023A370A205070CB0046FCDE /* RMChatMembership.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023A3709205070CB0046FCDE /* RMChatMembership.swift */; };
+		023A370C20507A800046FCDE /* FamilyMembership.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023A370B20507A800046FCDE /* FamilyMembership.swift */; };
+		023A370E20507BA50046FCDE /* RMFamilyMembership.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023A370D20507BA50046FCDE /* RMFamilyMembership.swift */; };
+		023A3710205085ED0046FCDE /* FamilyMembershipUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023A370F205085ED0046FCDE /* FamilyMembershipUsecase.swift */; };
+		023A3712205087450046FCDE /* RMFamilyMembershioUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023A3711205087450046FCDE /* RMFamilyMembershioUseCase.swift */; };
 		023AAAF0201EB9B300F50207 /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023AAAEF201EB9B300F50207 /* ViewModelType.swift */; };
 		023AAAF2201EB9D700F50207 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023AAAF1201EB9D700F50207 /* ActivityIndicator.swift */; };
 		023AAAF4201EB9F600F50207 /* ErrorTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023AAAF3201EB9F600F50207 /* ErrorTracker.swift */; };
@@ -318,6 +334,22 @@
 		0237D519201A6A8B00895DF5 /* Family-Office.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Family-Office.entitlements"; sourceTree = "<group>"; };
 		023858482044DECB00D1CDB3 /* ProfileAssistantViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAssistantViewModel.swift; sourceTree = "<group>"; };
 		0238584A2044E20000D1CDB3 /* ProfileAssitantNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAssitantNavigator.swift; sourceTree = "<group>"; };
+		023A36EF20505B020046FCDE /* MessageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageType.swift; sourceTree = "<group>"; };
+		023A36F120505B3C0046FCDE /* MessageData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageData.swift; sourceTree = "<group>"; };
+		023A36F320505B790046FCDE /* MockMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMessage.swift; sourceTree = "<group>"; };
+		023A36F620505BB50046FCDE /* Sender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sender.swift; sourceTree = "<group>"; };
+		023A36F920505ED00046FCDE /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		023A36FB205061280046FCDE /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
+		023A36FE2050620C0046FCDE /* ChatGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatGroup.swift; sourceTree = "<group>"; };
+		023A3700205062BD0046FCDE /* ChatMembership.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMembership.swift; sourceTree = "<group>"; };
+		023A370320506A890046FCDE /* RMMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMMessage.swift; sourceTree = "<group>"; };
+		023A370520506A950046FCDE /* RMChat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMChat.swift; sourceTree = "<group>"; };
+		023A370720506AEB0046FCDE /* RMSender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMSender.swift; sourceTree = "<group>"; };
+		023A3709205070CB0046FCDE /* RMChatMembership.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMChatMembership.swift; sourceTree = "<group>"; };
+		023A370B20507A800046FCDE /* FamilyMembership.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilyMembership.swift; sourceTree = "<group>"; };
+		023A370D20507BA50046FCDE /* RMFamilyMembership.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMFamilyMembership.swift; sourceTree = "<group>"; };
+		023A370F205085ED0046FCDE /* FamilyMembershipUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilyMembershipUsecase.swift; sourceTree = "<group>"; };
+		023A3711205087450046FCDE /* RMFamilyMembershioUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMFamilyMembershioUseCase.swift; sourceTree = "<group>"; };
 		023AAAEF201EB9B300F50207 /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
 		023AAAF1201EB9D700F50207 /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		023AAAF3201EB9F600F50207 /* ErrorTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorTracker.swift; sourceTree = "<group>"; };
@@ -698,6 +730,7 @@
 			children = (
 				022F5AAB20433A7D00BDDD7E /* Status_Solicitude.swift */,
 				022FCEE3204DBB2E00070546 /* InsuranceType.swift */,
+				023A36F120505B3C0046FCDE /* MessageData.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -709,6 +742,45 @@
 				022FE36C202CDB09009029AD /* HomeCellViewModel.swift */,
 			);
 			path = cell;
+			sourceTree = "<group>";
+		};
+		023A36EE20505AF40046FCDE /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				023A36EF20505B020046FCDE /* MessageType.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		023A36F520505B9C0046FCDE /* Messages */ = {
+			isa = PBXGroup;
+			children = (
+				023A36F320505B790046FCDE /* MockMessage.swift */,
+			);
+			path = Messages;
+			sourceTree = "<group>";
+		};
+		023A36F820505EA90046FCDE /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				023A36F920505ED00046FCDE /* Message.swift */,
+				023A36F620505BB50046FCDE /* Sender.swift */,
+				023A36FB205061280046FCDE /* Chat.swift */,
+				023A36FE2050620C0046FCDE /* ChatGroup.swift */,
+				023A3700205062BD0046FCDE /* ChatMembership.swift */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
+		023A370220506A7B0046FCDE /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				023A370320506A890046FCDE /* RMMessage.swift */,
+				023A370720506AEB0046FCDE /* RMSender.swift */,
+				023A370520506A950046FCDE /* RMChat.swift */,
+				023A3709205070CB0046FCDE /* RMChatMembership.swift */,
+			);
+			path = Chat;
 			sourceTree = "<group>";
 		};
 		023AAAE6201EB88100F50207 /* Utility */ = {
@@ -788,7 +860,9 @@
 		023AAAED201EB96500F50207 /* Entries */ = {
 			isa = PBXGroup;
 			children = (
+				023A36EE20505AF40046FCDE /* Protocol */,
 				022FCEE5204DBB6C00070546 /* Enums */,
+				023A36F820505EA90046FCDE /* Chat */,
 				023AAB4A201EBF6E00F50207 /* User.swift */,
 				023AAB4C201EBF9100F50207 /* Address.swift */,
 				023AAB52201F84EB00F50207 /* Family.swift */,
@@ -800,6 +874,7 @@
 				02DD500020473CF700E9B63D /* Illness.swift */,
 				022FCEE8204DBC7A00070546 /* Insurance.swift */,
 				0216901A204DE1F80097F150 /* Attachment.swift */,
+				023A370B20507A800046FCDE /* FamilyMembership.swift */,
 			);
 			path = Entries;
 			sourceTree = "<group>";
@@ -815,6 +890,7 @@
 				02FE57972021445800B7E084 /* Error.swift */,
 				02DD50062047446300E9B63D /* IllnessUseCase.swift */,
 				022FCEEC204DBD4200070546 /* InsuranceUseCase.swift */,
+				023A370F205085ED0046FCDE /* FamilyMembershipUsecase.swift */,
 				023AAB50201EC0BA00F50207 /* UseCaseProvider.swift */,
 			);
 			path = UseCase;
@@ -1032,6 +1108,7 @@
 		028B667320224076003EC625 /* Entries */ = {
 			isa = PBXGroup;
 			children = (
+				023A36F520505B9C0046FCDE /* Messages */,
 				028B66742022408A003EC625 /* User+Bindable.swift */,
 				02A5A303202A4429009133BD /* Family+Bindable.swift */,
 				0298C7B6202B91620035D493 /* HomeBtn+UIBtn.swift */,
@@ -1128,6 +1205,7 @@
 			isa = PBXGroup;
 			children = (
 				02A277CD202D0D2500321FBD /* RMFamilyUseCase.swift */,
+				023A3711205087450046FCDE /* RMFamilyMembershioUseCase.swift */,
 			);
 			path = Families;
 			sourceTree = "<group>";
@@ -1549,6 +1627,7 @@
 			isa = PBXGroup;
 			children = (
 				02FE57782020F04300B7E084 /* Convertion */,
+				023A370220506A7B0046FCDE /* Chat */,
 				02FE577E2020F09900B7E084 /* RMUser.swift */,
 				02AF66032023F2F800FE90F2 /* RMFamily.swift */,
 				02E559B52024CDF300D3FC07 /* RMAttachment.swift */,
@@ -1557,6 +1636,7 @@
 				02ED6F9C204474A900D880F8 /* RMApplicationAssistant.swift */,
 				02DD50042047401000E9B63D /* RMIllness.swift */,
 				02169012204DC3580097F150 /* RMInsurance.swift */,
+				023A370D20507BA50046FCDE /* RMFamilyMembership.swift */,
 			);
 			name = Entries;
 			path = ..;
@@ -1841,19 +1921,23 @@
 				02A9DCBA20364EC500F43C85 /* infoLineView.swift in Sources */,
 				023AAB33201EBB4900F50207 /* SpringView.swift in Sources */,
 				02CA927F2037605700C0AEC0 /* ProfileViewModel.swift in Sources */,
+				023A36F720505BB50046FCDE /* Sender.swift in Sources */,
 				02D468AA201FEF7800D6DF86 /* SignInViewModel.swift in Sources */,
 				028B66752022408A003EC625 /* User+Bindable.swift in Sources */,
 				02EDD792203E096F003DA591 /* UIView+Ext.swift in Sources */,
 				02D55FAC203B6D1700858D1B /* FamilyProfileViewController.swift in Sources */,
+				023A36FC205061280046FCDE /* Chat.swift in Sources */,
 				02F5D04C20486591009211BB /* IllnessViewController.swift in Sources */,
 				02DD500F204747B000E9B63D /* IllnessNetwork.swift in Sources */,
 				02A123DC20350EB40013508F /* FamilyViewModel.swift in Sources */,
 				023AAAF0201EB9B300F50207 /* ViewModelType.swift in Sources */,
+				023A370A205070CB0046FCDE /* RMChatMembership.swift in Sources */,
 				023AAB63201FA9ED00F50207 /* Network.swift in Sources */,
 				0211E7BA204F049200D3766E /* webViewViewModel.swift in Sources */,
 				0252DBE82048D405008CB454 /* Illness+Bindible.swift in Sources */,
 				023AAB3C201EBB4900F50207 /* KeyboardLayoutConstraint.swift in Sources */,
 				02D338EE2040AE0A007FDF7B /* UserInviteCellViewModel.swift in Sources */,
+				023A370C20507A800046FCDE /* FamilyMembership.swift in Sources */,
 				02D338E320408E55007FDF7B /* SolicitudeNetwork.swift in Sources */,
 				025742E0203F3CDF00215A56 /* SearchUsersViewController.swift in Sources */,
 				0242D4B0202E2C8E00B11E03 /* MenuViewModel.swift in Sources */,
@@ -1861,6 +1945,7 @@
 				02AF66042023F2F800FE90F2 /* RMFamily.swift in Sources */,
 				023AAB05201EBB0900F50207 /* UIImageViewX.swift in Sources */,
 				02FE578A2020F73B00B7E084 /* Realm+Ext.swift in Sources */,
+				023A370820506AEB0046FCDE /* RMSender.swift in Sources */,
 				023AAB37201EBB4900F50207 /* DesignableTextView.swift in Sources */,
 				02EF0F1520321A0B0020A133 /* NetPendingUseCase.swift in Sources */,
 				023AAB4F201EC05700F50207 /* AuthUseCase.swift in Sources */,
@@ -1871,10 +1956,12 @@
 				02F525982025018D009F817D /* Processable.swift in Sources */,
 				0282D3A4203F998600FF6663 /* ApplicationFamily+Codable.swift in Sources */,
 				023AAB30201EBB4900F50207 /* SpringImageView.swift in Sources */,
+				023A36FF2050620C0046FCDE /* ChatGroup.swift in Sources */,
 				0252DBE62048D3DC008CB454 /* IllnessTableViewCell.swift in Sources */,
 				02ED6F9D204474A900D880F8 /* RMApplicationAssistant.swift in Sources */,
 				02DD500A204744F000E9B63D /* RMIllnessUseCase.swift in Sources */,
 				02EF0F0F2032156F0020A133 /* PendingUseCase.swift in Sources */,
+				023A3710205085ED0046FCDE /* FamilyMembershipUsecase.swift in Sources */,
 				023AAB61201F946200F50207 /* Mapplable.swift in Sources */,
 				023AAB3A201EBB4900F50207 /* UnwindSegue.swift in Sources */,
 				02B79505202E7EC60083CAB7 /* TopViewProfileAssistant.swift in Sources */,
@@ -1920,6 +2007,7 @@
 				02ED6FA22044777600D880F8 /* AddAssistantViewController.swift in Sources */,
 				02DD50052047401000E9B63D /* RMIllness.swift in Sources */,
 				022DD8C22028DBF1008ED417 /* FamilyNetwork.swift in Sources */,
+				023A3701205062BD0046FCDE /* ChatMembership.swift in Sources */,
 				02F525962025015A009F817D /* ColorControl.swift in Sources */,
 				02D55FA5203B54E000858D1B /* UserSubscription.swift in Sources */,
 				02EDD790203E096F003DA591 /* Eureka+Ext.swift in Sources */,
@@ -1930,7 +2018,9 @@
 				02FE576F2020E92100B7E084 /* PreHomeViewModel.swift in Sources */,
 				02D468A5201FE6B700D6DF86 /* SignInViewController.swift in Sources */,
 				022DD8C62028DFFC008ED417 /* NetFamilyUseCase.swift in Sources */,
+				023A370420506A890046FCDE /* RMMessage.swift in Sources */,
 				023AAB6A201FB35C00F50207 /* RxApollo.swift in Sources */,
+				023A3712205087450046FCDE /* RMFamilyMembershioUseCase.swift in Sources */,
 				02A277D3202D103C00321FBD /* RMUserUseCase.swift in Sources */,
 				022FCEE2204DB1A900070546 /* InsuranceView.swift in Sources */,
 				023AAAF2201EB9D700F50207 /* ActivityIndicator.swift in Sources */,
@@ -1945,6 +2035,7 @@
 				02FE577A2020F05A00B7E084 /* DomainConvertionType.swift in Sources */,
 				02FE57982021445800B7E084 /* Error.swift in Sources */,
 				02DD501720477C0900E9B63D /* MainIllnessView.swift in Sources */,
+				023A36F220505B3C0046FCDE /* MessageData.swift in Sources */,
 				02D6BF7B202BC33C00141AAB /* HomeNavigator.swift in Sources */,
 				023AAB6C201FB73A00F50207 /* Dictionary.swift in Sources */,
 				023AAB3F201EBB4900F50207 /* SpringAnimation.swift in Sources */,
@@ -1957,6 +2048,7 @@
 				023AAB35201EBB4900F50207 /* DesignableTextField.swift in Sources */,
 				023AAB39201EBB4900F50207 /* SpringTextField.swift in Sources */,
 				02FE578E2020F86800B7E084 /* UserUseCase.swift in Sources */,
+				023A370E20507BA50046FCDE /* RMFamilyMembership.swift in Sources */,
 				02C24015204F026E00BD64D3 /* webNavigator.swift in Sources */,
 				025742E6203F3D3A00215A56 /* SearchUserNavigator.swift in Sources */,
 				022FCEE4204DBB2E00070546 /* InsuranceType.swift in Sources */,
@@ -2016,6 +2108,7 @@
 				0242E953204E115B00C46D00 /* DetailsInsuranceNavigator.swift in Sources */,
 				02C24011204F021000BD64D3 /* webView.swift in Sources */,
 				023AAB06201EBB0900F50207 /* UIViewAnchorPoint.swift in Sources */,
+				023A36F420505B790046FCDE /* MockMessage.swift in Sources */,
 				02C24013204F022600BD64D3 /* webViewController.swift in Sources */,
 				02BF68B5204250C600D03CDA /* Decodable+Ext.swift in Sources */,
 				022FCEDE204DB12A00070546 /* MainInsuranceViewModel.swift in Sources */,
@@ -2052,7 +2145,9 @@
 				02CD29D12044A72300879308 /* NetAssistantApplicationUseCase.swift in Sources */,
 				02F525932024E9B6009F817D /* imgEditable.swift in Sources */,
 				02EF0EF92031F9DD0020A133 /* Pending.swift in Sources */,
+				023A36FA20505ED00046FCDE /* Message.swift in Sources */,
 				02EDD78E203E096F003DA591 /* UICollectionViewCell+Ext.swift in Sources */,
+				023A36F020505B020046FCDE /* MessageType.swift in Sources */,
 				02D55FAE203B6D2200858D1B /* FamilyView.swift in Sources */,
 				023AAAF8201EBA2B00F50207 /* Reusable.swift in Sources */,
 				0242E951204E10DF00C46D00 /* DetailsInsuranceViewController.swift in Sources */,
@@ -2071,6 +2166,7 @@
 				02C68B682045F1B4002003FF /* ContrastColor.swift in Sources */,
 				02CD29D32044A8F400879308 /* RMApplicationAssistantUseCase.swift in Sources */,
 				02FE576D2020E77200B7E084 /* PreHomeStevia.swift in Sources */,
+				023A370620506A950046FCDE /* RMChat.swift in Sources */,
 				023AAB3B201EBB4900F50207 /* SpringButton.swift in Sources */,
 				02012DAF2035F67B00889401 /* HomeFamilyNavigator.swift in Sources */,
 				02DD501920477C1C00E9B63D /* MainIllnessNavigator.swift in Sources */,

@@ -11,7 +11,7 @@ import Realm
 import RxSwift
 import RealmSwift
 
-public final class RMUseCaseProvider: UseCaseProvider {
+public final class RMUseCaseProvider: UseCaseProvider, FamilyMembershipUseCaseProvider {
 
     private let configuration: Realm.Configuration
 
@@ -52,5 +52,9 @@ public final class RMUseCaseProvider: UseCaseProvider {
     public func makeInsuranceUseCase() -> InsuranceUseCase {
         let repository = Repository<Insurance>(configuration: configuration)
         return RMInsuranceUseCase(repository: repository)
+    }
+    public func makeFamilyMembershipUseCase() -> FamilyMembershipUseCase {
+        let repository = Repository<FamilyMembership>(configuration: configuration)
+        return RMFamilyMembershipUseCase(repository: repository)
     }
 }

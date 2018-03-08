@@ -107,37 +107,3 @@ class ChatViewController: SLKTextViewController {
         return titleString
     }
 }
-extension ChatViewController{
-    
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        let cellViewModel = self.dataSource.itemAtIndexPath(indexPath)
-        
-        // Help me!
-        // 1) We have to return the actual `CGFloat` value here.
-        // 2) We can only access `MyCellViewModel.message`, which is `Driver<String>`.
-        // 3) How can I do? There could be many possible workarounds, but I want to use the solution which is most fit to Rx philisophy.
-        // Possible workarounds (maybe code smell) and my opinions:
-        //
-        // 1) Define `MyCellViewModel.message` as a `Variable<String>`
-        //      => I'm trying to not use `Subject` as much as possible.
-        //
-        // 2) Provide a calculating method such as `MyCellViewModel.messageHeightThatFitsWidth(_:, font:) -> CGFloat`
-        //      => This makes `ViewModel` have UI responsibility.
-        //
-        // 3) Use Self-Sizing cells
-        //      => This is simplified project. I don't use auto layout in table/collection view cells because of performance issue.
-        //
-        // 4) Please give me an advice!
-        /*return*/ cellViewModel.message // This is `Driver<String>`
-            .map { message -> CGFloat in
-                let size = CGSize(width: tableView.width - 20, height: .max)
-                let options: NSStringDrawingOptions = [.UsesLineFragmentOrigin, .UsesFontLeading]
-                let attributes = [NSFontAttributeName: MyCell.Font.messageLabel]
-                let rect = message.boundingRectWithSize(size, options: options, attributes: attributes, context: nil)
-                return rect.height + 20 // I want to return this value
-        }
-        
-        return 40 // But we have to return actual value here :(
-    }
-    
-}

@@ -11,6 +11,9 @@ import Foundation
 public protocol AuthUseCaseProvider {
     func makeAuthUseCase() -> AuthUseCase
 }
+public protocol FamilyMembershipUseCaseProvider {
+    func makeFamilyMembershipUseCase() -> FamilyMembershipUseCase
+}
 public protocol UseCaseProvider {
     func makeUseCase() -> UserUseCase
     func makeFamilyUseCase() -> FamilyUseCase
