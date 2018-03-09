@@ -22,4 +22,5 @@ public protocol UseCaseProvider {
     func makeApplicationAssistantUseCase() -> ApplicationAssistantUseCase
     func makeIllnessUseCase() -> IllnessUseCase
     func makeInsuranceUseCase() -> InsuranceUseCase
+    func makeChatUseCase() -> ChatUseCase
  }

@@ -64,4 +64,8 @@ final class NetworkProvider {
         let network = Network<Insurance>(apollo)
         return InsuranceNetwork(network: network)
     }
+    public func makeChatNetwork() -> ChatNetwork {
+        let network = Network<Chat>(apollo)
+        return ChatNetwork(network: network)
+    }
 }

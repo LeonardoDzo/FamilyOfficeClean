@@ -57,4 +57,9 @@ public final class RMUseCaseProvider: UseCaseProvider, FamilyMembershipUseCasePr
         let repository = Repository<FamilyMembership>(configuration: configuration)
         return RMFamilyMembershipUseCase(repository: repository)
     }
+    
+    public func makeChatUseCase() -> ChatUseCase {
+        let repository = Repository<Chat>(configuration: configuration)
+        return RMChatUseCase(repository: repository)
+    }
 }

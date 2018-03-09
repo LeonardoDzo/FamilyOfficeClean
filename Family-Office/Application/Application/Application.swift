@@ -21,7 +21,8 @@ final class Application {
         let nc = UINavigationController()
 
         let signInNavigator = DefaultAuthNavigator(service: networkUseCaseProvider, nc: nc)
-        window.rootViewController = nc
+        //window.rootViewController = nc
+        window.rootViewController = ChatViewController()
         signInNavigator.toSignIn()
     }
 }

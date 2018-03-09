@@ -14,7 +14,7 @@ public struct Chat: Decodable {
     
     var group: ChatGroup?
     
-    var uid: String!
+    var uid: String = ""
     
     var lastMessage: Message?
     

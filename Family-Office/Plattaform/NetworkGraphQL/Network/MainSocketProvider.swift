@@ -53,7 +53,6 @@ final class MainSocket {
                                 break
                             case "pendingAdded":
                                 if let model = FindObject<Pending>().decoder(data: data) {
-                                    
                                     provider.makePendingUseCase().save(pending: model).subscribe().dispose()
                                 }
                                 break

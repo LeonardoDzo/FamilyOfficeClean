@@ -46,4 +46,7 @@ public final class NetUseCaseProvider: AuthUseCaseProvider, UseCaseProvider {
     public func makeInsuranceUseCase() -> InsuranceUseCase {
         return NetInsuranceUseCase(network: networkProvider.makeInsuranceNetwork())
     }
+    public func makeChatUseCase() -> ChatUseCase {
+        return NetChatUseCase(network: networkProvider.makeChatNetwork())
+    }
 }

@@ -56,6 +56,8 @@ extension UserBindable {
             } else {
                 photo.image = #imageLiteral(resourceName: "profile_default")
             }
+            photo.cornerRadius = 8
+            photo.clipsToBounds = true
         }
         if let view = self.rfcV {
             view.photo.image = #imageLiteral(resourceName: "rfc_profile")

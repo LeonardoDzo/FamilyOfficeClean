@@ -11,7 +11,7 @@ import SlackTextViewController
 import RxSwift
 import RxDataSources
 import RxCocoa
-
+import Stevia
 struct CustomData {
     var message: String
     var send: Date
@@ -44,12 +44,12 @@ class ChatViewController: SLKTextViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView?.dataSource = nil
-        tableView?.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        tableView?.register(MessageTableViewCell.self, forCellReuseIdentifier: "Cell")
         tableView?.separatorStyle = .none
         self.isKeyboardPanningEnabled = true
         // Do any additional setup after loading the view.
         conftable()
-        
+        getSections()
     }
     
     override class func tableViewStyle(for decoder: NSCoder) -> UITableViewStyle {
@@ -66,16 +66,25 @@ class ChatViewController: SLKTextViewController {
         text = text.trimmingCharacters(in: .whitespacesAndNewlines)
         if text.isEmpty { return; }
         messages.value.append(CustomData(message: text, send: Date()))
-        sections.value = getSections()
+       
         super.didPressRightButton(sender)
     }
     
     func conftable() -> Void {
-        dataSource = RxTableViewSectionedReloadDataSource<SectionOfMessages>(configureCell: { (ds, tv, ip, item) -> UITableViewCell in
-            let cell = tv.dequeueReusableCell(withIdentifier: "Cell", for: ip)
-            cell.textLabel?.attributedText = self.makeAttributedString(title: "Leonardo Durazo \(item.send.string(with: .HHmm))", subtitle: item.message)
+        dataSource = RxTableViewSectionedReloadDataSource<SectionOfMessages>(configureCell: { (ds, tv, ip, item) -> MessageTableViewCell in
+            let cell = tv.dequeueReusableCell(withIdentifier: "Cell", for: ip) as! MessageTableViewCell
+            cell.messageLbl.numberOfLines = 0
+            
+            cell.messageLbl.text = item.message
+            
             cell.transform = (self.tableView?.transform)!
-//            cell.draw(cell.frame)
+            if ip.row % 2 == 0 {
+                cell.bubbleView.right(15).left(>=40)
+                cell.changeImage()
+            }else{
+                cell.bubbleView.left(15).right(>=40)
+                cell.changeImage(isFromSender: false)
+            }
             return cell
         })
         
@@ -90,20 +99,14 @@ class ChatViewController: SLKTextViewController {
         
     }
     
-    func getSections() -> [SectionOfMessages] {
-        return Dictionary(grouping: messages.value) { (message) -> Date in
-            return message.send.midnight()
-            }.map({SectionOfMessages(value: $0)})
-    }
-    func makeAttributedString(title: String, subtitle: String) -> NSAttributedString {
-        let titleAttributes = [NSAttributedStringKey.font: UIFont.preferredFont(forTextStyle: .headline), NSAttributedStringKey.foregroundColor: UIColor.purple]
-        let subtitleAttributes = [NSAttributedStringKey.font: UIFont.preferredFont(forTextStyle: .subheadline)]
+    func getSections() {
         
-        let titleString = NSMutableAttributedString(string: "\(title)\n", attributes: titleAttributes)
-        let subtitleString = NSAttributedString(string: subtitle, attributes: subtitleAttributes)
+        messages.asObservable().bind(onNext: { (messages) in
+            self.sections.value = Dictionary(grouping: messages.reversed()) { (message) -> Date in
+                return message.send.midnight()
+                }.map({SectionOfMessages(value: $0)})
+        }).disposed(by: disposeBag)
         
-        titleString.append(subtitleString)
         
-        return titleString
     }
 }

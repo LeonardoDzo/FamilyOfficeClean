@@ -13,20 +13,23 @@ target 'Family-Office' do
     pod 'RxDataSources'
     pod 'RxRealm'
     
+    pod 'RealmSwift'
+    pod 'GzipSwift'
+    
 	pod 'SteviaLayout'
 	pod 'Whisper'
 	pod 'ImagePicker'
-	pod 'GzipSwift'
-	pod 'RealmSwift'
 	pod 'Eureka'
     pod 'GenericPasswordRow', '~> 3.0'
 	pod 'Kingfisher', '~> 4.0'
-    pod 'Alamofire'
-	
-	pod 'Apollo', '~> 0.7.0'
     pod 'SideMenu'
-    pod 'GoogleSignIn'
-    pod 'ActionCableClient'
     pod 'Hero'
     pod 'SlackTextViewController'
+    
+    pod 'Alamofire'
+	pod 'ActionCableClient'
+	pod 'Apollo', '~> 0.7.0'
+    pod 'GoogleSignIn'
+    
+    
 end

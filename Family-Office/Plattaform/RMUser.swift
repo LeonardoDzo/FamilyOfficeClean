@@ -28,12 +28,12 @@ final class RMUser: Object {
 
 extension RMUser: DomainConvertibleType {
     func asDomain() -> User {
-
-        var user = User(uid: "", name: name, email: email)
+        var user = User(uid: uid, name: name, email: email)
         user.user_type = user_type
         user.phone = phone
         user.photo = photo?.asDomain()
         return user
+        
     }
 }
 
