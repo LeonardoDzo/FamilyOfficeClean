@@ -17,7 +17,7 @@ struct MockMessage: MessageType {
     var sentDate: Date
     var data: MessageData
     
-    init(data: MessageData, sender: Sender, messageId: String, date: Date) {
+    init(data: MessageData, sender: Sender, messageId: String, date: Date, text: String = "") {
         self.data = data
         self.sender = sender
         self.messageId = messageId
@@ -32,7 +32,7 @@ struct MockMessage: MessageType {
         self.init(data: .attributedText(attributedText), sender: sender, messageId: messageId, date: date)
     }
     
-    init(image: UIImage, sender: Sender, messageId: String, date: Date) {
+    init(image: Attachment, sender: Sender, messageId: String, date: Date) {
         self.init(data: .photo(image), sender: sender, messageId: messageId, date: date)
     }
     

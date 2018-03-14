@@ -34,6 +34,7 @@ class MainInsuranceViewController: UIViewController {
     }
     
     func bindToViewModel() -> Void {
+        
         let input = MainInsuranceViewModel.Input(selectTrigger: self.myCustomView.collectionView.rx.itemSelected.asDriver())
         let output = viewModel.transform(input: input)
         

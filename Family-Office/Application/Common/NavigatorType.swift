@@ -15,6 +15,7 @@ protocol NavigatorType {
     func toMain(sender: Any?) -> Void
 }
 extension NavigatorType {
+    
     func toDissmiss() -> Void {
         navigationController?.dismiss(animated: true, completion: nil)
     }

@@ -35,7 +35,7 @@ class MembersTableViewController: UITableViewController {
         let willAppear = rx.sentMessage(#selector(self.viewWillAppear))
             .asDriverOnErrorJustComplete()
             .mapToVoid()
-        let input = MembersChatViewModel.Input(appearTrigger: willAppear)
+        let input = MembersChatViewModel.Input(appearTrigger: willAppear, selectUserTrigger: self.tableView.rx.itemSelected.asDriver())
    
         let output = viewModel.transform(input: input)
         
@@ -47,6 +47,10 @@ class MembersTableViewController: UITableViewController {
             cell.selectedBackgroundView = backgroundView
            
         }.disposed(by: disposeBag)
+        
+        output.selected
+            .drive()
+            .disposed(by: disposeBag)
         
     }
 

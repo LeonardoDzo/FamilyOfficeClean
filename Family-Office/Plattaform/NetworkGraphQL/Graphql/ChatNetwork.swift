@@ -14,4 +14,16 @@ final class ChatNetwork {
     init(network: Network<Chat>) {
         self.network = network
     }
+    
+    func get() -> Observable<[Chat]> {
+        return network.getItems(MyChatsQuery())
+    }
+    
+    func createChat(uid: String) -> Observable<Chat> {
+        return network.postItem(CreateChatMutation(user: uid))
+    }
+    
+    func sendMessage(chatId: String, mid: String, text: String) -> Observable<Chat> {
+        return network.postItem(SendMessageMutation(chat: chatId, messageId: mid, text: text))
+    }
 }

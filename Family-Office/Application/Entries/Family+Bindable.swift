@@ -8,6 +8,8 @@
 
 import Foundation
 import UIKit
+import Kingfisher
+
 protocol FamilyBindable: AnyObject {
     var family: Family! {get set}
     var titleLbl: UILabelX! {get}
@@ -31,10 +33,11 @@ extension FamilyBindable {
         if let titlelbl = titleLbl {
             titlelbl.text = family.name
         }
-        if let photo = photo {
-            photo.image = #imageLiteral(resourceName: "family-default")
-            photo.cornerRadius = 8
-            //photo.image = #imageLiteral(resourceName: "icons8-family")
+        if let view = photo {
+            let url = URL(string: family.photo?.routes[3] ?? "")
+            view.kf.indicatorType = .activity
+            let processor = RoundCornerImageProcessor(cornerRadius: 8)
+            view.kf.setImage(with: url, placeholder: #imageLiteral(resourceName: "family-default"), options: [.transition(.fade(0.2)), .processor(processor)])
         }
 
         if let selectedPhoto  = selectedPhoto {

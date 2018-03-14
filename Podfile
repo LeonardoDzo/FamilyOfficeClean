@@ -12,6 +12,7 @@ target 'Family-Office' do
     pod 'RxWebKit'
     pod 'RxDataSources'
     pod 'RxRealm'
+    pod 'Apollo'
     
     pod 'RealmSwift'
     pod 'GzipSwift'
@@ -28,7 +29,7 @@ target 'Family-Office' do
     
     pod 'Alamofire'
 	pod 'ActionCableClient'
-	pod 'Apollo', '~> 0.7.0'
+	
     pod 'GoogleSignIn'
     
     

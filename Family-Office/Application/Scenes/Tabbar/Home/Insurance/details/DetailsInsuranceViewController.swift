@@ -28,6 +28,7 @@ class DetailsInsuranceViewController: UIViewController {
         self.title = viewModel.type.description
         bindToViewModel()
     }
+    
     func bindToViewModel() -> Void {
         let willAppear = rx.methodInvoked(#selector(self.viewWillAppear))
             .asDriverOnErrorJustComplete()

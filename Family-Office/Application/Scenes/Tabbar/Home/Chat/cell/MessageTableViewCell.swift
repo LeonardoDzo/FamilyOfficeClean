@@ -9,8 +9,12 @@
 import UIKit
 import Stevia
 
-class MessageTableViewCell: UITableViewCell {
-    var messageLbl = UILabelX()
+class MessageTableViewCell: UITableViewCellX, MessageBindible {
+    var message: MockMessage!
+    var messageText: UILabelX! = UILabelX()
+    var date: UILabelX! = UILabelX()
+    var nameSender: UILabelX! = UILabelX()
+    var photoMessage: UIImageViewX! = UIImageViewX()
     var bubbleView = UIImageViewX()
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -26,24 +30,33 @@ class MessageTableViewCell: UITableViewCell {
         
         sv(
            bubbleView.sv(
-            messageLbl
+            messageText,
+            photoMessage,
+            date,
+            nameSender
            )
         )
         
         bubbleView.bottom(7.5).top(7.5).layout(
-            2,
-            |-10-messageLbl-10-| ~ (>=14),
+            5,
+            |-10-nameSender.height(12),
+            1,
+            |-10-photoMessage-10-|,
+            0,
+            |-10-messageText-10-| ~ (>=14),
+            1,
+            date.height(10)-15-|,
+            5,
             ""
         )
-        messageLbl.centerVertically().height(>=14)
-        
-        messageLbl.textAlignment = .justified
-        
-        changeImage()
+        messageText.centerVertically()
+        date.bottom(1)
         let view = UIView()
         view.backgroundColor = UIColor.clear
-    
         selectedBackgroundView = view
+        backgroundColor = #colorLiteral(red: 0.921431005, green: 0.9214526415, blue: 0.9214410186, alpha: 1)
+        animation = "fadeInUp"
+        animate()
     }
     
     func changeImage(isFromSender: Bool? = true ) {
@@ -54,7 +67,7 @@ class MessageTableViewCell: UITableViewCell {
                             resizingMode: .stretch)
             .withRenderingMode(.alwaysTemplate)
         
-        bubbleView.tintColor =  isFromSender! ? #colorLiteral(red: 0.721568644, green: 0.8862745166, blue: 0.5921568871, alpha: 1) : #colorLiteral(red: 0.8980519176, green: 0.8978511095, blue: 0.9194466472, alpha: 1)
+        bubbleView.tintColor =  isFromSender! ? #colorLiteral(red: 0.721568644, green: 0.8862745166, blue: 0.5921568871, alpha: 1) : #colorLiteral(red: 0.9792956669, green: 0.9908331388, blue: 1, alpha: 1)
     }
     
     

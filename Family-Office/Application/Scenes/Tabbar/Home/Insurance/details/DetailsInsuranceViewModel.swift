@@ -22,17 +22,18 @@ final class DetailsInsurancesViewModel: ViewModelType {
         self.type = type
     }
     func transform(input: DetailsInsurancesViewModel.Input) -> DetailsInsurancesViewModel.Output {
-        
         let insurances = input.trigger.flatMapLatest {
             return self.insuranceUseCase
                 .get()
                 .map({$0.filter({$0.type == self.type})})
                 .asDriverOnErrorJustComplete()
             }.do(onNext: {self.insurances = $0})
+        
         let selected = input.selectedTrigger.do(onNext: { indexPath in
             let url = self.insurances[indexPath.row].attachment?.routes.first
             self.navigator.toWebView(url: url)
         }).mapToVoid()
+        
         return Output(insurances: insurances.asDriver(), selected: selected)
     }
 }

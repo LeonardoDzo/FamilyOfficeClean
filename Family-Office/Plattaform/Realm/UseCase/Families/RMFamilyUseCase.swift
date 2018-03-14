@@ -18,6 +18,7 @@ final class RMFamilyUseCase<Repository>: FamilyUseCase where Repository: Abstrac
     }
 
     func save(fam: Family) -> Observable<Void> {
+        MainSocket.shareIntstance.channel.action("execute", with: FamilySubscription(fam))
         return repository.save(entity: fam)
     }
     func get() -> Observable<[Family]> {

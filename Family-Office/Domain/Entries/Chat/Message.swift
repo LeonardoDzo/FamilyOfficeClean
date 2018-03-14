@@ -8,17 +8,26 @@
 
 import Foundation
 
-public struct Message: Decodable {
+@objc enum MESSAGESTATUS: Int {
+    case Pending,
+         Sent
+}
+
+
+
+public struct ChatMessage: Decodable {
     
     var attachment: Attachment?
     
     var uid: String = ""
-    
+  
     var sender: Sender?
     
     var seenAt = 0
     
     var text: String = ""
+    
+    var status: MESSAGESTATUS = .Pending
     
     enum CodingKeys: String, CodingKey {
         case attachment
@@ -29,8 +38,8 @@ public struct Message: Decodable {
     }
     
 }
-extension Message {
-    public static func == (lhs: Message, rhs: Message) -> Bool {
+extension ChatMessage {
+    public static func == (lhs: ChatMessage, rhs: ChatMessage) -> Bool {
         return lhs.uid == rhs.uid
     }
 }

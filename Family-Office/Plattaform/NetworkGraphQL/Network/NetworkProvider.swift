@@ -14,7 +14,7 @@ final class NetworkProvider {
 
     public init(_ offline: Bool = false) {
         self.offline = offline
-
+        
         apollo = {
             let configuration = URLSessionConfiguration.default
             // Add additional headers as needed
@@ -67,5 +67,10 @@ final class NetworkProvider {
     public func makeChatNetwork() -> ChatNetwork {
         let network = Network<Chat>(apollo)
         return ChatNetwork(network: network)
+    }
+    
+    public func makeChatMessageNetwork() -> MessageNetwork {
+        let network = Network<ChatMessage>(apollo)
+        return MessageNetwork(network: network)
     }
 }

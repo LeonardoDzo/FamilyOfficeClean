@@ -20,7 +20,12 @@ final class MembersChatNavigator: NavigatorType {
     
     func toMain(sender: Any?) {
         let view = MembersTableViewController()
-        view.viewModel = MembersChatViewModel(navigator: self, userUseCase: service.makeUseCase())
+        view.viewModel = MembersChatViewModel(navigator: self, userUseCase: service.makeUseCase(), chatUSeCase: service.makeChatUseCase(), netChatUSeCase: NetUseCaseProvider().makeChatUseCase())
         navigationController?.pushViewController(view, animated: true)
+    }
+    
+    func toChat(_ chat: Chat) -> Void {
+        let navigator = ChatNavigator(navigationController: navigationController!)
+        navigator.toMain(sender: chat)
     }
 }

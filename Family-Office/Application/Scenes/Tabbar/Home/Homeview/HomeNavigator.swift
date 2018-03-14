@@ -70,7 +70,7 @@ class HomeNavigator: HomeNavigatorPr {
                 toAssistant(mainNavigationController, tabBarController, homeBtn)
             break
             case .FIRSTKIT:
-                let navigator = MainIllnessNavigator(nc: mainNavigationController)
+                let navigator = MainIllnessNavigator(navigationController: mainNavigationController)
                 navigator.toMain()
                 navigationController.present(mainNavigationController, animated: true, completion: nil)
                 break

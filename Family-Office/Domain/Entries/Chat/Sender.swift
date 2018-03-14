@@ -15,10 +15,10 @@ public struct Sender: Decodable {
     /// The unique String identifier for the sender.
     ///
     /// Note: This value must be unique across all senders.
-    public let uid: String
+    public var uid: String
     
     /// The display name of a sender.
-    public let displayName: String
+    public var displayName: String
     
     /// The display photo of a sender
     public var photo: Attachment?

@@ -23,7 +23,7 @@ final class NetAuthUseCase: AuthUseCase {
         UserDefaults().set(authmodel.user.email, forKey: "email")
         UserDefaults().set(pass, forKey: "password")
         
-        
+    
         MainSocket.shareIntstance.channel.action("execute", with: UserSubscription(authmodel.user))
         MainSocket.shareIntstance.channel.action("execute", with: PendingAddedSubscription())
         
@@ -33,6 +33,8 @@ final class NetAuthUseCase: AuthUseCase {
         
         NetUseCaseProvider().makeUseCase().getAssistants().subscribe().dispose()
         NetUseCaseProvider().makeFamilyUseCase().getMyFamilies(uid: authmodel.user.uid).subscribe().disposed(by: disposeBag)
+        NetUseCaseProvider().makeChatUseCase().get(byGroup: true).subscribe().disposed(by: disposeBag)
+        
     }
 
     func signIn(email: String, password: String) -> Observable<User> {

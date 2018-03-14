@@ -37,8 +37,6 @@ enum MODULE {
 }
 extension MODULE {
     
-    
-    
     public func iconBtn() -> UIImage {
         switch self {
         case .CALENDAR:

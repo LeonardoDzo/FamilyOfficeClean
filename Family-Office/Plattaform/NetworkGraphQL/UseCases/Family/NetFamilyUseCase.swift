@@ -10,6 +10,7 @@ import Foundation
 import RxSwift
 
 final class NetFamilyUseCase: FamilyUseCase {
+    private let diposeBag = DisposeBag()
     private let network: FamilyNetwork!
     private let provider: RMUseCaseProvider!
     init(_ network: FamilyNetwork, provider: RMUseCaseProvider = RMUseCaseProvider()) {
@@ -39,8 +40,7 @@ final class NetFamilyUseCase: FamilyUseCase {
         return network.myFamilies().do(onNext: {fams in
             fams.forEach({
                 $0.members.forEach({MainSocket.shareIntstance.channel.action("execute", with: UserSubscription($0.user))})
-                MainSocket.shareIntstance.channel.action("execute", with: FamilySubscription($0))
-                self.provider.makeFamilyUseCase().save(fam: $0).subscribe().dispose()
+                self.provider.makeFamilyUseCase().save(fam: $0).subscribe().disposed(by: self.diposeBag)
             })
         })
     }

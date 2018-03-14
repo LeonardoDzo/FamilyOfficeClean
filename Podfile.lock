@@ -2,9 +2,9 @@ PODS:
   - ActionCableClient (0.2.3):
     - Starscream (~> 2.0.0)
   - Alamofire (4.7.0)
-  - Apollo (0.7.0):
-    - Apollo/Core (= 0.7.0)
-  - Apollo/Core (0.7.0)
+  - Apollo (0.8.0):
+    - Apollo/Core (= 0.8.0)
+  - Apollo/Core (0.8.0)
   - Differentiator (3.0.2)
   - Eureka (4.1.0)
   - GenericPasswordRow (3.0.0):
@@ -63,7 +63,7 @@ PODS:
 DEPENDENCIES:
   - ActionCableClient
   - Alamofire
-  - Apollo (~> 0.7.0)
+  - Apollo
   - Eureka
   - GenericPasswordRow (~> 3.0)
   - GoogleSignIn
@@ -86,7 +86,7 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   ActionCableClient: c8a466410d31bfa14e7a9c209b539c1e2d026a5f
   Alamofire: 907e0a98eb68cdb7f9d1f541a563d6ac5dc77b25
-  Apollo: d6649ac06168660e70c6226c4eadfc0770791ba5
+  Apollo: 66e0f52289551545adb7ecdd994e713fdbae26eb
   Differentiator: a87be69eba49ec4ab460c7671143ee3a9eececfd
   Eureka: 5770ef95bbbbe52f8abbc0d9bea6ee8282c50209
   GenericPasswordRow: 27a52c727c47b2e4d50c2295d1cc7d32c5883e70
@@ -113,6 +113,6 @@ SPEC CHECKSUMS:
   SteviaLayout: 0d2112caea45707695e8c718262c8ea3dd37ef17
   Whisper: 169760fc4bab0abf24d5529f9276f95c25cf1025
 
-PODFILE CHECKSUM: c5571aba7508f434f2d0cfeeee7e8144e22569f8
+PODFILE CHECKSUM: 38e2578f5eb71ec5d6139f76a64b721c3d96291b
 
 COCOAPODS: 1.3.1

@@ -7,13 +7,13 @@
 //
 
 import Foundation
-var subscriptionUser = [String]()
+var subscriptions = [String]()
 
 func UserSubscription(_ user: User) -> [String: Any] {
-    if subscriptionUser.contains(user.uid) {
+    if subscriptions.contains(user.uid) {
         return [:]
     }
-    subscriptionUser.append(user.uid)
+    subscriptions.append(user.uid)
     return ["variables": ["id": user.uid], "query": "subscription UserChanged($id:ID){userChanged(id:$id) {...UserDetails}}"
         .appending(UserDetails.fragmentString)
         .appending(AttachmentDetails.fragmentString)]

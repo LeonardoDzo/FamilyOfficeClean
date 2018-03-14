@@ -23,18 +23,20 @@ final class RMMessage: Object {
     
     dynamic var text: String = ""
     
+    dynamic var status: MESSAGESTATUS = .Pending
+    
     override class func primaryKey() -> String {
         return "uid"
     }
     
 }
 extension RMMessage: DomainConvertibleType {
-    func asDomain() -> Message {
-       return Message(attachment: attachment?.asDomain(), uid: uid, sender: sender.asDomain(), seenAt: seendAt, text: text)
+    func asDomain() -> ChatMessage {
+        return ChatMessage(attachment: attachment?.asDomain(), uid: uid, sender: sender.asDomain(), seenAt: seendAt, text: text, status: status)
     }
 }
 
-extension Message: RealmRepresentable {
+extension ChatMessage: RealmRepresentable {
     func asRealm() -> RMMessage {
         return RMMessage.build({ (obj) in
             obj.attachment = attachment?.asRealm()
@@ -42,6 +44,7 @@ extension Message: RealmRepresentable {
             obj.seendAt = seenAt
             obj.sender = sender?.asRealm()
             obj.text = text
+            obj.status = status
         })
     }
 }

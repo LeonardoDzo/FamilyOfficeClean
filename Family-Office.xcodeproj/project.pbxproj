@@ -15,6 +15,8 @@
 		0202E666203379B6001494D9 /* MainSocketProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0202E665203379B6001494D9 /* MainSocketProvider.swift */; };
 		0207172F202CBAB900A36FEF /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0207172E202CBAB900A36FEF /* Default-568h@2x.png */; };
 		02071732202CBAFF00A36FEF /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02071731202CBAFF00A36FEF /* Constants.swift */; };
+		0207F3B62056EF75001EC67E /* Chat.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 0207F3B52056EF75001EC67E /* Chat.graphql */; };
+		020E16792052F65600E2E61B /* MessageBindible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020E16782052F65600E2E61B /* MessageBindible.swift */; };
 		0211E7BA204F049200D3766E /* webViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0211E7B9204F049200D3766E /* webViewViewModel.swift */; };
 		0211E7C0204F24D700D3766E /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0211E7BF204F24D700D3766E /* ChatViewController.swift */; };
 		0216900E204DBFFE0097F150 /* NetInsuranceUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0216900D204DBFFE0097F150 /* NetInsuranceUseCase.swift */; };
@@ -189,6 +191,9 @@
 		02B79501202E7E500083CAB7 /* ProfileAssistantView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B79500202E7E500083CAB7 /* ProfileAssistantView.swift */; };
 		02B79503202E7EA50083CAB7 /* btnWithLbl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B79502202E7EA50083CAB7 /* btnWithLbl.swift */; };
 		02B79505202E7EC60083CAB7 /* TopViewProfileAssistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B79504202E7EC60083CAB7 /* TopViewProfileAssistant.swift */; };
+		02BA97832058E03800375AEA /* MultiFormData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BA97822058E03800375AEA /* MultiFormData.swift */; };
+		02BA97852058E09200375AEA /* GraphQLFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BA97842058E09200375AEA /* GraphQLFile.swift */; };
+		02BA97872058E0D600375AEA /* HttpNetworkTransport+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BA97862058E0D600375AEA /* HttpNetworkTransport+Ext.swift */; };
 		02BF68B5204250C600D03CDA /* Decodable+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BF68B4204250C600D03CDA /* Decodable+Ext.swift */; };
 		02BF68B7204251A500D03CDA /* RMApplicationFamily.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BF68B6204251A500D03CDA /* RMApplicationFamily.swift */; };
 		02C24011204F021000BD64D3 /* webView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C24010204F021000BD64D3 /* webView.swift */; };
@@ -196,6 +201,10 @@
 		02C24015204F026E00BD64D3 /* webNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C24014204F026E00BD64D3 /* webNavigator.swift */; };
 		02C68B682045F1B4002003FF /* ContrastColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C68B672045F1B4002003FF /* ContrastColor.swift */; };
 		02C68B6A2045F1D5002003FF /* Brightness.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C68B692045F1D5002003FF /* Brightness.swift */; };
+		02C720B620584A0D00C7E5A3 /* ChatSubdscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C720B520584A0D00C7E5A3 /* ChatSubdscription.swift */; };
+		02C720B820584FE100C7E5A3 /* MessageNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C720B720584FE100C7E5A3 /* MessageNetwork.swift */; };
+		02C720C020585BD600C7E5A3 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C720BF20585BD600C7E5A3 /* ChatViewModel.swift */; };
+		02C720C220585BE600C7E5A3 /* ChatNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C720C120585BE500C7E5A3 /* ChatNavigator.swift */; };
 		02C932E4202CC84A00E64A42 /* AssistantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C932E3202CC84A00E64A42 /* AssistantViewController.swift */; };
 		02C932E8202CC8F000E64A42 /* MainAssistantView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C932E7202CC8F000E64A42 /* MainAssistantView.swift */; };
 		02C932EA202CC90300E64A42 /* MenuMainStevia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C932E9202CC90300E64A42 /* MenuMainStevia.swift */; };
@@ -317,6 +326,8 @@
 		0202E665203379B6001494D9 /* MainSocketProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSocketProvider.swift; sourceTree = "<group>"; };
 		0207172E202CBAB900A36FEF /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		02071731202CBAFF00A36FEF /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		0207F3B52056EF75001EC67E /* Chat.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = Chat.graphql; sourceTree = "<group>"; };
+		020E16782052F65600E2E61B /* MessageBindible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageBindible.swift; sourceTree = "<group>"; };
 		0211E7B9204F049200D3766E /* webViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = webViewViewModel.swift; sourceTree = "<group>"; };
 		0211E7BF204F24D700D3766E /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		0216900D204DBFFE0097F150 /* NetInsuranceUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetInsuranceUseCase.swift; sourceTree = "<group>"; };
@@ -493,6 +504,9 @@
 		02B79500202E7E500083CAB7 /* ProfileAssistantView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAssistantView.swift; sourceTree = "<group>"; };
 		02B79502202E7EA50083CAB7 /* btnWithLbl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = btnWithLbl.swift; sourceTree = "<group>"; };
 		02B79504202E7EC60083CAB7 /* TopViewProfileAssistant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopViewProfileAssistant.swift; sourceTree = "<group>"; };
+		02BA97822058E03800375AEA /* MultiFormData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiFormData.swift; sourceTree = "<group>"; };
+		02BA97842058E09200375AEA /* GraphQLFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLFile.swift; sourceTree = "<group>"; };
+		02BA97862058E0D600375AEA /* HttpNetworkTransport+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HttpNetworkTransport+Ext.swift"; sourceTree = "<group>"; };
 		02BF68B4204250C600D03CDA /* Decodable+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Decodable+Ext.swift"; sourceTree = "<group>"; };
 		02BF68B6204251A500D03CDA /* RMApplicationFamily.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMApplicationFamily.swift; sourceTree = "<group>"; };
 		02C24010204F021000BD64D3 /* webView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = webView.swift; sourceTree = "<group>"; };
@@ -500,6 +514,10 @@
 		02C24014204F026E00BD64D3 /* webNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = webNavigator.swift; sourceTree = "<group>"; };
 		02C68B672045F1B4002003FF /* ContrastColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContrastColor.swift; sourceTree = "<group>"; };
 		02C68B692045F1D5002003FF /* Brightness.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Brightness.swift; sourceTree = "<group>"; };
+		02C720B520584A0D00C7E5A3 /* ChatSubdscription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatSubdscription.swift; sourceTree = "<group>"; };
+		02C720B720584FE100C7E5A3 /* MessageNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageNetwork.swift; sourceTree = "<group>"; };
+		02C720BF20585BD600C7E5A3 /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
+		02C720C120585BE500C7E5A3 /* ChatNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatNavigator.swift; sourceTree = "<group>"; };
 		02C932E3202CC84A00E64A42 /* AssistantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistantViewController.swift; sourceTree = "<group>"; };
 		02C932E7202CC8F000E64A42 /* MainAssistantView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainAssistantView.swift; sourceTree = "<group>"; };
 		02C932E9202CC90300E64A42 /* MenuMainStevia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuMainStevia.swift; sourceTree = "<group>"; };
@@ -666,9 +684,9 @@
 			isa = PBXGroup;
 			children = (
 				02D5DF9D204F6E1800303C98 /* cell */,
+				028EA9162053327D0098D8E9 /* Messages */,
 				0211E7BD204F24AD00D3766E /* Chats */,
 				0211E7BE204F24B600D3766E /* members */,
-				0211E7BF204F24D700D3766E /* ChatViewController.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -1005,6 +1023,7 @@
 		023AAB5D201F918000F50207 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				02BA977F2058E00100375AEA /* Graphql */,
 				023AAB60201F946200F50207 /* Mapplable.swift */,
 				023AAB69201FB35C00F50207 /* RxApollo.swift */,
 				023AAB6B201FB73A00F50207 /* Dictionary.swift */,
@@ -1025,6 +1044,7 @@
 				02DD500E204747B000E9B63D /* IllnessNetwork.swift */,
 				022FCEEE204DBD9500070546 /* InsuranceNethwork.swift */,
 				024D601B2052280B00CD1333 /* ChatNetwork.swift */,
+				02C720B720584FE100C7E5A3 /* MessageNetwork.swift */,
 			);
 			path = Graphql;
 			sourceTree = "<group>";
@@ -1081,6 +1101,8 @@
 			isa = PBXGroup;
 			children = (
 				024D601E2052286D00CD1333 /* NetChatUseCase.swift */,
+				02C720B520584A0D00C7E5A3 /* ChatSubdscription.swift */,
+				0207F3B52056EF75001EC67E /* Chat.graphql */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -1161,6 +1183,7 @@
 				0252DBE92048D691008CB454 /* ILLNESSTYPE+EXT.swift */,
 				022FCEE6204DBC5700070546 /* Insurance+Bindable.swift */,
 				02169016204DD9B70097F150 /* InsuresBtn.swift */,
+				020E16782052F65600E2E61B /* MessageBindible.swift */,
 			);
 			path = Entries;
 			sourceTree = "<group>";
@@ -1173,6 +1196,16 @@
 				028B667F202285A0003EC625 /* SignUpNavigator.swift */,
 			);
 			path = SignUp;
+			sourceTree = "<group>";
+		};
+		028EA9162053327D0098D8E9 /* Messages */ = {
+			isa = PBXGroup;
+			children = (
+				0211E7BF204F24D700D3766E /* ChatViewController.swift */,
+				02C720BF20585BD600C7E5A3 /* ChatViewModel.swift */,
+				02C720C120585BE500C7E5A3 /* ChatNavigator.swift */,
+			);
+			path = Messages;
 			sourceTree = "<group>";
 		};
 		0291AE6A2035098B00CD1FB3 /* HomeFamily */ = {
@@ -1286,6 +1319,16 @@
 				0238584A2044E20000D1CDB3 /* ProfileAssitantNavigator.swift */,
 			);
 			path = ProfileAssistant;
+			sourceTree = "<group>";
+		};
+		02BA977F2058E00100375AEA /* Graphql */ = {
+			isa = PBXGroup;
+			children = (
+				02BA97822058E03800375AEA /* MultiFormData.swift */,
+				02BA97842058E09200375AEA /* GraphQLFile.swift */,
+				02BA97862058E0D600375AEA /* HttpNetworkTransport+Ext.swift */,
+			);
+			path = Graphql;
 			sourceTree = "<group>";
 		};
 		02C2400F204F01E800BD64D3 /* viewInsurance */ = {
@@ -1808,6 +1851,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0207F3B62056EF75001EC67E /* Chat.graphql in Resources */,
 				02F2E4ED201A5DFC002E360E /* LaunchScreen.storyboard in Resources */,
 				0207172F202CBAB900A36FEF /* Default-568h@2x.png in Resources */,
 				023AAB38201EBB4900F50207 /* Info.plist in Resources */,
@@ -2026,6 +2070,7 @@
 				02ED6FA820448EF700D880F8 /* MenuMainNavigator.swift in Sources */,
 				023AAB58201F8B8600F50207 /* User+Mappable.swift in Sources */,
 				02DD501520477BFD00E9B63D /* MainIllnessViewController.swift in Sources */,
+				02BA97852058E09200375AEA /* GraphQLFile.swift in Sources */,
 				02ED6FAD204491B900D880F8 /* AssistantInviteTableViewCell.swift in Sources */,
 				02EF0F262032370F0020A133 /* Pending+Mappable.swift in Sources */,
 				023AAB5C201F8BEC00F50207 /* Family+Mappable.swift in Sources */,
@@ -2084,8 +2129,10 @@
 				02B79503202E7EA50083CAB7 /* btnWithLbl.swift in Sources */,
 				0253E95C2040EC200007CC65 /* SolicitudeTableViewCell.swift in Sources */,
 				02EF0F112032182C0020A133 /* RMPendingUseCase.swift in Sources */,
+				02C720B620584A0D00C7E5A3 /* ChatSubdscription.swift in Sources */,
 				02DD500320473D8B00E9B63D /* Illness+Mappable.swift in Sources */,
 				024D601A205204FE00CD1333 /* RMChatUseCase.swift in Sources */,
+				02C720C020585BD600C7E5A3 /* ChatViewModel.swift in Sources */,
 				023AAB47201EBB4900F50207 /* DesignableButton.swift in Sources */,
 				02EF0F2420322CD80020A133 /* AddEditPendingNavigator.swift in Sources */,
 				02FE577A2020F05A00B7E084 /* DomainConvertionType.swift in Sources */,
@@ -2131,6 +2178,7 @@
 				02ED6F9F2044755900D880F8 /* ApplicationAssistant+Mappable.swift in Sources */,
 				02EF0F22203229BF0020A133 /* UITableViewX.swift in Sources */,
 				0291AE6E203509B400CD1FB3 /* FamilyStevia.swift in Sources */,
+				020E16792052F65600E2E61B /* MessageBindible.swift in Sources */,
 				0298C7B7202B91620035D493 /* HomeBtn+UIBtn.swift in Sources */,
 				02D55FA7203B54FD00858D1B /* FamilySubscription.swift in Sources */,
 				025742E2203F3D2400215A56 /* SearchUserView.swift in Sources */,
@@ -2139,6 +2187,7 @@
 				022DD8C42028DCDA008ED417 /* NetUserUseCase.swift in Sources */,
 				02D55FB2203B6D3700858D1B /* FamilyProfileViewModel.swift in Sources */,
 				02F5258E2024E5B8009F817D /* AddEditFamilyView.swift in Sources */,
+				02C720C220585BE600C7E5A3 /* ChatNavigator.swift in Sources */,
 				02FE57822020F41E00B7E084 /* Repository.swift in Sources */,
 				02DD500120473CF700E9B63D /* Illness.swift in Sources */,
 				023858492044DECB00D1CDB3 /* ProfileAssistantViewModel.swift in Sources */,
@@ -2154,6 +2203,7 @@
 				02F2E4E5201A5DFC002E360E /* ViewController.swift in Sources */,
 				023AAB0D201EBB0900F50207 /* UIViewXRadialGradient.swift in Sources */,
 				02BF68B7204251A500D03CDA /* RMApplicationFamily.swift in Sources */,
+				02BA97872058E0D600375AEA /* HttpNetworkTransport+Ext.swift in Sources */,
 				02D338E12040841F007FDF7B /* NetSolicitudeUseCase.swift in Sources */,
 				023AAB2E201EBB4900F50207 /* SoundPlayer.swift in Sources */,
 				0211E7C0204F24D700D3766E /* ChatViewController.swift in Sources */,
@@ -2218,6 +2268,8 @@
 				02EF0F20203228600020A133 /* Pending+Bindable.swift in Sources */,
 				02F5259A2025074B009F817D /* AddEditNavigator.swift in Sources */,
 				026F44AE2034A25F0056CD7D /* FindObject.swift in Sources */,
+				02BA97832058E03800375AEA /* MultiFormData.swift in Sources */,
+				02C720B820584FE100C7E5A3 /* MessageNetwork.swift in Sources */,
 				02012DB12036033500889401 /* menuNavigator.swift in Sources */,
 				025742ED203F616C00215A56 /* UserInviteTableViewCell.swift in Sources */,
 				022FCEE9204DBC7A00070546 /* Insurance.swift in Sources */,

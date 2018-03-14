@@ -33,7 +33,7 @@ class MemberChatTableViewCell: UITableViewCellX, UserBindable {
             phoneLbl
         )
         photoProfile.size(50).centerVertically()
-    
+        
         phoneLbl.height(20)
         alignHorizontally(|-20-photoProfile-nameLbl.height(20)-20-|)
         alignVertically(nameLbl, phoneLbl.bottom(10))

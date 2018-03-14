@@ -19,9 +19,9 @@ public struct ChatMembership: Decodable {
     var user: Sender?
     
     enum CodingKeys: String, CodingKey {
-        case isAdmin
+        case isAdmin = "is_admin"
         case uid = "id"
-        case seenAt = "sent_at"
+        case seenAt = "seen_at"
         case user
     }
 }

@@ -16,11 +16,32 @@ public struct Chat: Decodable {
     
     var uid: String = ""
     
-    var lastMessage: Message?
+    var lastMessage: ChatMessage?
     
     var members = [ChatMembership]()
     
-    var messages = [Message]()
+    var messages = [ChatMessage]()
+    
+    public init(from decoder: Decoder) throws {
+        
+        if  let values = try? decoder.container(keyedBy: CodingKeys.self) {
+            
+            group = values.decodeSafelyIfPresent(ChatGroup.self, forKey: .group)
+            
+            uid = values.decodeSafely(String.self, forKey: .uid)!
+            
+            lastMessage = values.decodeSafelyIfPresent(ChatMessage.self, forKey: .lastMessage)
+            members = values.decodeSafely([ChatMembership].self, forKey: .members) ?? []
+        }
+    }
+    init(family: Family?, group: ChatGroup?, uid: String, lastMessage: ChatMessage?, members: [ChatMembership], messages: [ChatMessage]) {
+        self.family = family
+        self.group = group
+        self.lastMessage = lastMessage
+        self.members = members
+        self.messages = messages
+        self.uid = uid
+    }
 
     enum CodingKeys: String, CodingKey {
         case family
@@ -28,7 +49,7 @@ public struct Chat: Decodable {
         case group
         case lastMessage = "last_message"
         case members
-        case messages
+        case messages = "chat_messages"
     }
 }
 

@@ -12,10 +12,7 @@ import RxSwift
 import RxDataSources
 import RxCocoa
 import Stevia
-struct CustomData {
-    var message: String
-    var send: Date
-}
+
 
 struct SectionOfMessages {
     var header: Date
@@ -27,7 +24,7 @@ struct SectionOfMessages {
 }
 
 extension SectionOfMessages: SectionModelType {
-    typealias Item = CustomData
+    typealias Item = MockMessage
     
     init(original: SectionOfMessages, items: [Item]) {
         self = original
@@ -38,9 +35,15 @@ extension SectionOfMessages: SectionModelType {
 
 class ChatViewController: SLKTextViewController {
     private let disposeBag = DisposeBag()
-    var messages = Variable([CustomData]())
-    var sections = Variable([SectionOfMessages]())
+    
+    var viewModel: ChatViewModel!
     var dataSource: RxTableViewSectionedReloadDataSource<SectionOfMessages>!
+    
+    fileprivate func setupView() {
+        conftable()
+        bindToView()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView?.dataSource = nil
@@ -48,12 +51,14 @@ class ChatViewController: SLKTextViewController {
         tableView?.separatorStyle = .none
         self.isKeyboardPanningEnabled = true
         // Do any additional setup after loading the view.
-        conftable()
-        getSections()
+        self.tableView?.backgroundColor = #colorLiteral(red: 0.921431005, green: 0.9214526415, blue: 0.9214410186, alpha: 1)
+        on("INJECTION_BUNDLE_NOTIFICATION") {
+            self.setupView()
+        }
+        setupView()
     }
     
     override class func tableViewStyle(for decoder: NSCoder) -> UITableViewStyle {
-        
         return .plain
     }
     override func didReceiveMemoryWarning() {
@@ -61,23 +66,12 @@ class ChatViewController: SLKTextViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    override func didPressRightButton(_ sender: Any?) {
-        guard var text = textView.text else { return }
-        text = text.trimmingCharacters(in: .whitespacesAndNewlines)
-        if text.isEmpty { return; }
-        messages.value.append(CustomData(message: text, send: Date()))
-       
-        super.didPressRightButton(sender)
-    }
-    
     func conftable() -> Void {
         dataSource = RxTableViewSectionedReloadDataSource<SectionOfMessages>(configureCell: { (ds, tv, ip, item) -> MessageTableViewCell in
             let cell = tv.dequeueReusableCell(withIdentifier: "Cell", for: ip) as! MessageTableViewCell
-            cell.messageLbl.numberOfLines = 0
-            
-            cell.messageLbl.text = item.message
-            
+            cell.messageText.numberOfLines = 0
             cell.transform = (self.tableView?.transform)!
+            cell.bind(message: item)
             if ip.row % 2 == 0 {
                 cell.bubbleView.right(15).left(>=40)
                 cell.changeImage()
@@ -91,22 +85,39 @@ class ChatViewController: SLKTextViewController {
         dataSource.titleForFooterInSection = { ds, index in
             return ds.sectionModels[index].header.string(with: .HHmm)
         }
+
+    }
+    
+    func bindToView() -> Void {
+        
+        let text = self.textView.rx.text
+            .orEmpty
+            .asDriver()
+        let tap = rx.methodInvoked(#selector(self.didPressRightButton))
+            .asDriverOnErrorJustComplete()
+            .mapToVoid()
+        
+        let combine = Driver.combineLatest(tap, text)
         
         
-        sections.asObservable()
-            .bind(to: (self.tableView?.rx.items(dataSource: dataSource))!)
+        
+        let willAppear = rx.methodInvoked(#selector(self.viewWillAppear))
+            .asDriverOnErrorJustComplete()
+            .mapToVoid()
+        
+        let input = ChatViewModel.Input(willAppear: willAppear, sendMessage: combine )
+        
+        let output = viewModel.transform(input: input)
+        
+        output.messages
+            .drive((self.tableView?.rx.items(dataSource: dataSource))!)
+            .disposed(by: disposeBag)
+        
+        output.sendMessage
+            .drive()
             .disposed(by: disposeBag)
         
     }
     
-    func getSections() {
-        
-        messages.asObservable().bind(onNext: { (messages) in
-            self.sections.value = Dictionary(grouping: messages.reversed()) { (message) -> Date in
-                return message.send.midnight()
-                }.map({SectionOfMessages(value: $0)})
-        }).disposed(by: disposeBag)
-        
-        
-    }
+  
 }

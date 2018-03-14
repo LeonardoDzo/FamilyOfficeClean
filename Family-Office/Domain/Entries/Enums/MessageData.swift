@@ -19,7 +19,7 @@ public enum MessageData {
     case attributedText(NSAttributedString)
     
     /// A photo message.
-    case photo(UIImage)
+    case photo(Attachment)
     
     /// A video message.
     case video(file: URL, thumbnail: UIImage)

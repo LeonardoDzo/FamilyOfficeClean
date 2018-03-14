@@ -11,6 +11,9 @@ import RxSwift
 
 public protocol ChatUseCase {
     func get(byGroup: Bool?) -> Observable<[Chat]>
-    func save(chatId: String, message: Message) -> Observable<Void>
-    func createt(chat: Chat) -> Observable<Chat>
+    func get(id: String) -> Observable<Chat>
+    func get(uid: String) -> Observable<Chat>
+    func save(chatId: String, message: ChatMessage) -> Observable<Void>
+    func create(chat: Chat) -> Observable<Chat>
+    func create(userId: String) -> Observable<Chat>
 }
