@@ -16,5 +16,6 @@ public protocol UserUseCase {
     func getUsers(byFamily: Family) -> Observable<[User]>
     func getUsers(phones: [String], rol: Int) -> Observable<[User]>
     func getAssistants() -> Observable<[User]>
+    func edit(user: User, photo: Data?) -> Observable<Void>
     //func allUser(fid: String) -> Void
 }

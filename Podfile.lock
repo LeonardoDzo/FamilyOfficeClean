@@ -2,9 +2,10 @@ PODS:
   - ActionCableClient (0.2.3):
     - Starscream (~> 2.0.0)
   - Alamofire (4.7.0)
-  - Apollo (0.8.0):
-    - Apollo/Core (= 0.8.0)
-  - Apollo/Core (0.8.0)
+  - ALCameraViewController (3.0.3)
+  - Apollo (0.7.0-alpha.5):
+    - Apollo/Core (= 0.7.0-alpha.5)
+  - Apollo/Core (0.7.0-alpha.5)
   - Differentiator (3.0.2)
   - Eureka (4.1.0)
   - GenericPasswordRow (3.0.0):
@@ -47,6 +48,9 @@ PODS:
     - Differentiator (~> 3.0)
     - RxCocoa (~> 4.0)
     - RxSwift (~> 4.0)
+  - RxGesture (1.2.1):
+    - RxCocoa (~> 4.0)
+    - RxSwift (~> 4.0)
   - RxRealm (0.7.5):
     - RealmSwift (~> 3.0)
     - RxSwift (~> 4.0)
@@ -63,7 +67,8 @@ PODS:
 DEPENDENCIES:
   - ActionCableClient
   - Alamofire
-  - Apollo
+  - ALCameraViewController
+  - Apollo (from `https://github.com/LeonardoDzo/apollo-ios`)
   - Eureka
   - GenericPasswordRow (~> 3.0)
   - GoogleSignIn
@@ -75,6 +80,7 @@ DEPENDENCIES:
   - RealmSwift
   - RxCocoa (~> 4.0)
   - RxDataSources
+  - RxGesture
   - RxRealm
   - RxSwift (~> 4.0)
   - RxWebKit
@@ -83,10 +89,20 @@ DEPENDENCIES:
   - SteviaLayout
   - Whisper
 
+EXTERNAL SOURCES:
+  Apollo:
+    :git: https://github.com/LeonardoDzo/apollo-ios
+
+CHECKOUT OPTIONS:
+  Apollo:
+    :commit: bc572917e438f77bab6a8dfe1bc0b89cfe648fcd
+    :git: https://github.com/LeonardoDzo/apollo-ios
+
 SPEC CHECKSUMS:
   ActionCableClient: c8a466410d31bfa14e7a9c209b539c1e2d026a5f
   Alamofire: 907e0a98eb68cdb7f9d1f541a563d6ac5dc77b25
-  Apollo: 66e0f52289551545adb7ecdd994e713fdbae26eb
+  ALCameraViewController: 6398a9282057f709b87a1ecc52a83b48028ade64
+  Apollo: 9b66ce1456e5a5e514a698040fe295597f018c80
   Differentiator: a87be69eba49ec4ab460c7671143ee3a9eececfd
   Eureka: 5770ef95bbbbe52f8abbc0d9bea6ee8282c50209
   GenericPasswordRow: 27a52c727c47b2e4d50c2295d1cc7d32c5883e70
@@ -104,6 +120,7 @@ SPEC CHECKSUMS:
   Result: d2d07204ce72856f1fd9130bbe42c35a7b0fea10
   RxCocoa: d88ba0f1f6abf040011a9eb4b539324fc426843a
   RxDataSources: cb7c31e652a87ebb919da45f716bbb87b3765f6b
+  RxGesture: c278eb05b187abd47e11e65464ae4de53ab71d95
   RxRealm: a6c6c0a07cb61f34209969ca6657734edfdfff30
   RxSwift: e49536837d9901277638493ea537394d4b55f570
   RxWebKit: e39e220919e5e24546c837f5f60689036a1e5920
@@ -113,6 +130,6 @@ SPEC CHECKSUMS:
   SteviaLayout: 0d2112caea45707695e8c718262c8ea3dd37ef17
   Whisper: 169760fc4bab0abf24d5529f9276f95c25cf1025
 
-PODFILE CHECKSUM: 38e2578f5eb71ec5d6139f76a64b721c3d96291b
+PODFILE CHECKSUM: 9afde17c870b21b44654a421ff85c4b7c2f8591e
 
 COCOAPODS: 1.3.1

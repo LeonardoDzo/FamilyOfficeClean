@@ -8,7 +8,6 @@
 
 import Foundation
 import RxSwift
-import Apollo
 
 public final class AuthNetwork {
     private let network: Network<AuthModel>

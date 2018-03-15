@@ -12,6 +12,10 @@ import Realm
 import RealmSwift
 
 final class RMUserUseCase<Repository>: UserUseCase where Repository: AbstractRepository, Repository.T == User {
+    func edit(user: User, photo: Data?) -> Observable<Void> {
+        return Variable(()).asObservable()
+    }
+    
 
     private let repository: Repository!
 

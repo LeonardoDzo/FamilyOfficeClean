@@ -8,6 +8,7 @@
 
 import Foundation
 import Apollo
+
 final class NetworkProvider {
     let apollo: ApolloClient!
     var offline = false

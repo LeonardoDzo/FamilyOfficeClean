@@ -191,9 +191,6 @@
 		02B79501202E7E500083CAB7 /* ProfileAssistantView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B79500202E7E500083CAB7 /* ProfileAssistantView.swift */; };
 		02B79503202E7EA50083CAB7 /* btnWithLbl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B79502202E7EA50083CAB7 /* btnWithLbl.swift */; };
 		02B79505202E7EC60083CAB7 /* TopViewProfileAssistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B79504202E7EC60083CAB7 /* TopViewProfileAssistant.swift */; };
-		02BA97832058E03800375AEA /* MultiFormData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BA97822058E03800375AEA /* MultiFormData.swift */; };
-		02BA97852058E09200375AEA /* GraphQLFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BA97842058E09200375AEA /* GraphQLFile.swift */; };
-		02BA97872058E0D600375AEA /* HttpNetworkTransport+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BA97862058E0D600375AEA /* HttpNetworkTransport+Ext.swift */; };
 		02BF68B5204250C600D03CDA /* Decodable+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BF68B4204250C600D03CDA /* Decodable+Ext.swift */; };
 		02BF68B7204251A500D03CDA /* RMApplicationFamily.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BF68B6204251A500D03CDA /* RMApplicationFamily.swift */; };
 		02C24011204F021000BD64D3 /* webView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C24010204F021000BD64D3 /* webView.swift */; };
@@ -504,9 +501,6 @@
 		02B79500202E7E500083CAB7 /* ProfileAssistantView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAssistantView.swift; sourceTree = "<group>"; };
 		02B79502202E7EA50083CAB7 /* btnWithLbl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = btnWithLbl.swift; sourceTree = "<group>"; };
 		02B79504202E7EC60083CAB7 /* TopViewProfileAssistant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopViewProfileAssistant.swift; sourceTree = "<group>"; };
-		02BA97822058E03800375AEA /* MultiFormData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiFormData.swift; sourceTree = "<group>"; };
-		02BA97842058E09200375AEA /* GraphQLFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLFile.swift; sourceTree = "<group>"; };
-		02BA97862058E0D600375AEA /* HttpNetworkTransport+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HttpNetworkTransport+Ext.swift"; sourceTree = "<group>"; };
 		02BF68B4204250C600D03CDA /* Decodable+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Decodable+Ext.swift"; sourceTree = "<group>"; };
 		02BF68B6204251A500D03CDA /* RMApplicationFamily.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMApplicationFamily.swift; sourceTree = "<group>"; };
 		02C24010204F021000BD64D3 /* webView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = webView.swift; sourceTree = "<group>"; };
@@ -1023,7 +1017,6 @@
 		023AAB5D201F918000F50207 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
-				02BA977F2058E00100375AEA /* Graphql */,
 				023AAB60201F946200F50207 /* Mapplable.swift */,
 				023AAB69201FB35C00F50207 /* RxApollo.swift */,
 				023AAB6B201FB73A00F50207 /* Dictionary.swift */,
@@ -1299,8 +1292,8 @@
 		02A277D4202D4FD100321FBD /* ProfileTabBar */ = {
 			isa = PBXGroup;
 			children = (
-				02A277D5202D4FE400321FBD /* ProfileViewController.swift */,
 				02A277D7202D4FF500321FBD /* ProfileView.swift */,
+				02A277D5202D4FE400321FBD /* ProfileViewController.swift */,
 				02A9DCB920364EC500F43C85 /* infoLineView.swift */,
 				02704BC2203759EF0070D6DA /* ProfileNavigator.swift */,
 				02CA927E2037605700C0AEC0 /* ProfileViewModel.swift */,
@@ -1319,16 +1312,6 @@
 				0238584A2044E20000D1CDB3 /* ProfileAssitantNavigator.swift */,
 			);
 			path = ProfileAssistant;
-			sourceTree = "<group>";
-		};
-		02BA977F2058E00100375AEA /* Graphql */ = {
-			isa = PBXGroup;
-			children = (
-				02BA97822058E03800375AEA /* MultiFormData.swift */,
-				02BA97842058E09200375AEA /* GraphQLFile.swift */,
-				02BA97862058E0D600375AEA /* HttpNetworkTransport+Ext.swift */,
-			);
-			path = Graphql;
 			sourceTree = "<group>";
 		};
 		02C2400F204F01E800BD64D3 /* viewInsurance */ = {
@@ -1895,6 +1878,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Family-Office/Pods-Family-Office-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/ALCameraViewController/ALCameraViewController.framework",
 				"${BUILT_PRODUCTS_DIR}/ActionCableClient/ActionCableClient.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Apollo/Apollo.framework",
@@ -1914,6 +1898,7 @@
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxDataSources/RxDataSources.framework",
+				"${BUILT_PRODUCTS_DIR}/RxGesture/RxGesture.framework",
 				"${BUILT_PRODUCTS_DIR}/RxRealm/RxRealm.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/RxWebKit/RxWebKit.framework",
@@ -1925,6 +1910,7 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ALCameraViewController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ActionCableClient.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Apollo.framework",
@@ -1944,6 +1930,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxDataSources.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxGesture.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxRealm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxWebKit.framework",
@@ -2070,7 +2057,6 @@
 				02ED6FA820448EF700D880F8 /* MenuMainNavigator.swift in Sources */,
 				023AAB58201F8B8600F50207 /* User+Mappable.swift in Sources */,
 				02DD501520477BFD00E9B63D /* MainIllnessViewController.swift in Sources */,
-				02BA97852058E09200375AEA /* GraphQLFile.swift in Sources */,
 				02ED6FAD204491B900D880F8 /* AssistantInviteTableViewCell.swift in Sources */,
 				02EF0F262032370F0020A133 /* Pending+Mappable.swift in Sources */,
 				023AAB5C201F8BEC00F50207 /* Family+Mappable.swift in Sources */,
@@ -2203,7 +2189,6 @@
 				02F2E4E5201A5DFC002E360E /* ViewController.swift in Sources */,
 				023AAB0D201EBB0900F50207 /* UIViewXRadialGradient.swift in Sources */,
 				02BF68B7204251A500D03CDA /* RMApplicationFamily.swift in Sources */,
-				02BA97872058E0D600375AEA /* HttpNetworkTransport+Ext.swift in Sources */,
 				02D338E12040841F007FDF7B /* NetSolicitudeUseCase.swift in Sources */,
 				023AAB2E201EBB4900F50207 /* SoundPlayer.swift in Sources */,
 				0211E7C0204F24D700D3766E /* ChatViewController.swift in Sources */,
@@ -2268,7 +2253,6 @@
 				02EF0F20203228600020A133 /* Pending+Bindable.swift in Sources */,
 				02F5259A2025074B009F817D /* AddEditNavigator.swift in Sources */,
 				026F44AE2034A25F0056CD7D /* FindObject.swift in Sources */,
-				02BA97832058E03800375AEA /* MultiFormData.swift in Sources */,
 				02C720B820584FE100C7E5A3 /* MessageNetwork.swift in Sources */,
 				02012DB12036033500889401 /* menuNavigator.swift in Sources */,
 				025742ED203F616C00215A56 /* UserInviteTableViewCell.swift in Sources */,

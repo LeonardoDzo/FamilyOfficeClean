@@ -34,7 +34,7 @@ final class NetChatUseCase: ChatUseCase {
         return mNetwork.sendMessage(chatId: chatId, mid: message.uid, text: message.text).do(onNext:  { message in
                 var m = message
                 m.status = .Sent
-            self.provider.makeChatUseCase().save(chatId: chatId, message: m).subscribe().disposed(by: self.diposeBag)
+//            self.provider.makeChatUseCase().save(chatId: chatId, message: m).subscribe().disposed(by: self.diposeBag)
             }).mapToVoid()
     }
     

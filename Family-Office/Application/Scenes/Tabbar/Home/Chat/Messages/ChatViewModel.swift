@@ -22,6 +22,9 @@ final class ChatViewModel: ViewModelType {
     var chat: Chat!
     
     var me: User!
+    
+    var text = ""
+    
     init(chatUseCase: ChatUseCase, netChatUseCase: ChatUseCase, navigator: ChatNavigator) {
         self.chatUseCase = chatUseCase
         self.netChatUseCase = netChatUseCase
@@ -54,31 +57,34 @@ final class ChatViewModel: ViewModelType {
                 return message.sentDate.midnight()
                 }.map({SectionOfMessages(value: $0)})
         }
+        let textChanged  = input.textChange.do(onNext: {self.text = $0})
         
-        let sendMessage = input.sendMessage.flatMapLatest({ (arg) -> SharedSequence<DriverSharingStrategy, Void> in
-            let (_,_) = arg
+        let sendMessage = input.sendMessage.flatMapLatest({_ -> SharedSequence<DriverSharingStrategy, Void> in
+         
             var message = ChatMessage()
             let me = self.chat.members.first(where: {$0.user!.uid == uid})
             message.seenAt = Date().toMillis()
             message.uid = UUID().uuidString
-            message.sender = Sender(uid: uid, displayName: (me!.user?.displayName)!, photo: (me!.user?.photo)!)
-            message.text = arg.1
+            message.sender = Sender(uid: uid, displayName: (me!.user?.displayName)!, photo: (me!.user?.photo))
+            message.text = self.text
             return self.netChatUseCase
                 .save(chatId: self.chat.uid, message: message)
                 .asDriverOnErrorJustComplete()
         })
-        return Output(messages: messages, infoChat: chattrigger, sendMessage: sendMessage)
+        return Output(messages: messages, infoChat: chattrigger, sendMessage: sendMessage, messageChange: textChanged.mapToVoid())
         
     }
 }
 extension ChatViewModel {
     struct Input {
         let willAppear: Driver<Void>
-        let sendMessage: Driver<(Void, String)>
+        let textChange: Driver<String>
+        let sendMessage: Driver<Void>
     }
     struct Output {
         let messages: Driver<[SectionOfMessages]>
         let infoChat: Driver<Chat>
         let sendMessage: Driver<Void>
+        let messageChange: Driver<Void>
     }
 }

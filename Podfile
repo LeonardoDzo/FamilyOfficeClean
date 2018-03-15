@@ -12,8 +12,10 @@ target 'Family-Office' do
     pod 'RxWebKit'
     pod 'RxDataSources'
     pod 'RxRealm'
-    pod 'Apollo'
+    pod 'RxGesture'
     
+    pod 'Apollo', :git => "https://github.com/LeonardoDzo/apollo-ios"
+
     pod 'RealmSwift'
     pod 'GzipSwift'
     
@@ -26,6 +28,7 @@ target 'Family-Office' do
     pod 'SideMenu'
     pod 'Hero'
     pod 'SlackTextViewController'
+    pod 'ALCameraViewController'
     
     pod 'Alamofire'
 	pod 'ActionCableClient'

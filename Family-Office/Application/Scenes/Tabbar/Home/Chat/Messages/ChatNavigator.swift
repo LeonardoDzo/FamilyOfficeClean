@@ -15,7 +15,7 @@ class ChatNavigator: NavigatorType {
         self.navigationController = navigationController
     }
     func toMain(sender: Any?) {
-        if let chat = sender as? Chat {
+        if let chat = sender as? Chat, let top = UIApplication.topViewController(), !(top is ChatViewController) {
             let view = ChatViewController()
             view.viewModel = ChatViewModel(chatUseCase: RMUseCaseProvider().makeChatUseCase(), netChatUseCase: NetUseCaseProvider().makeChatUseCase(), navigator: self)
             view.viewModel.chat = chat

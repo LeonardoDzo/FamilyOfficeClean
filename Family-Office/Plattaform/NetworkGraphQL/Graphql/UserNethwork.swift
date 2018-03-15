@@ -8,6 +8,7 @@
 
 import Foundation
 import RxSwift
+import Apollo
 
 public final class UserNetwork {
 
@@ -25,5 +26,17 @@ public final class UserNetwork {
     }
     func getUser(id: String) -> Observable<User> {
         return network.getItem(GetUserQuery(id: id))
+    }
+    func editUser(user: User, photo: Data?) -> Observable<User> {
+        if let data = photo {
+            
+            let id = UUID().uuidString
+            let file = GraphQLFile(fieldName: "file", originalName: "\(id).jpeg", mimeType: "image/jpeg", data: data)
+            let mutation = EditUserMutation(file: nil)
+            return network.postItem(mutation, files: [file])
+        }else{
+            return network.postItem(EditUserMutation(file: nil))
+        }
+       
     }
 }

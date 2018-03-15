@@ -8,7 +8,6 @@
 
 import Foundation
 import Stevia
-import Apollo
 import CoreImage
 
 class imgEditable: UIViewX {

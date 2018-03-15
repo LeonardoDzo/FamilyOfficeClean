@@ -9,6 +9,9 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import RxGesture
+
+import ALCameraViewController
 
 class ProfileViewController: UIViewController {
     private let disposeBag = DisposeBag()
@@ -37,17 +40,31 @@ class ProfileViewController: UIViewController {
         let viewWillAppear = rx.sentMessage(#selector(UIViewController.viewDidAppear(_:)))
             .mapToVoid()
             .asDriverOnErrorJustComplete()
-        let input = ProfileViewModel.Input(trigger: viewWillAppear, backTrigger: self.v.backButton.rx.tap.asDriver())
+        let input = ProfileViewModel.Input(trigger: viewWillAppear, selectTrigger: self.v.photoProfile.rx.tapGesture().when(.recognized).asDriverOnErrorJustComplete().mapToVoid(), backTrigger: self.v.backButton.rx.tap.asDriver())
+        
         let output = viewModel.transform(input: input)
-
-        output.back.drive().disposed(by: disposeBag)
+        
+        output.back
+            .drive()
+            .disposed(by: disposeBag)
+        
         output.user.drive(onNext: { user in
             self.v.bind(user: user)
         }).disposed(by: disposeBag)
+        
+        output.selected.drive(onNext: { self.selectImage(completion: { (img) in
+            if img != nil {
+                if let aux: Data = (img)?.resizeImage().jpeg(.high)! {
+                    NetUseCaseProvider().makeUseCase().edit(user: User(uid: "", name: "", email: ""), photo: aux).subscribe().disposed(by: self.disposeBag)
+                }
+            }
+        })}).disposed(by: disposeBag)
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
 
     }
+    
+
 
 }

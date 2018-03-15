@@ -8,7 +8,6 @@
 import Foundation
 import RxSwift
 import Apollo
-
 /// An `Error` emitted by `ApolloReactiveExtensions`.
 public enum RxApolloError: Error {
     /// One or more `GraphQLError`s were encountered.
@@ -89,9 +88,9 @@ public final class ApolloReactiveExtensions {
     ///   - mutation: The mutation to perform.
     ///   - queue: A dispatch queue on which the result handler will be called. Defaults to the main queue.
     /// - Returns: A `Maybe` that emits the results of the mutation.
-    public func perform<Mutation: GraphQLMutation>(mutation: Mutation, queue: DispatchQueue = DispatchQueue.main) -> Maybe<Mutation.Data> {
+    public func perform<Mutation: GraphQLMutation>(mutation: Mutation, files: [GraphQLFile]? = nil, queue: DispatchQueue = DispatchQueue.main) -> Maybe<Mutation.Data> {
         return Maybe.create { maybe in
-            let cancellable = self.client.perform(mutation: mutation, queue: queue) { result, error in
+            let cancellable = self.client.performUpload(mutation: mutation, files: files, queue: queue) { result, error in
                 if let error = error {
                     maybe(.error(error))
                 } else if let errors = result?.errors {
@@ -108,6 +107,7 @@ public final class ApolloReactiveExtensions {
             }
         }
     }
+    
 }
 
 public extension ApolloClient {

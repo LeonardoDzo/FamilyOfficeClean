@@ -39,6 +39,8 @@ class ProfileView: UIViewX, UserBindable {
     }
 
     fileprivate func render() {
+      
+    
         sv(backgroundImg, photoProfile, nameLbl, addressV, bloodtypeV, nssV, rfcV, menu, backButton)
         backButton.style(self.styleBtnBack)
         // Layout
@@ -76,5 +78,7 @@ class ProfileView: UIViewX, UserBindable {
         nameLbl.animation = "fadeInDown"
         self.animations()
     }
+    
+   
 
 }

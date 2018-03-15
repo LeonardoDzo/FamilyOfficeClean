@@ -25,15 +25,15 @@ public final class AllApplicationsAssistantsQuery: GraphQLQuery {
     }
 
     public init(allSolicitudes: [AllSolicitude?]? = nil) {
-      self.init(snapshot: ["__typename": "Query", "allSolicitudes": allSolicitudes.flatMap { (value: [AllSolicitude?]) -> [Snapshot?] in value.map { (value: AllSolicitude?) -> Snapshot? in value.flatMap { (value: AllSolicitude) -> Snapshot in value.snapshot } } }])
+      self.init(snapshot: ["__typename": "Query", "allSolicitudes": allSolicitudes.flatMap { $0.map { $0.flatMap { $0.snapshot } } }])
     }
 
     public var allSolicitudes: [AllSolicitude?]? {
       get {
-        return (snapshot["allSolicitudes"] as? [Snapshot?]).flatMap { (value: [Snapshot?]) -> [AllSolicitude?] in value.map { (value: Snapshot?) -> AllSolicitude? in value.flatMap { (value: Snapshot) -> AllSolicitude in AllSolicitude(snapshot: value) } } }
+        return (snapshot["allSolicitudes"] as? [Snapshot?]).flatMap { $0.map { $0.flatMap { AllSolicitude(snapshot: $0) } } }
       }
       set {
-        snapshot.updateValue(newValue.flatMap { (value: [AllSolicitude?]) -> [Snapshot?] in value.map { (value: AllSolicitude?) -> Snapshot? in value.flatMap { (value: AllSolicitude) -> Snapshot in value.snapshot } } }, forKey: "allSolicitudes")
+        snapshot.updateValue(newValue.flatMap { $0.map { $0.flatMap { $0.snapshot } } }, forKey: "allSolicitudes")
       }
     }
 
@@ -56,7 +56,7 @@ public final class AllApplicationsAssistantsQuery: GraphQLQuery {
       }
 
       public init(id: GraphQLID, assistant: Assistant? = nil, boss: Boss? = nil, status: String? = nil) {
-        self.init(snapshot: ["__typename": "Solicitude", "id": id, "assistant": assistant.flatMap { (value: Assistant) -> Snapshot in value.snapshot }, "boss": boss.flatMap { (value: Boss) -> Snapshot in value.snapshot }, "status": status])
+        self.init(snapshot: ["__typename": "Solicitude", "id": id, "assistant": assistant.flatMap { $0.snapshot }, "boss": boss.flatMap { $0.snapshot }, "status": status])
       }
 
       public var __typename: String {
@@ -79,7 +79,7 @@ public final class AllApplicationsAssistantsQuery: GraphQLQuery {
 
       public var assistant: Assistant? {
         get {
-          return (snapshot["assistant"] as? Snapshot).flatMap { Assistant(snapshot: $0) }
+          return (snapshot["assistant"] as! Snapshot?).flatMap { Assistant(snapshot: $0) }
         }
         set {
           snapshot.updateValue(newValue?.snapshot, forKey: "assistant")
@@ -88,7 +88,7 @@ public final class AllApplicationsAssistantsQuery: GraphQLQuery {
 
       public var boss: Boss? {
         get {
-          return (snapshot["boss"] as? Snapshot).flatMap { Boss(snapshot: $0) }
+          return (snapshot["boss"] as! Snapshot?).flatMap { Boss(snapshot: $0) }
         }
         set {
           snapshot.updateValue(newValue?.snapshot, forKey: "boss")
@@ -147,7 +147,7 @@ public final class AllApplicationsAssistantsQuery: GraphQLQuery {
         }
 
         public init(id: GraphQLID, name: String, email: String, phone: String? = nil, userType: String, photo: Photo? = nil) {
-          self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType, "photo": photo.flatMap { (value: Photo) -> Snapshot in value.snapshot }])
+          self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType, "photo": photo.flatMap { $0.snapshot }])
         }
 
         public var __typename: String {
@@ -206,7 +206,7 @@ public final class AllApplicationsAssistantsQuery: GraphQLQuery {
 
         public var photo: Photo? {
           get {
-            return (snapshot["photo"] as? Snapshot).flatMap { Photo(snapshot: $0) }
+            return (snapshot["photo"] as! Snapshot?).flatMap { Photo(snapshot: $0) }
           }
           set {
             snapshot.updateValue(newValue?.snapshot, forKey: "photo")
@@ -357,7 +357,7 @@ public final class AllApplicationsAssistantsQuery: GraphQLQuery {
         }
 
         public init(id: GraphQLID, name: String, email: String, phone: String? = nil, userType: String, photo: Photo? = nil) {
-          self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType, "photo": photo.flatMap { (value: Photo) -> Snapshot in value.snapshot }])
+          self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType, "photo": photo.flatMap { $0.snapshot }])
         }
 
         public var __typename: String {
@@ -416,7 +416,7 @@ public final class AllApplicationsAssistantsQuery: GraphQLQuery {
 
         public var photo: Photo? {
           get {
-            return (snapshot["photo"] as? Snapshot).flatMap { Photo(snapshot: $0) }
+            return (snapshot["photo"] as! Snapshot?).flatMap { Photo(snapshot: $0) }
           }
           set {
             snapshot.updateValue(newValue?.snapshot, forKey: "photo")
@@ -579,12 +579,12 @@ public final class AssitantApplicationsMutation: GraphQLMutation {
     }
 
     public init(createSolicitude: CreateSolicitude? = nil) {
-      self.init(snapshot: ["__typename": "Mutation", "createSolicitude": createSolicitude.flatMap { (value: CreateSolicitude) -> Snapshot in value.snapshot }])
+      self.init(snapshot: ["__typename": "Mutation", "createSolicitude": createSolicitude.flatMap { $0.snapshot }])
     }
 
     public var createSolicitude: CreateSolicitude? {
       get {
-        return (snapshot["createSolicitude"] as? Snapshot).flatMap { CreateSolicitude(snapshot: $0) }
+        return (snapshot["createSolicitude"] as! Snapshot?).flatMap { CreateSolicitude(snapshot: $0) }
       }
       set {
         snapshot.updateValue(newValue?.snapshot, forKey: "createSolicitude")
@@ -610,7 +610,7 @@ public final class AssitantApplicationsMutation: GraphQLMutation {
       }
 
       public init(id: GraphQLID, assistant: Assistant? = nil, boss: Boss? = nil, status: String? = nil) {
-        self.init(snapshot: ["__typename": "Solicitude", "id": id, "assistant": assistant.flatMap { (value: Assistant) -> Snapshot in value.snapshot }, "boss": boss.flatMap { (value: Boss) -> Snapshot in value.snapshot }, "status": status])
+        self.init(snapshot: ["__typename": "Solicitude", "id": id, "assistant": assistant.flatMap { $0.snapshot }, "boss": boss.flatMap { $0.snapshot }, "status": status])
       }
 
       public var __typename: String {
@@ -633,7 +633,7 @@ public final class AssitantApplicationsMutation: GraphQLMutation {
 
       public var assistant: Assistant? {
         get {
-          return (snapshot["assistant"] as? Snapshot).flatMap { Assistant(snapshot: $0) }
+          return (snapshot["assistant"] as! Snapshot?).flatMap { Assistant(snapshot: $0) }
         }
         set {
           snapshot.updateValue(newValue?.snapshot, forKey: "assistant")
@@ -642,7 +642,7 @@ public final class AssitantApplicationsMutation: GraphQLMutation {
 
       public var boss: Boss? {
         get {
-          return (snapshot["boss"] as? Snapshot).flatMap { Boss(snapshot: $0) }
+          return (snapshot["boss"] as! Snapshot?).flatMap { Boss(snapshot: $0) }
         }
         set {
           snapshot.updateValue(newValue?.snapshot, forKey: "boss")
@@ -701,7 +701,7 @@ public final class AssitantApplicationsMutation: GraphQLMutation {
         }
 
         public init(id: GraphQLID, name: String, email: String, phone: String? = nil, userType: String, photo: Photo? = nil) {
-          self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType, "photo": photo.flatMap { (value: Photo) -> Snapshot in value.snapshot }])
+          self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType, "photo": photo.flatMap { $0.snapshot }])
         }
 
         public var __typename: String {
@@ -760,7 +760,7 @@ public final class AssitantApplicationsMutation: GraphQLMutation {
 
         public var photo: Photo? {
           get {
-            return (snapshot["photo"] as? Snapshot).flatMap { Photo(snapshot: $0) }
+            return (snapshot["photo"] as! Snapshot?).flatMap { Photo(snapshot: $0) }
           }
           set {
             snapshot.updateValue(newValue?.snapshot, forKey: "photo")
@@ -911,7 +911,7 @@ public final class AssitantApplicationsMutation: GraphQLMutation {
         }
 
         public init(id: GraphQLID, name: String, email: String, phone: String? = nil, userType: String, photo: Photo? = nil) {
-          self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType, "photo": photo.flatMap { (value: Photo) -> Snapshot in value.snapshot }])
+          self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType, "photo": photo.flatMap { $0.snapshot }])
         }
 
         public var __typename: String {
@@ -970,7 +970,7 @@ public final class AssitantApplicationsMutation: GraphQLMutation {
 
         public var photo: Photo? {
           get {
-            return (snapshot["photo"] as? Snapshot).flatMap { Photo(snapshot: $0) }
+            return (snapshot["photo"] as! Snapshot?).flatMap { Photo(snapshot: $0) }
           }
           set {
             snapshot.updateValue(newValue?.snapshot, forKey: "photo")
@@ -1135,12 +1135,12 @@ public final class SignInUserMutation: GraphQLMutation {
     }
 
     public init(signInUser: SignInUser? = nil) {
-      self.init(snapshot: ["__typename": "Mutation", "signInUser": signInUser.flatMap { (value: SignInUser) -> Snapshot in value.snapshot }])
+      self.init(snapshot: ["__typename": "Mutation", "signInUser": signInUser.flatMap { $0.snapshot }])
     }
 
     public var signInUser: SignInUser? {
       get {
-        return (snapshot["signInUser"] as? Snapshot).flatMap { SignInUser(snapshot: $0) }
+        return (snapshot["signInUser"] as! Snapshot?).flatMap { SignInUser(snapshot: $0) }
       }
       set {
         snapshot.updateValue(newValue?.snapshot, forKey: "signInUser")
@@ -1163,7 +1163,7 @@ public final class SignInUserMutation: GraphQLMutation {
       }
 
       public init(token: String? = nil, user: User? = nil) {
-        self.init(snapshot: ["__typename": "SignInPayload", "token": token, "user": user.flatMap { (value: User) -> Snapshot in value.snapshot }])
+        self.init(snapshot: ["__typename": "SignInPayload", "token": token, "user": user.flatMap { $0.snapshot }])
       }
 
       public var __typename: String {
@@ -1186,7 +1186,7 @@ public final class SignInUserMutation: GraphQLMutation {
 
       public var user: User? {
         get {
-          return (snapshot["user"] as? Snapshot).flatMap { User(snapshot: $0) }
+          return (snapshot["user"] as! Snapshot?).flatMap { User(snapshot: $0) }
         }
         set {
           snapshot.updateValue(newValue?.snapshot, forKey: "user")
@@ -1214,7 +1214,7 @@ public final class SignInUserMutation: GraphQLMutation {
         }
 
         public init(id: GraphQLID, name: String, email: String, phone: String? = nil, userType: String, photo: Photo? = nil) {
-          self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType, "photo": photo.flatMap { (value: Photo) -> Snapshot in value.snapshot }])
+          self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType, "photo": photo.flatMap { $0.snapshot }])
         }
 
         public var __typename: String {
@@ -1273,7 +1273,7 @@ public final class SignInUserMutation: GraphQLMutation {
 
         public var photo: Photo? {
           get {
-            return (snapshot["photo"] as? Snapshot).flatMap { Photo(snapshot: $0) }
+            return (snapshot["photo"] as! Snapshot?).flatMap { Photo(snapshot: $0) }
           }
           set {
             snapshot.updateValue(newValue?.snapshot, forKey: "photo")
@@ -1442,12 +1442,12 @@ public final class SignUpMutation: GraphQLMutation {
     }
 
     public init(createUser: CreateUser? = nil) {
-      self.init(snapshot: ["__typename": "Mutation", "createUser": createUser.flatMap { (value: CreateUser) -> Snapshot in value.snapshot }])
+      self.init(snapshot: ["__typename": "Mutation", "createUser": createUser.flatMap { $0.snapshot }])
     }
 
     public var createUser: CreateUser? {
       get {
-        return (snapshot["createUser"] as? Snapshot).flatMap { CreateUser(snapshot: $0) }
+        return (snapshot["createUser"] as! Snapshot?).flatMap { CreateUser(snapshot: $0) }
       }
       set {
         snapshot.updateValue(newValue?.snapshot, forKey: "createUser")
@@ -1470,7 +1470,7 @@ public final class SignUpMutation: GraphQLMutation {
       }
 
       public init(token: String? = nil, user: User? = nil) {
-        self.init(snapshot: ["__typename": "SignInPayload", "token": token, "user": user.flatMap { (value: User) -> Snapshot in value.snapshot }])
+        self.init(snapshot: ["__typename": "SignInPayload", "token": token, "user": user.flatMap { $0.snapshot }])
       }
 
       public var __typename: String {
@@ -1493,7 +1493,7 @@ public final class SignUpMutation: GraphQLMutation {
 
       public var user: User? {
         get {
-          return (snapshot["user"] as? Snapshot).flatMap { User(snapshot: $0) }
+          return (snapshot["user"] as! Snapshot?).flatMap { User(snapshot: $0) }
         }
         set {
           snapshot.updateValue(newValue?.snapshot, forKey: "user")
@@ -1522,7 +1522,7 @@ public final class SignUpMutation: GraphQLMutation {
         }
 
         public init(id: GraphQLID, name: String, email: String, phone: String? = nil, userType: String, photo: Photo? = nil, families: [Family?]) {
-          self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType, "photo": photo.flatMap { (value: Photo) -> Snapshot in value.snapshot }, "families": families.map { (value: Family?) -> Snapshot? in value.flatMap { (value: Family) -> Snapshot in value.snapshot } }])
+          self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType, "photo": photo.flatMap { $0.snapshot }, "families": families.map { $0.flatMap { $0.snapshot } }])
         }
 
         public var __typename: String {
@@ -1581,7 +1581,7 @@ public final class SignUpMutation: GraphQLMutation {
 
         public var photo: Photo? {
           get {
-            return (snapshot["photo"] as? Snapshot).flatMap { Photo(snapshot: $0) }
+            return (snapshot["photo"] as! Snapshot?).flatMap { Photo(snapshot: $0) }
           }
           set {
             snapshot.updateValue(newValue?.snapshot, forKey: "photo")
@@ -1590,10 +1590,10 @@ public final class SignUpMutation: GraphQLMutation {
 
         public var families: [Family?] {
           get {
-            return (snapshot["families"] as! [Snapshot?]).map { (value: Snapshot?) -> Family? in value.flatMap { (value: Snapshot) -> Family in Family(snapshot: value) } }
+            return (snapshot["families"] as! [Snapshot?]).map { $0.flatMap { Family(snapshot: $0) } }
           }
           set {
-            snapshot.updateValue(newValue.map { (value: Family?) -> Snapshot? in value.flatMap { (value: Family) -> Snapshot in value.snapshot } }, forKey: "families")
+            snapshot.updateValue(newValue.map { $0.flatMap { $0.snapshot } }, forKey: "families")
           }
         }
 
@@ -1772,7 +1772,7 @@ public final class SignUpMutation: GraphQLMutation {
             }
 
             public init(photo: Photo? = nil, name: String? = nil, id: GraphQLID) {
-              self.init(snapshot: ["__typename": "Family", "photo": photo.flatMap { (value: Photo) -> Snapshot in value.snapshot }, "name": name, "id": id])
+              self.init(snapshot: ["__typename": "Family", "photo": photo.flatMap { $0.snapshot }, "name": name, "id": id])
             }
 
             public var __typename: String {
@@ -1786,7 +1786,7 @@ public final class SignUpMutation: GraphQLMutation {
 
             public var photo: Photo? {
               get {
-                return (snapshot["photo"] as? Snapshot).flatMap { Photo(snapshot: $0) }
+                return (snapshot["photo"] as! Snapshot?).flatMap { Photo(snapshot: $0) }
               }
               set {
                 snapshot.updateValue(newValue?.snapshot, forKey: "photo")
@@ -1981,7 +1981,7 @@ public final class CreateChatGroupMutation: GraphQLMutation {
       }
 
       public init(id: GraphQLID, family: Family? = nil, group: Group? = nil, lastMessage: LastMessage? = nil, members: [Member?]) {
-        self.init(snapshot: ["__typename": "Chat", "id": id, "family": family.flatMap { (value: Family) -> Snapshot in value.snapshot }, "group": group.flatMap { (value: Group) -> Snapshot in value.snapshot }, "last_message": lastMessage.flatMap { (value: LastMessage) -> Snapshot in value.snapshot }, "members": members.map { (value: Member?) -> Snapshot? in value.flatMap { (value: Member) -> Snapshot in value.snapshot } }])
+        self.init(snapshot: ["__typename": "Chat", "id": id, "family": family.flatMap { $0.snapshot }, "group": group.flatMap { $0.snapshot }, "last_message": lastMessage.flatMap { $0.snapshot }, "members": members.map { $0.flatMap { $0.snapshot } }])
       }
 
       public var __typename: String {
@@ -2004,7 +2004,7 @@ public final class CreateChatGroupMutation: GraphQLMutation {
 
       public var family: Family? {
         get {
-          return (snapshot["family"] as? Snapshot).flatMap { Family(snapshot: $0) }
+          return (snapshot["family"] as! Snapshot?).flatMap { Family(snapshot: $0) }
         }
         set {
           snapshot.updateValue(newValue?.snapshot, forKey: "family")
@@ -2013,7 +2013,7 @@ public final class CreateChatGroupMutation: GraphQLMutation {
 
       public var group: Group? {
         get {
-          return (snapshot["group"] as? Snapshot).flatMap { Group(snapshot: $0) }
+          return (snapshot["group"] as! Snapshot?).flatMap { Group(snapshot: $0) }
         }
         set {
           snapshot.updateValue(newValue?.snapshot, forKey: "group")
@@ -2022,7 +2022,7 @@ public final class CreateChatGroupMutation: GraphQLMutation {
 
       public var lastMessage: LastMessage? {
         get {
-          return (snapshot["last_message"] as? Snapshot).flatMap { LastMessage(snapshot: $0) }
+          return (snapshot["last_message"] as! Snapshot?).flatMap { LastMessage(snapshot: $0) }
         }
         set {
           snapshot.updateValue(newValue?.snapshot, forKey: "last_message")
@@ -2031,10 +2031,10 @@ public final class CreateChatGroupMutation: GraphQLMutation {
 
       public var members: [Member?] {
         get {
-          return (snapshot["members"] as! [Snapshot?]).map { (value: Snapshot?) -> Member? in value.flatMap { (value: Snapshot) -> Member in Member(snapshot: value) } }
+          return (snapshot["members"] as! [Snapshot?]).map { $0.flatMap { Member(snapshot: $0) } }
         }
         set {
-          snapshot.updateValue(newValue.map { (value: Member?) -> Snapshot? in value.flatMap { (value: Member) -> Snapshot in value.snapshot } }, forKey: "members")
+          snapshot.updateValue(newValue.map { $0.flatMap { $0.snapshot } }, forKey: "members")
         }
       }
 
@@ -2078,7 +2078,7 @@ public final class CreateChatGroupMutation: GraphQLMutation {
         }
 
         public init(id: GraphQLID, name: String? = nil, photo: Photo? = nil) {
-          self.init(snapshot: ["__typename": "Family", "id": id, "name": name, "photo": photo.flatMap { (value: Photo) -> Snapshot in value.snapshot }])
+          self.init(snapshot: ["__typename": "Family", "id": id, "name": name, "photo": photo.flatMap { $0.snapshot }])
         }
 
         public var __typename: String {
@@ -2110,7 +2110,7 @@ public final class CreateChatGroupMutation: GraphQLMutation {
 
         public var photo: Photo? {
           get {
-            return (snapshot["photo"] as? Snapshot).flatMap { Photo(snapshot: $0) }
+            return (snapshot["photo"] as! Snapshot?).flatMap { Photo(snapshot: $0) }
           }
           set {
             snapshot.updateValue(newValue?.snapshot, forKey: "photo")
@@ -2256,7 +2256,7 @@ public final class CreateChatGroupMutation: GraphQLMutation {
         }
 
         public init(name: String, photo: Photo? = nil) {
-          self.init(snapshot: ["__typename": "ChatGroup", "name": name, "photo": photo.flatMap { (value: Photo) -> Snapshot in value.snapshot }])
+          self.init(snapshot: ["__typename": "ChatGroup", "name": name, "photo": photo.flatMap { $0.snapshot }])
         }
 
         public var __typename: String {
@@ -2279,7 +2279,7 @@ public final class CreateChatGroupMutation: GraphQLMutation {
 
         public var photo: Photo? {
           get {
-            return (snapshot["photo"] as? Snapshot).flatMap { Photo(snapshot: $0) }
+            return (snapshot["photo"] as! Snapshot?).flatMap { Photo(snapshot: $0) }
           }
           set {
             snapshot.updateValue(newValue?.snapshot, forKey: "photo")
@@ -2407,7 +2407,7 @@ public final class CreateChatGroupMutation: GraphQLMutation {
         }
 
         public init(id: GraphQLID, sender: Sender? = nil, sentAt: Int? = nil, text: String? = nil, attachment: Attachment? = nil) {
-          self.init(snapshot: ["__typename": "ChatMessage", "id": id, "sender": sender.flatMap { (value: Sender) -> Snapshot in value.snapshot }, "sent_at": sentAt, "text": text, "attachment": attachment.flatMap { (value: Attachment) -> Snapshot in value.snapshot }])
+          self.init(snapshot: ["__typename": "ChatMessage", "id": id, "sender": sender.flatMap { $0.snapshot }, "sent_at": sentAt, "text": text, "attachment": attachment.flatMap { $0.snapshot }])
         }
 
         public var __typename: String {
@@ -2430,7 +2430,7 @@ public final class CreateChatGroupMutation: GraphQLMutation {
 
         public var sender: Sender? {
           get {
-            return (snapshot["sender"] as? Snapshot).flatMap { Sender(snapshot: $0) }
+            return (snapshot["sender"] as! Snapshot?).flatMap { Sender(snapshot: $0) }
           }
           set {
             snapshot.updateValue(newValue?.snapshot, forKey: "sender")
@@ -2457,7 +2457,7 @@ public final class CreateChatGroupMutation: GraphQLMutation {
 
         public var attachment: Attachment? {
           get {
-            return (snapshot["attachment"] as? Snapshot).flatMap { Attachment(snapshot: $0) }
+            return (snapshot["attachment"] as! Snapshot?).flatMap { Attachment(snapshot: $0) }
           }
           set {
             snapshot.updateValue(newValue?.snapshot, forKey: "attachment")
@@ -2507,7 +2507,7 @@ public final class CreateChatGroupMutation: GraphQLMutation {
           }
 
           public init(id: GraphQLID, name: String, email: String, phone: String? = nil, userType: String, photo: Photo? = nil) {
-            self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType, "photo": photo.flatMap { (value: Photo) -> Snapshot in value.snapshot }])
+            self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType, "photo": photo.flatMap { $0.snapshot }])
           }
 
           public var __typename: String {
@@ -2566,7 +2566,7 @@ public final class CreateChatGroupMutation: GraphQLMutation {
 
           public var photo: Photo? {
             get {
-              return (snapshot["photo"] as? Snapshot).flatMap { Photo(snapshot: $0) }
+              return (snapshot["photo"] as! Snapshot?).flatMap { Photo(snapshot: $0) }
             }
             set {
               snapshot.updateValue(newValue?.snapshot, forKey: "photo")
@@ -2816,7 +2816,7 @@ public final class CreateChatGroupMutation: GraphQLMutation {
         }
 
         public init(id: GraphQLID? = nil, isAdmin: Bool? = nil, seenAt: Int? = nil, user: User? = nil) {
-          self.init(snapshot: ["__typename": "ChatMembership", "id": id, "is_admin": isAdmin, "seen_at": seenAt, "user": user.flatMap { (value: User) -> Snapshot in value.snapshot }])
+          self.init(snapshot: ["__typename": "ChatMembership", "id": id, "is_admin": isAdmin, "seen_at": seenAt, "user": user.flatMap { $0.snapshot }])
         }
 
         public var __typename: String {
@@ -2857,7 +2857,7 @@ public final class CreateChatGroupMutation: GraphQLMutation {
 
         public var user: User? {
           get {
-            return (snapshot["user"] as? Snapshot).flatMap { User(snapshot: $0) }
+            return (snapshot["user"] as! Snapshot?).flatMap { User(snapshot: $0) }
           }
           set {
             snapshot.updateValue(newValue?.snapshot, forKey: "user")
@@ -2907,7 +2907,7 @@ public final class CreateChatGroupMutation: GraphQLMutation {
           }
 
           public init(id: GraphQLID, name: String, email: String, phone: String? = nil, userType: String, photo: Photo? = nil) {
-            self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType, "photo": photo.flatMap { (value: Photo) -> Snapshot in value.snapshot }])
+            self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType, "photo": photo.flatMap { $0.snapshot }])
           }
 
           public var __typename: String {
@@ -2966,7 +2966,7 @@ public final class CreateChatGroupMutation: GraphQLMutation {
 
           public var photo: Photo? {
             get {
-              return (snapshot["photo"] as? Snapshot).flatMap { Photo(snapshot: $0) }
+              return (snapshot["photo"] as! Snapshot?).flatMap { Photo(snapshot: $0) }
             }
             set {
               snapshot.updateValue(newValue?.snapshot, forKey: "photo")
@@ -3162,7 +3162,7 @@ public final class CreateChatMutation: GraphQLMutation {
       }
 
       public init(id: GraphQLID, family: Family? = nil, group: Group? = nil, lastMessage: LastMessage? = nil, members: [Member?]) {
-        self.init(snapshot: ["__typename": "Chat", "id": id, "family": family.flatMap { (value: Family) -> Snapshot in value.snapshot }, "group": group.flatMap { (value: Group) -> Snapshot in value.snapshot }, "last_message": lastMessage.flatMap { (value: LastMessage) -> Snapshot in value.snapshot }, "members": members.map { (value: Member?) -> Snapshot? in value.flatMap { (value: Member) -> Snapshot in value.snapshot } }])
+        self.init(snapshot: ["__typename": "Chat", "id": id, "family": family.flatMap { $0.snapshot }, "group": group.flatMap { $0.snapshot }, "last_message": lastMessage.flatMap { $0.snapshot }, "members": members.map { $0.flatMap { $0.snapshot } }])
       }
 
       public var __typename: String {
@@ -3185,7 +3185,7 @@ public final class CreateChatMutation: GraphQLMutation {
 
       public var family: Family? {
         get {
-          return (snapshot["family"] as? Snapshot).flatMap { Family(snapshot: $0) }
+          return (snapshot["family"] as! Snapshot?).flatMap { Family(snapshot: $0) }
         }
         set {
           snapshot.updateValue(newValue?.snapshot, forKey: "family")
@@ -3194,7 +3194,7 @@ public final class CreateChatMutation: GraphQLMutation {
 
       public var group: Group? {
         get {
-          return (snapshot["group"] as? Snapshot).flatMap { Group(snapshot: $0) }
+          return (snapshot["group"] as! Snapshot?).flatMap { Group(snapshot: $0) }
         }
         set {
           snapshot.updateValue(newValue?.snapshot, forKey: "group")
@@ -3203,7 +3203,7 @@ public final class CreateChatMutation: GraphQLMutation {
 
       public var lastMessage: LastMessage? {
         get {
-          return (snapshot["last_message"] as? Snapshot).flatMap { LastMessage(snapshot: $0) }
+          return (snapshot["last_message"] as! Snapshot?).flatMap { LastMessage(snapshot: $0) }
         }
         set {
           snapshot.updateValue(newValue?.snapshot, forKey: "last_message")
@@ -3212,10 +3212,10 @@ public final class CreateChatMutation: GraphQLMutation {
 
       public var members: [Member?] {
         get {
-          return (snapshot["members"] as! [Snapshot?]).map { (value: Snapshot?) -> Member? in value.flatMap { (value: Snapshot) -> Member in Member(snapshot: value) } }
+          return (snapshot["members"] as! [Snapshot?]).map { $0.flatMap { Member(snapshot: $0) } }
         }
         set {
-          snapshot.updateValue(newValue.map { (value: Member?) -> Snapshot? in value.flatMap { (value: Member) -> Snapshot in value.snapshot } }, forKey: "members")
+          snapshot.updateValue(newValue.map { $0.flatMap { $0.snapshot } }, forKey: "members")
         }
       }
 
@@ -3259,7 +3259,7 @@ public final class CreateChatMutation: GraphQLMutation {
         }
 
         public init(id: GraphQLID, name: String? = nil, photo: Photo? = nil) {
-          self.init(snapshot: ["__typename": "Family", "id": id, "name": name, "photo": photo.flatMap { (value: Photo) -> Snapshot in value.snapshot }])
+          self.init(snapshot: ["__typename": "Family", "id": id, "name": name, "photo": photo.flatMap { $0.snapshot }])
         }
 
         public var __typename: String {
@@ -3291,7 +3291,7 @@ public final class CreateChatMutation: GraphQLMutation {
 
         public var photo: Photo? {
           get {
-            return (snapshot["photo"] as? Snapshot).flatMap { Photo(snapshot: $0) }
+            return (snapshot["photo"] as! Snapshot?).flatMap { Photo(snapshot: $0) }
           }
           set {
             snapshot.updateValue(newValue?.snapshot, forKey: "photo")
@@ -3437,7 +3437,7 @@ public final class CreateChatMutation: GraphQLMutation {
         }
 
         public init(name: String, photo: Photo? = nil) {
-          self.init(snapshot: ["__typename": "ChatGroup", "name": name, "photo": photo.flatMap { (value: Photo) -> Snapshot in value.snapshot }])
+          self.init(snapshot: ["__typename": "ChatGroup", "name": name, "photo": photo.flatMap { $0.snapshot }])
         }
 
         public var __typename: String {
@@ -3460,7 +3460,7 @@ public final class CreateChatMutation: GraphQLMutation {
 
         public var photo: Photo? {
           get {
-            return (snapshot["photo"] as? Snapshot).flatMap { Photo(snapshot: $0) }
+            return (snapshot["photo"] as! Snapshot?).flatMap { Photo(snapshot: $0) }
           }
           set {
             snapshot.updateValue(newValue?.snapshot, forKey: "photo")
@@ -3588,7 +3588,7 @@ public final class CreateChatMutation: GraphQLMutation {
         }
 
         public init(id: GraphQLID, sender: Sender? = nil, sentAt: Int? = nil, text: String? = nil, attachment: Attachment? = nil) {
-          self.init(snapshot: ["__typename": "ChatMessage", "id": id, "sender": sender.flatMap { (value: Sender) -> Snapshot in value.snapshot }, "sent_at": sentAt, "text": text, "attachment": attachment.flatMap { (value: Attachment) -> Snapshot in value.snapshot }])
+          self.init(snapshot: ["__typename": "ChatMessage", "id": id, "sender": sender.flatMap { $0.snapshot }, "sent_at": sentAt, "text": text, "attachment": attachment.flatMap { $0.snapshot }])
         }
 
         public var __typename: String {
@@ -3611,7 +3611,7 @@ public final class CreateChatMutation: GraphQLMutation {
 
         public var sender: Sender? {
           get {
-            return (snapshot["sender"] as? Snapshot).flatMap { Sender(snapshot: $0) }
+            return (snapshot["sender"] as! Snapshot?).flatMap { Sender(snapshot: $0) }
           }
           set {
             snapshot.updateValue(newValue?.snapshot, forKey: "sender")
@@ -3638,7 +3638,7 @@ public final class CreateChatMutation: GraphQLMutation {
 
         public var attachment: Attachment? {
           get {
-            return (snapshot["attachment"] as? Snapshot).flatMap { Attachment(snapshot: $0) }
+            return (snapshot["attachment"] as! Snapshot?).flatMap { Attachment(snapshot: $0) }
           }
           set {
             snapshot.updateValue(newValue?.snapshot, forKey: "attachment")
@@ -3688,7 +3688,7 @@ public final class CreateChatMutation: GraphQLMutation {
           }
 
           public init(id: GraphQLID, name: String, email: String, phone: String? = nil, userType: String, photo: Photo? = nil) {
-            self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType, "photo": photo.flatMap { (value: Photo) -> Snapshot in value.snapshot }])
+            self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType, "photo": photo.flatMap { $0.snapshot }])
           }
 
           public var __typename: String {
@@ -3747,7 +3747,7 @@ public final class CreateChatMutation: GraphQLMutation {
 
           public var photo: Photo? {
             get {
-              return (snapshot["photo"] as? Snapshot).flatMap { Photo(snapshot: $0) }
+              return (snapshot["photo"] as! Snapshot?).flatMap { Photo(snapshot: $0) }
             }
             set {
               snapshot.updateValue(newValue?.snapshot, forKey: "photo")
@@ -3997,7 +3997,7 @@ public final class CreateChatMutation: GraphQLMutation {
         }
 
         public init(id: GraphQLID? = nil, isAdmin: Bool? = nil, seenAt: Int? = nil, user: User? = nil) {
-          self.init(snapshot: ["__typename": "ChatMembership", "id": id, "is_admin": isAdmin, "seen_at": seenAt, "user": user.flatMap { (value: User) -> Snapshot in value.snapshot }])
+          self.init(snapshot: ["__typename": "ChatMembership", "id": id, "is_admin": isAdmin, "seen_at": seenAt, "user": user.flatMap { $0.snapshot }])
         }
 
         public var __typename: String {
@@ -4038,7 +4038,7 @@ public final class CreateChatMutation: GraphQLMutation {
 
         public var user: User? {
           get {
-            return (snapshot["user"] as? Snapshot).flatMap { User(snapshot: $0) }
+            return (snapshot["user"] as! Snapshot?).flatMap { User(snapshot: $0) }
           }
           set {
             snapshot.updateValue(newValue?.snapshot, forKey: "user")
@@ -4088,7 +4088,7 @@ public final class CreateChatMutation: GraphQLMutation {
           }
 
           public init(id: GraphQLID, name: String, email: String, phone: String? = nil, userType: String, photo: Photo? = nil) {
-            self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType, "photo": photo.flatMap { (value: Photo) -> Snapshot in value.snapshot }])
+            self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType, "photo": photo.flatMap { $0.snapshot }])
           }
 
           public var __typename: String {
@@ -4147,7 +4147,7 @@ public final class CreateChatMutation: GraphQLMutation {
 
           public var photo: Photo? {
             get {
-              return (snapshot["photo"] as? Snapshot).flatMap { Photo(snapshot: $0) }
+              return (snapshot["photo"] as! Snapshot?).flatMap { Photo(snapshot: $0) }
             }
             set {
               snapshot.updateValue(newValue?.snapshot, forKey: "photo")
@@ -4346,7 +4346,7 @@ public final class AddMemberToChatMutation: GraphQLMutation {
       }
 
       public init(id: GraphQLID? = nil, isAdmin: Bool? = nil, seenAt: Int? = nil, user: User? = nil) {
-        self.init(snapshot: ["__typename": "ChatMembership", "id": id, "is_admin": isAdmin, "seen_at": seenAt, "user": user.flatMap { (value: User) -> Snapshot in value.snapshot }])
+        self.init(snapshot: ["__typename": "ChatMembership", "id": id, "is_admin": isAdmin, "seen_at": seenAt, "user": user.flatMap { $0.snapshot }])
       }
 
       public var __typename: String {
@@ -4387,7 +4387,7 @@ public final class AddMemberToChatMutation: GraphQLMutation {
 
       public var user: User? {
         get {
-          return (snapshot["user"] as? Snapshot).flatMap { User(snapshot: $0) }
+          return (snapshot["user"] as! Snapshot?).flatMap { User(snapshot: $0) }
         }
         set {
           snapshot.updateValue(newValue?.snapshot, forKey: "user")
@@ -4437,7 +4437,7 @@ public final class AddMemberToChatMutation: GraphQLMutation {
         }
 
         public init(id: GraphQLID, name: String, email: String, phone: String? = nil, userType: String, photo: Photo? = nil) {
-          self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType, "photo": photo.flatMap { (value: Photo) -> Snapshot in value.snapshot }])
+          self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType, "photo": photo.flatMap { $0.snapshot }])
         }
 
         public var __typename: String {
@@ -4496,7 +4496,7 @@ public final class AddMemberToChatMutation: GraphQLMutation {
 
         public var photo: Photo? {
           get {
-            return (snapshot["photo"] as? Snapshot).flatMap { Photo(snapshot: $0) }
+            return (snapshot["photo"] as! Snapshot?).flatMap { Photo(snapshot: $0) }
           }
           set {
             snapshot.updateValue(newValue?.snapshot, forKey: "photo")
@@ -4663,12 +4663,12 @@ public final class SendMessageMutation: GraphQLMutation {
     }
 
     public init(createChatMessage: CreateChatMessage? = nil) {
-      self.init(snapshot: ["__typename": "Mutation", "createChatMessage": createChatMessage.flatMap { (value: CreateChatMessage) -> Snapshot in value.snapshot }])
+      self.init(snapshot: ["__typename": "Mutation", "createChatMessage": createChatMessage.flatMap { $0.snapshot }])
     }
 
     public var createChatMessage: CreateChatMessage? {
       get {
-        return (snapshot["createChatMessage"] as? Snapshot).flatMap { CreateChatMessage(snapshot: $0) }
+        return (snapshot["createChatMessage"] as! Snapshot?).flatMap { CreateChatMessage(snapshot: $0) }
       }
       set {
         snapshot.updateValue(newValue?.snapshot, forKey: "createChatMessage")
@@ -4695,7 +4695,7 @@ public final class SendMessageMutation: GraphQLMutation {
       }
 
       public init(id: GraphQLID, sender: Sender? = nil, sentAt: Int? = nil, text: String? = nil, attachment: Attachment? = nil) {
-        self.init(snapshot: ["__typename": "ChatMessage", "id": id, "sender": sender.flatMap { (value: Sender) -> Snapshot in value.snapshot }, "sent_at": sentAt, "text": text, "attachment": attachment.flatMap { (value: Attachment) -> Snapshot in value.snapshot }])
+        self.init(snapshot: ["__typename": "ChatMessage", "id": id, "sender": sender.flatMap { $0.snapshot }, "sent_at": sentAt, "text": text, "attachment": attachment.flatMap { $0.snapshot }])
       }
 
       public var __typename: String {
@@ -4718,7 +4718,7 @@ public final class SendMessageMutation: GraphQLMutation {
 
       public var sender: Sender? {
         get {
-          return (snapshot["sender"] as? Snapshot).flatMap { Sender(snapshot: $0) }
+          return (snapshot["sender"] as! Snapshot?).flatMap { Sender(snapshot: $0) }
         }
         set {
           snapshot.updateValue(newValue?.snapshot, forKey: "sender")
@@ -4745,7 +4745,7 @@ public final class SendMessageMutation: GraphQLMutation {
 
       public var attachment: Attachment? {
         get {
-          return (snapshot["attachment"] as? Snapshot).flatMap { Attachment(snapshot: $0) }
+          return (snapshot["attachment"] as! Snapshot?).flatMap { Attachment(snapshot: $0) }
         }
         set {
           snapshot.updateValue(newValue?.snapshot, forKey: "attachment")
@@ -4795,7 +4795,7 @@ public final class SendMessageMutation: GraphQLMutation {
         }
 
         public init(id: GraphQLID, name: String, email: String, phone: String? = nil, userType: String, photo: Photo? = nil) {
-          self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType, "photo": photo.flatMap { (value: Photo) -> Snapshot in value.snapshot }])
+          self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType, "photo": photo.flatMap { $0.snapshot }])
         }
 
         public var __typename: String {
@@ -4854,7 +4854,7 @@ public final class SendMessageMutation: GraphQLMutation {
 
         public var photo: Photo? {
           get {
-            return (snapshot["photo"] as? Snapshot).flatMap { Photo(snapshot: $0) }
+            return (snapshot["photo"] as! Snapshot?).flatMap { Photo(snapshot: $0) }
           }
           set {
             snapshot.updateValue(newValue?.snapshot, forKey: "photo")
@@ -5117,12 +5117,12 @@ public final class SetChatSeenMutation: GraphQLMutation {
     }
 
     public init(setChatSeen: SetChatSeen? = nil) {
-      self.init(snapshot: ["__typename": "Mutation", "setChatSeen": setChatSeen.flatMap { (value: SetChatSeen) -> Snapshot in value.snapshot }])
+      self.init(snapshot: ["__typename": "Mutation", "setChatSeen": setChatSeen.flatMap { $0.snapshot }])
     }
 
     public var setChatSeen: SetChatSeen? {
       get {
-        return (snapshot["setChatSeen"] as? Snapshot).flatMap { SetChatSeen(snapshot: $0) }
+        return (snapshot["setChatSeen"] as! Snapshot?).flatMap { SetChatSeen(snapshot: $0) }
       }
       set {
         snapshot.updateValue(newValue?.snapshot, forKey: "setChatSeen")
@@ -5148,7 +5148,7 @@ public final class SetChatSeenMutation: GraphQLMutation {
       }
 
       public init(id: GraphQLID? = nil, isAdmin: Bool? = nil, seenAt: Int? = nil, user: User? = nil) {
-        self.init(snapshot: ["__typename": "ChatMembership", "id": id, "is_admin": isAdmin, "seen_at": seenAt, "user": user.flatMap { (value: User) -> Snapshot in value.snapshot }])
+        self.init(snapshot: ["__typename": "ChatMembership", "id": id, "is_admin": isAdmin, "seen_at": seenAt, "user": user.flatMap { $0.snapshot }])
       }
 
       public var __typename: String {
@@ -5189,7 +5189,7 @@ public final class SetChatSeenMutation: GraphQLMutation {
 
       public var user: User? {
         get {
-          return (snapshot["user"] as? Snapshot).flatMap { User(snapshot: $0) }
+          return (snapshot["user"] as! Snapshot?).flatMap { User(snapshot: $0) }
         }
         set {
           snapshot.updateValue(newValue?.snapshot, forKey: "user")
@@ -5239,7 +5239,7 @@ public final class SetChatSeenMutation: GraphQLMutation {
         }
 
         public init(id: GraphQLID, name: String, email: String, phone: String? = nil, userType: String, photo: Photo? = nil) {
-          self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType, "photo": photo.flatMap { (value: Photo) -> Snapshot in value.snapshot }])
+          self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType, "photo": photo.flatMap { $0.snapshot }])
         }
 
         public var __typename: String {
@@ -5298,7 +5298,7 @@ public final class SetChatSeenMutation: GraphQLMutation {
 
         public var photo: Photo? {
           get {
-            return (snapshot["photo"] as? Snapshot).flatMap { Photo(snapshot: $0) }
+            return (snapshot["photo"] as! Snapshot?).flatMap { Photo(snapshot: $0) }
           }
           set {
             snapshot.updateValue(newValue?.snapshot, forKey: "photo")
@@ -5454,15 +5454,15 @@ public final class MyChatsQuery: GraphQLQuery {
     }
 
     public init(myChats: [MyChat?]) {
-      self.init(snapshot: ["__typename": "Query", "myChats": myChats.map { (value: MyChat?) -> Snapshot? in value.flatMap { (value: MyChat) -> Snapshot in value.snapshot } }])
+      self.init(snapshot: ["__typename": "Query", "myChats": myChats.map { $0.flatMap { $0.snapshot } }])
     }
 
     public var myChats: [MyChat?] {
       get {
-        return (snapshot["myChats"] as! [Snapshot?]).map { (value: Snapshot?) -> MyChat? in value.flatMap { (value: Snapshot) -> MyChat in MyChat(snapshot: value) } }
+        return (snapshot["myChats"] as! [Snapshot?]).map { $0.flatMap { MyChat(snapshot: $0) } }
       }
       set {
-        snapshot.updateValue(newValue.map { (value: MyChat?) -> Snapshot? in value.flatMap { (value: MyChat) -> Snapshot in value.snapshot } }, forKey: "myChats")
+        snapshot.updateValue(newValue.map { $0.flatMap { $0.snapshot } }, forKey: "myChats")
       }
     }
 
@@ -5486,7 +5486,7 @@ public final class MyChatsQuery: GraphQLQuery {
       }
 
       public init(id: GraphQLID, family: Family? = nil, group: Group? = nil, lastMessage: LastMessage? = nil, members: [Member?]) {
-        self.init(snapshot: ["__typename": "Chat", "id": id, "family": family.flatMap { (value: Family) -> Snapshot in value.snapshot }, "group": group.flatMap { (value: Group) -> Snapshot in value.snapshot }, "last_message": lastMessage.flatMap { (value: LastMessage) -> Snapshot in value.snapshot }, "members": members.map { (value: Member?) -> Snapshot? in value.flatMap { (value: Member) -> Snapshot in value.snapshot } }])
+        self.init(snapshot: ["__typename": "Chat", "id": id, "family": family.flatMap { $0.snapshot }, "group": group.flatMap { $0.snapshot }, "last_message": lastMessage.flatMap { $0.snapshot }, "members": members.map { $0.flatMap { $0.snapshot } }])
       }
 
       public var __typename: String {
@@ -5509,7 +5509,7 @@ public final class MyChatsQuery: GraphQLQuery {
 
       public var family: Family? {
         get {
-          return (snapshot["family"] as? Snapshot).flatMap { Family(snapshot: $0) }
+          return (snapshot["family"] as! Snapshot?).flatMap { Family(snapshot: $0) }
         }
         set {
           snapshot.updateValue(newValue?.snapshot, forKey: "family")
@@ -5518,7 +5518,7 @@ public final class MyChatsQuery: GraphQLQuery {
 
       public var group: Group? {
         get {
-          return (snapshot["group"] as? Snapshot).flatMap { Group(snapshot: $0) }
+          return (snapshot["group"] as! Snapshot?).flatMap { Group(snapshot: $0) }
         }
         set {
           snapshot.updateValue(newValue?.snapshot, forKey: "group")
@@ -5527,7 +5527,7 @@ public final class MyChatsQuery: GraphQLQuery {
 
       public var lastMessage: LastMessage? {
         get {
-          return (snapshot["last_message"] as? Snapshot).flatMap { LastMessage(snapshot: $0) }
+          return (snapshot["last_message"] as! Snapshot?).flatMap { LastMessage(snapshot: $0) }
         }
         set {
           snapshot.updateValue(newValue?.snapshot, forKey: "last_message")
@@ -5536,10 +5536,10 @@ public final class MyChatsQuery: GraphQLQuery {
 
       public var members: [Member?] {
         get {
-          return (snapshot["members"] as! [Snapshot?]).map { (value: Snapshot?) -> Member? in value.flatMap { (value: Snapshot) -> Member in Member(snapshot: value) } }
+          return (snapshot["members"] as! [Snapshot?]).map { $0.flatMap { Member(snapshot: $0) } }
         }
         set {
-          snapshot.updateValue(newValue.map { (value: Member?) -> Snapshot? in value.flatMap { (value: Member) -> Snapshot in value.snapshot } }, forKey: "members")
+          snapshot.updateValue(newValue.map { $0.flatMap { $0.snapshot } }, forKey: "members")
         }
       }
 
@@ -5583,7 +5583,7 @@ public final class MyChatsQuery: GraphQLQuery {
         }
 
         public init(id: GraphQLID, name: String? = nil, photo: Photo? = nil) {
-          self.init(snapshot: ["__typename": "Family", "id": id, "name": name, "photo": photo.flatMap { (value: Photo) -> Snapshot in value.snapshot }])
+          self.init(snapshot: ["__typename": "Family", "id": id, "name": name, "photo": photo.flatMap { $0.snapshot }])
         }
 
         public var __typename: String {
@@ -5615,7 +5615,7 @@ public final class MyChatsQuery: GraphQLQuery {
 
         public var photo: Photo? {
           get {
-            return (snapshot["photo"] as? Snapshot).flatMap { Photo(snapshot: $0) }
+            return (snapshot["photo"] as! Snapshot?).flatMap { Photo(snapshot: $0) }
           }
           set {
             snapshot.updateValue(newValue?.snapshot, forKey: "photo")
@@ -5761,7 +5761,7 @@ public final class MyChatsQuery: GraphQLQuery {
         }
 
         public init(name: String, photo: Photo? = nil) {
-          self.init(snapshot: ["__typename": "ChatGroup", "name": name, "photo": photo.flatMap { (value: Photo) -> Snapshot in value.snapshot }])
+          self.init(snapshot: ["__typename": "ChatGroup", "name": name, "photo": photo.flatMap { $0.snapshot }])
         }
 
         public var __typename: String {
@@ -5784,7 +5784,7 @@ public final class MyChatsQuery: GraphQLQuery {
 
         public var photo: Photo? {
           get {
-            return (snapshot["photo"] as? Snapshot).flatMap { Photo(snapshot: $0) }
+            return (snapshot["photo"] as! Snapshot?).flatMap { Photo(snapshot: $0) }
           }
           set {
             snapshot.updateValue(newValue?.snapshot, forKey: "photo")
@@ -5912,7 +5912,7 @@ public final class MyChatsQuery: GraphQLQuery {
         }
 
         public init(id: GraphQLID, sender: Sender? = nil, sentAt: Int? = nil, text: String? = nil, attachment: Attachment? = nil) {
-          self.init(snapshot: ["__typename": "ChatMessage", "id": id, "sender": sender.flatMap { (value: Sender) -> Snapshot in value.snapshot }, "sent_at": sentAt, "text": text, "attachment": attachment.flatMap { (value: Attachment) -> Snapshot in value.snapshot }])
+          self.init(snapshot: ["__typename": "ChatMessage", "id": id, "sender": sender.flatMap { $0.snapshot }, "sent_at": sentAt, "text": text, "attachment": attachment.flatMap { $0.snapshot }])
         }
 
         public var __typename: String {
@@ -5935,7 +5935,7 @@ public final class MyChatsQuery: GraphQLQuery {
 
         public var sender: Sender? {
           get {
-            return (snapshot["sender"] as? Snapshot).flatMap { Sender(snapshot: $0) }
+            return (snapshot["sender"] as! Snapshot?).flatMap { Sender(snapshot: $0) }
           }
           set {
             snapshot.updateValue(newValue?.snapshot, forKey: "sender")
@@ -5962,7 +5962,7 @@ public final class MyChatsQuery: GraphQLQuery {
 
         public var attachment: Attachment? {
           get {
-            return (snapshot["attachment"] as? Snapshot).flatMap { Attachment(snapshot: $0) }
+            return (snapshot["attachment"] as! Snapshot?).flatMap { Attachment(snapshot: $0) }
           }
           set {
             snapshot.updateValue(newValue?.snapshot, forKey: "attachment")
@@ -6012,7 +6012,7 @@ public final class MyChatsQuery: GraphQLQuery {
           }
 
           public init(id: GraphQLID, name: String, email: String, phone: String? = nil, userType: String, photo: Photo? = nil) {
-            self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType, "photo": photo.flatMap { (value: Photo) -> Snapshot in value.snapshot }])
+            self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType, "photo": photo.flatMap { $0.snapshot }])
           }
 
           public var __typename: String {
@@ -6071,7 +6071,7 @@ public final class MyChatsQuery: GraphQLQuery {
 
           public var photo: Photo? {
             get {
-              return (snapshot["photo"] as? Snapshot).flatMap { Photo(snapshot: $0) }
+              return (snapshot["photo"] as! Snapshot?).flatMap { Photo(snapshot: $0) }
             }
             set {
               snapshot.updateValue(newValue?.snapshot, forKey: "photo")
@@ -6321,7 +6321,7 @@ public final class MyChatsQuery: GraphQLQuery {
         }
 
         public init(id: GraphQLID? = nil, isAdmin: Bool? = nil, seenAt: Int? = nil, user: User? = nil) {
-          self.init(snapshot: ["__typename": "ChatMembership", "id": id, "is_admin": isAdmin, "seen_at": seenAt, "user": user.flatMap { (value: User) -> Snapshot in value.snapshot }])
+          self.init(snapshot: ["__typename": "ChatMembership", "id": id, "is_admin": isAdmin, "seen_at": seenAt, "user": user.flatMap { $0.snapshot }])
         }
 
         public var __typename: String {
@@ -6362,7 +6362,7 @@ public final class MyChatsQuery: GraphQLQuery {
 
         public var user: User? {
           get {
-            return (snapshot["user"] as? Snapshot).flatMap { User(snapshot: $0) }
+            return (snapshot["user"] as! Snapshot?).flatMap { User(snapshot: $0) }
           }
           set {
             snapshot.updateValue(newValue?.snapshot, forKey: "user")
@@ -6412,7 +6412,7 @@ public final class MyChatsQuery: GraphQLQuery {
           }
 
           public init(id: GraphQLID, name: String, email: String, phone: String? = nil, userType: String, photo: Photo? = nil) {
-            self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType, "photo": photo.flatMap { (value: Photo) -> Snapshot in value.snapshot }])
+            self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType, "photo": photo.flatMap { $0.snapshot }])
           }
 
           public var __typename: String {
@@ -6471,7 +6471,7 @@ public final class MyChatsQuery: GraphQLQuery {
 
           public var photo: Photo? {
             get {
-              return (snapshot["photo"] as? Snapshot).flatMap { Photo(snapshot: $0) }
+              return (snapshot["photo"] as! Snapshot?).flatMap { Photo(snapshot: $0) }
             }
             set {
               snapshot.updateValue(newValue?.snapshot, forKey: "photo")
@@ -6635,12 +6635,12 @@ public final class CreateFamilyMutation: GraphQLMutation {
     }
 
     public init(createFamily: CreateFamily? = nil) {
-      self.init(snapshot: ["__typename": "Mutation", "createFamily": createFamily.flatMap { (value: CreateFamily) -> Snapshot in value.snapshot }])
+      self.init(snapshot: ["__typename": "Mutation", "createFamily": createFamily.flatMap { $0.snapshot }])
     }
 
     public var createFamily: CreateFamily? {
       get {
-        return (snapshot["createFamily"] as? Snapshot).flatMap { CreateFamily(snapshot: $0) }
+        return (snapshot["createFamily"] as! Snapshot?).flatMap { CreateFamily(snapshot: $0) }
       }
       set {
         snapshot.updateValue(newValue?.snapshot, forKey: "createFamily")
@@ -6666,7 +6666,7 @@ public final class CreateFamilyMutation: GraphQLMutation {
       }
 
       public init(id: GraphQLID, name: String? = nil, photo: Photo? = nil, members: [Member?]) {
-        self.init(snapshot: ["__typename": "Family", "id": id, "name": name, "photo": photo.flatMap { (value: Photo) -> Snapshot in value.snapshot }, "members": members.map { (value: Member?) -> Snapshot? in value.flatMap { (value: Member) -> Snapshot in value.snapshot } }])
+        self.init(snapshot: ["__typename": "Family", "id": id, "name": name, "photo": photo.flatMap { $0.snapshot }, "members": members.map { $0.flatMap { $0.snapshot } }])
       }
 
       public var __typename: String {
@@ -6698,7 +6698,7 @@ public final class CreateFamilyMutation: GraphQLMutation {
 
       public var photo: Photo? {
         get {
-          return (snapshot["photo"] as? Snapshot).flatMap { Photo(snapshot: $0) }
+          return (snapshot["photo"] as! Snapshot?).flatMap { Photo(snapshot: $0) }
         }
         set {
           snapshot.updateValue(newValue?.snapshot, forKey: "photo")
@@ -6707,10 +6707,10 @@ public final class CreateFamilyMutation: GraphQLMutation {
 
       public var members: [Member?] {
         get {
-          return (snapshot["members"] as! [Snapshot?]).map { (value: Snapshot?) -> Member? in value.flatMap { (value: Snapshot) -> Member in Member(snapshot: value) } }
+          return (snapshot["members"] as! [Snapshot?]).map { $0.flatMap { Member(snapshot: $0) } }
         }
         set {
-          snapshot.updateValue(newValue.map { (value: Member?) -> Snapshot? in value.flatMap { (value: Member) -> Snapshot in value.snapshot } }, forKey: "members")
+          snapshot.updateValue(newValue.map { $0.flatMap { $0.snapshot } }, forKey: "members")
         }
       }
 
@@ -6893,7 +6893,7 @@ public final class CreateFamilyMutation: GraphQLMutation {
           }
 
           public init(id: GraphQLID, name: String, email: String, phone: String? = nil, userType: String, photo: Photo? = nil) {
-            self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType, "photo": photo.flatMap { (value: Photo) -> Snapshot in value.snapshot }])
+            self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType, "photo": photo.flatMap { $0.snapshot }])
           }
 
           public var __typename: String {
@@ -6952,7 +6952,7 @@ public final class CreateFamilyMutation: GraphQLMutation {
 
           public var photo: Photo? {
             get {
-              return (snapshot["photo"] as? Snapshot).flatMap { Photo(snapshot: $0) }
+              return (snapshot["photo"] as! Snapshot?).flatMap { Photo(snapshot: $0) }
             }
             set {
               snapshot.updateValue(newValue?.snapshot, forKey: "photo")
@@ -7109,15 +7109,15 @@ public final class MyFamiliesQuery: GraphQLQuery {
     }
 
     public init(myFamilies: [MyFamily?]) {
-      self.init(snapshot: ["__typename": "Query", "myFamilies": myFamilies.map { (value: MyFamily?) -> Snapshot? in value.flatMap { (value: MyFamily) -> Snapshot in value.snapshot } }])
+      self.init(snapshot: ["__typename": "Query", "myFamilies": myFamilies.map { $0.flatMap { $0.snapshot } }])
     }
 
     public var myFamilies: [MyFamily?] {
       get {
-        return (snapshot["myFamilies"] as! [Snapshot?]).map { (value: Snapshot?) -> MyFamily? in value.flatMap { (value: Snapshot) -> MyFamily in MyFamily(snapshot: value) } }
+        return (snapshot["myFamilies"] as! [Snapshot?]).map { $0.flatMap { MyFamily(snapshot: $0) } }
       }
       set {
-        snapshot.updateValue(newValue.map { (value: MyFamily?) -> Snapshot? in value.flatMap { (value: MyFamily) -> Snapshot in value.snapshot } }, forKey: "myFamilies")
+        snapshot.updateValue(newValue.map { $0.flatMap { $0.snapshot } }, forKey: "myFamilies")
       }
     }
 
@@ -7140,7 +7140,7 @@ public final class MyFamiliesQuery: GraphQLQuery {
       }
 
       public init(id: GraphQLID, name: String? = nil, photo: Photo? = nil, members: [Member?]) {
-        self.init(snapshot: ["__typename": "Family", "id": id, "name": name, "photo": photo.flatMap { (value: Photo) -> Snapshot in value.snapshot }, "members": members.map { (value: Member?) -> Snapshot? in value.flatMap { (value: Member) -> Snapshot in value.snapshot } }])
+        self.init(snapshot: ["__typename": "Family", "id": id, "name": name, "photo": photo.flatMap { $0.snapshot }, "members": members.map { $0.flatMap { $0.snapshot } }])
       }
 
       public var __typename: String {
@@ -7172,7 +7172,7 @@ public final class MyFamiliesQuery: GraphQLQuery {
 
       public var photo: Photo? {
         get {
-          return (snapshot["photo"] as? Snapshot).flatMap { Photo(snapshot: $0) }
+          return (snapshot["photo"] as! Snapshot?).flatMap { Photo(snapshot: $0) }
         }
         set {
           snapshot.updateValue(newValue?.snapshot, forKey: "photo")
@@ -7181,10 +7181,10 @@ public final class MyFamiliesQuery: GraphQLQuery {
 
       public var members: [Member?] {
         get {
-          return (snapshot["members"] as! [Snapshot?]).map { (value: Snapshot?) -> Member? in value.flatMap { (value: Snapshot) -> Member in Member(snapshot: value) } }
+          return (snapshot["members"] as! [Snapshot?]).map { $0.flatMap { Member(snapshot: $0) } }
         }
         set {
-          snapshot.updateValue(newValue.map { (value: Member?) -> Snapshot? in value.flatMap { (value: Member) -> Snapshot in value.snapshot } }, forKey: "members")
+          snapshot.updateValue(newValue.map { $0.flatMap { $0.snapshot } }, forKey: "members")
         }
       }
 
@@ -7430,7 +7430,7 @@ public final class MyFamiliesQuery: GraphQLQuery {
           }
 
           public init(id: GraphQLID, name: String, email: String, phone: String? = nil, userType: String, photo: Photo? = nil) {
-            self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType, "photo": photo.flatMap { (value: Photo) -> Snapshot in value.snapshot }])
+            self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType, "photo": photo.flatMap { $0.snapshot }])
           }
 
           public var __typename: String {
@@ -7489,7 +7489,7 @@ public final class MyFamiliesQuery: GraphQLQuery {
 
           public var photo: Photo? {
             get {
-              return (snapshot["photo"] as? Snapshot).flatMap { Photo(snapshot: $0) }
+              return (snapshot["photo"] as! Snapshot?).flatMap { Photo(snapshot: $0) }
             }
             set {
               snapshot.updateValue(newValue?.snapshot, forKey: "photo")
@@ -7637,7 +7637,7 @@ public final class MyFamiliesQuery: GraphQLQuery {
           }
 
           public init(id: GraphQLID, name: String? = nil, photo: Photo? = nil) {
-            self.init(snapshot: ["__typename": "Family", "id": id, "name": name, "photo": photo.flatMap { (value: Photo) -> Snapshot in value.snapshot }])
+            self.init(snapshot: ["__typename": "Family", "id": id, "name": name, "photo": photo.flatMap { $0.snapshot }])
           }
 
           public var __typename: String {
@@ -7669,7 +7669,7 @@ public final class MyFamiliesQuery: GraphQLQuery {
 
           public var photo: Photo? {
             get {
-              return (snapshot["photo"] as? Snapshot).flatMap { Photo(snapshot: $0) }
+              return (snapshot["photo"] as! Snapshot?).flatMap { Photo(snapshot: $0) }
             }
             set {
               snapshot.updateValue(newValue?.snapshot, forKey: "photo")
@@ -7843,12 +7843,12 @@ public final class CreateIllnessMutation: GraphQLMutation {
     }
 
     public init(createIllness: CreateIllness? = nil) {
-      self.init(snapshot: ["__typename": "Mutation", "createIllness": createIllness.flatMap { (value: CreateIllness) -> Snapshot in value.snapshot }])
+      self.init(snapshot: ["__typename": "Mutation", "createIllness": createIllness.flatMap { $0.snapshot }])
     }
 
     public var createIllness: CreateIllness? {
       get {
-        return (snapshot["createIllness"] as? Snapshot).flatMap { CreateIllness(snapshot: $0) }
+        return (snapshot["createIllness"] as! Snapshot?).flatMap { CreateIllness(snapshot: $0) }
       }
       set {
         snapshot.updateValue(newValue?.snapshot, forKey: "createIllness")
@@ -7878,7 +7878,7 @@ public final class CreateIllnessMutation: GraphQLMutation {
       }
 
       public init(id: GraphQLID, name: String? = nil, description: String? = nil, medicines: String? = nil, type: Int? = nil, family: Family? = nil, creator: Creator? = nil) {
-        self.init(snapshot: ["__typename": "Illness", "id": id, "name": name, "description": description, "medicines": medicines, "type": type, "family": family.flatMap { (value: Family) -> Snapshot in value.snapshot }, "creator": creator.flatMap { (value: Creator) -> Snapshot in value.snapshot }])
+        self.init(snapshot: ["__typename": "Illness", "id": id, "name": name, "description": description, "medicines": medicines, "type": type, "family": family.flatMap { $0.snapshot }, "creator": creator.flatMap { $0.snapshot }])
       }
 
       public var __typename: String {
@@ -7937,7 +7937,7 @@ public final class CreateIllnessMutation: GraphQLMutation {
 
       public var family: Family? {
         get {
-          return (snapshot["family"] as? Snapshot).flatMap { Family(snapshot: $0) }
+          return (snapshot["family"] as! Snapshot?).flatMap { Family(snapshot: $0) }
         }
         set {
           snapshot.updateValue(newValue?.snapshot, forKey: "family")
@@ -7946,7 +7946,7 @@ public final class CreateIllnessMutation: GraphQLMutation {
 
       public var creator: Creator? {
         get {
-          return (snapshot["creator"] as? Snapshot).flatMap { Creator(snapshot: $0) }
+          return (snapshot["creator"] as! Snapshot?).flatMap { Creator(snapshot: $0) }
         }
         set {
           snapshot.updateValue(newValue?.snapshot, forKey: "creator")
@@ -7993,7 +7993,7 @@ public final class CreateIllnessMutation: GraphQLMutation {
         }
 
         public init(id: GraphQLID, name: String? = nil, photo: Photo? = nil) {
-          self.init(snapshot: ["__typename": "Family", "id": id, "name": name, "photo": photo.flatMap { (value: Photo) -> Snapshot in value.snapshot }])
+          self.init(snapshot: ["__typename": "Family", "id": id, "name": name, "photo": photo.flatMap { $0.snapshot }])
         }
 
         public var __typename: String {
@@ -8025,7 +8025,7 @@ public final class CreateIllnessMutation: GraphQLMutation {
 
         public var photo: Photo? {
           get {
-            return (snapshot["photo"] as? Snapshot).flatMap { Photo(snapshot: $0) }
+            return (snapshot["photo"] as! Snapshot?).flatMap { Photo(snapshot: $0) }
           }
           set {
             snapshot.updateValue(newValue?.snapshot, forKey: "photo")
@@ -8176,7 +8176,7 @@ public final class CreateIllnessMutation: GraphQLMutation {
         }
 
         public init(id: GraphQLID, name: String, email: String, phone: String? = nil, userType: String, photo: Photo? = nil) {
-          self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType, "photo": photo.flatMap { (value: Photo) -> Snapshot in value.snapshot }])
+          self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType, "photo": photo.flatMap { $0.snapshot }])
         }
 
         public var __typename: String {
@@ -8235,7 +8235,7 @@ public final class CreateIllnessMutation: GraphQLMutation {
 
         public var photo: Photo? {
           get {
-            return (snapshot["photo"] as? Snapshot).flatMap { Photo(snapshot: $0) }
+            return (snapshot["photo"] as! Snapshot?).flatMap { Photo(snapshot: $0) }
           }
           set {
             snapshot.updateValue(newValue?.snapshot, forKey: "photo")
@@ -8406,12 +8406,12 @@ public final class EditIllnessMutation: GraphQLMutation {
     }
 
     public init(editIllness: EditIllness? = nil) {
-      self.init(snapshot: ["__typename": "Mutation", "editIllness": editIllness.flatMap { (value: EditIllness) -> Snapshot in value.snapshot }])
+      self.init(snapshot: ["__typename": "Mutation", "editIllness": editIllness.flatMap { $0.snapshot }])
     }
 
     public var editIllness: EditIllness? {
       get {
-        return (snapshot["editIllness"] as? Snapshot).flatMap { EditIllness(snapshot: $0) }
+        return (snapshot["editIllness"] as! Snapshot?).flatMap { EditIllness(snapshot: $0) }
       }
       set {
         snapshot.updateValue(newValue?.snapshot, forKey: "editIllness")
@@ -8441,7 +8441,7 @@ public final class EditIllnessMutation: GraphQLMutation {
       }
 
       public init(id: GraphQLID, name: String? = nil, description: String? = nil, medicines: String? = nil, type: Int? = nil, family: Family? = nil, creator: Creator? = nil) {
-        self.init(snapshot: ["__typename": "Illness", "id": id, "name": name, "description": description, "medicines": medicines, "type": type, "family": family.flatMap { (value: Family) -> Snapshot in value.snapshot }, "creator": creator.flatMap { (value: Creator) -> Snapshot in value.snapshot }])
+        self.init(snapshot: ["__typename": "Illness", "id": id, "name": name, "description": description, "medicines": medicines, "type": type, "family": family.flatMap { $0.snapshot }, "creator": creator.flatMap { $0.snapshot }])
       }
 
       public var __typename: String {
@@ -8500,7 +8500,7 @@ public final class EditIllnessMutation: GraphQLMutation {
 
       public var family: Family? {
         get {
-          return (snapshot["family"] as? Snapshot).flatMap { Family(snapshot: $0) }
+          return (snapshot["family"] as! Snapshot?).flatMap { Family(snapshot: $0) }
         }
         set {
           snapshot.updateValue(newValue?.snapshot, forKey: "family")
@@ -8509,7 +8509,7 @@ public final class EditIllnessMutation: GraphQLMutation {
 
       public var creator: Creator? {
         get {
-          return (snapshot["creator"] as? Snapshot).flatMap { Creator(snapshot: $0) }
+          return (snapshot["creator"] as! Snapshot?).flatMap { Creator(snapshot: $0) }
         }
         set {
           snapshot.updateValue(newValue?.snapshot, forKey: "creator")
@@ -8556,7 +8556,7 @@ public final class EditIllnessMutation: GraphQLMutation {
         }
 
         public init(id: GraphQLID, name: String? = nil, photo: Photo? = nil) {
-          self.init(snapshot: ["__typename": "Family", "id": id, "name": name, "photo": photo.flatMap { (value: Photo) -> Snapshot in value.snapshot }])
+          self.init(snapshot: ["__typename": "Family", "id": id, "name": name, "photo": photo.flatMap { $0.snapshot }])
         }
 
         public var __typename: String {
@@ -8588,7 +8588,7 @@ public final class EditIllnessMutation: GraphQLMutation {
 
         public var photo: Photo? {
           get {
-            return (snapshot["photo"] as? Snapshot).flatMap { Photo(snapshot: $0) }
+            return (snapshot["photo"] as! Snapshot?).flatMap { Photo(snapshot: $0) }
           }
           set {
             snapshot.updateValue(newValue?.snapshot, forKey: "photo")
@@ -8739,7 +8739,7 @@ public final class EditIllnessMutation: GraphQLMutation {
         }
 
         public init(id: GraphQLID, name: String, email: String, phone: String? = nil, userType: String, photo: Photo? = nil) {
-          self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType, "photo": photo.flatMap { (value: Photo) -> Snapshot in value.snapshot }])
+          self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType, "photo": photo.flatMap { $0.snapshot }])
         }
 
         public var __typename: String {
@@ -8798,7 +8798,7 @@ public final class EditIllnessMutation: GraphQLMutation {
 
         public var photo: Photo? {
           get {
-            return (snapshot["photo"] as? Snapshot).flatMap { Photo(snapshot: $0) }
+            return (snapshot["photo"] as! Snapshot?).flatMap { Photo(snapshot: $0) }
           }
           set {
             snapshot.updateValue(newValue?.snapshot, forKey: "photo")
@@ -8961,12 +8961,12 @@ public final class DeleteIllnessMutation: GraphQLMutation {
     }
 
     public init(deleteIllness: DeleteIllness? = nil) {
-      self.init(snapshot: ["__typename": "Mutation", "deleteIllness": deleteIllness.flatMap { (value: DeleteIllness) -> Snapshot in value.snapshot }])
+      self.init(snapshot: ["__typename": "Mutation", "deleteIllness": deleteIllness.flatMap { $0.snapshot }])
     }
 
     public var deleteIllness: DeleteIllness? {
       get {
-        return (snapshot["deleteIllness"] as? Snapshot).flatMap { DeleteIllness(snapshot: $0) }
+        return (snapshot["deleteIllness"] as! Snapshot?).flatMap { DeleteIllness(snapshot: $0) }
       }
       set {
         snapshot.updateValue(newValue?.snapshot, forKey: "deleteIllness")
@@ -8996,7 +8996,7 @@ public final class DeleteIllnessMutation: GraphQLMutation {
       }
 
       public init(id: GraphQLID, name: String? = nil, description: String? = nil, medicines: String? = nil, type: Int? = nil, family: Family? = nil, creator: Creator? = nil) {
-        self.init(snapshot: ["__typename": "Illness", "id": id, "name": name, "description": description, "medicines": medicines, "type": type, "family": family.flatMap { (value: Family) -> Snapshot in value.snapshot }, "creator": creator.flatMap { (value: Creator) -> Snapshot in value.snapshot }])
+        self.init(snapshot: ["__typename": "Illness", "id": id, "name": name, "description": description, "medicines": medicines, "type": type, "family": family.flatMap { $0.snapshot }, "creator": creator.flatMap { $0.snapshot }])
       }
 
       public var __typename: String {
@@ -9055,7 +9055,7 @@ public final class DeleteIllnessMutation: GraphQLMutation {
 
       public var family: Family? {
         get {
-          return (snapshot["family"] as? Snapshot).flatMap { Family(snapshot: $0) }
+          return (snapshot["family"] as! Snapshot?).flatMap { Family(snapshot: $0) }
         }
         set {
           snapshot.updateValue(newValue?.snapshot, forKey: "family")
@@ -9064,7 +9064,7 @@ public final class DeleteIllnessMutation: GraphQLMutation {
 
       public var creator: Creator? {
         get {
-          return (snapshot["creator"] as? Snapshot).flatMap { Creator(snapshot: $0) }
+          return (snapshot["creator"] as! Snapshot?).flatMap { Creator(snapshot: $0) }
         }
         set {
           snapshot.updateValue(newValue?.snapshot, forKey: "creator")
@@ -9111,7 +9111,7 @@ public final class DeleteIllnessMutation: GraphQLMutation {
         }
 
         public init(id: GraphQLID, name: String? = nil, photo: Photo? = nil) {
-          self.init(snapshot: ["__typename": "Family", "id": id, "name": name, "photo": photo.flatMap { (value: Photo) -> Snapshot in value.snapshot }])
+          self.init(snapshot: ["__typename": "Family", "id": id, "name": name, "photo": photo.flatMap { $0.snapshot }])
         }
 
         public var __typename: String {
@@ -9143,7 +9143,7 @@ public final class DeleteIllnessMutation: GraphQLMutation {
 
         public var photo: Photo? {
           get {
-            return (snapshot["photo"] as? Snapshot).flatMap { Photo(snapshot: $0) }
+            return (snapshot["photo"] as! Snapshot?).flatMap { Photo(snapshot: $0) }
           }
           set {
             snapshot.updateValue(newValue?.snapshot, forKey: "photo")
@@ -9294,7 +9294,7 @@ public final class DeleteIllnessMutation: GraphQLMutation {
         }
 
         public init(id: GraphQLID, name: String, email: String, phone: String? = nil, userType: String, photo: Photo? = nil) {
-          self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType, "photo": photo.flatMap { (value: Photo) -> Snapshot in value.snapshot }])
+          self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType, "photo": photo.flatMap { $0.snapshot }])
         }
 
         public var __typename: String {
@@ -9353,7 +9353,7 @@ public final class DeleteIllnessMutation: GraphQLMutation {
 
         public var photo: Photo? {
           get {
-            return (snapshot["photo"] as? Snapshot).flatMap { Photo(snapshot: $0) }
+            return (snapshot["photo"] as! Snapshot?).flatMap { Photo(snapshot: $0) }
           }
           set {
             snapshot.updateValue(newValue?.snapshot, forKey: "photo")
@@ -9516,15 +9516,15 @@ public final class AllIllnessQuery: GraphQLQuery {
     }
 
     public init(allIllnesses: [AllIllness?]) {
-      self.init(snapshot: ["__typename": "Query", "allIllnesses": allIllnesses.map { (value: AllIllness?) -> Snapshot? in value.flatMap { (value: AllIllness) -> Snapshot in value.snapshot } }])
+      self.init(snapshot: ["__typename": "Query", "allIllnesses": allIllnesses.map { $0.flatMap { $0.snapshot } }])
     }
 
     public var allIllnesses: [AllIllness?] {
       get {
-        return (snapshot["allIllnesses"] as! [Snapshot?]).map { (value: Snapshot?) -> AllIllness? in value.flatMap { (value: Snapshot) -> AllIllness in AllIllness(snapshot: value) } }
+        return (snapshot["allIllnesses"] as! [Snapshot?]).map { $0.flatMap { AllIllness(snapshot: $0) } }
       }
       set {
-        snapshot.updateValue(newValue.map { (value: AllIllness?) -> Snapshot? in value.flatMap { (value: AllIllness) -> Snapshot in value.snapshot } }, forKey: "allIllnesses")
+        snapshot.updateValue(newValue.map { $0.flatMap { $0.snapshot } }, forKey: "allIllnesses")
       }
     }
 
@@ -9551,7 +9551,7 @@ public final class AllIllnessQuery: GraphQLQuery {
       }
 
       public init(id: GraphQLID, name: String? = nil, description: String? = nil, medicines: String? = nil, type: Int? = nil, family: Family? = nil, creator: Creator? = nil) {
-        self.init(snapshot: ["__typename": "Illness", "id": id, "name": name, "description": description, "medicines": medicines, "type": type, "family": family.flatMap { (value: Family) -> Snapshot in value.snapshot }, "creator": creator.flatMap { (value: Creator) -> Snapshot in value.snapshot }])
+        self.init(snapshot: ["__typename": "Illness", "id": id, "name": name, "description": description, "medicines": medicines, "type": type, "family": family.flatMap { $0.snapshot }, "creator": creator.flatMap { $0.snapshot }])
       }
 
       public var __typename: String {
@@ -9610,7 +9610,7 @@ public final class AllIllnessQuery: GraphQLQuery {
 
       public var family: Family? {
         get {
-          return (snapshot["family"] as? Snapshot).flatMap { Family(snapshot: $0) }
+          return (snapshot["family"] as! Snapshot?).flatMap { Family(snapshot: $0) }
         }
         set {
           snapshot.updateValue(newValue?.snapshot, forKey: "family")
@@ -9619,7 +9619,7 @@ public final class AllIllnessQuery: GraphQLQuery {
 
       public var creator: Creator? {
         get {
-          return (snapshot["creator"] as? Snapshot).flatMap { Creator(snapshot: $0) }
+          return (snapshot["creator"] as! Snapshot?).flatMap { Creator(snapshot: $0) }
         }
         set {
           snapshot.updateValue(newValue?.snapshot, forKey: "creator")
@@ -9666,7 +9666,7 @@ public final class AllIllnessQuery: GraphQLQuery {
         }
 
         public init(id: GraphQLID, name: String? = nil, photo: Photo? = nil) {
-          self.init(snapshot: ["__typename": "Family", "id": id, "name": name, "photo": photo.flatMap { (value: Photo) -> Snapshot in value.snapshot }])
+          self.init(snapshot: ["__typename": "Family", "id": id, "name": name, "photo": photo.flatMap { $0.snapshot }])
         }
 
         public var __typename: String {
@@ -9698,7 +9698,7 @@ public final class AllIllnessQuery: GraphQLQuery {
 
         public var photo: Photo? {
           get {
-            return (snapshot["photo"] as? Snapshot).flatMap { Photo(snapshot: $0) }
+            return (snapshot["photo"] as! Snapshot?).flatMap { Photo(snapshot: $0) }
           }
           set {
             snapshot.updateValue(newValue?.snapshot, forKey: "photo")
@@ -9849,7 +9849,7 @@ public final class AllIllnessQuery: GraphQLQuery {
         }
 
         public init(id: GraphQLID, name: String, email: String, phone: String? = nil, userType: String, photo: Photo? = nil) {
-          self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType, "photo": photo.flatMap { (value: Photo) -> Snapshot in value.snapshot }])
+          self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType, "photo": photo.flatMap { $0.snapshot }])
         }
 
         public var __typename: String {
@@ -9908,7 +9908,7 @@ public final class AllIllnessQuery: GraphQLQuery {
 
         public var photo: Photo? {
           get {
-            return (snapshot["photo"] as? Snapshot).flatMap { Photo(snapshot: $0) }
+            return (snapshot["photo"] as! Snapshot?).flatMap { Photo(snapshot: $0) }
           }
           set {
             snapshot.updateValue(newValue?.snapshot, forKey: "photo")
@@ -10064,15 +10064,15 @@ public final class AllInsurancesQuery: GraphQLQuery {
     }
 
     public init(allInsurances: [AllInsurance?]) {
-      self.init(snapshot: ["__typename": "Query", "allInsurances": allInsurances.map { (value: AllInsurance?) -> Snapshot? in value.flatMap { (value: AllInsurance) -> Snapshot in value.snapshot } }])
+      self.init(snapshot: ["__typename": "Query", "allInsurances": allInsurances.map { $0.flatMap { $0.snapshot } }])
     }
 
     public var allInsurances: [AllInsurance?] {
       get {
-        return (snapshot["allInsurances"] as! [Snapshot?]).map { (value: Snapshot?) -> AllInsurance? in value.flatMap { (value: Snapshot) -> AllInsurance in AllInsurance(snapshot: value) } }
+        return (snapshot["allInsurances"] as! [Snapshot?]).map { $0.flatMap { AllInsurance(snapshot: $0) } }
       }
       set {
-        snapshot.updateValue(newValue.map { (value: AllInsurance?) -> Snapshot? in value.flatMap { (value: AllInsurance) -> Snapshot in value.snapshot } }, forKey: "allInsurances")
+        snapshot.updateValue(newValue.map { $0.flatMap { $0.snapshot } }, forKey: "allInsurances")
       }
     }
 
@@ -10096,7 +10096,7 @@ public final class AllInsurancesQuery: GraphQLQuery {
       }
 
       public init(id: GraphQLID, name: String? = nil, policy: String? = nil, telephone: String? = nil, type: Int? = nil, attachment: Attachment? = nil) {
-        self.init(snapshot: ["__typename": "Insurance", "id": id, "name": name, "policy": policy, "telephone": telephone, "type": type, "attachment": attachment.flatMap { (value: Attachment) -> Snapshot in value.snapshot }])
+        self.init(snapshot: ["__typename": "Insurance", "id": id, "name": name, "policy": policy, "telephone": telephone, "type": type, "attachment": attachment.flatMap { $0.snapshot }])
       }
 
       public var __typename: String {
@@ -10155,7 +10155,7 @@ public final class AllInsurancesQuery: GraphQLQuery {
 
       public var attachment: Attachment? {
         get {
-          return (snapshot["attachment"] as? Snapshot).flatMap { Attachment(snapshot: $0) }
+          return (snapshot["attachment"] as! Snapshot?).flatMap { Attachment(snapshot: $0) }
         }
         set {
           snapshot.updateValue(newValue?.snapshot, forKey: "attachment")
@@ -10288,15 +10288,15 @@ public final class AllPendingQuery: GraphQLQuery {
     }
 
     public init(allPendings: [AllPending?]? = nil) {
-      self.init(snapshot: ["__typename": "Query", "allPendings": allPendings.flatMap { (value: [AllPending?]) -> [Snapshot?] in value.map { (value: AllPending?) -> Snapshot? in value.flatMap { (value: AllPending) -> Snapshot in value.snapshot } } }])
+      self.init(snapshot: ["__typename": "Query", "allPendings": allPendings.flatMap { $0.map { $0.flatMap { $0.snapshot } } }])
     }
 
     public var allPendings: [AllPending?]? {
       get {
-        return (snapshot["allPendings"] as? [Snapshot?]).flatMap { (value: [Snapshot?]) -> [AllPending?] in value.map { (value: Snapshot?) -> AllPending? in value.flatMap { (value: Snapshot) -> AllPending in AllPending(snapshot: value) } } }
+        return (snapshot["allPendings"] as? [Snapshot?]).flatMap { $0.map { $0.flatMap { AllPending(snapshot: $0) } } }
       }
       set {
-        snapshot.updateValue(newValue.flatMap { (value: [AllPending?]) -> [Snapshot?] in value.map { (value: AllPending?) -> Snapshot? in value.flatMap { (value: AllPending) -> Snapshot in value.snapshot } } }, forKey: "allPendings")
+        snapshot.updateValue(newValue.flatMap { $0.map { $0.flatMap { $0.snapshot } } }, forKey: "allPendings")
       }
     }
 
@@ -10446,12 +10446,12 @@ public final class CreatePendingMutation: GraphQLMutation {
     }
 
     public init(createPending: CreatePending? = nil) {
-      self.init(snapshot: ["__typename": "Mutation", "createPending": createPending.flatMap { (value: CreatePending) -> Snapshot in value.snapshot }])
+      self.init(snapshot: ["__typename": "Mutation", "createPending": createPending.flatMap { $0.snapshot }])
     }
 
     public var createPending: CreatePending? {
       get {
-        return (snapshot["createPending"] as? Snapshot).flatMap { CreatePending(snapshot: $0) }
+        return (snapshot["createPending"] as! Snapshot?).flatMap { CreatePending(snapshot: $0) }
       }
       set {
         snapshot.updateValue(newValue?.snapshot, forKey: "createPending")
@@ -10602,12 +10602,12 @@ public final class FamilyApplicationMutation: GraphQLMutation {
     }
 
     public init(createFamilyApplication: CreateFamilyApplication? = nil) {
-      self.init(snapshot: ["__typename": "Mutation", "createFamilyApplication": createFamilyApplication.flatMap { (value: CreateFamilyApplication) -> Snapshot in value.snapshot }])
+      self.init(snapshot: ["__typename": "Mutation", "createFamilyApplication": createFamilyApplication.flatMap { $0.snapshot }])
     }
 
     public var createFamilyApplication: CreateFamilyApplication? {
       get {
-        return (snapshot["createFamilyApplication"] as? Snapshot).flatMap { CreateFamilyApplication(snapshot: $0) }
+        return (snapshot["createFamilyApplication"] as! Snapshot?).flatMap { CreateFamilyApplication(snapshot: $0) }
       }
       set {
         snapshot.updateValue(newValue?.snapshot, forKey: "createFamilyApplication")
@@ -10633,7 +10633,7 @@ public final class FamilyApplicationMutation: GraphQLMutation {
       }
 
       public init(id: GraphQLID, family: Family? = nil, user: User? = nil, status: String? = nil) {
-        self.init(snapshot: ["__typename": "FamilyApplication", "id": id, "family": family.flatMap { (value: Family) -> Snapshot in value.snapshot }, "user": user.flatMap { (value: User) -> Snapshot in value.snapshot }, "status": status])
+        self.init(snapshot: ["__typename": "FamilyApplication", "id": id, "family": family.flatMap { $0.snapshot }, "user": user.flatMap { $0.snapshot }, "status": status])
       }
 
       public var __typename: String {
@@ -10656,7 +10656,7 @@ public final class FamilyApplicationMutation: GraphQLMutation {
 
       public var family: Family? {
         get {
-          return (snapshot["family"] as? Snapshot).flatMap { Family(snapshot: $0) }
+          return (snapshot["family"] as! Snapshot?).flatMap { Family(snapshot: $0) }
         }
         set {
           snapshot.updateValue(newValue?.snapshot, forKey: "family")
@@ -10665,7 +10665,7 @@ public final class FamilyApplicationMutation: GraphQLMutation {
 
       public var user: User? {
         get {
-          return (snapshot["user"] as? Snapshot).flatMap { User(snapshot: $0) }
+          return (snapshot["user"] as! Snapshot?).flatMap { User(snapshot: $0) }
         }
         set {
           snapshot.updateValue(newValue?.snapshot, forKey: "user")
@@ -10721,7 +10721,7 @@ public final class FamilyApplicationMutation: GraphQLMutation {
         }
 
         public init(id: GraphQLID, name: String? = nil, photo: Photo? = nil) {
-          self.init(snapshot: ["__typename": "Family", "id": id, "name": name, "photo": photo.flatMap { (value: Photo) -> Snapshot in value.snapshot }])
+          self.init(snapshot: ["__typename": "Family", "id": id, "name": name, "photo": photo.flatMap { $0.snapshot }])
         }
 
         public var __typename: String {
@@ -10753,7 +10753,7 @@ public final class FamilyApplicationMutation: GraphQLMutation {
 
         public var photo: Photo? {
           get {
-            return (snapshot["photo"] as? Snapshot).flatMap { Photo(snapshot: $0) }
+            return (snapshot["photo"] as! Snapshot?).flatMap { Photo(snapshot: $0) }
           }
           set {
             snapshot.updateValue(newValue?.snapshot, forKey: "photo")
@@ -10904,7 +10904,7 @@ public final class FamilyApplicationMutation: GraphQLMutation {
         }
 
         public init(id: GraphQLID, name: String, email: String, phone: String? = nil, userType: String, photo: Photo? = nil) {
-          self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType, "photo": photo.flatMap { (value: Photo) -> Snapshot in value.snapshot }])
+          self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType, "photo": photo.flatMap { $0.snapshot }])
         }
 
         public var __typename: String {
@@ -10963,7 +10963,7 @@ public final class FamilyApplicationMutation: GraphQLMutation {
 
         public var photo: Photo? {
           get {
-            return (snapshot["photo"] as? Snapshot).flatMap { Photo(snapshot: $0) }
+            return (snapshot["photo"] as! Snapshot?).flatMap { Photo(snapshot: $0) }
           }
           set {
             snapshot.updateValue(newValue?.snapshot, forKey: "photo")
@@ -11126,12 +11126,12 @@ public final class AcceptFamilyApplicationMutation: GraphQLMutation {
     }
 
     public init(approveFamilyApplication: ApproveFamilyApplication? = nil) {
-      self.init(snapshot: ["__typename": "Mutation", "approveFamilyApplication": approveFamilyApplication.flatMap { (value: ApproveFamilyApplication) -> Snapshot in value.snapshot }])
+      self.init(snapshot: ["__typename": "Mutation", "approveFamilyApplication": approveFamilyApplication.flatMap { $0.snapshot }])
     }
 
     public var approveFamilyApplication: ApproveFamilyApplication? {
       get {
-        return (snapshot["approveFamilyApplication"] as? Snapshot).flatMap { ApproveFamilyApplication(snapshot: $0) }
+        return (snapshot["approveFamilyApplication"] as! Snapshot?).flatMap { ApproveFamilyApplication(snapshot: $0) }
       }
       set {
         snapshot.updateValue(newValue?.snapshot, forKey: "approveFamilyApplication")
@@ -11157,7 +11157,7 @@ public final class AcceptFamilyApplicationMutation: GraphQLMutation {
       }
 
       public init(id: GraphQLID, family: Family? = nil, user: User? = nil, status: String? = nil) {
-        self.init(snapshot: ["__typename": "FamilyApplication", "id": id, "family": family.flatMap { (value: Family) -> Snapshot in value.snapshot }, "user": user.flatMap { (value: User) -> Snapshot in value.snapshot }, "status": status])
+        self.init(snapshot: ["__typename": "FamilyApplication", "id": id, "family": family.flatMap { $0.snapshot }, "user": user.flatMap { $0.snapshot }, "status": status])
       }
 
       public var __typename: String {
@@ -11180,7 +11180,7 @@ public final class AcceptFamilyApplicationMutation: GraphQLMutation {
 
       public var family: Family? {
         get {
-          return (snapshot["family"] as? Snapshot).flatMap { Family(snapshot: $0) }
+          return (snapshot["family"] as! Snapshot?).flatMap { Family(snapshot: $0) }
         }
         set {
           snapshot.updateValue(newValue?.snapshot, forKey: "family")
@@ -11189,7 +11189,7 @@ public final class AcceptFamilyApplicationMutation: GraphQLMutation {
 
       public var user: User? {
         get {
-          return (snapshot["user"] as? Snapshot).flatMap { User(snapshot: $0) }
+          return (snapshot["user"] as! Snapshot?).flatMap { User(snapshot: $0) }
         }
         set {
           snapshot.updateValue(newValue?.snapshot, forKey: "user")
@@ -11245,7 +11245,7 @@ public final class AcceptFamilyApplicationMutation: GraphQLMutation {
         }
 
         public init(id: GraphQLID, name: String? = nil, photo: Photo? = nil) {
-          self.init(snapshot: ["__typename": "Family", "id": id, "name": name, "photo": photo.flatMap { (value: Photo) -> Snapshot in value.snapshot }])
+          self.init(snapshot: ["__typename": "Family", "id": id, "name": name, "photo": photo.flatMap { $0.snapshot }])
         }
 
         public var __typename: String {
@@ -11277,7 +11277,7 @@ public final class AcceptFamilyApplicationMutation: GraphQLMutation {
 
         public var photo: Photo? {
           get {
-            return (snapshot["photo"] as? Snapshot).flatMap { Photo(snapshot: $0) }
+            return (snapshot["photo"] as! Snapshot?).flatMap { Photo(snapshot: $0) }
           }
           set {
             snapshot.updateValue(newValue?.snapshot, forKey: "photo")
@@ -11428,7 +11428,7 @@ public final class AcceptFamilyApplicationMutation: GraphQLMutation {
         }
 
         public init(id: GraphQLID, name: String, email: String, phone: String? = nil, userType: String, photo: Photo? = nil) {
-          self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType, "photo": photo.flatMap { (value: Photo) -> Snapshot in value.snapshot }])
+          self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType, "photo": photo.flatMap { $0.snapshot }])
         }
 
         public var __typename: String {
@@ -11487,7 +11487,7 @@ public final class AcceptFamilyApplicationMutation: GraphQLMutation {
 
         public var photo: Photo? {
           get {
-            return (snapshot["photo"] as? Snapshot).flatMap { Photo(snapshot: $0) }
+            return (snapshot["photo"] as! Snapshot?).flatMap { Photo(snapshot: $0) }
           }
           set {
             snapshot.updateValue(newValue?.snapshot, forKey: "photo")
@@ -11643,15 +11643,15 @@ public final class FamilyApplicationsQuery: GraphQLQuery {
     }
 
     public init(allFamilyApplications: [AllFamilyApplication?]) {
-      self.init(snapshot: ["__typename": "Query", "allFamilyApplications": allFamilyApplications.map { (value: AllFamilyApplication?) -> Snapshot? in value.flatMap { (value: AllFamilyApplication) -> Snapshot in value.snapshot } }])
+      self.init(snapshot: ["__typename": "Query", "allFamilyApplications": allFamilyApplications.map { $0.flatMap { $0.snapshot } }])
     }
 
     public var allFamilyApplications: [AllFamilyApplication?] {
       get {
-        return (snapshot["allFamilyApplications"] as! [Snapshot?]).map { (value: Snapshot?) -> AllFamilyApplication? in value.flatMap { (value: Snapshot) -> AllFamilyApplication in AllFamilyApplication(snapshot: value) } }
+        return (snapshot["allFamilyApplications"] as! [Snapshot?]).map { $0.flatMap { AllFamilyApplication(snapshot: $0) } }
       }
       set {
-        snapshot.updateValue(newValue.map { (value: AllFamilyApplication?) -> Snapshot? in value.flatMap { (value: AllFamilyApplication) -> Snapshot in value.snapshot } }, forKey: "allFamilyApplications")
+        snapshot.updateValue(newValue.map { $0.flatMap { $0.snapshot } }, forKey: "allFamilyApplications")
       }
     }
 
@@ -11674,7 +11674,7 @@ public final class FamilyApplicationsQuery: GraphQLQuery {
       }
 
       public init(id: GraphQLID, family: Family? = nil, user: User? = nil, status: String? = nil) {
-        self.init(snapshot: ["__typename": "FamilyApplication", "id": id, "family": family.flatMap { (value: Family) -> Snapshot in value.snapshot }, "user": user.flatMap { (value: User) -> Snapshot in value.snapshot }, "status": status])
+        self.init(snapshot: ["__typename": "FamilyApplication", "id": id, "family": family.flatMap { $0.snapshot }, "user": user.flatMap { $0.snapshot }, "status": status])
       }
 
       public var __typename: String {
@@ -11697,7 +11697,7 @@ public final class FamilyApplicationsQuery: GraphQLQuery {
 
       public var family: Family? {
         get {
-          return (snapshot["family"] as? Snapshot).flatMap { Family(snapshot: $0) }
+          return (snapshot["family"] as! Snapshot?).flatMap { Family(snapshot: $0) }
         }
         set {
           snapshot.updateValue(newValue?.snapshot, forKey: "family")
@@ -11706,7 +11706,7 @@ public final class FamilyApplicationsQuery: GraphQLQuery {
 
       public var user: User? {
         get {
-          return (snapshot["user"] as? Snapshot).flatMap { User(snapshot: $0) }
+          return (snapshot["user"] as! Snapshot?).flatMap { User(snapshot: $0) }
         }
         set {
           snapshot.updateValue(newValue?.snapshot, forKey: "user")
@@ -11762,7 +11762,7 @@ public final class FamilyApplicationsQuery: GraphQLQuery {
         }
 
         public init(id: GraphQLID, name: String? = nil, photo: Photo? = nil) {
-          self.init(snapshot: ["__typename": "Family", "id": id, "name": name, "photo": photo.flatMap { (value: Photo) -> Snapshot in value.snapshot }])
+          self.init(snapshot: ["__typename": "Family", "id": id, "name": name, "photo": photo.flatMap { $0.snapshot }])
         }
 
         public var __typename: String {
@@ -11794,7 +11794,7 @@ public final class FamilyApplicationsQuery: GraphQLQuery {
 
         public var photo: Photo? {
           get {
-            return (snapshot["photo"] as? Snapshot).flatMap { Photo(snapshot: $0) }
+            return (snapshot["photo"] as! Snapshot?).flatMap { Photo(snapshot: $0) }
           }
           set {
             snapshot.updateValue(newValue?.snapshot, forKey: "photo")
@@ -11945,7 +11945,7 @@ public final class FamilyApplicationsQuery: GraphQLQuery {
         }
 
         public init(id: GraphQLID, name: String, email: String, phone: String? = nil, userType: String, photo: Photo? = nil) {
-          self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType, "photo": photo.flatMap { (value: Photo) -> Snapshot in value.snapshot }])
+          self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType, "photo": photo.flatMap { $0.snapshot }])
         }
 
         public var __typename: String {
@@ -12004,7 +12004,7 @@ public final class FamilyApplicationsQuery: GraphQLQuery {
 
         public var photo: Photo? {
           get {
-            return (snapshot["photo"] as? Snapshot).flatMap { Photo(snapshot: $0) }
+            return (snapshot["photo"] as! Snapshot?).flatMap { Photo(snapshot: $0) }
           }
           set {
             snapshot.updateValue(newValue?.snapshot, forKey: "photo")
@@ -12169,15 +12169,15 @@ public final class AllUserQuery: GraphQLQuery {
     }
 
     public init(allUsers: [AllUser?]? = nil) {
-      self.init(snapshot: ["__typename": "Query", "allUsers": allUsers.flatMap { (value: [AllUser?]) -> [Snapshot?] in value.map { (value: AllUser?) -> Snapshot? in value.flatMap { (value: AllUser) -> Snapshot in value.snapshot } } }])
+      self.init(snapshot: ["__typename": "Query", "allUsers": allUsers.flatMap { $0.map { $0.flatMap { $0.snapshot } } }])
     }
 
     public var allUsers: [AllUser?]? {
       get {
-        return (snapshot["allUsers"] as? [Snapshot?]).flatMap { (value: [Snapshot?]) -> [AllUser?] in value.map { (value: Snapshot?) -> AllUser? in value.flatMap { (value: Snapshot) -> AllUser in AllUser(snapshot: value) } } }
+        return (snapshot["allUsers"] as? [Snapshot?]).flatMap { $0.map { $0.flatMap { AllUser(snapshot: $0) } } }
       }
       set {
-        snapshot.updateValue(newValue.flatMap { (value: [AllUser?]) -> [Snapshot?] in value.map { (value: AllUser?) -> Snapshot? in value.flatMap { (value: AllUser) -> Snapshot in value.snapshot } } }, forKey: "allUsers")
+        snapshot.updateValue(newValue.flatMap { $0.map { $0.flatMap { $0.snapshot } } }, forKey: "allUsers")
       }
     }
 
@@ -12202,7 +12202,7 @@ public final class AllUserQuery: GraphQLQuery {
       }
 
       public init(id: GraphQLID, name: String, email: String, phone: String? = nil, userType: String, photo: Photo? = nil) {
-        self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType, "photo": photo.flatMap { (value: Photo) -> Snapshot in value.snapshot }])
+        self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType, "photo": photo.flatMap { $0.snapshot }])
       }
 
       public var __typename: String {
@@ -12261,7 +12261,261 @@ public final class AllUserQuery: GraphQLQuery {
 
       public var photo: Photo? {
         get {
-          return (snapshot["photo"] as? Snapshot).flatMap { Photo(snapshot: $0) }
+          return (snapshot["photo"] as! Snapshot?).flatMap { Photo(snapshot: $0) }
+        }
+        set {
+          snapshot.updateValue(newValue?.snapshot, forKey: "photo")
+        }
+      }
+
+      public var fragments: Fragments {
+        get {
+          return Fragments(snapshot: snapshot)
+        }
+        set {
+          snapshot += newValue.snapshot
+        }
+      }
+
+      public struct Fragments {
+        public var snapshot: Snapshot
+
+        public var userDetails: UserDetails {
+          get {
+            return UserDetails(snapshot: snapshot)
+          }
+          set {
+            snapshot += newValue.snapshot
+          }
+        }
+      }
+
+      public struct Photo: GraphQLSelectionSet {
+        public static let possibleTypes = ["Attachment"]
+
+        public static let selections: [GraphQLSelection] = [
+          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLField("mime", type: .scalar(String.self)),
+          GraphQLField("ext", type: .scalar(String.self)),
+          GraphQLField("url", type: .scalar(String.self)),
+          GraphQLField("name", type: .scalar(String.self)),
+          GraphQLField("routes", type: .list(.scalar(String.self))),
+        ]
+
+        public var snapshot: Snapshot
+
+        public init(snapshot: Snapshot) {
+          self.snapshot = snapshot
+        }
+
+        public init(mime: String? = nil, ext: String? = nil, url: String? = nil, name: String? = nil, routes: [String?]? = nil) {
+          self.init(snapshot: ["__typename": "Attachment", "mime": mime, "ext": ext, "url": url, "name": name, "routes": routes])
+        }
+
+        public var __typename: String {
+          get {
+            return snapshot["__typename"]! as! String
+          }
+          set {
+            snapshot.updateValue(newValue, forKey: "__typename")
+          }
+        }
+
+        public var mime: String? {
+          get {
+            return snapshot["mime"] as? String
+          }
+          set {
+            snapshot.updateValue(newValue, forKey: "mime")
+          }
+        }
+
+        public var ext: String? {
+          get {
+            return snapshot["ext"] as? String
+          }
+          set {
+            snapshot.updateValue(newValue, forKey: "ext")
+          }
+        }
+
+        public var url: String? {
+          get {
+            return snapshot["url"] as? String
+          }
+          set {
+            snapshot.updateValue(newValue, forKey: "url")
+          }
+        }
+
+        public var name: String? {
+          get {
+            return snapshot["name"] as? String
+          }
+          set {
+            snapshot.updateValue(newValue, forKey: "name")
+          }
+        }
+
+        public var routes: [String?]? {
+          get {
+            return snapshot["routes"] as? [String?]
+          }
+          set {
+            snapshot.updateValue(newValue, forKey: "routes")
+          }
+        }
+
+        public var fragments: Fragments {
+          get {
+            return Fragments(snapshot: snapshot)
+          }
+          set {
+            snapshot += newValue.snapshot
+          }
+        }
+
+        public struct Fragments {
+          public var snapshot: Snapshot
+
+          public var attachmentDetails: AttachmentDetails {
+            get {
+              return AttachmentDetails(snapshot: snapshot)
+            }
+            set {
+              snapshot += newValue.snapshot
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+public final class EditUserMutation: GraphQLMutation {
+  public static let operationString =
+    "mutation EditUser($file: Upload) {\n  editUser(photo: $file) {\n    __typename\n    ...UserDetails\n  }\n}"
+
+  public static var requestString: String { return operationString.appending(UserDetails.fragmentString).appending(AttachmentDetails.fragmentString) }
+
+  public var file: String?
+
+  public init(file: String? = nil) {
+    self.file = file
+  }
+
+  public var variables: GraphQLMap? {
+    return ["file": file]
+  }
+
+  public struct Data: GraphQLSelectionSet {
+    public static let possibleTypes = ["Mutation"]
+
+    public static let selections: [GraphQLSelection] = [
+      GraphQLField("editUser", arguments: ["photo": GraphQLVariable("file")], type: .object(EditUser.selections)),
+    ]
+
+    public var snapshot: Snapshot
+
+    public init(snapshot: Snapshot) {
+      self.snapshot = snapshot
+    }
+
+    public init(editUser: EditUser? = nil) {
+      self.init(snapshot: ["__typename": "Mutation", "editUser": editUser.flatMap { $0.snapshot }])
+    }
+
+    public var editUser: EditUser? {
+      get {
+        return (snapshot["editUser"] as! Snapshot?).flatMap { EditUser(snapshot: $0) }
+      }
+      set {
+        snapshot.updateValue(newValue?.snapshot, forKey: "editUser")
+      }
+    }
+
+    public struct EditUser: GraphQLSelectionSet {
+      public static let possibleTypes = ["User"]
+
+      public static let selections: [GraphQLSelection] = [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
+        GraphQLField("name", type: .nonNull(.scalar(String.self))),
+        GraphQLField("email", type: .nonNull(.scalar(String.self))),
+        GraphQLField("phone", type: .scalar(String.self)),
+        GraphQLField("user_type", type: .nonNull(.scalar(String.self))),
+        GraphQLField("photo", type: .object(Photo.selections)),
+      ]
+
+      public var snapshot: Snapshot
+
+      public init(snapshot: Snapshot) {
+        self.snapshot = snapshot
+      }
+
+      public init(id: GraphQLID, name: String, email: String, phone: String? = nil, userType: String, photo: Photo? = nil) {
+        self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType, "photo": photo.flatMap { $0.snapshot }])
+      }
+
+      public var __typename: String {
+        get {
+          return snapshot["__typename"]! as! String
+        }
+        set {
+          snapshot.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      public var id: GraphQLID {
+        get {
+          return snapshot["id"]! as! GraphQLID
+        }
+        set {
+          snapshot.updateValue(newValue, forKey: "id")
+        }
+      }
+
+      public var name: String {
+        get {
+          return snapshot["name"]! as! String
+        }
+        set {
+          snapshot.updateValue(newValue, forKey: "name")
+        }
+      }
+
+      public var email: String {
+        get {
+          return snapshot["email"]! as! String
+        }
+        set {
+          snapshot.updateValue(newValue, forKey: "email")
+        }
+      }
+
+      public var phone: String? {
+        get {
+          return snapshot["phone"] as? String
+        }
+        set {
+          snapshot.updateValue(newValue, forKey: "phone")
+        }
+      }
+
+      public var userType: String {
+        get {
+          return snapshot["user_type"]! as! String
+        }
+        set {
+          snapshot.updateValue(newValue, forKey: "user_type")
+        }
+      }
+
+      public var photo: Photo? {
+        get {
+          return (snapshot["photo"] as! Snapshot?).flatMap { Photo(snapshot: $0) }
         }
         set {
           snapshot.updateValue(newValue?.snapshot, forKey: "photo")
@@ -12416,15 +12670,15 @@ public final class MyAssistantsQuery: GraphQLQuery {
     }
 
     public init(myAssistants: [MyAssistant?]? = nil) {
-      self.init(snapshot: ["__typename": "Query", "myAssistants": myAssistants.flatMap { (value: [MyAssistant?]) -> [Snapshot?] in value.map { (value: MyAssistant?) -> Snapshot? in value.flatMap { (value: MyAssistant) -> Snapshot in value.snapshot } } }])
+      self.init(snapshot: ["__typename": "Query", "myAssistants": myAssistants.flatMap { $0.map { $0.flatMap { $0.snapshot } } }])
     }
 
     public var myAssistants: [MyAssistant?]? {
       get {
-        return (snapshot["myAssistants"] as? [Snapshot?]).flatMap { (value: [Snapshot?]) -> [MyAssistant?] in value.map { (value: Snapshot?) -> MyAssistant? in value.flatMap { (value: Snapshot) -> MyAssistant in MyAssistant(snapshot: value) } } }
+        return (snapshot["myAssistants"] as? [Snapshot?]).flatMap { $0.map { $0.flatMap { MyAssistant(snapshot: $0) } } }
       }
       set {
-        snapshot.updateValue(newValue.flatMap { (value: [MyAssistant?]) -> [Snapshot?] in value.map { (value: MyAssistant?) -> Snapshot? in value.flatMap { (value: MyAssistant) -> Snapshot in value.snapshot } } }, forKey: "myAssistants")
+        snapshot.updateValue(newValue.flatMap { $0.map { $0.flatMap { $0.snapshot } } }, forKey: "myAssistants")
       }
     }
 
@@ -12443,7 +12697,7 @@ public final class MyAssistantsQuery: GraphQLQuery {
       }
 
       public init(assistant: Assistant? = nil) {
-        self.init(snapshot: ["__typename": "BossToAssistant", "assistant": assistant.flatMap { (value: Assistant) -> Snapshot in value.snapshot }])
+        self.init(snapshot: ["__typename": "BossToAssistant", "assistant": assistant.flatMap { $0.snapshot }])
       }
 
       public var __typename: String {
@@ -12457,7 +12711,7 @@ public final class MyAssistantsQuery: GraphQLQuery {
 
       public var assistant: Assistant? {
         get {
-          return (snapshot["assistant"] as? Snapshot).flatMap { Assistant(snapshot: $0) }
+          return (snapshot["assistant"] as! Snapshot?).flatMap { Assistant(snapshot: $0) }
         }
         set {
           snapshot.updateValue(newValue?.snapshot, forKey: "assistant")
@@ -12485,7 +12739,7 @@ public final class MyAssistantsQuery: GraphQLQuery {
         }
 
         public init(id: GraphQLID, name: String, email: String, phone: String? = nil, userType: String, photo: Photo? = nil) {
-          self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType, "photo": photo.flatMap { (value: Photo) -> Snapshot in value.snapshot }])
+          self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType, "photo": photo.flatMap { $0.snapshot }])
         }
 
         public var __typename: String {
@@ -12544,7 +12798,7 @@ public final class MyAssistantsQuery: GraphQLQuery {
 
         public var photo: Photo? {
           get {
-            return (snapshot["photo"] as? Snapshot).flatMap { Photo(snapshot: $0) }
+            return (snapshot["photo"] as! Snapshot?).flatMap { Photo(snapshot: $0) }
           }
           set {
             snapshot.updateValue(newValue?.snapshot, forKey: "photo")
@@ -12740,7 +12994,7 @@ public final class GetUserQuery: GraphQLQuery {
       }
 
       public init(id: GraphQLID, name: String, email: String, phone: String? = nil, userType: String, photo: Photo? = nil) {
-        self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType, "photo": photo.flatMap { (value: Photo) -> Snapshot in value.snapshot }])
+        self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType, "photo": photo.flatMap { $0.snapshot }])
       }
 
       public var __typename: String {
@@ -12799,7 +13053,7 @@ public final class GetUserQuery: GraphQLQuery {
 
       public var photo: Photo? {
         get {
-          return (snapshot["photo"] as? Snapshot).flatMap { Photo(snapshot: $0) }
+          return (snapshot["photo"] as! Snapshot?).flatMap { Photo(snapshot: $0) }
         }
         set {
           snapshot.updateValue(newValue?.snapshot, forKey: "photo")
@@ -12952,7 +13206,7 @@ public struct SolicitudeADetails: GraphQLFragment {
   }
 
   public init(id: GraphQLID, assistant: Assistant? = nil, boss: Boss? = nil, status: String? = nil) {
-    self.init(snapshot: ["__typename": "Solicitude", "id": id, "assistant": assistant.flatMap { (value: Assistant) -> Snapshot in value.snapshot }, "boss": boss.flatMap { (value: Boss) -> Snapshot in value.snapshot }, "status": status])
+    self.init(snapshot: ["__typename": "Solicitude", "id": id, "assistant": assistant.flatMap { $0.snapshot }, "boss": boss.flatMap { $0.snapshot }, "status": status])
   }
 
   public var __typename: String {
@@ -12975,7 +13229,7 @@ public struct SolicitudeADetails: GraphQLFragment {
 
   public var assistant: Assistant? {
     get {
-      return (snapshot["assistant"] as? Snapshot).flatMap { Assistant(snapshot: $0) }
+      return (snapshot["assistant"] as! Snapshot?).flatMap { Assistant(snapshot: $0) }
     }
     set {
       snapshot.updateValue(newValue?.snapshot, forKey: "assistant")
@@ -12984,7 +13238,7 @@ public struct SolicitudeADetails: GraphQLFragment {
 
   public var boss: Boss? {
     get {
-      return (snapshot["boss"] as? Snapshot).flatMap { Boss(snapshot: $0) }
+      return (snapshot["boss"] as! Snapshot?).flatMap { Boss(snapshot: $0) }
     }
     set {
       snapshot.updateValue(newValue?.snapshot, forKey: "boss")
@@ -13021,7 +13275,7 @@ public struct SolicitudeADetails: GraphQLFragment {
     }
 
     public init(id: GraphQLID, name: String, email: String, phone: String? = nil, userType: String, photo: Photo? = nil) {
-      self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType, "photo": photo.flatMap { (value: Photo) -> Snapshot in value.snapshot }])
+      self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType, "photo": photo.flatMap { $0.snapshot }])
     }
 
     public var __typename: String {
@@ -13080,7 +13334,7 @@ public struct SolicitudeADetails: GraphQLFragment {
 
     public var photo: Photo? {
       get {
-        return (snapshot["photo"] as? Snapshot).flatMap { Photo(snapshot: $0) }
+        return (snapshot["photo"] as! Snapshot?).flatMap { Photo(snapshot: $0) }
       }
       set {
         snapshot.updateValue(newValue?.snapshot, forKey: "photo")
@@ -13231,7 +13485,7 @@ public struct SolicitudeADetails: GraphQLFragment {
     }
 
     public init(id: GraphQLID, name: String, email: String, phone: String? = nil, userType: String, photo: Photo? = nil) {
-      self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType, "photo": photo.flatMap { (value: Photo) -> Snapshot in value.snapshot }])
+      self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType, "photo": photo.flatMap { $0.snapshot }])
     }
 
     public var __typename: String {
@@ -13290,7 +13544,7 @@ public struct SolicitudeADetails: GraphQLFragment {
 
     public var photo: Photo? {
       get {
-        return (snapshot["photo"] as? Snapshot).flatMap { Photo(snapshot: $0) }
+        return (snapshot["photo"] as! Snapshot?).flatMap { Photo(snapshot: $0) }
       }
       set {
         snapshot.updateValue(newValue?.snapshot, forKey: "photo")
@@ -13444,7 +13698,7 @@ public struct UserDetails: GraphQLFragment {
   }
 
   public init(id: GraphQLID, name: String, email: String, phone: String? = nil, userType: String, photo: Photo? = nil) {
-    self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType, "photo": photo.flatMap { (value: Photo) -> Snapshot in value.snapshot }])
+    self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType, "photo": photo.flatMap { $0.snapshot }])
   }
 
   public var __typename: String {
@@ -13503,7 +13757,7 @@ public struct UserDetails: GraphQLFragment {
 
   public var photo: Photo? {
     get {
-      return (snapshot["photo"] as? Snapshot).flatMap { Photo(snapshot: $0) }
+      return (snapshot["photo"] as! Snapshot?).flatMap { Photo(snapshot: $0) }
     }
     set {
       snapshot.updateValue(newValue?.snapshot, forKey: "photo")
@@ -13711,7 +13965,7 @@ public struct FamilyMembershipDetails: GraphQLFragment {
     }
 
     public init(id: GraphQLID, name: String, email: String, phone: String? = nil, userType: String, photo: Photo? = nil) {
-      self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType, "photo": photo.flatMap { (value: Photo) -> Snapshot in value.snapshot }])
+      self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType, "photo": photo.flatMap { $0.snapshot }])
     }
 
     public var __typename: String {
@@ -13770,7 +14024,7 @@ public struct FamilyMembershipDetails: GraphQLFragment {
 
     public var photo: Photo? {
       get {
-        return (snapshot["photo"] as? Snapshot).flatMap { Photo(snapshot: $0) }
+        return (snapshot["photo"] as! Snapshot?).flatMap { Photo(snapshot: $0) }
       }
       set {
         snapshot.updateValue(newValue?.snapshot, forKey: "photo")
@@ -13918,7 +14172,7 @@ public struct FamilyMembershipDetails: GraphQLFragment {
     }
 
     public init(id: GraphQLID, name: String? = nil, photo: Photo? = nil) {
-      self.init(snapshot: ["__typename": "Family", "id": id, "name": name, "photo": photo.flatMap { (value: Photo) -> Snapshot in value.snapshot }])
+      self.init(snapshot: ["__typename": "Family", "id": id, "name": name, "photo": photo.flatMap { $0.snapshot }])
     }
 
     public var __typename: String {
@@ -13950,7 +14204,7 @@ public struct FamilyMembershipDetails: GraphQLFragment {
 
     public var photo: Photo? {
       get {
-        return (snapshot["photo"] as? Snapshot).flatMap { Photo(snapshot: $0) }
+        return (snapshot["photo"] as! Snapshot?).flatMap { Photo(snapshot: $0) }
       }
       set {
         snapshot.updateValue(newValue?.snapshot, forKey: "photo")
@@ -14102,7 +14356,7 @@ public struct ChatDetails: GraphQLFragment {
   }
 
   public init(id: GraphQLID, family: Family? = nil, group: Group? = nil, lastMessage: LastMessage? = nil) {
-    self.init(snapshot: ["__typename": "Chat", "id": id, "family": family.flatMap { (value: Family) -> Snapshot in value.snapshot }, "group": group.flatMap { (value: Group) -> Snapshot in value.snapshot }, "last_message": lastMessage.flatMap { (value: LastMessage) -> Snapshot in value.snapshot }])
+    self.init(snapshot: ["__typename": "Chat", "id": id, "family": family.flatMap { $0.snapshot }, "group": group.flatMap { $0.snapshot }, "last_message": lastMessage.flatMap { $0.snapshot }])
   }
 
   public var __typename: String {
@@ -14125,7 +14379,7 @@ public struct ChatDetails: GraphQLFragment {
 
   public var family: Family? {
     get {
-      return (snapshot["family"] as? Snapshot).flatMap { Family(snapshot: $0) }
+      return (snapshot["family"] as! Snapshot?).flatMap { Family(snapshot: $0) }
     }
     set {
       snapshot.updateValue(newValue?.snapshot, forKey: "family")
@@ -14134,7 +14388,7 @@ public struct ChatDetails: GraphQLFragment {
 
   public var group: Group? {
     get {
-      return (snapshot["group"] as? Snapshot).flatMap { Group(snapshot: $0) }
+      return (snapshot["group"] as! Snapshot?).flatMap { Group(snapshot: $0) }
     }
     set {
       snapshot.updateValue(newValue?.snapshot, forKey: "group")
@@ -14143,7 +14397,7 @@ public struct ChatDetails: GraphQLFragment {
 
   public var lastMessage: LastMessage? {
     get {
-      return (snapshot["last_message"] as? Snapshot).flatMap { LastMessage(snapshot: $0) }
+      return (snapshot["last_message"] as! Snapshot?).flatMap { LastMessage(snapshot: $0) }
     }
     set {
       snapshot.updateValue(newValue?.snapshot, forKey: "last_message")
@@ -14168,7 +14422,7 @@ public struct ChatDetails: GraphQLFragment {
     }
 
     public init(id: GraphQLID, name: String? = nil, photo: Photo? = nil) {
-      self.init(snapshot: ["__typename": "Family", "id": id, "name": name, "photo": photo.flatMap { (value: Photo) -> Snapshot in value.snapshot }])
+      self.init(snapshot: ["__typename": "Family", "id": id, "name": name, "photo": photo.flatMap { $0.snapshot }])
     }
 
     public var __typename: String {
@@ -14200,7 +14454,7 @@ public struct ChatDetails: GraphQLFragment {
 
     public var photo: Photo? {
       get {
-        return (snapshot["photo"] as? Snapshot).flatMap { Photo(snapshot: $0) }
+        return (snapshot["photo"] as! Snapshot?).flatMap { Photo(snapshot: $0) }
       }
       set {
         snapshot.updateValue(newValue?.snapshot, forKey: "photo")
@@ -14346,7 +14600,7 @@ public struct ChatDetails: GraphQLFragment {
     }
 
     public init(name: String, photo: Photo? = nil) {
-      self.init(snapshot: ["__typename": "ChatGroup", "name": name, "photo": photo.flatMap { (value: Photo) -> Snapshot in value.snapshot }])
+      self.init(snapshot: ["__typename": "ChatGroup", "name": name, "photo": photo.flatMap { $0.snapshot }])
     }
 
     public var __typename: String {
@@ -14369,7 +14623,7 @@ public struct ChatDetails: GraphQLFragment {
 
     public var photo: Photo? {
       get {
-        return (snapshot["photo"] as? Snapshot).flatMap { Photo(snapshot: $0) }
+        return (snapshot["photo"] as! Snapshot?).flatMap { Photo(snapshot: $0) }
       }
       set {
         snapshot.updateValue(newValue?.snapshot, forKey: "photo")
@@ -14497,7 +14751,7 @@ public struct ChatDetails: GraphQLFragment {
     }
 
     public init(id: GraphQLID, sender: Sender? = nil, sentAt: Int? = nil, text: String? = nil, attachment: Attachment? = nil) {
-      self.init(snapshot: ["__typename": "ChatMessage", "id": id, "sender": sender.flatMap { (value: Sender) -> Snapshot in value.snapshot }, "sent_at": sentAt, "text": text, "attachment": attachment.flatMap { (value: Attachment) -> Snapshot in value.snapshot }])
+      self.init(snapshot: ["__typename": "ChatMessage", "id": id, "sender": sender.flatMap { $0.snapshot }, "sent_at": sentAt, "text": text, "attachment": attachment.flatMap { $0.snapshot }])
     }
 
     public var __typename: String {
@@ -14520,7 +14774,7 @@ public struct ChatDetails: GraphQLFragment {
 
     public var sender: Sender? {
       get {
-        return (snapshot["sender"] as? Snapshot).flatMap { Sender(snapshot: $0) }
+        return (snapshot["sender"] as! Snapshot?).flatMap { Sender(snapshot: $0) }
       }
       set {
         snapshot.updateValue(newValue?.snapshot, forKey: "sender")
@@ -14547,7 +14801,7 @@ public struct ChatDetails: GraphQLFragment {
 
     public var attachment: Attachment? {
       get {
-        return (snapshot["attachment"] as? Snapshot).flatMap { Attachment(snapshot: $0) }
+        return (snapshot["attachment"] as! Snapshot?).flatMap { Attachment(snapshot: $0) }
       }
       set {
         snapshot.updateValue(newValue?.snapshot, forKey: "attachment")
@@ -14597,7 +14851,7 @@ public struct ChatDetails: GraphQLFragment {
       }
 
       public init(id: GraphQLID, name: String, email: String, phone: String? = nil, userType: String, photo: Photo? = nil) {
-        self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType, "photo": photo.flatMap { (value: Photo) -> Snapshot in value.snapshot }])
+        self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType, "photo": photo.flatMap { $0.snapshot }])
       }
 
       public var __typename: String {
@@ -14656,7 +14910,7 @@ public struct ChatDetails: GraphQLFragment {
 
       public var photo: Photo? {
         get {
-          return (snapshot["photo"] as? Snapshot).flatMap { Photo(snapshot: $0) }
+          return (snapshot["photo"] as! Snapshot?).flatMap { Photo(snapshot: $0) }
         }
         set {
           snapshot.updateValue(newValue?.snapshot, forKey: "photo")
@@ -14910,7 +15164,7 @@ public struct ChatMessageDetails: GraphQLFragment {
   }
 
   public init(id: GraphQLID, sender: Sender? = nil, sentAt: Int? = nil, text: String? = nil, attachment: Attachment? = nil) {
-    self.init(snapshot: ["__typename": "ChatMessage", "id": id, "sender": sender.flatMap { (value: Sender) -> Snapshot in value.snapshot }, "sent_at": sentAt, "text": text, "attachment": attachment.flatMap { (value: Attachment) -> Snapshot in value.snapshot }])
+    self.init(snapshot: ["__typename": "ChatMessage", "id": id, "sender": sender.flatMap { $0.snapshot }, "sent_at": sentAt, "text": text, "attachment": attachment.flatMap { $0.snapshot }])
   }
 
   public var __typename: String {
@@ -14933,7 +15187,7 @@ public struct ChatMessageDetails: GraphQLFragment {
 
   public var sender: Sender? {
     get {
-      return (snapshot["sender"] as? Snapshot).flatMap { Sender(snapshot: $0) }
+      return (snapshot["sender"] as! Snapshot?).flatMap { Sender(snapshot: $0) }
     }
     set {
       snapshot.updateValue(newValue?.snapshot, forKey: "sender")
@@ -14960,7 +15214,7 @@ public struct ChatMessageDetails: GraphQLFragment {
 
   public var attachment: Attachment? {
     get {
-      return (snapshot["attachment"] as? Snapshot).flatMap { Attachment(snapshot: $0) }
+      return (snapshot["attachment"] as! Snapshot?).flatMap { Attachment(snapshot: $0) }
     }
     set {
       snapshot.updateValue(newValue?.snapshot, forKey: "attachment")
@@ -14988,7 +15242,7 @@ public struct ChatMessageDetails: GraphQLFragment {
     }
 
     public init(id: GraphQLID, name: String, email: String, phone: String? = nil, userType: String, photo: Photo? = nil) {
-      self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType, "photo": photo.flatMap { (value: Photo) -> Snapshot in value.snapshot }])
+      self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType, "photo": photo.flatMap { $0.snapshot }])
     }
 
     public var __typename: String {
@@ -15047,7 +15301,7 @@ public struct ChatMessageDetails: GraphQLFragment {
 
     public var photo: Photo? {
       get {
-        return (snapshot["photo"] as? Snapshot).flatMap { Photo(snapshot: $0) }
+        return (snapshot["photo"] as! Snapshot?).flatMap { Photo(snapshot: $0) }
       }
       set {
         snapshot.updateValue(newValue?.snapshot, forKey: "photo")
@@ -15299,7 +15553,7 @@ public struct ChatMembershipDetails: GraphQLFragment {
   }
 
   public init(id: GraphQLID? = nil, isAdmin: Bool? = nil, seenAt: Int? = nil, user: User? = nil) {
-    self.init(snapshot: ["__typename": "ChatMembership", "id": id, "is_admin": isAdmin, "seen_at": seenAt, "user": user.flatMap { (value: User) -> Snapshot in value.snapshot }])
+    self.init(snapshot: ["__typename": "ChatMembership", "id": id, "is_admin": isAdmin, "seen_at": seenAt, "user": user.flatMap { $0.snapshot }])
   }
 
   public var __typename: String {
@@ -15340,7 +15594,7 @@ public struct ChatMembershipDetails: GraphQLFragment {
 
   public var user: User? {
     get {
-      return (snapshot["user"] as? Snapshot).flatMap { User(snapshot: $0) }
+      return (snapshot["user"] as! Snapshot?).flatMap { User(snapshot: $0) }
     }
     set {
       snapshot.updateValue(newValue?.snapshot, forKey: "user")
@@ -15368,7 +15622,7 @@ public struct ChatMembershipDetails: GraphQLFragment {
     }
 
     public init(id: GraphQLID, name: String, email: String, phone: String? = nil, userType: String, photo: Photo? = nil) {
-      self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType, "photo": photo.flatMap { (value: Photo) -> Snapshot in value.snapshot }])
+      self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType, "photo": photo.flatMap { $0.snapshot }])
     }
 
     public var __typename: String {
@@ -15427,7 +15681,7 @@ public struct ChatMembershipDetails: GraphQLFragment {
 
     public var photo: Photo? {
       get {
-        return (snapshot["photo"] as? Snapshot).flatMap { Photo(snapshot: $0) }
+        return (snapshot["photo"] as! Snapshot?).flatMap { Photo(snapshot: $0) }
       }
       set {
         snapshot.updateValue(newValue?.snapshot, forKey: "photo")
@@ -15658,7 +15912,7 @@ public struct FamilyDetails: GraphQLFragment {
   }
 
   public init(id: GraphQLID, name: String? = nil, photo: Photo? = nil) {
-    self.init(snapshot: ["__typename": "Family", "id": id, "name": name, "photo": photo.flatMap { (value: Photo) -> Snapshot in value.snapshot }])
+    self.init(snapshot: ["__typename": "Family", "id": id, "name": name, "photo": photo.flatMap { $0.snapshot }])
   }
 
   public var __typename: String {
@@ -15690,7 +15944,7 @@ public struct FamilyDetails: GraphQLFragment {
 
   public var photo: Photo? {
     get {
-      return (snapshot["photo"] as? Snapshot).flatMap { Photo(snapshot: $0) }
+      return (snapshot["photo"] as! Snapshot?).flatMap { Photo(snapshot: $0) }
     }
     set {
       snapshot.updateValue(newValue?.snapshot, forKey: "photo")
@@ -15823,7 +16077,7 @@ public struct IllnessDetails: GraphQLFragment {
   }
 
   public init(id: GraphQLID, name: String? = nil, description: String? = nil, medicines: String? = nil, type: Int? = nil, family: Family? = nil, creator: Creator? = nil) {
-    self.init(snapshot: ["__typename": "Illness", "id": id, "name": name, "description": description, "medicines": medicines, "type": type, "family": family.flatMap { (value: Family) -> Snapshot in value.snapshot }, "creator": creator.flatMap { (value: Creator) -> Snapshot in value.snapshot }])
+    self.init(snapshot: ["__typename": "Illness", "id": id, "name": name, "description": description, "medicines": medicines, "type": type, "family": family.flatMap { $0.snapshot }, "creator": creator.flatMap { $0.snapshot }])
   }
 
   public var __typename: String {
@@ -15882,7 +16136,7 @@ public struct IllnessDetails: GraphQLFragment {
 
   public var family: Family? {
     get {
-      return (snapshot["family"] as? Snapshot).flatMap { Family(snapshot: $0) }
+      return (snapshot["family"] as! Snapshot?).flatMap { Family(snapshot: $0) }
     }
     set {
       snapshot.updateValue(newValue?.snapshot, forKey: "family")
@@ -15891,7 +16145,7 @@ public struct IllnessDetails: GraphQLFragment {
 
   public var creator: Creator? {
     get {
-      return (snapshot["creator"] as? Snapshot).flatMap { Creator(snapshot: $0) }
+      return (snapshot["creator"] as! Snapshot?).flatMap { Creator(snapshot: $0) }
     }
     set {
       snapshot.updateValue(newValue?.snapshot, forKey: "creator")
@@ -15916,7 +16170,7 @@ public struct IllnessDetails: GraphQLFragment {
     }
 
     public init(id: GraphQLID, name: String? = nil, photo: Photo? = nil) {
-      self.init(snapshot: ["__typename": "Family", "id": id, "name": name, "photo": photo.flatMap { (value: Photo) -> Snapshot in value.snapshot }])
+      self.init(snapshot: ["__typename": "Family", "id": id, "name": name, "photo": photo.flatMap { $0.snapshot }])
     }
 
     public var __typename: String {
@@ -15948,7 +16202,7 @@ public struct IllnessDetails: GraphQLFragment {
 
     public var photo: Photo? {
       get {
-        return (snapshot["photo"] as? Snapshot).flatMap { Photo(snapshot: $0) }
+        return (snapshot["photo"] as! Snapshot?).flatMap { Photo(snapshot: $0) }
       }
       set {
         snapshot.updateValue(newValue?.snapshot, forKey: "photo")
@@ -16099,7 +16353,7 @@ public struct IllnessDetails: GraphQLFragment {
     }
 
     public init(id: GraphQLID, name: String, email: String, phone: String? = nil, userType: String, photo: Photo? = nil) {
-      self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType, "photo": photo.flatMap { (value: Photo) -> Snapshot in value.snapshot }])
+      self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType, "photo": photo.flatMap { $0.snapshot }])
     }
 
     public var __typename: String {
@@ -16158,7 +16412,7 @@ public struct IllnessDetails: GraphQLFragment {
 
     public var photo: Photo? {
       get {
-        return (snapshot["photo"] as? Snapshot).flatMap { Photo(snapshot: $0) }
+        return (snapshot["photo"] as! Snapshot?).flatMap { Photo(snapshot: $0) }
       }
       set {
         snapshot.updateValue(newValue?.snapshot, forKey: "photo")
@@ -16400,7 +16654,7 @@ public struct SolicitudeFDetails: GraphQLFragment {
   }
 
   public init(id: GraphQLID, family: Family? = nil, user: User? = nil, status: String? = nil) {
-    self.init(snapshot: ["__typename": "FamilyApplication", "id": id, "family": family.flatMap { (value: Family) -> Snapshot in value.snapshot }, "user": user.flatMap { (value: User) -> Snapshot in value.snapshot }, "status": status])
+    self.init(snapshot: ["__typename": "FamilyApplication", "id": id, "family": family.flatMap { $0.snapshot }, "user": user.flatMap { $0.snapshot }, "status": status])
   }
 
   public var __typename: String {
@@ -16423,7 +16677,7 @@ public struct SolicitudeFDetails: GraphQLFragment {
 
   public var family: Family? {
     get {
-      return (snapshot["family"] as? Snapshot).flatMap { Family(snapshot: $0) }
+      return (snapshot["family"] as! Snapshot?).flatMap { Family(snapshot: $0) }
     }
     set {
       snapshot.updateValue(newValue?.snapshot, forKey: "family")
@@ -16432,7 +16686,7 @@ public struct SolicitudeFDetails: GraphQLFragment {
 
   public var user: User? {
     get {
-      return (snapshot["user"] as? Snapshot).flatMap { User(snapshot: $0) }
+      return (snapshot["user"] as! Snapshot?).flatMap { User(snapshot: $0) }
     }
     set {
       snapshot.updateValue(newValue?.snapshot, forKey: "user")
@@ -16466,7 +16720,7 @@ public struct SolicitudeFDetails: GraphQLFragment {
     }
 
     public init(id: GraphQLID, name: String? = nil, photo: Photo? = nil) {
-      self.init(snapshot: ["__typename": "Family", "id": id, "name": name, "photo": photo.flatMap { (value: Photo) -> Snapshot in value.snapshot }])
+      self.init(snapshot: ["__typename": "Family", "id": id, "name": name, "photo": photo.flatMap { $0.snapshot }])
     }
 
     public var __typename: String {
@@ -16498,7 +16752,7 @@ public struct SolicitudeFDetails: GraphQLFragment {
 
     public var photo: Photo? {
       get {
-        return (snapshot["photo"] as? Snapshot).flatMap { Photo(snapshot: $0) }
+        return (snapshot["photo"] as! Snapshot?).flatMap { Photo(snapshot: $0) }
       }
       set {
         snapshot.updateValue(newValue?.snapshot, forKey: "photo")
@@ -16649,7 +16903,7 @@ public struct SolicitudeFDetails: GraphQLFragment {
     }
 
     public init(id: GraphQLID, name: String, email: String, phone: String? = nil, userType: String, photo: Photo? = nil) {
-      self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType, "photo": photo.flatMap { (value: Photo) -> Snapshot in value.snapshot }])
+      self.init(snapshot: ["__typename": "User", "id": id, "name": name, "email": email, "phone": phone, "user_type": userType, "photo": photo.flatMap { $0.snapshot }])
     }
 
     public var __typename: String {
@@ -16708,7 +16962,7 @@ public struct SolicitudeFDetails: GraphQLFragment {
 
     public var photo: Photo? {
       get {
-        return (snapshot["photo"] as? Snapshot).flatMap { Photo(snapshot: $0) }
+        return (snapshot["photo"] as! Snapshot?).flatMap { Photo(snapshot: $0) }
       }
       set {
         snapshot.updateValue(newValue?.snapshot, forKey: "photo")

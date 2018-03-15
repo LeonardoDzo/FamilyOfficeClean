@@ -19,7 +19,7 @@ final class RMMessage: Object {
     
     dynamic var sender: RMSender!
     
-    dynamic var seendAt: Int!
+    dynamic var seendAt: Int = 0
     
     dynamic var text: String = ""
     
@@ -32,17 +32,18 @@ final class RMMessage: Object {
 }
 extension RMMessage: DomainConvertibleType {
     func asDomain() -> ChatMessage {
-        return ChatMessage(attachment: attachment?.asDomain(), uid: uid, sender: sender.asDomain(), seenAt: seendAt, text: text, status: status)
+        return ChatMessage(attachment: attachment?.asDomain(), uid: uid, sender: sender?.asDomain(), seenAt: seendAt, text: text, status: status)
     }
 }
 
 extension ChatMessage: RealmRepresentable {
     func asRealm() -> RMMessage {
+        let realm = try! Realm()
         return RMMessage.build({ (obj) in
             obj.attachment = attachment?.asRealm()
             obj.uid = uid
             obj.seendAt = seenAt
-            obj.sender = sender?.asRealm()
+            obj.sender = realm.create(RMSender.self, value: sender?.asRealm(), update: true)
             obj.text = text
             obj.status = status
         })

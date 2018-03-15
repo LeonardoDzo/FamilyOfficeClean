@@ -97,15 +97,11 @@ class ChatViewController: SLKTextViewController {
             .asDriverOnErrorJustComplete()
             .mapToVoid()
         
-        let combine = Driver.combineLatest(tap, text)
-        
-        
-        
         let willAppear = rx.methodInvoked(#selector(self.viewWillAppear))
             .asDriverOnErrorJustComplete()
             .mapToVoid()
         
-        let input = ChatViewModel.Input(willAppear: willAppear, sendMessage: combine )
+        let input = ChatViewModel.Input(willAppear: willAppear, textChange: text, sendMessage: tap )
         
         let output = viewModel.transform(input: input)
         
@@ -116,6 +112,8 @@ class ChatViewController: SLKTextViewController {
         output.sendMessage
             .drive()
             .disposed(by: disposeBag)
+        
+        output.messageChange.drive().disposed(by: disposeBag)
         
     }
     

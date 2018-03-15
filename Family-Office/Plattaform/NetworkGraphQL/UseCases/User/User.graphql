@@ -8,6 +8,12 @@ query allUser($phones: [String], $rol: Int) {
     }
 }
 
+mutation EditUser($file: Upload) {
+    editUser(photo: $file) {
+     ...UserDetails
+    }
+}
+
 query myAssistants {
     myAssistants {
         assistant {

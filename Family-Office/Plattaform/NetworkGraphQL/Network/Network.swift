@@ -7,9 +7,8 @@
 //
 
 import Foundation
-import Apollo
 import RxSwift
-
+import Apollo
 final class Network<T: Decodable> {
     private let apollo: ApolloClient!
     private let scheduler: ConcurrentDispatchQueueScheduler
@@ -57,8 +56,8 @@ final class Network<T: Decodable> {
             }).asObservable()
     }
 
-    func postItem<M: GraphQLMutation>(_ query: M) -> Observable<T> {
-        return apollo.rx.perform(mutation: query)
+    func postItem<M: GraphQLMutation>(_ query: M, files: [GraphQLFile]? = []) -> Observable<T> {
+        return apollo.rx.perform(mutation: query, files: files)
             .debug()
             .observeOn(scheduler)
             .map({ (data) -> T in

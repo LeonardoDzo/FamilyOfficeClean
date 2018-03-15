@@ -45,4 +45,10 @@ final class NetUserUseCase: UserUseCase {
             })
         })
     }
+    
+    func edit(user: User, photo: Data?) -> Observable<Void> {
+        return network.editUser(user: user, photo: photo).do(onNext: { user in
+            print(user)
+        }).mapToVoid()
+    }
 }
