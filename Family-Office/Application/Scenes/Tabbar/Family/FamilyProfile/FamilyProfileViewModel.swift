@@ -14,12 +14,15 @@ class FamilyProfileViewModel: ViewModelType {
     let familyUseCase: FamilyUseCase!
     let userUseCase: UserUseCase!
     let navigator: FamProfileNavigator!
+    
     var family: Family!
+    
     init(familyUseCase: FamilyUseCase, navigator: FamProfileNavigator, userUseCase: UserUseCase) {
         self.familyUseCase = familyUseCase
         self.navigator = navigator
         self.userUseCase = userUseCase
     }
+    
     func transform(input: FamilyProfileViewModel.Input) -> FamilyProfileViewModel.Output {
         let back = input.backtrigger.do(onNext: {self.navigator.toBack()})
         let f = input.familyTrigger.flatMapLatest({_ in
@@ -29,9 +32,9 @@ class FamilyProfileViewModel: ViewModelType {
         }).do(onNext: {self.family = $0})
         let tapAdd = input.tapAddMemberTrigger.do(onNext: {self.navigator.addMember(family: self.family)})
         let members = f.flatMapLatest { (family) in
-            return BehaviorRelay(value: family.members).asDriver()
+            return self.getMembers(family: family)
         }
-
+        
         return Output(family: f, tapAddMember: tapAdd, back: back, members: members)
     }
 

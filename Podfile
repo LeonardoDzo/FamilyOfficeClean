@@ -7,21 +7,33 @@ target 'Family-Office' do
 
   # Pods for Family-Office
 	pod 'ReactiveSwift'
+    pod 'RxSwift',    '~> 4.0'
+    pod 'RxCocoa',    '~> 4.0'
+    pod 'RxWebKit'
+    pod 'RxDataSources'
+    pod 'RxRealm'
+    pod 'RxGesture'
+    
+    pod 'Apollo', :git => "https://github.com/LeonardoDzo/apollo-ios"
+
+    pod 'RealmSwift'
+    pod 'GzipSwift'
+    
 	pod 'SteviaLayout'
 	pod 'Whisper'
 	pod 'ImagePicker'
-	pod 'GzipSwift'
-	pod 'RealmSwift'
 	pod 'Eureka'
     pod 'GenericPasswordRow', '~> 3.0'
 	pod 'Kingfisher', '~> 4.0'
-    pod 'Alamofire'
-	pod 'RxSwift',    '~> 4.0'
-    pod 'RxCocoa',    '~> 4.0'
-	pod 'Apollo', '~> 0.7.0'
     pod 'SideMenu'
-	pod 'RxRealm'
-    pod 'GoogleSignIn'
-    pod 'ActionCableClient'
     pod 'Hero'
+    pod 'SlackTextViewController'
+    pod 'ALCameraViewController'
+    
+    pod 'Alamofire'
+	pod 'ActionCableClient'
+	
+    pod 'GoogleSignIn'
+    
+    
 end

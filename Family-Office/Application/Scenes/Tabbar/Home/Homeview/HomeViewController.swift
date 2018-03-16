@@ -20,6 +20,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate {
     override func viewDidLoad() {
 
         super.viewDidLoad()
+        
         SideMenuManager.default.menuAddPanGestureToPresent(toView: self.navigationController!.navigationBar)
         SideMenuManager.default.menuAddScreenEdgePanGesturesToPresent(toView: self.navigationController!.view)
         self.navigationItem.leftBarButtonItem = menuBtn

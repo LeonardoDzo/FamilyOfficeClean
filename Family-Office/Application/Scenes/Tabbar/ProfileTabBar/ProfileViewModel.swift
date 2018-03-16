@@ -23,17 +23,19 @@ final class ProfileViewModel: ViewModelType {
     func transform(input: ProfileViewModel.Input) -> ProfileViewModel.Output {
         let back = input.backTrigger.do(onNext: self.navigator.toBack).asDriver()
         let user = self.getUser(input.trigger, self.useCase, self.user.uid)
-        return Output(back: back, user: user)
+        return Output(back: back, user: user, selected: input.selectTrigger)
     }
 
 }
 extension ProfileViewModel {
     struct Input {
         let trigger: Driver<Void>
+        let selectTrigger: Driver<Void>
         let backTrigger: Driver<Void>
     }
     struct Output {
         let back: Driver<Void>
         let user: Driver<User>
+        let selected: Driver<Void>
     }
 }

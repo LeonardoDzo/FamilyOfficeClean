@@ -7,7 +7,7 @@
 //
 
 import Foundation
-//import KingerFisher
+import Kingfisher
 
 protocol SafeboxBindable: AnyObject {
     var attachment: SafeboxAttachment! {get set}
@@ -33,7 +33,12 @@ extension SafeboxBindable {
         
         if let view = iconImgView {
             if attachment.mime.contains("image"){
-                //get thumbnail of attachment
+                
+                let url = URL(string: "\(Constants.url.safebox)\(attachment.token!)")
+                print("\(Constants.url.safebox)\(attachment.token)")
+                view.kf.indicatorType = .activity
+                let processor = RoundCornerImageProcessor(cornerRadius: 2)
+                view.kf.setImage(with: url, placeholder: #imageLiteral(resourceName: "family-default"), options: [.transition(.fade(0.2)), .processor(processor)])
             }else{
                 //put generic icon depending on file type
             }

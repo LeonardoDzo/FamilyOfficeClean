@@ -8,7 +8,6 @@
 import Foundation
 import RxSwift
 import RxCocoa
-import Apollo
 extension ObservableType where E == Bool {
     /// Boolean not operator
     public func not() -> Observable<Bool> {

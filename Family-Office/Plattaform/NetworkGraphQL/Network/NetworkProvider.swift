@@ -8,13 +8,14 @@
 
 import Foundation
 import Apollo
+
 final class NetworkProvider {
     let apollo: ApolloClient!
     var offline = false
 
     public init(_ offline: Bool = false) {
         self.offline = offline
-
+        
         apollo = {
             let configuration = URLSessionConfiguration.default
             // Add additional headers as needed
@@ -67,5 +68,14 @@ final class NetworkProvider {
     public func makeSafeboxNetwork() -> SafeboxNetwork {
         let network = Network<SafeboxAttachment>(apollo)
         return SafeboxNetwork(network: network)
+    }
+    public func makeChatNetwork() -> ChatNetwork {
+        let network = Network<Chat>(apollo)
+        return ChatNetwork(network: network)
+    }
+    
+    public func makeChatMessageNetwork() -> MessageNetwork {
+        let network = Network<ChatMessage>(apollo)
+        return MessageNetwork(network: network)
     }
 }

@@ -49,12 +49,7 @@ class HomeNavigator: HomeNavigatorPr {
             profileAssistant,
             addeditPendingNavigationController]
         
-        tabBarController.viewControllers?.forEach({ (vc) in
-            if let nc = vc as? UINavigationController {
-                nc.navigationBar.barTintColor = homeBtn.color
-                nc.navigationBar.tintColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-            }
-        })
+        tabBarController.setStyle(homeBtn)
         mainNavigator.toMain()
         adPendingNavigator.toMain(pending: Pending())
         profileAssitantNavigator.toMain()
@@ -75,7 +70,7 @@ class HomeNavigator: HomeNavigatorPr {
                 toAssistant(mainNavigationController, tabBarController, homeBtn)
             break
             case .FIRSTKIT:
-                let navigator = MainIllnessNavigator(nc: mainNavigationController)
+                let navigator = MainIllnessNavigator(navigationController: mainNavigationController)
                 navigator.toMain()
                 navigationController.present(mainNavigationController, animated: true, completion: nil)
                 break
@@ -88,8 +83,30 @@ class HomeNavigator: HomeNavigatorPr {
                 let navigator = MainSafeboxNavigator(nc: mainNavigationController)
                 navigator.toMain()
                 navigationController.present(mainNavigationController, animated: true, completion: nil)
-            default:
                 break
+            case .CHAT:
+                let membersnc = UINavigationController()
+                let service = SuperProvider().rmusecaseprovider
+                let membersnavigator = MembersChatNavigator(nc: membersnc, service: service)
+                membersnc.tabBarItem = UITabBarItem(title: "Miembros", image: #imageLiteral(resourceName: "icons8-conference_call"), selectedImage: nil)
+                membersnavigator.toMain(sender: nil)
+                
+                let mychatsnc = UINavigationController()
+                let mychatsNavigator = ChatsNavigator(nc: mychatsnc, service: service)
+                mychatsnc.tabBarItem =  UITabBarItem(title: "Chats", image: #imageLiteral(resourceName: "icons8-filled_chat"), selectedImage: nil)
+                mychatsNavigator.toMain(sender: 0)
+                let mygroupsnc = UINavigationController()
+                let mygroupsNavigator = ChatsNavigator(nc: mygroupsnc, service: service)
+                mygroupsnc.tabBarItem =  UITabBarItem(title: "Chats", image: #imageLiteral(resourceName: "groups-conference"), selectedImage: nil)
+                mygroupsNavigator.toMain(sender: 1)
+                
+                tabBarController.viewControllers = [mychatsnc, mygroupsnc ,membersnc]
+                tabBarController.setStyle(homeBtn)
+                navigationController.present(tabBarController, animated: true, completion: nil)
+                break
+            
+        default:
+            break
         }
     }
 }

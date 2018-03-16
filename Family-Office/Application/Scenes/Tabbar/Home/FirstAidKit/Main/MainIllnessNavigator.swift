@@ -15,8 +15,8 @@ final class MainIllnessNavigator: NavigatorType {
     
     weak var navigationController: UINavigationController?
     
-    init(nc: UINavigationController) {
-        self.navigationController = nc       
+    init(navigationController: UINavigationController) {
+        self.navigationController = navigationController
     }
     func toMain(sender: Any? = nil) {
         let view = MainIllnessViewController()

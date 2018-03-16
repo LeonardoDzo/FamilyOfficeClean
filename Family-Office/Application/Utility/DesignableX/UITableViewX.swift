@@ -82,4 +82,40 @@ class UITableViewCellX: UITableViewCell, Springable {
             layer.shadowOffset.height = shadowOffsetY
         }
     }
+    
+//    override func draw(_ rect: CGRect) {
+//        let bubbleSpace = CGRect(x: 20.0, y: self.bounds.origin.y, width: self.bounds.width - 20, height: self.bounds.height)
+////        let bubblePath1 = UIBezierPath(roundedRect: bubbleSpace, byRoundingCorners: [.topLeft, .topRight, .bottomRight], cornerRadii: CGSize(width: 20, height: 20))
+//        
+//        let bubblePath = UIBezierPath(roundedRect: bubbleSpace, cornerRadius: 20.0)
+//        
+//        UIColor.green.setStroke()
+//        UIColor.green.setFill()
+//        bubblePath.stroke()
+//        bubblePath.fill()
+//        
+//       // let triangleSpace = CGRect(x: 0.0, y: self.bounds.height - 20,width: 20,height: 20.0)
+//        let trianglePath = UIBezierPath()
+//        let startPoint = CGPoint(x: 20.0, y: self.bounds.height - 40)
+//        let tipPoint = CGPoint(x: 0.0, y: self.bounds.height - 30)
+//        let endPoint = CGPoint(x: 20.0, y: self.bounds.height - 20)
+//        trianglePath.move(to: startPoint)
+//        trianglePath.addLine(to: tipPoint)
+//        trianglePath.addLine(to: endPoint)
+//        trianglePath.close()
+//        UIColor.green.setStroke()
+//        UIColor.green.setFill()
+//        trianglePath.stroke()
+//        trianglePath.fill()
+//    }
+//    
+//    override init(style: UITableViewCellStyle, reuseIdentifier: String!) {
+//        super.init(style: style, reuseIdentifier: reuseIdentifier)
+//        
+//    }
+//    
+//    required init?(coder aDecoder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
+
 }

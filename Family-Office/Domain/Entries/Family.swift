@@ -8,24 +8,15 @@
 
 import Foundation
 
-public struct Family: Codable {
+public struct Family: Decodable {
 
     public var uid: String = ""
     public var name: String = ""
     public var photo: Attachment?
     public var admin: String? = ""
-    public var members = [User]()
+    public var members = [FamilyMembership]()
     public var isSelected = false
-    public init(name: String,
-                admin: String,
-                members: [User],
-                uid: String) {
-        self.admin = admin
-        self.members = members
-        self.photo = nil
-        self.name = name
-        self.uid = uid
-    }
+ 
     public init(name: String) {
         self.admin = ""
         self.members = []
@@ -42,9 +33,7 @@ public struct Family: Codable {
             uid = try values.decode(String.self, forKey: .uid)
 
             photo = try! values.decodeIfPresent(Attachment.self, forKey: .photo)
-            members = values.decodeSafely([[String:User]].self, forKey: .members)?
-                .flatMap({$0.flatMap({$0.value})})
-                .filter({!$0.uid.isEmpty}) ?? []
+            members = values.decodeSafely([FamilyMembership].self, forKey: .members) ?? []
         }
 
 //        members = try values.decode()

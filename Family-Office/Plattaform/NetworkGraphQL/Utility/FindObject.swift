@@ -8,7 +8,7 @@
 
 import Foundation
 
-final class FindObject<T: Codable> {
+final class FindObject<T: Decodable> {
 
     init() {
     }

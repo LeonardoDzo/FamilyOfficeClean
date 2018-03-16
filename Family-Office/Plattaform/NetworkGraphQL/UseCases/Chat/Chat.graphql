@@ -1,0 +1,82 @@
+
+mutation CreateChatGroup($users: [ID]!,$name: String!) {
+    createChatGroup(users: $users, name: $name) {
+        ...ChatDetails,
+        members{
+            ...ChatMembershipDetails
+        }
+    }
+}
+
+mutation CreateChat($user: ID!) {
+    createChat(user:$user) {
+        ...ChatDetails,
+        members {
+            ...ChatMembershipDetails
+        }
+    }
+}
+
+mutation AddMemberToChat($chat: ID!,$user: ID! $admin: Boolean){
+    addChatMember(chat: $chat, user: $user, admin: $admin){
+        ...ChatMembershipDetails
+    }
+}
+
+mutation SendMessage($chat: ID!, $messageId: ID!, $text: String!){
+    createChatMessage(chat: $chat, messageId: $messageId, text: $text) {
+        ...ChatMessageDetails
+    }
+}
+
+mutation SetChatSeen($chat: ID!){
+    setChatSeen(chat: $chat) {
+        ...ChatMembershipDetails
+    }
+}
+
+query MyChats{
+    myChats {
+        ...ChatDetails,
+        members{
+            ...ChatMembershipDetails
+        }
+    }
+}
+
+fragment ChatDetails on Chat {
+    id,
+    family {
+        ...FamilyDetails
+    },
+    group{
+        name,
+        photo {
+            ...AttachmentDetails
+        }
+    },
+    last_message {
+        ...ChatMessageDetails
+    }
+}
+
+fragment ChatMessageDetails on ChatMessage {
+    uuid,
+    sender {
+        ...UserDetails
+    },
+    sent_at,
+    text,
+    attachment {
+        ...AttachmentDetails
+    }
+}
+
+fragment ChatMembershipDetails on ChatMembership {
+    id,
+    is_admin,
+    seen_at,
+    user {
+        ...UserDetails
+    }
+}

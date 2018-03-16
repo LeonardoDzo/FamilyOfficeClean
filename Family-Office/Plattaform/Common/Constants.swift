@@ -32,6 +32,7 @@ struct Constants {
     struct url {
         static let url = "http://\(uri.rawValue.appending(uri.getPort()))graphql"
         static let ws = "ws://\(uri.rawValue.appending(uri.getPort()))websocket"
+        static let safebox = "http://\(uri.rawValue.appending(uri.getPort()))private/safebox/"
     }
 }
 

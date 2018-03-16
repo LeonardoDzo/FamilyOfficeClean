@@ -8,6 +8,7 @@
 
 import UIKit
 import Apollo
+
 class ViewController: UIViewController {
     let apollo: ApolloClient = {
         let configuration = URLSessionConfiguration.default

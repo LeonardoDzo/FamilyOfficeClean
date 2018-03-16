@@ -30,7 +30,7 @@ class PreHomeNav: PreHomeNavigator {
 
     func toMe(user: User) {
           let preHome = PreHomeViewController()
-            let viewModel = PreHomeViewModel(user: user, navigator: self, familyUseCase: service.makeFamilyUseCase(), userUseCase: service.makeUseCase())
+        let viewModel = PreHomeViewModel(user: user, navigator: self, familyMembershipUseCase: service.makeFamilyMembershipUseCase(), familyUseCase: service.makeFamilyUseCase(), userUseCase: service.makeUseCase())
             preHome.viewModel = viewModel
             preHome.hero.isEnabled = true
             navigationController.hero.navigationAnimationType = .slide(direction: .up)
@@ -39,7 +39,7 @@ class PreHomeNav: PreHomeNavigator {
 
     fileprivate func setMenu() {
         let menu = MenuViewController()
-        menu.viewModel = MenuViewModel(service: service.makeFamilyUseCase())
+        menu.viewModel = MenuViewModel(service: service.makeFamilyUseCase(), familyMembershipUseCase: service.makeFamilyMembershipUseCase())
 
         let menuLeftNavigationController = UISideMenuNavigationController(rootViewController: menu)
         menuLeftNavigationController.view.backgroundColor = #colorLiteral(red: 0.9792956669, green: 0.9908331388, blue: 1, alpha: 1)

@@ -11,6 +11,7 @@ import ActionCableClient
 import Starscream
 import RealmSwift
 final class MainSocket {
+    
     var request = URL(string: Curl.ws)!
     var client: ActionCableClient!
     var channel: Channel!
@@ -42,13 +43,26 @@ final class MainSocket {
                                     }
                                     break
                             case "familyChanged":
-                                if let family = FindObject<Family>().decoder(data: data) {
+                                if var family = FindObject<Family>().decoder(data: data) {
+                                    let realm = try! Realm()
+                                    if let fam = realm.object(ofType: RMFamily.self, forPrimaryKey: family.uid) {
+                                        family.isSelected = fam.isSelected
+                                    }
                                     provider.makeFamilyUseCase().save(fam: family).subscribe().dispose()
                                 }
                                 break
                             case "pendingAdded":
                                 if let model = FindObject<Pending>().decoder(data: data) {
                                     provider.makePendingUseCase().save(pending: model).subscribe().dispose()
+                                }
+                                break
+                            case "chatMessageAdded":
+                                if var model = FindObject<ChatMessage>().decoder(data: data) {
+                                    guard let dic = json["chatMessageAdded"] as? NSDictionary, let chat = dic["chat"] as? NSDictionary, let chatId = chat["id"] as? String  else {
+                                        return
+                                    }
+                                    model.status = .Sent
+                                    self.provider.makeChatUseCase().save(chatId: chatId, message: model).subscribe().dispose()
                                 }
                                 break
                                 default:

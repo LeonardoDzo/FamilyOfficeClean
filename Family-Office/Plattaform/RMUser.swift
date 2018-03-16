@@ -18,7 +18,7 @@ final class RMUser: Object {
     dynamic var name: String = ""
     dynamic var phone: String = ""
     dynamic var photo: RMAttachment?
-    dynamic var families = List<RMFamily>()
+    dynamic var families = List<RMFamilyMembership>()
     dynamic var user_type = 0
 
     override class func primaryKey() -> String {
@@ -28,12 +28,12 @@ final class RMUser: Object {
 
 extension RMUser: DomainConvertibleType {
     func asDomain() -> User {
-
-        var user = User(uid: "", name: name, email: email)
+        var user = User(uid: uid, name: name, email: email)
         user.user_type = user_type
         user.phone = phone
         user.photo = photo?.asDomain()
         return user
+        
     }
 }
 

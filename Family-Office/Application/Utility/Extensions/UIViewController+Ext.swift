@@ -9,6 +9,8 @@
 import Foundation
 import RxCocoa
 import UIKit
+import ALCameraViewController
+
 extension UIViewController {
     var backBtn: UIBarButtonItem! {
         return UIBarButtonItem(image: #imageLiteral(resourceName: "back-27x20").maskWithColor(color: #colorLiteral(red: 0.9792956669, green: 0.9908331388, blue: 1, alpha: 1)), style: .plain, target: self, action: #selector(self.back))
@@ -50,6 +52,50 @@ extension UIViewController {
     }
      @objc func dismissKeyboard() {
         view.endEditing(true)
+    }
+    
+    @objc func selectImage( completion: @escaping (UIImage?) -> Void) {
+        let croppingEnabled = true
+        let actionSheet = UIAlertController(title: "Photo Source", message: "Choose a source", preferredStyle: .actionSheet)
+        
+        actionSheet.addAction(UIAlertAction(title: "Camara", style: .default, handler: { (action: UIAlertAction) in
+            let croppingEnabled = true
+            let cameraViewController = CameraViewController(croppingParameters: CroppingParameters(isEnabled: croppingEnabled, allowResizing: true, allowMoving: true)) { [weak self] image, asset in
+                
+                guard image != nil else {
+                    self?.dismiss(animated: true, completion: nil)
+                    completion(nil)
+                    return
+                }
+                completion(image)
+                self?.dismiss(animated: true, completion: nil)
+            }
+            
+            self.present(cameraViewController, animated: true, completion: nil)
+            
+            
+        }))
+        
+        actionSheet.addAction(UIAlertAction(title: "Galería", style: .default, handler: { (action: UIAlertAction) in
+            
+            /// Provides an image picker wrapped inside a UINavigationController instance
+            let imagePickerViewController = CameraViewController.imagePickerViewController(croppingParameters: CroppingParameters(isEnabled: croppingEnabled, allowResizing: true, allowMoving: true)) { [weak self] image, asset in
+                guard image != nil else {
+                    completion(nil)
+                    self?.dismiss(animated: true, completion: nil)
+                    return
+                }
+                completion(image)
+                self?.dismiss(animated: true, completion: nil)
+            }
+            
+            self.present(imagePickerViewController, animated: true, completion: nil)
+            
+        }))
+        
+        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        self.present(actionSheet, animated: true, completion: nil)
     }
 
 }

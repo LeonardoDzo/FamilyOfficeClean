@@ -13,17 +13,19 @@ import RealmSwift
 
 final class MenuViewModel: ViewModelType {
     private var familyUseCase: FamilyUseCase!
+    private var familymembershipUseCase: FamilyMembershipUseCase!
     private var navigator: MenuNavigator!
     private var families = [Family]()
-    init(service: FamilyUseCase, navigator: MenuNavigator = MenuNavigator()) {
+    init(service: FamilyUseCase,familyMembershipUseCase: FamilyMembershipUseCase, navigator: MenuNavigator = MenuNavigator()) {
         self.familyUseCase = service
         self.navigator = navigator
+        self.familymembershipUseCase = familyMembershipUseCase
     }
 
     func transform(input: MenuViewModel.Input) -> MenuViewModel.Output {
 
-        let families = input.trigger.flatMapLatest {
-             return self.getMyFamilies(self.familyUseCase)
+        let families = input.trigger.flatMapLatest {_ in
+             return self.getMyFamilies(self.familymembershipUseCase)
             }.do(onNext: {self.families = $0})
         let logout = input.triggerLogout
             .do(onNext: {

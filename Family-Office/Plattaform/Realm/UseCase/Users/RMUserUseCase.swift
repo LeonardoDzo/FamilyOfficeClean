@@ -12,6 +12,10 @@ import Realm
 import RealmSwift
 
 final class RMUserUseCase<Repository>: UserUseCase where Repository: AbstractRepository, Repository.T == User {
+    func edit(user: User, photo: Data?) -> Observable<Void> {
+        return Variable(()).asObservable()
+    }
+    
 
     private let repository: Repository!
 
@@ -31,8 +35,9 @@ final class RMUserUseCase<Repository>: UserUseCase where Repository: AbstractRep
         return repository.query(with: predicate, sortDescriptors: [])
     }
 
-    func getUsers(phones: [String], rol: Int) -> Observable<[User]> {
-        return repository.queryAll()
+    func getUsers(phones: [String] = [], rol: Int) -> Observable<[User]> {
+        let predicate = NSPredicate(format: "user_type = %d", rol)
+        return repository.query(with: predicate, sortDescriptors: [])
     }
     func getAssistants() -> Observable<[User]> {
         return repository.query(with: NSPredicate(format: "user_type = %d", 1), sortDescriptors: [])

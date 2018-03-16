@@ -49,4 +49,7 @@ public final class NetUseCaseProvider: AuthUseCaseProvider, UseCaseProvider {
     public func makeSafeboxUseCase() -> SafeboxUseCase {
         return NetSafeboxUseCase(network: networkProvider.makeSafeboxNetwork())
     }
+    public func makeChatUseCase() -> ChatUseCase {
+        return NetChatUseCase(network: networkProvider.makeChatNetwork(), mNetwork: networkProvider.makeChatMessageNetwork())
+    }
 }

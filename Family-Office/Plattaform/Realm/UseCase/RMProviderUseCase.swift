@@ -11,7 +11,7 @@ import Realm
 import RxSwift
 import RealmSwift
 
-public final class RMUseCaseProvider: UseCaseProvider {
+public final class RMUseCaseProvider: UseCaseProvider, FamilyMembershipUseCaseProvider {
 
     private let configuration: Realm.Configuration
 
@@ -57,5 +57,14 @@ public final class RMUseCaseProvider: UseCaseProvider {
     public func makeSafeboxUseCase() -> SafeboxUseCase {
         let repository = Repository<SafeboxAttachment>(configuration: configuration)
         return RMSafeboxUseCase(repository: repository)
+    }
+    public func makeFamilyMembershipUseCase() -> FamilyMembershipUseCase {
+        let repository = Repository<FamilyMembership>(configuration: configuration)
+        return RMFamilyMembershipUseCase(repository: repository)
+    }
+    
+    public func makeChatUseCase() -> ChatUseCase {
+        let repository = Repository<Chat>(configuration: configuration)
+        return RMChatUseCase(repository: repository)
     }
 }

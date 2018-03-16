@@ -18,6 +18,7 @@ final class RMFamilyUseCase<Repository>: FamilyUseCase where Repository: Abstrac
     }
 
     func save(fam: Family) -> Observable<Void> {
+        MainSocket.shareIntstance.channel.action("execute", with: FamilySubscription(fam))
         return repository.save(entity: fam)
     }
     func get() -> Observable<[Family]> {
@@ -50,7 +51,7 @@ final class RMFamilyUseCase<Repository>: FamilyUseCase where Repository: Abstrac
     }
     
     func getMyFamilies(uid: String) -> Observable<[Family]> {
-        let predicate = NSPredicate(format: "ANY members.uid == %@", uid)
+        let predicate = NSPredicate(format: "ANY members.user.uid == %@", uid)
         return repository.query(with: predicate, sortDescriptors: [])
         
     }

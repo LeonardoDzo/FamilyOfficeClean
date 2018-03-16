@@ -10,6 +10,15 @@ mutation CreateFamily($name:String!) {
     }
 }
 
+query MyFamilies {
+    myFamilies {
+        ...FamilyDetails,
+        members {
+            ...FamilyMembershipDetails
+        }
+    }
+}
+
 fragment AttachmentDetails on Attachment {
     mime,
     ext,
@@ -25,3 +34,5 @@ fragment FamilyDetails on Family {
     ...AttachmentDetails
     }
 }
+
+

@@ -14,8 +14,8 @@ import RealmSwift
 final class RMFamily: Object {
     dynamic var uid: String = ""
     dynamic var name: String = ""
-    //dynamic var members = List<RMUser>()
-    let members = LinkingObjects(fromType: RMUser.self, property: "families")
+    dynamic var members = List<RMFamilyMembership>()
+    dynamic var photo: RMAttachment?
     dynamic var isSelected = false
     override class func primaryKey() -> String {
         return "uid"
@@ -23,8 +23,10 @@ final class RMFamily: Object {
 }
 extension RMFamily: DomainConvertibleType {
     func asDomain() -> Family {
-        let mapMembers = Array(members.map({$0.asDomain()}))
-        var family = Family(name: name, admin: "", members: mapMembers, uid: uid)
+        //let mapMembers = Array(members.map({$0.asDomain()}))
+        var family = Family(name: name)
+        family.uid = uid
+        family.photo = photo?.asDomain()
         family.isSelected = isSelected
         return family
     }
@@ -32,11 +34,13 @@ extension RMFamily: DomainConvertibleType {
 
 extension Family: RealmRepresentable {
     func asRealm() -> RMFamily {
+
         let family = RMFamily()
         family.uid = uid
         family.name = name
-        //family.members.append(objectsIn: members.map({$0.asRealm()}))
+        family.members.append(objectsIn: members.map({$0.asRealm()}))
         family.isSelected = isSelected
+      
         return family
     }
 }

@@ -39,6 +39,7 @@ class ProfileAssistantViewController: UIViewController {
                 self.v.topview.bind(user: assistant)
             }).disposed(by: disposeBag)
     }
+    
     @objc func call(_ sender: UIButtonX) {
         if let url = URL(string: "tel://\(sender.tag)"), UIApplication.shared.canOpenURL(url) {
             if #available(iOS 10, *) {
