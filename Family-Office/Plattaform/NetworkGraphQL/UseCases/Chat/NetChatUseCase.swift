@@ -30,12 +30,7 @@ final class NetChatUseCase: ChatUseCase {
     }
     
     func save(chatId: String, message: ChatMessage) -> Observable<Void> {
-        self.provider.makeChatUseCase().save(chatId: chatId, message: message).subscribe().disposed(by: diposeBag)
-        return mNetwork.sendMessage(chatId: chatId, mid: message.uid, text: message.text).do(onNext:  { message in
-                var m = message
-                m.status = .Sent
-//            self.provider.makeChatUseCase().save(chatId: chatId, message: m).subscribe().disposed(by: self.diposeBag)
-            }).mapToVoid()
+        return mNetwork.sendMessage(chatId: chatId, mid: message.uid, text: message.text).mapToVoid()
     }
     
     func create(chat: Chat) -> Observable<Chat> {
@@ -44,7 +39,7 @@ final class NetChatUseCase: ChatUseCase {
     
     func create(userId: String) -> Observable<Chat> {
         return network.createChat(uid:userId).do(onNext: { chat in
-            self.provider.makeChatUseCase().create(chat: chat).subscribe().disposed(by: self.diposeBag)
+            self.provider.makeChatUseCase().create(chat: chat).subscribe().dispose()
         })
     }
     func get(uid: String) -> Observable<Chat> {

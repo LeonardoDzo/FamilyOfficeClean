@@ -36,7 +36,7 @@ final class MembersChatViewModel: ViewModelType {
         let selected = input.selectUserTrigger.flatMapLatest({ indexpath -> SharedSequence<DriverSharingStrategy, Chat> in
             himId = self.users[indexpath.row].uid
             return self.chatUSeCase
-                .get(uid: uid)
+                .get(uid: himId)
                 .asDriverOnErrorJustComplete()
         }).flatMapLatest({ chat -> SharedSequence<DriverSharingStrategy, Chat> in
             if chat.uid.isEmpty {

@@ -2393,7 +2393,7 @@ public final class CreateChatGroupMutation: GraphQLMutation {
         public static let selections: [GraphQLSelection] = [
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
+          GraphQLField("uuid", type: .scalar(String.self)),
           GraphQLField("sender", type: .object(Sender.selections)),
           GraphQLField("sent_at", type: .scalar(Int.self)),
           GraphQLField("text", type: .scalar(String.self)),
@@ -2406,8 +2406,8 @@ public final class CreateChatGroupMutation: GraphQLMutation {
           self.snapshot = snapshot
         }
 
-        public init(id: GraphQLID, sender: Sender? = nil, sentAt: Int? = nil, text: String? = nil, attachment: Attachment? = nil) {
-          self.init(snapshot: ["__typename": "ChatMessage", "id": id, "sender": sender.flatMap { $0.snapshot }, "sent_at": sentAt, "text": text, "attachment": attachment.flatMap { $0.snapshot }])
+        public init(uuid: String? = nil, sender: Sender? = nil, sentAt: Int? = nil, text: String? = nil, attachment: Attachment? = nil) {
+          self.init(snapshot: ["__typename": "ChatMessage", "uuid": uuid, "sender": sender.flatMap { $0.snapshot }, "sent_at": sentAt, "text": text, "attachment": attachment.flatMap { $0.snapshot }])
         }
 
         public var __typename: String {
@@ -2419,12 +2419,12 @@ public final class CreateChatGroupMutation: GraphQLMutation {
           }
         }
 
-        public var id: GraphQLID {
+        public var uuid: String? {
           get {
-            return snapshot["id"]! as! GraphQLID
+            return snapshot["uuid"] as? String
           }
           set {
-            snapshot.updateValue(newValue, forKey: "id")
+            snapshot.updateValue(newValue, forKey: "uuid")
           }
         }
 
@@ -3574,7 +3574,7 @@ public final class CreateChatMutation: GraphQLMutation {
         public static let selections: [GraphQLSelection] = [
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
+          GraphQLField("uuid", type: .scalar(String.self)),
           GraphQLField("sender", type: .object(Sender.selections)),
           GraphQLField("sent_at", type: .scalar(Int.self)),
           GraphQLField("text", type: .scalar(String.self)),
@@ -3587,8 +3587,8 @@ public final class CreateChatMutation: GraphQLMutation {
           self.snapshot = snapshot
         }
 
-        public init(id: GraphQLID, sender: Sender? = nil, sentAt: Int? = nil, text: String? = nil, attachment: Attachment? = nil) {
-          self.init(snapshot: ["__typename": "ChatMessage", "id": id, "sender": sender.flatMap { $0.snapshot }, "sent_at": sentAt, "text": text, "attachment": attachment.flatMap { $0.snapshot }])
+        public init(uuid: String? = nil, sender: Sender? = nil, sentAt: Int? = nil, text: String? = nil, attachment: Attachment? = nil) {
+          self.init(snapshot: ["__typename": "ChatMessage", "uuid": uuid, "sender": sender.flatMap { $0.snapshot }, "sent_at": sentAt, "text": text, "attachment": attachment.flatMap { $0.snapshot }])
         }
 
         public var __typename: String {
@@ -3600,12 +3600,12 @@ public final class CreateChatMutation: GraphQLMutation {
           }
         }
 
-        public var id: GraphQLID {
+        public var uuid: String? {
           get {
-            return snapshot["id"]! as! GraphQLID
+            return snapshot["uuid"] as? String
           }
           set {
-            snapshot.updateValue(newValue, forKey: "id")
+            snapshot.updateValue(newValue, forKey: "uuid")
           }
         }
 
@@ -4681,7 +4681,7 @@ public final class SendMessageMutation: GraphQLMutation {
       public static let selections: [GraphQLSelection] = [
         GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
         GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-        GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
+        GraphQLField("uuid", type: .scalar(String.self)),
         GraphQLField("sender", type: .object(Sender.selections)),
         GraphQLField("sent_at", type: .scalar(Int.self)),
         GraphQLField("text", type: .scalar(String.self)),
@@ -4694,8 +4694,8 @@ public final class SendMessageMutation: GraphQLMutation {
         self.snapshot = snapshot
       }
 
-      public init(id: GraphQLID, sender: Sender? = nil, sentAt: Int? = nil, text: String? = nil, attachment: Attachment? = nil) {
-        self.init(snapshot: ["__typename": "ChatMessage", "id": id, "sender": sender.flatMap { $0.snapshot }, "sent_at": sentAt, "text": text, "attachment": attachment.flatMap { $0.snapshot }])
+      public init(uuid: String? = nil, sender: Sender? = nil, sentAt: Int? = nil, text: String? = nil, attachment: Attachment? = nil) {
+        self.init(snapshot: ["__typename": "ChatMessage", "uuid": uuid, "sender": sender.flatMap { $0.snapshot }, "sent_at": sentAt, "text": text, "attachment": attachment.flatMap { $0.snapshot }])
       }
 
       public var __typename: String {
@@ -4707,12 +4707,12 @@ public final class SendMessageMutation: GraphQLMutation {
         }
       }
 
-      public var id: GraphQLID {
+      public var uuid: String? {
         get {
-          return snapshot["id"]! as! GraphQLID
+          return snapshot["uuid"] as? String
         }
         set {
-          snapshot.updateValue(newValue, forKey: "id")
+          snapshot.updateValue(newValue, forKey: "uuid")
         }
       }
 
@@ -5898,7 +5898,7 @@ public final class MyChatsQuery: GraphQLQuery {
         public static let selections: [GraphQLSelection] = [
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
+          GraphQLField("uuid", type: .scalar(String.self)),
           GraphQLField("sender", type: .object(Sender.selections)),
           GraphQLField("sent_at", type: .scalar(Int.self)),
           GraphQLField("text", type: .scalar(String.self)),
@@ -5911,8 +5911,8 @@ public final class MyChatsQuery: GraphQLQuery {
           self.snapshot = snapshot
         }
 
-        public init(id: GraphQLID, sender: Sender? = nil, sentAt: Int? = nil, text: String? = nil, attachment: Attachment? = nil) {
-          self.init(snapshot: ["__typename": "ChatMessage", "id": id, "sender": sender.flatMap { $0.snapshot }, "sent_at": sentAt, "text": text, "attachment": attachment.flatMap { $0.snapshot }])
+        public init(uuid: String? = nil, sender: Sender? = nil, sentAt: Int? = nil, text: String? = nil, attachment: Attachment? = nil) {
+          self.init(snapshot: ["__typename": "ChatMessage", "uuid": uuid, "sender": sender.flatMap { $0.snapshot }, "sent_at": sentAt, "text": text, "attachment": attachment.flatMap { $0.snapshot }])
         }
 
         public var __typename: String {
@@ -5924,12 +5924,12 @@ public final class MyChatsQuery: GraphQLQuery {
           }
         }
 
-        public var id: GraphQLID {
+        public var uuid: String? {
           get {
-            return snapshot["id"]! as! GraphQLID
+            return snapshot["uuid"] as? String
           }
           set {
-            snapshot.updateValue(newValue, forKey: "id")
+            snapshot.updateValue(newValue, forKey: "uuid")
           }
         }
 
@@ -14737,7 +14737,7 @@ public struct ChatDetails: GraphQLFragment {
     public static let selections: [GraphQLSelection] = [
       GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
       GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-      GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
+      GraphQLField("uuid", type: .scalar(String.self)),
       GraphQLField("sender", type: .object(Sender.selections)),
       GraphQLField("sent_at", type: .scalar(Int.self)),
       GraphQLField("text", type: .scalar(String.self)),
@@ -14750,8 +14750,8 @@ public struct ChatDetails: GraphQLFragment {
       self.snapshot = snapshot
     }
 
-    public init(id: GraphQLID, sender: Sender? = nil, sentAt: Int? = nil, text: String? = nil, attachment: Attachment? = nil) {
-      self.init(snapshot: ["__typename": "ChatMessage", "id": id, "sender": sender.flatMap { $0.snapshot }, "sent_at": sentAt, "text": text, "attachment": attachment.flatMap { $0.snapshot }])
+    public init(uuid: String? = nil, sender: Sender? = nil, sentAt: Int? = nil, text: String? = nil, attachment: Attachment? = nil) {
+      self.init(snapshot: ["__typename": "ChatMessage", "uuid": uuid, "sender": sender.flatMap { $0.snapshot }, "sent_at": sentAt, "text": text, "attachment": attachment.flatMap { $0.snapshot }])
     }
 
     public var __typename: String {
@@ -14763,12 +14763,12 @@ public struct ChatDetails: GraphQLFragment {
       }
     }
 
-    public var id: GraphQLID {
+    public var uuid: String? {
       get {
-        return snapshot["id"]! as! GraphQLID
+        return snapshot["uuid"] as? String
       }
       set {
-        snapshot.updateValue(newValue, forKey: "id")
+        snapshot.updateValue(newValue, forKey: "uuid")
       }
     }
 
@@ -15144,13 +15144,13 @@ public struct ChatDetails: GraphQLFragment {
 
 public struct ChatMessageDetails: GraphQLFragment {
   public static let fragmentString =
-    "fragment ChatMessageDetails on ChatMessage {\n  __typename\n  id\n  sender {\n    __typename\n    ...UserDetails\n  }\n  sent_at\n  text\n  attachment {\n    __typename\n    ...AttachmentDetails\n  }\n}"
+    "fragment ChatMessageDetails on ChatMessage {\n  __typename\n  uuid\n  sender {\n    __typename\n    ...UserDetails\n  }\n  sent_at\n  text\n  attachment {\n    __typename\n    ...AttachmentDetails\n  }\n}"
 
   public static let possibleTypes = ["ChatMessage"]
 
   public static let selections: [GraphQLSelection] = [
     GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-    GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
+    GraphQLField("uuid", type: .scalar(String.self)),
     GraphQLField("sender", type: .object(Sender.selections)),
     GraphQLField("sent_at", type: .scalar(Int.self)),
     GraphQLField("text", type: .scalar(String.self)),
@@ -15163,8 +15163,8 @@ public struct ChatMessageDetails: GraphQLFragment {
     self.snapshot = snapshot
   }
 
-  public init(id: GraphQLID, sender: Sender? = nil, sentAt: Int? = nil, text: String? = nil, attachment: Attachment? = nil) {
-    self.init(snapshot: ["__typename": "ChatMessage", "id": id, "sender": sender.flatMap { $0.snapshot }, "sent_at": sentAt, "text": text, "attachment": attachment.flatMap { $0.snapshot }])
+  public init(uuid: String? = nil, sender: Sender? = nil, sentAt: Int? = nil, text: String? = nil, attachment: Attachment? = nil) {
+    self.init(snapshot: ["__typename": "ChatMessage", "uuid": uuid, "sender": sender.flatMap { $0.snapshot }, "sent_at": sentAt, "text": text, "attachment": attachment.flatMap { $0.snapshot }])
   }
 
   public var __typename: String {
@@ -15176,12 +15176,12 @@ public struct ChatMessageDetails: GraphQLFragment {
     }
   }
 
-  public var id: GraphQLID {
+  public var uuid: String? {
     get {
-      return snapshot["id"]! as! GraphQLID
+      return snapshot["uuid"] as? String
     }
     set {
-      snapshot.updateValue(newValue, forKey: "id")
+      snapshot.updateValue(newValue, forKey: "uuid")
     }
   }
 

@@ -30,7 +30,8 @@ public struct Chat: Decodable {
             
             uid = values.decodeSafely(String.self, forKey: .uid)!
             
-            lastMessage = values.decodeSafelyIfPresent(ChatMessage.self, forKey: .lastMessage)
+            family = values.decodeSafelyIfPresent(Family.self, forKey: .family)
+//            lastMessage = values.decodeSafelyIfPresent(ChatMessage.self, forKey: .lastMessage)
             members = values.decodeSafely([ChatMembership].self, forKey: .members) ?? []
         }
     }

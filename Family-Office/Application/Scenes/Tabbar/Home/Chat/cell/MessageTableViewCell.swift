@@ -59,15 +59,32 @@ class MessageTableViewCell: UITableViewCellX, MessageBindible {
         animate()
     }
     
-    func changeImage(isFromSender: Bool? = true ) {
-        let image =  isFromSender! ? #imageLiteral(resourceName: "chat_bubble_sent") : #imageLiteral(resourceName: "chat_bubble_received")
+    func isFromSender(isMe: Bool) {
+        if isMe {
+            self.bubbleView.bottom(7.5).top(7.5).right(15).left(>=40)
+        }else{
+            self.bubbleView.bottom(7.5).top(7.5).left(15).right(>=40)
+        }
+        
+        let image =  isMe ? #imageLiteral(resourceName: "chat_bubble_sent") : #imageLiteral(resourceName: "chat_bubble_received")
+        
         bubbleView.image = image
             .resizableImage(withCapInsets:
                 UIEdgeInsetsMake(17, 21, 17, 21),
                             resizingMode: .stretch)
             .withRenderingMode(.alwaysTemplate)
         
-        bubbleView.tintColor =  isFromSender! ? #colorLiteral(red: 0.721568644, green: 0.8862745166, blue: 0.5921568871, alpha: 1) : #colorLiteral(red: 0.9792956669, green: 0.9908331388, blue: 1, alpha: 1)
+        let color =  isMe ? #colorLiteral(red: 0.721568644, green: 0.8862745166, blue: 0.5921568871, alpha: 1) : #colorLiteral(red: 0.9792956669, green: 0.9908331388, blue: 1, alpha: 1)
+        
+        
+        switch message.status {
+            case .Pending:
+                bubbleView.tintColor = color.withAlphaComponent(0.5)
+                return
+            default:
+                bubbleView.tintColor = color
+                return
+        }
     }
     
     

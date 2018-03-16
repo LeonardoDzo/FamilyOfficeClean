@@ -57,10 +57,11 @@ final class MainSocket {
                                 }
                                 break
                             case "chatMessageAdded":
-                                if let model = FindObject<ChatMessage>().decoder(data: data) {
+                                if var model = FindObject<ChatMessage>().decoder(data: data) {
                                     guard let dic = json["chatMessageAdded"] as? NSDictionary, let chat = dic["chat"] as? NSDictionary, let chatId = chat["id"] as? String  else {
                                         return
                                     }
+                                    model.status = .Sent
                                     self.provider.makeChatUseCase().save(chatId: chatId, message: model).subscribe().dispose()
                                 }
                                 break

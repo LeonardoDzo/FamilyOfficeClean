@@ -21,7 +21,12 @@ final class ChatsNavigator: NavigatorType {
         let view = ChatsTableViewController()
         if let type = sender as? Int {
             view.title = type == 0 ? "Mis chats" : "Mis grupos"
+            view.viewwModel = ChatsViewmodel(navigator: self, byGroup: !(type == 0), chatUseCase: service.makeChatUseCase())
         }
         navigationController?.pushViewController(view, animated: true)
+    }
+    func toChat(_ chat: Chat) -> Void {
+        let navigator = ChatNavigator(navigationController: navigationController!)
+        navigator.toMain(sender: chat)
     }
 }

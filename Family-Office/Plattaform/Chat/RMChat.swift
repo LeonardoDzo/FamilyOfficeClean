@@ -39,15 +39,21 @@ extension RMChat: DomainConvertibleType {
 extension Chat: RealmRepresentable {
     
     typealias RealmType = RMChat
-
+    
     func asRealm() -> RMChat {
+        let realm = try! Realm()
+        var message = messages
+        if let chat =  realm.object(ofType: RMChat.self, forPrimaryKey: uid) {
+            let oldmessage = Array(chat.messages.map { $0.asDomain() })
+            message = oldmessage
+        }
         return RMChat.build({ (obj) in
             obj.family = family?.asRealm()
             obj.uid = uid
             obj.name = group?.name ?? ""
             obj.photo = group?.photo?.asRealm()
             obj.lastMessage = lastMessage?.asRealm()
-            obj.messages.append(objectsIn: messages.map({$0.asRealm()}))
+            obj.messages.append(objectsIn: message.map({$0.asRealm()}))
             obj.members.append(objectsIn: members.map({$0.asRealm()}))
         })
     }

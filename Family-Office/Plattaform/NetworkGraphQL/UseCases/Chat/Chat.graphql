@@ -35,13 +35,12 @@ mutation SetChatSeen($chat: ID!){
     }
 }
 
-query MyChats {
+query MyChats{
     myChats {
         ...ChatDetails,
         members{
             ...ChatMembershipDetails
         }
-
     }
 }
 
@@ -62,7 +61,7 @@ fragment ChatDetails on Chat {
 }
 
 fragment ChatMessageDetails on ChatMessage {
-    id,
+    uuid,
     sender {
         ...UserDetails
     },

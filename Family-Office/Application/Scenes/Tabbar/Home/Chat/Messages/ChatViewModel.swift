@@ -11,11 +11,8 @@ import RxSwift
 import RxCocoa
 
 final class ChatViewModel: ViewModelType {
-    /// se comunica con realm
+
     let chatUseCase: ChatUseCase!
-    
-    /// Se comunica con la api
-    let netChatUseCase: ChatUseCase!
     
     let navigator: ChatNavigator!
     
@@ -25,9 +22,8 @@ final class ChatViewModel: ViewModelType {
     
     var text = ""
     
-    init(chatUseCase: ChatUseCase, netChatUseCase: ChatUseCase, navigator: ChatNavigator) {
+    init(chatUseCase: ChatUseCase, navigator: ChatNavigator) {
         self.chatUseCase = chatUseCase
-        self.netChatUseCase = netChatUseCase
         self.navigator = navigator
     }
     
@@ -42,21 +38,21 @@ final class ChatViewModel: ViewModelType {
                 .asDriverOnErrorJustComplete()
             }.do(onNext: {self.chat = $0})
         
-        
+
         
         let messages = chattrigger.map({ chat in
             return  chat.messages.map({
                 MockMessage(text: $0.text,
                             sender: $0.sender!,
                             messageId: $0.uid,
-                            date: Date($0.seenAt) ?? Date())
-                
+                            date: Date($0.seenAt) ?? Date(),
+                            status: $0.status)
             })
-        }).map { (messages)  in
+        }).map({ (messages)  in
             return Dictionary(grouping: messages.reversed()) { (message) -> Date in
                 return message.sentDate.midnight()
                 }.map({SectionOfMessages(value: $0)})
-        }
+        })
         let textChanged  = input.textChange.do(onNext: {self.text = $0})
         
         let sendMessage = input.sendMessage.flatMapLatest({_ -> SharedSequence<DriverSharingStrategy, Void> in
@@ -67,12 +63,11 @@ final class ChatViewModel: ViewModelType {
             message.uid = UUID().uuidString
             message.sender = Sender(uid: uid, displayName: (me!.user?.displayName)!, photo: (me!.user?.photo))
             message.text = self.text
-            return self.netChatUseCase
+            return self.chatUseCase
                 .save(chatId: self.chat.uid, message: message)
                 .asDriverOnErrorJustComplete()
         })
         return Output(messages: messages, infoChat: chattrigger, sendMessage: sendMessage, messageChange: textChanged.mapToVoid())
-        
     }
 }
 extension ChatViewModel {

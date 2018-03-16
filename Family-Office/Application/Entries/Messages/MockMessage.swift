@@ -16,37 +16,39 @@ struct MockMessage: MessageType {
     var sender: Sender
     var sentDate: Date
     var data: MessageData
+    var status: MESSAGESTATUS = .Pending
     
-    init(data: MessageData, sender: Sender, messageId: String, date: Date, text: String = "") {
+    init(data: MessageData, sender: Sender, messageId: String, date: Date, text: String = "", status: MESSAGESTATUS) {
         self.data = data
         self.sender = sender
         self.messageId = messageId
         self.sentDate = date
+        self.status = status
     }
     
-    init(text: String, sender: Sender, messageId: String, date: Date) {
-        self.init(data: .text(text), sender: sender, messageId: messageId, date: date)
+    init(text: String, sender: Sender, messageId: String, date: Date, status: MESSAGESTATUS) {
+        self.init(data: .text(text), sender: sender, messageId: messageId, date: date, status: status)
     }
     
-    init(attributedText: NSAttributedString, sender: Sender, messageId: String, date: Date) {
-        self.init(data: .attributedText(attributedText), sender: sender, messageId: messageId, date: date)
+    init(attributedText: NSAttributedString, sender: Sender, messageId: String, date: Date, status: MESSAGESTATUS) {
+        self.init(data: .attributedText(attributedText), sender: sender, messageId: messageId, date: date, status: status)
     }
     
-    init(image: Attachment, sender: Sender, messageId: String, date: Date) {
-        self.init(data: .photo(image), sender: sender, messageId: messageId, date: date)
+    init(image: Attachment, sender: Sender, messageId: String, date: Date, status: MESSAGESTATUS) {
+        self.init(data: .photo(image), sender: sender, messageId: messageId, date: date, status: status)
     }
     
-    init(thumbnail: UIImage, sender: Sender, messageId: String, date: Date) {
+    init(thumbnail: UIImage, sender: Sender, messageId: String, date: Date, status: MESSAGESTATUS) {
         let url = URL(fileURLWithPath: "")
-        self.init(data: .video(file: url, thumbnail: thumbnail), sender: sender, messageId: messageId, date: date)
+        self.init(data: .video(file: url, thumbnail: thumbnail), sender: sender, messageId: messageId, date: date, status: status)
     }
     
-    init(location: CLLocation, sender: Sender, messageId: String, date: Date) {
-        self.init(data: .location(location), sender: sender, messageId: messageId, date: date)
+    init(location: CLLocation, sender: Sender, messageId: String, date: Date, status: MESSAGESTATUS) {
+        self.init(data: .location(location), sender: sender, messageId: messageId, date: date, status: status)
     }
     
-    init(emoji: String, sender: Sender, messageId: String, date: Date) {
-        self.init(data: .emoji(emoji), sender: sender, messageId: messageId, date: date)
+    init(emoji: String, sender: Sender, messageId: String, date: Date, status: MESSAGESTATUS) {
+        self.init(data: .emoji(emoji), sender: sender, messageId: messageId, date: date, status: status)
     }
     
 }

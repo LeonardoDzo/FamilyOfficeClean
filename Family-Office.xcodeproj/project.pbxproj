@@ -294,6 +294,7 @@
 		02F5D04E204865AA009211BB /* IllnessAddViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F5D04D204865AA009211BB /* IllnessAddViewModel.swift */; };
 		02F5D050204865B6009211BB /* IllnessAddNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F5D04F204865B6009211BB /* IllnessAddNavigator.swift */; };
 		02F5D05220487F7D009211BB /* Illness.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 02F5D05120487F7D009211BB /* Illness.graphql */; };
+		02FCCD89205B447D002ECCC2 /* ChatGroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FCCD88205B447D002ECCC2 /* ChatGroupTableViewCell.swift */; };
 		02FE57632020D77900B7E084 /* NetUseCaseProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FE57622020D77900B7E084 /* NetUseCaseProvider.swift */; };
 		02FE57652020E0C100B7E084 /* AuthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FE57642020E0C100B7E084 /* AuthModel.swift */; };
 		02FE576A2020E73000B7E084 /* PreHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FE57692020E73000B7E084 /* PreHomeViewController.swift */; };
@@ -606,6 +607,7 @@
 		02F5D04D204865AA009211BB /* IllnessAddViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IllnessAddViewModel.swift; sourceTree = "<group>"; };
 		02F5D04F204865B6009211BB /* IllnessAddNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IllnessAddNavigator.swift; sourceTree = "<group>"; };
 		02F5D05120487F7D009211BB /* Illness.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = Illness.graphql; sourceTree = "<group>"; };
+		02FCCD88205B447D002ECCC2 /* ChatGroupTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatGroupTableViewCell.swift; sourceTree = "<group>"; };
 		02FE57622020D77900B7E084 /* NetUseCaseProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetUseCaseProvider.swift; sourceTree = "<group>"; };
 		02FE57642020E0C100B7E084 /* AuthModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthModel.swift; sourceTree = "<group>"; };
 		02FE57692020E73000B7E084 /* PreHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreHomeViewController.swift; sourceTree = "<group>"; };
@@ -1418,6 +1420,7 @@
 			children = (
 				02D5DF9E204F6E3200303C98 /* MessageTableViewCell.swift */,
 				0265E39B2051BE6D00DEB2B6 /* MemberChatTableViewCell.swift */,
+				02FCCD88205B447D002ECCC2 /* ChatGroupTableViewCell.swift */,
 			);
 			path = cell;
 			sourceTree = "<group>";
@@ -2091,6 +2094,7 @@
 				02DD50052047401000E9B63D /* RMIllness.swift in Sources */,
 				024D601C2052280B00CD1333 /* ChatNetwork.swift in Sources */,
 				022DD8C22028DBF1008ED417 /* FamilyNetwork.swift in Sources */,
+				02FCCD89205B447D002ECCC2 /* ChatGroupTableViewCell.swift in Sources */,
 				023A3701205062BD0046FCDE /* ChatMembership.swift in Sources */,
 				02F525962025015A009F817D /* ColorControl.swift in Sources */,
 				02D55FA5203B54E000858D1B /* UserSubscription.swift in Sources */,

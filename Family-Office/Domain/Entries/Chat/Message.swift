@@ -31,7 +31,7 @@ public struct ChatMessage: Decodable {
     
     enum CodingKeys: String, CodingKey {
         case attachment
-        case uid = "id"
+        case uid = "uuid"
         case sender
         case seenAt = "sent_at"
         case text
@@ -39,7 +39,9 @@ public struct ChatMessage: Decodable {
     
 }
 extension ChatMessage {
+
     public static func == (lhs: ChatMessage, rhs: ChatMessage) -> Bool {
         return lhs.uid == rhs.uid
     }
+    
 }

@@ -68,17 +68,13 @@ class ChatViewController: SLKTextViewController {
     
     func conftable() -> Void {
         dataSource = RxTableViewSectionedReloadDataSource<SectionOfMessages>(configureCell: { (ds, tv, ip, item) -> MessageTableViewCell in
-            let cell = tv.dequeueReusableCell(withIdentifier: "Cell", for: ip) as! MessageTableViewCell
+            let cell = MessageTableViewCell(style: .default, reuseIdentifier: "Cell")
             cell.messageText.numberOfLines = 0
+            cell.message = item
             cell.transform = (self.tableView?.transform)!
+            let meId = UserDefaults().value(forKey: "uid") as? String ?? ""
+            cell.isFromSender(isMe: item.sender.uid == meId)
             cell.bind(message: item)
-            if ip.row % 2 == 0 {
-                cell.bubbleView.right(15).left(>=40)
-                cell.changeImage()
-            }else{
-                cell.bubbleView.left(15).right(>=40)
-                cell.changeImage(isFromSender: false)
-            }
             return cell
         })
         
@@ -115,6 +111,7 @@ class ChatViewController: SLKTextViewController {
         
         output.messageChange.drive().disposed(by: disposeBag)
         
+        self.title = viewModel.chat.members.first(where: {$0.user?.uid != me})?.user?.displayName
     }
     
   

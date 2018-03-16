@@ -10,8 +10,11 @@ import Foundation
 import RxSwift
 import RealmSwift
 
+let me = {
+    return  UserDefaults().value(forKey: "uid") as? String ?? ""
+}()
 final class RMChatUseCase<Repository>: ChatUseCase where Repository: AbstractRepository, Repository.T == Chat {
-
+    let disposeBag = DisposeBag()
     let realm = try! Realm()
     private let repository: Repository!
     
@@ -23,16 +26,20 @@ final class RMChatUseCase<Repository>: ChatUseCase where Repository: AbstractRep
         
         if let chat = realm.object(ofType: RMChat.self, forPrimaryKey: chatId) {
             try! realm.write {
-                chat.messages.append(message.asRealm())
+                if message.sender?.uid == me && message.status == .Sent {
+                    realm.add(message.asRealm(), update: true)
+                }else if message.sender?.uid == me {
+                    NetUseCaseProvider().makeChatUseCase().save(chatId: chatId, message: message).subscribe().disposed(by: disposeBag)
+                    chat.messages.append(message.asRealm())
+                }else{chat.messages.append(message.asRealm())}
             }
-            return repository.save(entity: chat.asDomain())
+           return repository.save(entity: chat.asDomain())
         }
-        
         return Variable(()).asObservable()
     }
     
     func get(byGroup: Bool? = false) -> Observable<[Chat]> {
-        return byGroup! ? repository.query(with: NSPredicate(format: "name.count > %d", 0), sortDescriptors: []) :repository.query(with: NSPredicate(format: "name.count = %d", 0), sortDescriptors: [])
+        return byGroup! ? repository.query(with: NSPredicate(format: "name != '' OR family != nil"), sortDescriptors: []) : repository.query(with: NSPredicate(format: "name == '' AND family == nil"), sortDescriptors: [])
     }
     
     func create(chat: Chat) -> Observable<Chat> {
@@ -47,16 +54,18 @@ final class RMChatUseCase<Repository>: ChatUseCase where Repository: AbstractRep
     func get(id: String) -> Observable<Chat> {
         return repository.query(uid: id)
     }
+    
     func get(uid: String) -> Observable<Chat> {
-        let myId = UserDefaults().value(forKey: "uid") as? String ?? ""
         return repository.queryAll().map({ chats in
-            if let chat = chats.first(where: { (chat) -> Bool in
-                return chat.members.contains(where: {$0.user?.uid == uid}) &&  chat.members.contains(where: {$0.user?.uid == myId})
+            if let chat = chats.filter({($0.group?.name.isEmpty)! && $0.family == nil}).first(where: { (chat) -> Bool in
+                return chat.members.contains(where: {$0.user?.uid == uid}) &&  chat.members.contains(where: {$0.user?.uid == me})
             }) {
                 return chat
             }
             return Chat(family: nil, group: nil, uid: "", lastMessage: nil, members: [], messages: [])
         })
     }
+    
+  
 }
 

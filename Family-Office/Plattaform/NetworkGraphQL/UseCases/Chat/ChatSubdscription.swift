@@ -13,7 +13,7 @@ func ChatMessageAdded(id: String) -> [String: Any] {
         return [:]
     }
     subscriptions.append(id)
-    return ["variables": ["id": id], "query": "subscription ChatMessageAdded($id: ID!){ chatMessageAdded(chat: $id) { ...ChatMessageDetails}}"
+    return ["variables": ["id": id], "query": "subscription ChatMessageAdded($id: ID!){ chatMessageAdded(chat: $id) { ...ChatMessageDetails, chat {id}}}"
         .appending(ChatMessageDetails.fragmentString)
         .appending(UserDetails.fragmentString)
         .appending(AttachmentDetails.fragmentString)]
