@@ -83,9 +83,13 @@ class HomeNavigator: HomeNavigatorPr {
                 let navigator = InsuranceNavigator(navigationController: mainNavigationController)
                 navigator.toMain()
                 navigationController.present(mainNavigationController, animated: true, completion: nil)
-            break
-        default:
-            break
+                break
+            case .SAFEBOX:
+                let navigator = MainSafeboxNavigator(nc: mainNavigationController)
+                navigator.toMain()
+                navigationController.present(mainNavigationController, animated: true, completion: nil)
+            default:
+                break
         }
     }
 }

@@ -64,4 +64,8 @@ final class NetworkProvider {
         let network = Network<Insurance>(apollo)
         return InsuranceNetwork(network: network)
     }
+    public func makeSafeboxNetwork() -> SafeboxNetwork {
+        let network = Network<SafeboxAttachment>(apollo)
+        return SafeboxNetwork(network: network)
+    }
 }

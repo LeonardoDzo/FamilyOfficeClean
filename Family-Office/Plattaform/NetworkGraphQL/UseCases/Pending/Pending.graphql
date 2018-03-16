@@ -5,7 +5,7 @@ query AllPending {
     }
 }
 mutation CreatePending($title: String!, $priority:String, $details: String){
-    createPending(title: $title, priority: $priority, details: $details){
+createPending(title: $title, priority: $priority, details: $details, assistant: ""){
         ...PendingDetails
     }
 }

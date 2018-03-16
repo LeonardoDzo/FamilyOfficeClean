@@ -21,7 +21,7 @@ final class MainIllnessNavigator: NavigatorType {
     func toMain(sender: Any? = nil) {
         let view = MainIllnessViewController()
         view.viewModel = MainIllnessViewModel(navigator: self, useCase: NetUseCaseProvider().makeIllnessUseCase())
-        
+        print("toMain Safebox")
         self.navigationController?.pushViewController(view, animated: true)
     }
     

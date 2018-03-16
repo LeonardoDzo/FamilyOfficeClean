@@ -270,6 +270,21 @@
 		02FE5794202105EA00B7E084 /* PreHomeNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FE5793202105EA00B7E084 /* PreHomeNavigator.swift */; };
 		02FE579620210C9B00B7E084 /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FE579520210C9B00B7E084 /* Application.swift */; };
 		02FE57982021445800B7E084 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02FE57972021445800B7E084 /* Error.swift */; };
+		04F4AF6520598F52001F0D63 /* Safebox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F4AF6420598F52001F0D63 /* Safebox.swift */; };
+		04F4AF6720599826001F0D63 /* SafeboxAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F4AF6620599826001F0D63 /* SafeboxAttachment.swift */; };
+		04F4AF6B20599CBC001F0D63 /* MainSafeboxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F4AF6A20599CBC001F0D63 /* MainSafeboxView.swift */; };
+		04F4AF6D20599FE7001F0D63 /* MainSafeboxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F4AF6C20599FE7001F0D63 /* MainSafeboxViewController.swift */; };
+		04F4AF6F20599FF0001F0D63 /* MainSafeboxViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F4AF6E20599FF0001F0D63 /* MainSafeboxViewModel.swift */; };
+		04F4AF7120599FF9001F0D63 /* MainSafeboxNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F4AF7020599FF9001F0D63 /* MainSafeboxNavigator.swift */; };
+		04F4AF732059A173001F0D63 /* SafeboxUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F4AF722059A173001F0D63 /* SafeboxUseCase.swift */; };
+		04F4AF762059AA67001F0D63 /* SafeboxCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F4AF752059AA67001F0D63 /* SafeboxCollectionViewCell.swift */; };
+		04F4AF782059ACA4001F0D63 /* SafeboxAttachment+Bindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F4AF772059ACA4001F0D63 /* SafeboxAttachment+Bindable.swift */; };
+		04F4AF7A2059F3D3001F0D63 /* SafeboxNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F4AF792059F3D3001F0D63 /* SafeboxNetwork.swift */; };
+		04F4AF7D2059F5AB001F0D63 /* NetSafeboxUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F4AF7C2059F5AB001F0D63 /* NetSafeboxUseCase.swift */; };
+		04F4AF802059F779001F0D63 /* RMSafeboxUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F4AF7F2059F779001F0D63 /* RMSafeboxUseCase.swift */; };
+		04F4AF822059F8B9001F0D63 /* Safebox.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 04F4AF812059F8B9001F0D63 /* Safebox.graphql */; };
+		04F4AF842059FDE7001F0D63 /* RMSafeboxAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F4AF832059FDE7001F0D63 /* RMSafeboxAttachment.swift */; };
+		04F4AF862059FE70001F0D63 /* RMSafebox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F4AF852059FE70001F0D63 /* RMSafebox.swift */; };
 		D979032C1D9FD9D30A861A1B /* Pods_Family_Office.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F832127F7425C43A37F58A2D /* Pods_Family_Office.framework */; };
 /* End PBXBuildFile section */
 
@@ -541,6 +556,21 @@
 		02FE5793202105EA00B7E084 /* PreHomeNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreHomeNavigator.swift; sourceTree = "<group>"; };
 		02FE579520210C9B00B7E084 /* Application.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
 		02FE57972021445800B7E084 /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
+		04F4AF6420598F52001F0D63 /* Safebox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Safebox.swift; sourceTree = "<group>"; };
+		04F4AF6620599826001F0D63 /* SafeboxAttachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafeboxAttachment.swift; sourceTree = "<group>"; };
+		04F4AF6A20599CBC001F0D63 /* MainSafeboxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSafeboxView.swift; sourceTree = "<group>"; };
+		04F4AF6C20599FE7001F0D63 /* MainSafeboxViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSafeboxViewController.swift; sourceTree = "<group>"; };
+		04F4AF6E20599FF0001F0D63 /* MainSafeboxViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSafeboxViewModel.swift; sourceTree = "<group>"; };
+		04F4AF7020599FF9001F0D63 /* MainSafeboxNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSafeboxNavigator.swift; sourceTree = "<group>"; };
+		04F4AF722059A173001F0D63 /* SafeboxUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafeboxUseCase.swift; sourceTree = "<group>"; };
+		04F4AF752059AA67001F0D63 /* SafeboxCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafeboxCollectionViewCell.swift; sourceTree = "<group>"; };
+		04F4AF772059ACA4001F0D63 /* SafeboxAttachment+Bindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SafeboxAttachment+Bindable.swift"; sourceTree = "<group>"; };
+		04F4AF792059F3D3001F0D63 /* SafeboxNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafeboxNetwork.swift; sourceTree = "<group>"; };
+		04F4AF7C2059F5AB001F0D63 /* NetSafeboxUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetSafeboxUseCase.swift; sourceTree = "<group>"; };
+		04F4AF7F2059F779001F0D63 /* RMSafeboxUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMSafeboxUseCase.swift; sourceTree = "<group>"; };
+		04F4AF812059F8B9001F0D63 /* Safebox.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = Safebox.graphql; sourceTree = "<group>"; };
+		04F4AF832059FDE7001F0D63 /* RMSafeboxAttachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMSafeboxAttachment.swift; sourceTree = "<group>"; };
+		04F4AF852059FE70001F0D63 /* RMSafebox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMSafebox.swift; sourceTree = "<group>"; };
 		8E8B73E3CFAE2D9C102EEEB4 /* Pods-Family-Office.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Family-Office.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Family-Office/Pods-Family-Office.debug.xcconfig"; sourceTree = "<group>"; };
 		A7ACE2A028DA56B8D9961EBB /* Pods-Family-Office.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Family-Office.release.xcconfig"; path = "Pods/Target Support Files/Pods-Family-Office/Pods-Family-Office.release.xcconfig"; sourceTree = "<group>"; };
 		F832127F7425C43A37F58A2D /* Pods_Family_Office.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Family_Office.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -754,6 +784,8 @@
 				02DD500020473CF700E9B63D /* Illness.swift */,
 				022FCEE8204DBC7A00070546 /* Insurance.swift */,
 				0216901A204DE1F80097F150 /* Attachment.swift */,
+				04F4AF6420598F52001F0D63 /* Safebox.swift */,
+				04F4AF6620599826001F0D63 /* SafeboxAttachment.swift */,
 			);
 			path = Entries;
 			sourceTree = "<group>";
@@ -770,6 +802,7 @@
 				02DD50062047446300E9B63D /* IllnessUseCase.swift */,
 				022FCEEC204DBD4200070546 /* InsuranceUseCase.swift */,
 				023AAB50201EC0BA00F50207 /* UseCaseProvider.swift */,
+				04F4AF722059A173001F0D63 /* SafeboxUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -876,6 +909,7 @@
 				02D338E220408E55007FDF7B /* SolicitudeNetwork.swift */,
 				02DD500E204747B000E9B63D /* IllnessNetwork.swift */,
 				022FCEEE204DBD9500070546 /* InsuranceNethwork.swift */,
+				04F4AF792059F3D3001F0D63 /* SafeboxNetwork.swift */,
 			);
 			path = Graphql;
 			sourceTree = "<group>";
@@ -883,6 +917,7 @@
 		023AAB6D201FBC9F00F50207 /* UseCases */ = {
 			isa = PBXGroup;
 			children = (
+				04F4AF7B2059F599001F0D63 /* Safebox */,
 				0216900C204DBFEE0097F150 /* Insurance */,
 				02DD500B2047478500E9B63D /* Illness */,
 				02CD29CF2044A70D00879308 /* AssistantSolicitude */,
@@ -994,6 +1029,7 @@
 				0252DBE92048D691008CB454 /* ILLNESSTYPE+EXT.swift */,
 				022FCEE6204DBC5700070546 /* Insurance+Bindable.swift */,
 				02169016204DD9B70097F150 /* InsuresBtn.swift */,
+				04F4AF772059ACA4001F0D63 /* SafeboxAttachment+Bindable.swift */,
 			);
 			path = Entries;
 			sourceTree = "<group>";
@@ -1028,6 +1064,7 @@
 				02C932E2202CC7FD00E64A42 /* Assistants */,
 				02DD5010204778E400E9B63D /* FirstAidKit */,
 				022FCEDA204DB09C00070546 /* Insurance */,
+				04F4AF6820599A36001F0D63 /* Safebox */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -1066,6 +1103,7 @@
 		02A277CB202D0CE500321FBD /* UseCase */ = {
 			isa = PBXGroup;
 			children = (
+				04F4AF7E2059F76E001F0D63 /* Safebox */,
 				0216900F204DC1B20097F150 /* Insurance */,
 				02DD5008204744DF00E9B63D /* Illness */,
 				02D338E8204097E2007FDF7B /* Solicitude */,
@@ -1491,6 +1529,8 @@
 				02ED6F9C204474A900D880F8 /* RMApplicationAssistant.swift */,
 				02DD50042047401000E9B63D /* RMIllness.swift */,
 				02169012204DC3580097F150 /* RMInsurance.swift */,
+				04F4AF832059FDE7001F0D63 /* RMSafeboxAttachment.swift */,
+				04F4AF852059FE70001F0D63 /* RMSafebox.swift */,
 			);
 			name = Entries;
 			path = ..;
@@ -1528,6 +1568,51 @@
 				02FE57892020F73B00B7E084 /* Realm+Ext.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		04F4AF6820599A36001F0D63 /* Safebox */ = {
+			isa = PBXGroup;
+			children = (
+				04F4AF6920599AE5001F0D63 /* Main */,
+			);
+			path = Safebox;
+			sourceTree = "<group>";
+		};
+		04F4AF6920599AE5001F0D63 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				04F4AF742059AA57001F0D63 /* cells */,
+				04F4AF6A20599CBC001F0D63 /* MainSafeboxView.swift */,
+				04F4AF6C20599FE7001F0D63 /* MainSafeboxViewController.swift */,
+				04F4AF6E20599FF0001F0D63 /* MainSafeboxViewModel.swift */,
+				04F4AF7020599FF9001F0D63 /* MainSafeboxNavigator.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		04F4AF742059AA57001F0D63 /* cells */ = {
+			isa = PBXGroup;
+			children = (
+				04F4AF752059AA67001F0D63 /* SafeboxCollectionViewCell.swift */,
+			);
+			path = cells;
+			sourceTree = "<group>";
+		};
+		04F4AF7B2059F599001F0D63 /* Safebox */ = {
+			isa = PBXGroup;
+			children = (
+				04F4AF7C2059F5AB001F0D63 /* NetSafeboxUseCase.swift */,
+				04F4AF812059F8B9001F0D63 /* Safebox.graphql */,
+			);
+			path = Safebox;
+			sourceTree = "<group>";
+		};
+		04F4AF7E2059F76E001F0D63 /* Safebox */ = {
+			isa = PBXGroup;
+			children = (
+				04F4AF7F2059F779001F0D63 /* RMSafeboxUseCase.swift */,
+			);
+			path = Safebox;
 			sourceTree = "<group>";
 		};
 		68290FFD8A4BAE3746C2F543 /* Frameworks */ = {
@@ -1631,6 +1716,7 @@
 				02D338E520408F96007FDF7B /* Solicitude.graphql in Resources */,
 				02EF0F1920321AE80020A133 /* Pending.graphql in Resources */,
 				02F2E4E8201A5DFC002E360E /* Main.storyboard in Resources */,
+				04F4AF822059F8B9001F0D63 /* Safebox.graphql in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1772,6 +1858,7 @@
 				02EDD792203E096F003DA591 /* UIView+Ext.swift in Sources */,
 				02D55FAC203B6D1700858D1B /* FamilyProfileViewController.swift in Sources */,
 				02F5D04C20486591009211BB /* IllnessViewController.swift in Sources */,
+				04F4AF782059ACA4001F0D63 /* SafeboxAttachment+Bindable.swift in Sources */,
 				02DD500F204747B000E9B63D /* IllnessNetwork.swift in Sources */,
 				02A123DC20350EB40013508F /* FamilyViewModel.swift in Sources */,
 				023AAAF0201EB9B300F50207 /* ViewModelType.swift in Sources */,
@@ -1784,11 +1871,14 @@
 				0242D4B0202E2C8E00B11E03 /* MenuViewModel.swift in Sources */,
 				02EF0F1E203228050020A133 /* PendingTableViewCell.swift in Sources */,
 				02AF66042023F2F800FE90F2 /* RMFamily.swift in Sources */,
+				04F4AF732059A173001F0D63 /* SafeboxUseCase.swift in Sources */,
 				023AAB05201EBB0900F50207 /* UIImageViewX.swift in Sources */,
 				02FE578A2020F73B00B7E084 /* Realm+Ext.swift in Sources */,
 				023AAB37201EBB4900F50207 /* DesignableTextView.swift in Sources */,
 				02EF0F1520321A0B0020A133 /* NetPendingUseCase.swift in Sources */,
+				04F4AF6720599826001F0D63 /* SafeboxAttachment.swift in Sources */,
 				023AAB4F201EC05700F50207 /* AuthUseCase.swift in Sources */,
+				04F4AF6F20599FF0001F0D63 /* MainSafeboxViewModel.swift in Sources */,
 				023AAB3E201EBB4900F50207 /* DesignableLabel.swift in Sources */,
 				028B667E2022858B003EC625 /* SignUpViewModel.swift in Sources */,
 				0298C7B3202B8E0E0035D493 /* HomeViewController.swift in Sources */,
@@ -1816,6 +1906,7 @@
 				02ED6FAD204491B900D880F8 /* AssistantInviteTableViewCell.swift in Sources */,
 				02EF0F262032370F0020A133 /* Pending+Mappable.swift in Sources */,
 				023AAB5C201F8BEC00F50207 /* Family+Mappable.swift in Sources */,
+				04F4AF7D2059F5AB001F0D63 /* NetSafeboxUseCase.swift in Sources */,
 				023AAB0A201EBB0900F50207 /* UITextFieldX.swift in Sources */,
 				02012DB92036114100889401 /* NotificationNavigator.swift in Sources */,
 				02FE5794202105EA00B7E084 /* PreHomeNavigator.swift in Sources */,
@@ -1880,6 +1971,7 @@
 				0291AE6C203509A300CD1FB3 /* FamilyViewController.swift in Sources */,
 				02012DB720360EE500889401 /* NotificationsView.swift in Sources */,
 				023AAB35201EBB4900F50207 /* DesignableTextField.swift in Sources */,
+				04F4AF6D20599FE7001F0D63 /* MainSafeboxViewController.swift in Sources */,
 				023AAB39201EBB4900F50207 /* SpringTextField.swift in Sources */,
 				02FE578E2020F86800B7E084 /* UserUseCase.swift in Sources */,
 				025742E6203F3D3A00215A56 /* SearchUserNavigator.swift in Sources */,
@@ -1901,6 +1993,7 @@
 				023AAB4B201EBF6E00F50207 /* User.swift in Sources */,
 				02F5D04E204865AA009211BB /* IllnessAddViewModel.swift in Sources */,
 				028F3E93204631DF00B7CB25 /* ApplicationSolicitudeViewModel.swift in Sources */,
+				04F4AF802059F779001F0D63 /* RMSafeboxUseCase.swift in Sources */,
 				02A123DE203514C40013508F /* FamilyCollectionViewCell.swift in Sources */,
 				0216901B204DE1F80097F150 /* Attachment.swift in Sources */,
 				02EF0F0D20320E710020A133 /* SuperProvider.swift in Sources */,
@@ -1913,6 +2006,7 @@
 				022FCEEB204DBCD400070546 /* Insurance+Mappable.swift in Sources */,
 				0282D3A9203FA57C00FF6663 /* ApplicationUseCase.swift in Sources */,
 				022DD8C42028DCDA008ED417 /* NetUserUseCase.swift in Sources */,
+				04F4AF6B20599CBC001F0D63 /* MainSafeboxView.swift in Sources */,
 				02D55FB2203B6D3700858D1B /* FamilyProfileViewModel.swift in Sources */,
 				02F5258E2024E5B8009F817D /* AddEditFamilyView.swift in Sources */,
 				02FE57822020F41E00B7E084 /* Repository.swift in Sources */,
@@ -1938,12 +2032,15 @@
 				0242E953204E115B00C46D00 /* DetailsInsuranceNavigator.swift in Sources */,
 				023AAB06201EBB0900F50207 /* UIViewAnchorPoint.swift in Sources */,
 				02BF68B5204250C600D03CDA /* Decodable+Ext.swift in Sources */,
+				04F4AF7120599FF9001F0D63 /* MainSafeboxNavigator.swift in Sources */,
 				022FCEDE204DB12A00070546 /* MainInsuranceViewModel.swift in Sources */,
 				025742E4203F3D2F00215A56 /* SearchUserViewModel.swift in Sources */,
 				02EF0F1B203225ED0020A133 /* PendingViewModel.swift in Sources */,
 				02D338EC20409F91007FDF7B /* SolicitudeViewModel.swift in Sources */,
 				028F3E8F20461E3D00B7CB25 /* UILabel+Ext.swift in Sources */,
 				02CD29CE20449BFF00879308 /* AssitantTableViewCellViewModel.swift in Sources */,
+				04F4AF862059FE70001F0D63 /* RMSafebox.swift in Sources */,
+				04F4AF762059AA67001F0D63 /* SafeboxCollectionViewCell.swift in Sources */,
 				02F5259D2025261F009F817D /* AddEditFamilyViewModel.swift in Sources */,
 				023AAB44201EBB4900F50207 /* Spring.swift in Sources */,
 				02EF0F0B203207680020A133 /* AddEditAssistantViewModel.swift in Sources */,
@@ -1964,6 +2061,7 @@
 				022F5AAC20433A7D00BDDD7E /* Status_Solicitude.swift in Sources */,
 				02D55FB0203B6D2C00858D1B /* FamilyNavigator.swift in Sources */,
 				023AAB43201EBB4900F50207 /* AutoTextView.swift in Sources */,
+				04F4AF6520598F52001F0D63 /* Safebox.swift in Sources */,
 				022FE36D202CDB09009029AD /* HomeCellViewModel.swift in Sources */,
 				023AAB49201EBB4900F50207 /* TransitionZoom.swift in Sources */,
 				02F5D050204865B6009211BB /* IllnessAddNavigator.swift in Sources */,
@@ -1993,8 +2091,10 @@
 				02FE576D2020E77200B7E084 /* PreHomeStevia.swift in Sources */,
 				023AAB3B201EBB4900F50207 /* SpringButton.swift in Sources */,
 				02012DAF2035F67B00889401 /* HomeFamilyNavigator.swift in Sources */,
+				04F4AF842059FDE7001F0D63 /* RMSafeboxAttachment.swift in Sources */,
 				02DD501920477C1C00E9B63D /* MainIllnessNavigator.swift in Sources */,
 				02FE57632020D77900B7E084 /* NetUseCaseProvider.swift in Sources */,
+				04F4AF7A2059F3D3001F0D63 /* SafeboxNetwork.swift in Sources */,
 				02508D9A201ABAD600C6F030 /* API.swift in Sources */,
 				02A5A306202A4F62009133BD /* Graphql+Mappable.swift in Sources */,
 				022FE36A202CCD58009029AD /* HomeViewModel.swift in Sources */,

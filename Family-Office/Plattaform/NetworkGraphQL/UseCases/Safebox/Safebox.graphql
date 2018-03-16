@@ -1,0 +1,17 @@
+query MySafebox($password: String!){
+    mySafebox(password: $password){
+        files{
+            name
+        },
+        id
+    }
+}
+
+query MySafeboxFiles($password: String!){
+    mySafeboxFiles(password: $password){
+        name,
+        mime,
+        token,
+        uid
+    }
+}

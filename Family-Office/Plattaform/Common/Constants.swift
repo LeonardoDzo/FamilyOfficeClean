@@ -9,11 +9,11 @@
 import Foundation
 
 enum ip: String {
-    case Dev = "0960d911.ngrok.io"
+    case Dev = "1396f7d3.ngrok.io"
     case COT = "192.168.1.191"
 }
 
-let uri = ip.COT
+let uri = ip.Dev
 
 extension ip {
     func getPort() -> String {

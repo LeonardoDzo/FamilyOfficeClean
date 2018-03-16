@@ -7310,7 +7310,7 @@ public final class AllPendingQuery: GraphQLQuery {
 
 public final class CreatePendingMutation: GraphQLMutation {
   public static let operationString =
-    "mutation CreatePending($title: String!, $priority: String, $details: String) {\n  createPending(title: $title, priority: $priority, details: $details) {\n    __typename\n    ...PendingDetails\n  }\n}"
+    "mutation CreatePending($title: String!, $priority: String, $details: String) {\n  createPending(title: $title, priority: $priority, details: $details, assistant: \"\") {\n    __typename\n    ...PendingDetails\n  }\n}"
 
   public static var requestString: String { return operationString.appending(PendingDetails.fragmentString) }
 
@@ -7332,7 +7332,7 @@ public final class CreatePendingMutation: GraphQLMutation {
     public static let possibleTypes = ["Mutation"]
 
     public static let selections: [GraphQLSelection] = [
-      GraphQLField("createPending", arguments: ["title": GraphQLVariable("title"), "priority": GraphQLVariable("priority"), "details": GraphQLVariable("details")], type: .object(CreatePending.selections)),
+      GraphQLField("createPending", arguments: ["title": GraphQLVariable("title"), "priority": GraphQLVariable("priority"), "details": GraphQLVariable("details"), "assistant": ""], type: .object(CreatePending.selections)),
     ]
 
     public var snapshot: Snapshot
@@ -7460,6 +7460,241 @@ public final class CreatePendingMutation: GraphQLMutation {
           set {
             snapshot += newValue.snapshot
           }
+        }
+      }
+    }
+  }
+}
+
+public final class MySafeboxQuery: GraphQLQuery {
+  public static let operationString =
+    "query MySafebox($password: String!) {\n  mySafebox(password: $password) {\n    __typename\n    files {\n      __typename\n      name\n    }\n    id\n  }\n}"
+
+  public var password: String
+
+  public init(password: String) {
+    self.password = password
+  }
+
+  public var variables: GraphQLMap? {
+    return ["password": password]
+  }
+
+  public struct Data: GraphQLSelectionSet {
+    public static let possibleTypes = ["Query"]
+
+    public static let selections: [GraphQLSelection] = [
+      GraphQLField("mySafebox", arguments: ["password": GraphQLVariable("password")], type: .object(MySafebox.selections)),
+    ]
+
+    public var snapshot: Snapshot
+
+    public init(snapshot: Snapshot) {
+      self.snapshot = snapshot
+    }
+
+    public init(mySafebox: MySafebox? = nil) {
+      self.init(snapshot: ["__typename": "Query", "mySafebox": mySafebox.flatMap { $0.snapshot }])
+    }
+
+    public var mySafebox: MySafebox? {
+      get {
+        return (snapshot["mySafebox"] as? Snapshot).flatMap { MySafebox(snapshot: $0) }
+      }
+      set {
+        snapshot.updateValue(newValue?.snapshot, forKey: "mySafebox")
+      }
+    }
+
+    public struct MySafebox: GraphQLSelectionSet {
+      public static let possibleTypes = ["Safebox"]
+
+      public static let selections: [GraphQLSelection] = [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("files", type: .nonNull(.list(.object(File.selections)))),
+        GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
+      ]
+
+      public var snapshot: Snapshot
+
+      public init(snapshot: Snapshot) {
+        self.snapshot = snapshot
+      }
+
+      public init(files: [File?], id: GraphQLID) {
+        self.init(snapshot: ["__typename": "Safebox", "files": files.map { $0.flatMap { $0.snapshot } }, "id": id])
+      }
+
+      public var __typename: String {
+        get {
+          return snapshot["__typename"]! as! String
+        }
+        set {
+          snapshot.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      public var files: [File?] {
+        get {
+          return (snapshot["files"] as! [Snapshot?]).map { $0.flatMap { File(snapshot: $0) } }
+        }
+        set {
+          snapshot.updateValue(newValue.map { $0.flatMap { $0.snapshot } }, forKey: "files")
+        }
+      }
+
+      public var id: GraphQLID {
+        get {
+          return snapshot["id"]! as! GraphQLID
+        }
+        set {
+          snapshot.updateValue(newValue, forKey: "id")
+        }
+      }
+
+      public struct File: GraphQLSelectionSet {
+        public static let possibleTypes = ["SafeboxFile"]
+
+        public static let selections: [GraphQLSelection] = [
+          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLField("name", type: .scalar(String.self)),
+        ]
+
+        public var snapshot: Snapshot
+
+        public init(snapshot: Snapshot) {
+          self.snapshot = snapshot
+        }
+
+        public init(name: String? = nil) {
+          self.init(snapshot: ["__typename": "SafeboxFile", "name": name])
+        }
+
+        public var __typename: String {
+          get {
+            return snapshot["__typename"]! as! String
+          }
+          set {
+            snapshot.updateValue(newValue, forKey: "__typename")
+          }
+        }
+
+        public var name: String? {
+          get {
+            return snapshot["name"] as? String
+          }
+          set {
+            snapshot.updateValue(newValue, forKey: "name")
+          }
+        }
+      }
+    }
+  }
+}
+
+public final class MySafeboxFilesQuery: GraphQLQuery {
+  public static let operationString =
+    "query MySafeboxFiles($password: String!) {\n  mySafeboxFiles(password: $password) {\n    __typename\n    name\n    mime\n    token\n    uid\n  }\n}"
+
+  public var password: String
+
+  public init(password: String) {
+    self.password = password
+  }
+
+  public var variables: GraphQLMap? {
+    return ["password": password]
+  }
+
+  public struct Data: GraphQLSelectionSet {
+    public static let possibleTypes = ["Query"]
+
+    public static let selections: [GraphQLSelection] = [
+      GraphQLField("mySafeboxFiles", arguments: ["password": GraphQLVariable("password")], type: .nonNull(.list(.object(MySafeboxFile.selections)))),
+    ]
+
+    public var snapshot: Snapshot
+
+    public init(snapshot: Snapshot) {
+      self.snapshot = snapshot
+    }
+
+    public init(mySafeboxFiles: [MySafeboxFile?]) {
+      self.init(snapshot: ["__typename": "Query", "mySafeboxFiles": mySafeboxFiles.map { $0.flatMap { $0.snapshot } }])
+    }
+
+    public var mySafeboxFiles: [MySafeboxFile?] {
+      get {
+        return (snapshot["mySafeboxFiles"] as! [Snapshot?]).map { $0.flatMap { MySafeboxFile(snapshot: $0) } }
+      }
+      set {
+        snapshot.updateValue(newValue.map { $0.flatMap { $0.snapshot } }, forKey: "mySafeboxFiles")
+      }
+    }
+
+    public struct MySafeboxFile: GraphQLSelectionSet {
+      public static let possibleTypes = ["SafeboxFile"]
+
+      public static let selections: [GraphQLSelection] = [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("name", type: .scalar(String.self)),
+        GraphQLField("mime", type: .scalar(String.self)),
+        GraphQLField("token", type: .scalar(String.self)),
+        GraphQLField("uid", type: .scalar(String.self)),
+      ]
+
+      public var snapshot: Snapshot
+
+      public init(snapshot: Snapshot) {
+        self.snapshot = snapshot
+      }
+
+      public init(name: String? = nil, mime: String? = nil, token: String? = nil, uid: String? = nil) {
+        self.init(snapshot: ["__typename": "SafeboxFile", "name": name, "mime": mime, "token": token, "uid": uid])
+      }
+
+      public var __typename: String {
+        get {
+          return snapshot["__typename"]! as! String
+        }
+        set {
+          snapshot.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      public var name: String? {
+        get {
+          return snapshot["name"] as? String
+        }
+        set {
+          snapshot.updateValue(newValue, forKey: "name")
+        }
+      }
+
+      public var mime: String? {
+        get {
+          return snapshot["mime"] as? String
+        }
+        set {
+          snapshot.updateValue(newValue, forKey: "mime")
+        }
+      }
+
+      public var token: String? {
+        get {
+          return snapshot["token"] as? String
+        }
+        set {
+          snapshot.updateValue(newValue, forKey: "token")
+        }
+      }
+
+      public var uid: String? {
+        get {
+          return snapshot["uid"] as? String
+        }
+        set {
+          snapshot.updateValue(newValue, forKey: "uid")
         }
       }
     }

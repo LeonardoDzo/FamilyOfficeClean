@@ -53,4 +53,9 @@ public final class RMUseCaseProvider: UseCaseProvider {
         let repository = Repository<Insurance>(configuration: configuration)
         return RMInsuranceUseCase(repository: repository)
     }
+    
+    public func makeSafeboxUseCase() -> SafeboxUseCase {
+        let repository = Repository<SafeboxAttachment>(configuration: configuration)
+        return RMSafeboxUseCase(repository: repository)
+    }
 }
