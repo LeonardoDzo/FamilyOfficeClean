@@ -15,7 +15,7 @@ class CreateEventController: FormViewController {
     let disposeBag = DisposeBag()
     var viewModel: CreateEventViewModel!
     let event = BehaviorRelay(value: Event())
-    let recurrence = BehaviorRelay<String?>(value: nil)
+    let recurrence = BehaviorRelay<rrule?>(value: nil)
     let valid = BehaviorRelay(value: false)
     
     var startTag = UUID().uuidString
@@ -44,6 +44,11 @@ class CreateEventController: FormViewController {
         mutate(&ev)
         self.event.accept(ev)
 //        print(ev)
+        if let rule = recurrence.value {
+            rule.set(dtstart: Date(ev.instances[0].start)!)
+            print(rule.toString())
+            recurrence.accept(rule)
+        }
         syncForm(event: ev)
         valid.accept(form.validate().count == 0)
     }
@@ -186,17 +191,35 @@ class CreateEventController: FormViewController {
                 row.title = "Repetir"
                 row.options = ["Nunca", "Cada día", "Todas las semanas", "Cada 2 semanas", "Cada mes", "Cada año"]
                 }.onChange { row in
-//                    switch row.options.index(of: row.value) {
-//                    case 0: recurrence.accept(nil) break
-//                    case 1: recurrence.accept(rrule(.daily).)
-//                    default: break
-//                    }
+                    var rule: rrule?
+                    let start = Date(self.event.value.instances[0].start)
+                    switch row.options!.index(of: row.value!) {
+                    case 1?:
+                        rule = rrule(frequency: .daily, dtstart: start)
+                        break
+                    case 2?:
+                        rule = rrule(frequency: .weekly, dtstart: start)
+                        break
+                    case 3?:
+                        rule = rrule(frequency: .weekly, dtstart: start, interval: 2)
+                        break
+                    case 4?:
+                        rule = rrule(frequency: .monthly, dtstart: start)
+                        break
+                    case 5?:
+                        rule = rrule(frequency: .yearly, dtstart: start)
+                        break
+                    default: break
+                    }
+                    print(rule?.toString() ?? "no recurrence")
+                    self.recurrence.accept(rule)
                 }
         
         // model
         let input = CreateEventViewModel.Input(
             valid: valid.asDriver(),
             event: event.asDriver(),
+            recurrence: recurrence.asDriver(),
             submit: saveBtn.rx.tap.asDriver()
         )
         let output = viewModel.transform(input: input)

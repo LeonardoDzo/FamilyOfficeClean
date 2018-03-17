@@ -40,14 +40,15 @@ fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
 // swiftlint:disable comma
 // swiftlint:disable todo
 
-public enum RruleFrequency {
-    case yearly
-    case monthly
-    case weekly
-    case daily
-    case hourly //Todo
-    case minutely //Todo
-    case secondly //Todo
+public enum RruleFrequency: String {
+    case yearly = "YEARLY"
+    case monthly = "MONTHLY"
+    case weekly = "WEEKLY"
+    case daily = "DAILY"
+    case hourly = "HOURLY" //Todo
+    case minutely = "MINUTELY" //Todo
+    case secondly = "SECONDLY" //Todo
+    
 }
 
 private struct DateMask {
@@ -138,29 +139,32 @@ class rrule {
         
         // Complete the recurrence rule
         if self.byweekno.count == 0 && self.byyearday.count == 0 && self.bymonthday.count == 0 && self.byweekday.count == 0 {
-            let calendar = Calendar.current
-            let components = calendar.dateComponents([.year, .month, .day], from: dtstart!)
-            switch frequency {
-            case .yearly:
-                if bymonth.count == 0 {
-                    if let month = components.month {
-                        self.bymonth = [month]
-                    }
-                }
-                if let day = components.day {
-                    self.bymonthday = [day]
-                }
-            case .monthly:
-                if let day = components.day {
-                    self.bymonthday = [day]
-                }
-            case .weekly:
-                if let weekday = components.weekday {
-                    self.byweekday = [weekday]
-                }
-            default:
-                break
+            self.set(dtstart: self.dtstart)
+        }
+    }
+    
+    func set(dtstart: Date) {
+        let calendar = Calendar.current
+        self.dtstart = dtstart
+        let components = calendar.dateComponents([.year, .month, .day, .weekday], from: self.dtstart)
+        switch frequency {
+        case .yearly:
+            if let month = components.month {
+                self.bymonth = [month]
             }
+            if let day = components.day {
+                self.bymonthday = [day]
+            }
+        case .monthly:
+            if let day = components.day {
+                self.bymonthday = [day]
+            }
+        case .weekly:
+            if let weekday = components.weekday {
+                self.wkst = weekday
+            }
+        default:
+            break
         }
     }
     
@@ -675,6 +679,124 @@ class rrule {
         let calendar = Calendar(identifier: Calendar.Identifier.gregorian)
         let dateComponent = (calendar as NSCalendar?)?.components(.weekday, from: date)
         return (dateComponent?.weekday)!
+    }
+}
+
+extension rrule {
+    
+    public static let dateFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
+        dateFormatter.dateFormat = "yyyyMMdd'T'HHmmss'Z'"
+        return dateFormatter
+    }()
+    
+    static func wkstring(_ wknum: Int) -> String? {
+        return ["SU", "MO", "TU", "WE", "TH", "FR", "SA"][wknum-1]
+    }
+    
+    func toString() -> String {
+        let rule = self
+        var rruleString = "RRULE:"
+        
+        rruleString += "FREQ=\(rule.frequency);"
+        
+        let interval = max(1, rule.interval)
+        rruleString += "INTERVAL=\(interval);"
+        
+        if let wkst = rrule.wkstring(rule.wkst), rule.frequency == .weekly {
+            rruleString += "WKST=\(wkst);"
+        }
+        
+        if let endDate = rule.until {
+            rruleString += "UNTIL=\(rrule.dateFormatter.string(from: endDate));"
+        } else if let count = rule.count {
+            rruleString += "COUNT=\(count);"
+        }
+        
+        let bysetposStrings = rule.bysetpos.flatMap({ (setpo) -> String? in
+            guard (-366...366 ~= setpo) && (setpo != 0) else {
+                return nil
+            }
+            return String(setpo)
+        })
+        if bysetposStrings.count > 0 {
+            rruleString += "BYSETPOS=\(bysetposStrings.joined(separator: ","));"
+        }
+        
+        let byyeardayStrings = rule.byyearday.flatMap({ (yearday) -> String? in
+            guard (-366...366 ~= yearday) && (yearday != 0) else {
+                return nil
+            }
+            return String(yearday)
+        })
+        if byyeardayStrings.count > 0 {
+            rruleString += "BYYEARDAY=\(byyeardayStrings.joined(separator: ","));"
+        }
+        
+        let bymonthStrings = rule.bymonth.flatMap({ (month) -> String? in
+            guard 1...12 ~= month else {
+                return nil
+            }
+            return String(month)
+        })
+        if bymonthStrings.count > 0 {
+            rruleString += "BYMONTH=\(bymonthStrings.joined(separator: ","));"
+        }
+        
+        let byweeknoStrings = rule.byweekno.flatMap({ (weekno) -> String? in
+            guard (-53...53 ~= weekno) && (weekno != 0) else {
+                return nil
+            }
+            return String(weekno)
+        })
+        if byweeknoStrings.count > 0 {
+            rruleString += "BYWEEKNO=\(byweeknoStrings.joined(separator: ","));"
+        }
+        
+        let bymonthdayStrings = rule.bymonthday.flatMap({ (monthday) -> String? in
+            guard (-31...31 ~= monthday) && (monthday != 0) else {
+                return nil
+            }
+            return String(monthday)
+        })
+        if bymonthdayStrings.count > 0 {
+            rruleString += "BYMONTHDAY=\(bymonthdayStrings.joined(separator: ","));"
+        }
+        
+        let byweekdaySymbols = rule.byweekday.map({ (weekday) -> String in
+            return "\(rrule.wkstring(weekday)!)"
+        })
+        if byweekdaySymbols.count > 0 {
+            rruleString += "BYDAY=\(byweekdaySymbols.joined(separator: ","));"
+        }
+        
+        let byhourStrings = rule.byhour.map({ (hour) -> String in
+            return String(hour)
+        })
+        if byhourStrings.count > 0 {
+            rruleString += "BYHOUR=\(byhourStrings.joined(separator: ","));"
+        }
+        
+        let byminuteStrings = rule.byminute.map({ (minute) -> String in
+            return String(minute)
+        })
+        if byminuteStrings.count > 0 {
+            rruleString += "BYMINUTE=\(byminuteStrings.joined(separator: ","));"
+        }
+        
+        let bysecondStrings = rule.bysecond.map({ (second) -> String in
+            return String(second)
+        })
+        if bysecondStrings.count > 0 {
+            rruleString += "BYSECOND=\(bysecondStrings.joined(separator: ","));"
+        }
+        
+        if String(rruleString.suffix(from: rruleString.characters.index(rruleString.endIndex, offsetBy: -1))) == ";" {
+            rruleString.remove(at: rruleString.characters.index(rruleString.endIndex, offsetBy: -1))
+        }
+        
+        return rruleString
     }
 }
 

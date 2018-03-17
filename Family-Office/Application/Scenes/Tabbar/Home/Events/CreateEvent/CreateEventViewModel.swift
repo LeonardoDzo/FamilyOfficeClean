@@ -22,9 +22,10 @@ public class CreateEventViewModel: ViewModelType {
     func transform(input: Input) -> Output {
         let created = input.submit
             .withLatestFrom(input.event)
-            .flatMapLatest { [unowned self] in
+            .withLatestFrom(input.recurrence, resultSelector: { ev, rec in (ev, rec)})
+            .flatMapLatest { (ev, rec) in
                 return self.useCase
-                    .create(event: $0, recurrence: nil)
+                    .create(event: ev, recurrence: rec?.toString())
                     .asDriverOnErrorJustComplete()
             }.do(onNext: { _ in
                 self.navigator.toPop()
@@ -37,6 +38,7 @@ extension CreateEventViewModel {
     struct Input {
         let valid: Driver<Bool>
         let event: Driver<Event>
+        let recurrence: Driver<rrule?>
         let submit: Driver<Void>
     }
     struct Output {

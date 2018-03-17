@@ -42,15 +42,16 @@ class CalendarDayCell: JTAppleCell {
     func bind(state: CellState, active: Bool) {
         if state.dateBelongsTo == .thisMonth {
             label.text = state.text
+            if active {
+                label.backgroundColor = MODULE.CALENDAR.color
+                label.textColor = UIColor.white
+            } else {
+                label.backgroundColor = UIColor.clear
+                label.textColor = UIColor.black
+            }
         } else {
             label.text = ""
-        }
-        if active {
-            label.backgroundColor = MODULE.CALENDAR.color
-            label.textColor = UIColor.white
-        } else {
             label.backgroundColor = UIColor.clear
-            label.textColor = UIColor.black
         }
     }
 }
