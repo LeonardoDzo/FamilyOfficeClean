@@ -16,6 +16,8 @@ final class MainIllnessViewModel: ViewModelType {
     let navigator: MainIllnessNavigator!
     let illnessUseCase: IllnessUseCase!
     var isEditting: Bool = false
+    var filter = Variable(0)
+    
     init(navigator: MainIllnessNavigator, useCase: IllnessUseCase) {
         self.illnessUseCase = useCase
         self.navigator = navigator
@@ -34,6 +36,7 @@ final class MainIllnessViewModel: ViewModelType {
         
         
         let tap = input.taptrigger.do(onNext: {
+           
             switch $0.tag{
                 case 3:
                     self.navigator.toAddEdit()
@@ -43,8 +46,12 @@ final class MainIllnessViewModel: ViewModelType {
             }
         })
         
-        let illness = Driver.combineLatest(value, tap, input.searchTrigger) { values,tap,search  -> [Illness] in
+        
+
+        
+        let illness =  Driver.combineLatest(value, tap, input.searchTrigger, value) { values,tap,search,val   -> [Illness] in
             var value: [Illness]! = values
+    
             switch tap.tag{
                 case 1:
                     value = values.filter({$0.type == .Pain})

@@ -12,7 +12,7 @@ import Kingfisher
 
 protocol MessageBindible: AnyObject {
     
-    var message: MockMessage! {get set}
+    var message: ChatMessage! {get set}
     
     var messageText: UILabelX! {get}
     
@@ -38,7 +38,7 @@ extension MessageBindible {
     var photoMessage: UIImageViewX! {return nil}
     
     
-    func bind(message: MockMessage) -> Void {
+    func bind(message: ChatMessage) -> Void {
         self.message = message
         self.bind()
     }
@@ -47,10 +47,10 @@ extension MessageBindible {
         guard let message = message else { return }
         
         if let view = messageText {
-            if case let MessageData.text(value) = message.data {
+            if !message.text.isEmpty {
                 view.isHidden = false
                 view.numberOfLines = 0
-                view.text = value
+                view.text = message.text
                 view.height(>=14)
                 view.textAlignment = .justified
                 view.font = UIFont(name: "Thonburi", size: UIFont.systemFontSize)!
@@ -60,17 +60,22 @@ extension MessageBindible {
             }
         }
 
-        if let view = photoMessage {
-            if case let MessageData.photo(value) = message.data {
+        if let view = photoMessage{
+            view.cornerRadius = 8
+            view.size(270)
+            view.clipsToBounds = true
+            if let data = message.attachment {
                 view.isHidden = false
-                let url = URL(string: value.routes[2])
+                view.contentMode = .scaleAspectFill
+                let token = UserDefaults().value(forKey: "token") as? String ?? ""
+                let url = URL(string: data.routes[1].appending("?token=\(token)"))
                 view.kf.indicatorType = .activity
-                view.cornerRadius = 8
-                view.clipsToBounds = true
                 view.kf.setImage(with: url, placeholder: #imageLiteral(resourceName: "icons8-remove_image"))
-                view.size(200)
+            }else if let data = message.data {
+                let image = UIImage(data: data, scale: 1.0)
+                view.image = image
             }else{
-                view.height(0)
+                view.size(0)
                 view.isHidden = true
             }
         }
@@ -79,20 +84,20 @@ extension MessageBindible {
             view.cornerRadius = view.bounds.size.width / 2
             view.clipsToBounds = true
             view.size(40)
-            let url = URL(string: message.sender.photo?.routes[3] ?? "")
+            let url = URL(string: message.sender?.photo?.routes[3] ?? "")
             view.kf.indicatorType = .activity
             view.kf.setImage(with: url, placeholder: #imageLiteral(resourceName: "profile_default"))
         }
         
         if let view = nameSender {
-            view.text = message.sender.displayName
+            view.text = message.sender?.displayName
             view.textAlignment = .left
             view.font = UIFont(name: "HelveticaNeue-CondensedBlack", size: 14)!
             view.textColor = #colorLiteral(red: 0.1764705926, green: 0.01176470611, blue: 0.5607843399, alpha: 1)
         }
         
         if let view = date {
-            view.text = message.sentDate.string(with: .HHmm)
+            view.text = Date(message.seenAt)?.string(with: .HHmm) ?? ""
             view.font = UIFont(name: "HelveticaNeue-CondensedBlack", size: 11)!
             view.textColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
         }

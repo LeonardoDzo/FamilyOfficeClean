@@ -17,14 +17,20 @@ mutation CreateChat($user: ID!) {
     }
 }
 
+mutation SeenChat($chatId: ID!) {
+    setChatSeen(chat: $chatId){
+        ...ChatMembershipDetails
+    }
+}
+
 mutation AddMemberToChat($chat: ID!,$user: ID! $admin: Boolean){
     addChatMember(chat: $chat, user: $user, admin: $admin){
         ...ChatMembershipDetails
     }
 }
 
-mutation SendMessage($chat: ID!, $messageId: ID!, $text: String!){
-    createChatMessage(chat: $chat, messageId: $messageId, text: $text) {
+mutation SendMessage($chat: ID!, $messageId: ID!, $text: String!, $file: Upload){
+    createChatMessage(chat: $chat, messageId: $messageId, text: $text, attachment: $file) {
         ...ChatMessageDetails
     }
 }

@@ -14,6 +14,10 @@ let me = {
     return  UserDefaults().value(forKey: "uid") as? String ?? ""
 }()
 final class RMChatUseCase<Repository>: ChatUseCase where Repository: AbstractRepository, Repository.T == Chat {
+    func seenToChat(id: String) -> Observable<Void> {
+        return  Variable(()).asObservable()
+    }
+    
     let disposeBag = DisposeBag()
     let realm = try! Realm()
     private let repository: Repository!
@@ -44,6 +48,7 @@ final class RMChatUseCase<Repository>: ChatUseCase where Repository: AbstractRep
     
     func create(chat: Chat) -> Observable<Chat> {
         MainSocket.shareIntstance.channel.action("execute", with: ChatMessageAdded(id: chat.uid))
+        MainSocket.shareIntstance.channel.action("execute", with: chatMembershipChanged(chat: chat.uid))
         return repository.save(entity: chat).map({return chat})
     }
     
@@ -57,7 +62,7 @@ final class RMChatUseCase<Repository>: ChatUseCase where Repository: AbstractRep
     
     func get(uid: String) -> Observable<Chat> {
         return repository.queryAll().map({ chats in
-            if let chat = chats.filter({($0.group?.name.isEmpty)! && $0.family == nil}).first(where: { (chat) -> Bool in
+            if let chat = chats.filter({ $0.getType() == .OneToOne }).first(where: { (chat) -> Bool in
                 return chat.members.contains(where: {$0.user?.uid == uid}) &&  chat.members.contains(where: {$0.user?.uid == me})
             }) {
                 return chat

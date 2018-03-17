@@ -29,6 +29,8 @@ public struct ChatMessage: Decodable {
     
     var status: MESSAGESTATUS = .Pending
     
+    var data: Data? = nil
+    
     enum CodingKeys: String, CodingKey {
         case attachment
         case uid = "uuid"

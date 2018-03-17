@@ -64,8 +64,7 @@ final class Repository<T: RealmRepresentable>: AbstractRepository where T == T.R
         return Observable.deferred {
             let realm = self.realm
             let objects = realm.objects(T.RealmType.self).filter(predicate)
-            return Observable.array(from: objects)
-                .mapToDomain()
+            return Observable.array(from: objects).mapToDomain()
             }
             .observeOn(scheduler)
     }

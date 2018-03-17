@@ -65,10 +65,17 @@ final class MainSocket {
                                     self.provider.makeChatUseCase().save(chatId: chatId, message: model).subscribe().dispose()
                                 }
                                 break
-                                default:
-                                    break
+                            case "chatMembershipChanged":
+                                if let model = FindObject<ChatMembership>().decoder(data: data) {
+                                    let realm = try! Realm()
+                                    try! realm.write {
+                                        realm.add(model.asRealm(), update: true)
+                                    }
+                                }
+                                break
+                            default:
+                                break
                             }
-
                         }
                     }
                 }

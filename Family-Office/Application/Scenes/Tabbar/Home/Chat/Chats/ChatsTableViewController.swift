@@ -19,8 +19,10 @@ class ChatsTableViewController: UITableViewController {
     fileprivate func setupView() {
         self.navigationItem.leftBarButtonItem = backBtn
         self.tableView.register(ChatGroupTableViewCell.self, forCellReuseIdentifier: "cell")
+        self.tableView.rowHeight = 80
         self.tableView.tableFooterView = UIView()
         self.tableView.backgroundColor = #colorLiteral(red: 0.9792956669, green: 0.9908331388, blue: 1, alpha: 1)
+        self.tableView.separatorInset = UIEdgeInsets(top: 0, left: 80, bottom: 0, right: 0)
         self.tableView.dataSource = nil
         let label = UILabel()
         label.text = "No se encontro nada :("
@@ -45,17 +47,8 @@ class ChatsTableViewController: UITableViewController {
         
         output.chats.drive(self.tableView.rx.items(cellIdentifier: "cell", cellType: ChatGroupTableViewCell.self)){
             i, model, cell in
-           
-            if (model.group?.name.isEmpty)! && model.family == nil{
-                 let user = model.members.first(where: {$0.user?.uid != me})?.user
-                 cell.title.text = user?.displayName ?? "🥊"
-            }else{
-                let name = model.family == nil ? model.group?.name : model.family?.name
-                cell.title.text = name
-                
-            }
-            cell.photo.image = #imageLiteral(resourceName: "background-Assitant")
-           
+            cell.bind(chat: model)
+            self.tableView.backgroundView = nil
         }.disposed(by: disposeBag)
         
         output.selected.drive().disposed(by: disposeBag)

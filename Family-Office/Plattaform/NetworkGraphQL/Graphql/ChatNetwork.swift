@@ -8,6 +8,8 @@
 
 import Foundation
 import RxSwift
+import Apollo
+
 
 final class ChatNetwork {
     private let network: Network<Chat>
@@ -23,7 +25,8 @@ final class ChatNetwork {
         return network.postItem(CreateChatMutation(user: uid))
     }
     
-    func sendMessage(chatId: String, mid: String, text: String) -> Observable<Chat> {
-        return network.postItem(SendMessageMutation(chat: chatId, messageId: mid, text: text))
+    func seenChat(chatId: String) -> Observable<Void> {
+        return network.postItem(SeenChatMutation(chatId: chatId)).mapToVoid()
     }
+  
 }

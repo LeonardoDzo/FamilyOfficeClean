@@ -14,13 +14,12 @@ final class MembersChatViewModel: ViewModelType {
     let navigator: MembersChatNavigator!
     let userUseCase: UserUseCase!
     let chatUSeCase: ChatUseCase!
-    let netChatUSeCase: ChatUseCase!
+    var isSelected: Bool = false
     var users: [User]!
-    init(navigator: MembersChatNavigator, userUseCase: UserUseCase, chatUSeCase: ChatUseCase, netChatUSeCase: ChatUseCase) {
+    init(navigator: MembersChatNavigator, userUseCase: UserUseCase, chatUSeCase: ChatUseCase) {
         self.userUseCase = userUseCase
         self.navigator = navigator
         self.chatUSeCase = chatUSeCase
-        self.netChatUSeCase = netChatUSeCase
     }
     func transform(input: MembersChatViewModel.Input) -> MembersChatViewModel.Output {
         let error = ErrorTracker()
@@ -35,17 +34,24 @@ final class MembersChatViewModel: ViewModelType {
         
         let selected = input.selectUserTrigger.flatMapLatest({ indexpath -> SharedSequence<DriverSharingStrategy, Chat> in
             himId = self.users[indexpath.row].uid
+            self.isSelected = true
             return self.chatUSeCase
                 .get(uid: himId)
                 .asDriverOnErrorJustComplete()
-        }).flatMapLatest({ chat -> SharedSequence<DriverSharingStrategy, Chat> in
+        }).flatMap({ chat -> SharedSequence<DriverSharingStrategy, Chat> in
             if chat.uid.isEmpty {
-                return self.netChatUSeCase
-                    .create(userId: himId)
+                 return NetUseCaseProvider()
+                    .makeChatUseCase()
+                    .create(userId: uid)
                     .asDriverOnErrorJustComplete()
             }
             return BehaviorRelay(value: chat).asDriver()
-        }).do(onNext: {self.navigator.toChat($0)})
+        }).do(onNext: {
+            if self.isSelected {
+                self.navigator.toChat($0)
+                self.isSelected = false
+            }
+        }).mapToVoid()
         
         return Output(users: users, selected: selected)
     }
@@ -57,6 +63,6 @@ extension MembersChatViewModel {
     }
     struct Output {
         let users: Driver<[User]>
-        let selected: Driver<Chat>
+        let selected: Driver<Void>
     }
 }

@@ -18,7 +18,6 @@ class AddEditPendingViewController: FormViewController {
     var pending: Variable<Pending> = Variable(Pending())
     var viewModel: AddEditPendingViewModel!
     fileprivate func searchKey(_ key: String, _ value: Any?) {
-
         switch key {
         case "title":
             self.pending.value.title = value as? String ?? ""
@@ -63,7 +62,6 @@ class AddEditPendingViewController: FormViewController {
                 row.value = self.pending.value.priority
                 row.tag = "priority"
                 row.selectorTitle = ""
-
                 self.navigationController?.setNavigationBarHidden(false, animated: true)
                 }.onChange({ (row) in
                     self.searchKey(row.tag!, row.value)

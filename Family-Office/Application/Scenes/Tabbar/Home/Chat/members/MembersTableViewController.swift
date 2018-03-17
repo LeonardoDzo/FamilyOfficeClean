@@ -28,9 +28,11 @@ class MembersTableViewController: UITableViewController {
         self.tableView.dataSource = nil
         self.tableView.tableFooterView = UIView()
         self.title = "Miembros"
+    
         self.navigationItem.leftBarButtonItem = self.backBtn
         bindToView()
     }
+  
     func bindToView() -> Void {
         let willAppear = rx.sentMessage(#selector(self.viewWillAppear))
             .asDriverOnErrorJustComplete()
@@ -45,6 +47,7 @@ class MembersTableViewController: UITableViewController {
             let backgroundView = UIView()
             backgroundView.backgroundColor = UIColor.clear
             cell.selectedBackgroundView = backgroundView
+        
            
         }.disposed(by: disposeBag)
         

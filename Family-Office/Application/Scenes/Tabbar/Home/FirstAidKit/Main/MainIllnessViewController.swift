@@ -56,7 +56,7 @@ class MainIllnessViewController: UIViewController, UITabBarDelegate {
         let selectPost = self.v.tableView.rx.itemSelected.asDriver()
         self.v.tableView.allowsSelection = true
         
-        let input = MainIllnessViewModel.Input(backTrigger: self.backBtn.rx.tap.asDriver(), taptrigger: self.v.tabbar.rx.didSelectItem.asDriver(), willAppearTrigger: willAppear, searchTrigger: search, editTrigger: self.editButton.rx.tap.asDriver(), selectIllness: selectPost)
+        let input = MainIllnessViewModel.Input(backTrigger: self.backBtn.rx.tap.asDriver(), taptrigger: self.v.tabbar.rx.didSelectItem.asDriver().startWith((self.v.tabbar.items?.first!)!), willAppearTrigger: willAppear, searchTrigger: search.startWith(""), editTrigger: self.editButton.rx.tap.asDriver(), selectIllness: selectPost)
         let output = viewModel.transform(input: input)
         
         output.back
@@ -84,7 +84,6 @@ class MainIllnessViewController: UIViewController, UITabBarDelegate {
         
         output.selectedIllness.drive().disposed(by: disposeBag)
         
-        self.v.tabbar.selectedItem = self.v.tabbar.items?.first!
         self.v.searchBar.text = ""
     }
 

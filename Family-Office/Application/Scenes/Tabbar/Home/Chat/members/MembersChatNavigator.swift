@@ -20,7 +20,7 @@ final class MembersChatNavigator: NavigatorType {
     
     func toMain(sender: Any?) {
         let view = MembersTableViewController()
-        view.viewModel = MembersChatViewModel(navigator: self, userUseCase: service.makeUseCase(), chatUSeCase: service.makeChatUseCase(), netChatUSeCase: NetUseCaseProvider().makeChatUseCase())
+        view.viewModel = MembersChatViewModel(navigator: self, userUseCase: service.makeUseCase(), chatUSeCase: service.makeChatUseCase())
         navigationController?.pushViewController(view, animated: true)
     }
     

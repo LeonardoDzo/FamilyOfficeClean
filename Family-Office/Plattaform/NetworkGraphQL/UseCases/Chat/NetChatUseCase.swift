@@ -10,6 +10,7 @@ import Foundation
 import RxSwift
 
 final class NetChatUseCase: ChatUseCase {
+
     private let diposeBag = DisposeBag()
     private let provider: RMUseCaseProvider!
     private let network: ChatNetwork!
@@ -30,7 +31,7 @@ final class NetChatUseCase: ChatUseCase {
     }
     
     func save(chatId: String, message: ChatMessage) -> Observable<Void> {
-        return mNetwork.sendMessage(chatId: chatId, mid: message.uid, text: message.text).mapToVoid()
+        return mNetwork.sendMessage(chatId: chatId, message: message).mapToVoid()
     }
     
     func create(chat: Chat) -> Observable<Chat> {
@@ -47,6 +48,10 @@ final class NetChatUseCase: ChatUseCase {
     }
     func get(id: String) -> Observable<Chat> {
         return Variable(Chat(family: nil, group: nil, uid: "", lastMessage: nil, members: [], messages: [])).asObservable()
+    }
+    
+    func seenToChat(id: String) -> Observable<Void> {
+        return network.seenChat(chatId:id)
     }
     
     

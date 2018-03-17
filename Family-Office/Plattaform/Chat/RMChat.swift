@@ -25,6 +25,7 @@ final class RMChat: Object {
     
     dynamic var messages = List<RMMessage>()
     
+    
     override class func primaryKey() -> String {
         return "uid"
     }
@@ -32,7 +33,8 @@ final class RMChat: Object {
 
 extension RMChat: DomainConvertibleType {
     func asDomain() -> Chat {
-        return Chat(family: family?.asDomain(), group: ChatGroup(name: name, photo: photo?.asDomain()), uid: uid, lastMessage: lastMessage?.asDomain(), members: Array(members.map({$0.asDomain()})), messages: Array(messages.map({$0.asDomain()})))
+        let group = name.isEmpty ? nil :ChatGroup(name: name, photo: photo?.asDomain())
+        return Chat(family: family?.asDomain(), group: group, uid: uid, lastMessage: lastMessage?.asDomain(), members: Array(members.map({$0.asDomain()})), messages: Array(messages.map({$0.asDomain()})))
     }
 }
 

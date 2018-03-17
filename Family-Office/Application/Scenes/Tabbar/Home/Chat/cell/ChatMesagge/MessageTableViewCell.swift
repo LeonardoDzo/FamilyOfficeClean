@@ -8,14 +8,23 @@
 
 import UIKit
 import Stevia
+import RxCocoa
+import RxSwift
 
 class MessageTableViewCell: UITableViewCellX, MessageBindible {
-    var message: MockMessage!
+    private let disposeBag = DisposeBag()
+    var message: ChatMessage!
+    var viewModel: MessageViewModel!
+    
     var messageText: UILabelX! = UILabelX()
     var date: UILabelX! = UILabelX()
     var nameSender: UILabelX! = UILabelX()
     var photoMessage: UIImageViewX! = UIImageViewX()
     var bubbleView = UIImageViewX()
+    
+    //Action
+    let btnShare = UIButton()
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -34,7 +43,8 @@ class MessageTableViewCell: UITableViewCellX, MessageBindible {
             photoMessage,
             date,
             nameSender
-           )
+           ),
+           btnShare
         )
         
         bubbleView.bottom(7.5).top(7.5).layout(
@@ -49,6 +59,8 @@ class MessageTableViewCell: UITableViewCellX, MessageBindible {
             5,
             ""
         )
+        btnShare.setImage(#imageLiteral(resourceName: "icons8-link"), for: .normal)
+        btnShare.centerVertically()
         messageText.centerVertically()
         date.bottom(1)
         let view = UIView()
@@ -62,19 +74,25 @@ class MessageTableViewCell: UITableViewCellX, MessageBindible {
     func isFromSender(isMe: Bool) {
         if isMe {
             self.bubbleView.bottom(7.5).top(7.5).right(15).left(>=40)
+            btnShare.left(5%)
+
         }else{
             self.bubbleView.bottom(7.5).top(7.5).left(15).right(>=40)
+            btnShare.right(5%)
         }
         
         let image =  isMe ? #imageLiteral(resourceName: "chat_bubble_sent") : #imageLiteral(resourceName: "chat_bubble_received")
         
+        if message.attachment == nil && message.data == nil {
+            btnShare.isHidden = true
+        }
         bubbleView.image = image
             .resizableImage(withCapInsets:
                 UIEdgeInsetsMake(17, 21, 17, 21),
                             resizingMode: .stretch)
             .withRenderingMode(.alwaysTemplate)
         
-        let color =  isMe ? #colorLiteral(red: 0.721568644, green: 0.8862745166, blue: 0.5921568871, alpha: 1) : #colorLiteral(red: 0.9792956669, green: 0.9908331388, blue: 1, alpha: 1)
+        let color =  isMe ? #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1) : #colorLiteral(red: 0.9792956669, green: 0.9908331388, blue: 1, alpha: 1)
         
         
         switch message.status {
@@ -85,6 +103,21 @@ class MessageTableViewCell: UITableViewCellX, MessageBindible {
                 bubbleView.tintColor = color
                 return
         }
+        
+    
+    }
+    
+    
+    func bindToView(chatId: String) -> Void {
+        viewModel = MessageViewModel(message: self.message, chatId: chatId)
+        let image = BehaviorRelay(value: self.photoMessage.image).asDriver()
+        let tap = btnShare.rx.tap.asDriver()
+        
+        let input = MessageViewModel.Input(tap: Driver.combineLatest(tap, image))
+        
+        let output = viewModel.transform(input: input)
+        
+        output.tapped.drive().disposed(by: disposeBag)
     }
     
     

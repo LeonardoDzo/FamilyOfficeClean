@@ -27,8 +27,16 @@ final class ChatsViewmodel: ViewModelType {
             return self.chatUseCase
                 .get(byGroup: self.byGroup)
                 .asDriverOnErrorJustComplete()
-            }.do(onNext: {self.chats = $0})
-        let selected  = input.selectTrigger.flatMapLatest({ indexpath in
+            }.map {
+                return $0.sorted(by: { (old, new) -> Bool in
+                    let dateOne = old.messages.last?.seenAt ?? 0
+                    let dateTwo = new.messages.last?.seenAt ?? 1
+                    
+                    return dateOne > dateTwo
+                })
+            }
+            .do(onNext: {self.chats = $0})
+        let selected = input.selectTrigger.flatMapLatest({ indexpath in
             return BehaviorRelay(value: self.chats[indexpath.row]).asDriver()
         }).do(onNext: {self.navigator.toChat($0)}).mapToVoid()
         

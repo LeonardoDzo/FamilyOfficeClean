@@ -13,42 +13,23 @@ import CoreLocation
 struct MockMessage: MessageType {
     
     var messageId: String
+    var text: String
     var sender: Sender
     var sentDate: Date
-    var data: MessageData
+    var data: MessageData?
     var status: MESSAGESTATUS = .Pending
     
-    init(data: MessageData, sender: Sender, messageId: String, date: Date, text: String = "", status: MESSAGESTATUS) {
-        self.data = data
+    init(data: Data? = nil, attachment: Attachment? = nil, sender: Sender, messageId: String, date: Date, text: String = "", status: MESSAGESTATUS) {
+        if let data = data {
+            self.data = MessageData.data(data)
+        }else if let attachment = attachment {
+            self.data = MessageData.photo(attachment)
+        }
         self.sender = sender
         self.messageId = messageId
         self.sentDate = date
         self.status = status
-    }
-    
-    init(text: String, sender: Sender, messageId: String, date: Date, status: MESSAGESTATUS) {
-        self.init(data: .text(text), sender: sender, messageId: messageId, date: date, status: status)
-    }
-    
-    init(attributedText: NSAttributedString, sender: Sender, messageId: String, date: Date, status: MESSAGESTATUS) {
-        self.init(data: .attributedText(attributedText), sender: sender, messageId: messageId, date: date, status: status)
-    }
-    
-    init(image: Attachment, sender: Sender, messageId: String, date: Date, status: MESSAGESTATUS) {
-        self.init(data: .photo(image), sender: sender, messageId: messageId, date: date, status: status)
-    }
-    
-    init(thumbnail: UIImage, sender: Sender, messageId: String, date: Date, status: MESSAGESTATUS) {
-        let url = URL(fileURLWithPath: "")
-        self.init(data: .video(file: url, thumbnail: thumbnail), sender: sender, messageId: messageId, date: date, status: status)
-    }
-    
-    init(location: CLLocation, sender: Sender, messageId: String, date: Date, status: MESSAGESTATUS) {
-        self.init(data: .location(location), sender: sender, messageId: messageId, date: date, status: status)
-    }
-    
-    init(emoji: String, sender: Sender, messageId: String, date: Date, status: MESSAGESTATUS) {
-        self.init(data: .emoji(emoji), sender: sender, messageId: messageId, date: date, status: status)
+        self.text = text
     }
     
 }

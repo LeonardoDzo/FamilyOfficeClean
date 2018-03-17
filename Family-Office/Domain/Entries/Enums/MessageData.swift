@@ -21,6 +21,9 @@ public enum MessageData {
     /// A photo message.
     case photo(Attachment)
     
+    /// A photo message.
+    case data(Data)
+    
     /// A video message.
     case video(file: URL, thumbnail: UIImage)
     

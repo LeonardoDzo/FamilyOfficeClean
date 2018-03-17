@@ -8,6 +8,12 @@
 
 import Foundation
 
+enum CHATTYPE {
+    case OneToOne,
+         Family,
+         Group
+}
+
 public struct Chat: Decodable {
     
     var family: Family?
@@ -51,6 +57,15 @@ public struct Chat: Decodable {
         case lastMessage = "last_message"
         case members
         case messages = "chat_messages"
+    }
+    func getType() -> CHATTYPE {
+        if family != nil {
+            return .Family
+        }else if group != nil {
+            return .Group
+        }else {
+            return .OneToOne
+        }
     }
 }
 
