@@ -14,6 +14,9 @@ public protocol AuthUseCaseProvider {
 public protocol FamilyMembershipUseCaseProvider {
     func makeFamilyMembershipUseCase() -> FamilyMembershipUseCase
 }
+public protocol EventsUseCaseProvider {
+    func makeEventsUseCase() -> EventsUseCase
+}
 public protocol UseCaseProvider {
     func makeUseCase() -> UserUseCase
     func makeFamilyUseCase() -> FamilyUseCase

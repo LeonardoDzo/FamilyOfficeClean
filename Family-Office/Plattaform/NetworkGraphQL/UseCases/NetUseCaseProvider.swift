@@ -10,7 +10,7 @@ import Foundation
 import Realm
 import RealmSwift
 
-public final class NetUseCaseProvider: AuthUseCaseProvider, UseCaseProvider {
+public final class NetUseCaseProvider: AuthUseCaseProvider, UseCaseProvider, EventsUseCaseProvider {
 
     private let networkProvider: NetworkProvider
 
@@ -48,5 +48,9 @@ public final class NetUseCaseProvider: AuthUseCaseProvider, UseCaseProvider {
     }
     public func makeChatUseCase() -> ChatUseCase {
         return NetChatUseCase(network: networkProvider.makeChatNetwork(), mNetwork: networkProvider.makeChatMessageNetwork())
+    }
+    
+    public func makeEventsUseCase() -> EventsUseCase {
+        return NetEventsUseCase(network: networkProvider.makeEventsNetwork())
     }
 }

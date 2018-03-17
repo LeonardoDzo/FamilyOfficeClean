@@ -1,5 +1,5 @@
 //
-//  EventUseCase.swift
+//  EventsUseCase.swift
 //  Family-Office
 //
 //  Created by Nan Montaño on 14/mar/18.
@@ -7,7 +7,9 @@
 //
 
 import Foundation
+import RxSwift
 
-public protocol EventUseCase {
-    
+public protocol EventsUseCase {
+    func get(start: Date, end: Date) -> Observable<[Event]>
+    func create(event: Event, recurrence: String?) -> Observable<Event>
 }

@@ -79,6 +79,11 @@ class HomeNavigator: HomeNavigatorPr {
                 navigator.toMain()
                 navigationController.present(mainNavigationController, animated: true, completion: nil)
             break
+            case .CALENDAR:
+                let navigator = MainEventsNavigator(navigationController: mainNavigationController)
+                navigator.toMain()
+                navigationController.present(mainNavigationController, animated: true, completion: nil)
+            break
             case .CHAT:
                 let membersnc = UINavigationController()
                 let service = SuperProvider().rmusecaseprovider

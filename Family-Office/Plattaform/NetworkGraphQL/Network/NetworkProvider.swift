@@ -73,4 +73,9 @@ final class NetworkProvider {
         let network = Network<ChatMessage>(apollo)
         return MessageNetwork(network: network)
     }
+    
+    public func makeEventsNetwork() -> EventsNetwork {
+        let network = Network<Event>(apollo)
+        return EventsNetwork(network: network)
+    }
 }

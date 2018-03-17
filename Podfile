@@ -31,6 +31,6 @@ target 'Family-Office' do
 	pod 'ActionCableClient'
 	
     pod 'GoogleSignIn'
-    
+    pod 'JTAppleCalendar', '~> 7.0'
     
 end

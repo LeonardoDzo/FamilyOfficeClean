@@ -23,12 +23,35 @@ extension Date {
     init?(_ date: Int) {
         self.init(timeIntervalSince1970: TimeInterval(date))
     }
+    
+    init(year: Int = 1970, month: Int = 1, day: Int = 1) {
+        var components = DateComponents()
+        components.year = year
+        components.month = month
+        components.day = day
+        self = Calendar.current.date(from: components)!
+    }
 
     func toMillis() -> Int! {
         return Int(self.timeIntervalSince1970)
     }
+    
+    func startOfDay() -> Date {
+        return Calendar.current.startOfDay(for: self)
+    }
+    
     func startOfMonth() -> Date {
         return Calendar.current.date(from: Calendar.current.dateComponents([.year, .month], from: Calendar.current.startOfDay(for: self)))!
+    }
+    
+    func startOfYear() -> Date {
+        return Calendar.current.date(
+            from: Calendar.current.dateComponents([.year], from: self)
+        )!
+    }
+    
+    func endOfDay() -> Date {
+        return self.startOfDay().add(hours: 23, minutes: 59, seconds: 59)
     }
 
     func endOfMonth() -> Date {
@@ -49,5 +72,16 @@ extension Date {
     func isYesterday() -> Bool {
         let gregorian = Calendar.current
         return gregorian.isDateInYesterday(self)
+    }
+    
+    func add(years: Int = 0, months: Int = 0, days: Int = 0, hours: Int = 0, minutes: Int = 0, seconds: Int = 0) -> Date {
+        var comp = DateComponents()
+        comp.year = years
+        comp.month = months
+        comp.day = days
+        comp.hour = hours
+        comp.minute = minutes
+        comp.second = seconds
+        return Calendar.current.date(byAdding: comp, to: self)!
     }
 }

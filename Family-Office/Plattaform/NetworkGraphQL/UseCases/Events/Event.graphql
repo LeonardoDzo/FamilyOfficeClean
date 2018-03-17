@@ -1,0 +1,52 @@
+
+query MyEvents(
+  $start: Int!,
+  $end: Int!,
+) {
+  myEvents {
+  	...EventDetails
+  	instances(start: $start, end: $end) { 
+      ...InstanceDetails
+    }
+  }
+}
+
+mutation CreateEvent(
+  $start: Int!,
+  $end: Int!,
+  $summary: String!,
+  $description: String,
+  $recurrence: String,
+  $location: String!,
+  $all_day: Boolean!
+) {
+  createEvent(
+    start: $start,
+    end: $end,
+    summary: $summary,
+    description: $description,
+    recurrence: $recurrence,
+    location: $location,
+    all_day: $all_day
+  ) {
+  	...EventDetails
+  	instances(start: $start, end: $end) { 
+      ...InstanceDetails
+    }
+  }
+}
+
+fragment EventDetails on Event {
+  id
+  creator { ...UserDetails }
+  description
+  summary
+}
+
+fragment InstanceDetails on EventInstance {
+  all_day
+  start
+  end
+  location
+  status
+}
