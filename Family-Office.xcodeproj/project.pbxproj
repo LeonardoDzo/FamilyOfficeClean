@@ -328,6 +328,9 @@
 		A4A491902059F32D0048E42A /* MainEventsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A4918F2059F32D0048E42A /* MainEventsViewModel.swift */; };
 		A4A491932059FDE60048E42A /* CalendarMonthCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A491922059FDE60048E42A /* CalendarMonthCell.swift */; };
 		A4A49195205AD86A0048E42A /* CalendarDayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A49194205AD86A0048E42A /* CalendarDayCell.swift */; };
+		A4EC746F205F449800D1169C /* AgendaNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4EC746E205F449800D1169C /* AgendaNavigator.swift */; };
+		A4EC7471205F454500D1169C /* AgendaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4EC7470205F454500D1169C /* AgendaViewModel.swift */; };
+		A4EC7473205F45E800D1169C /* AgendaController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4EC7472205F45E800D1169C /* AgendaController.swift */; };
 		D979032C1D9FD9D30A861A1B /* Pods_Family_Office.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F832127F7425C43A37F58A2D /* Pods_Family_Office.framework */; };
 /* End PBXBuildFile section */
 
@@ -658,6 +661,9 @@
 		A4A4918F2059F32D0048E42A /* MainEventsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainEventsViewModel.swift; sourceTree = "<group>"; };
 		A4A491922059FDE60048E42A /* CalendarMonthCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarMonthCell.swift; sourceTree = "<group>"; };
 		A4A49194205AD86A0048E42A /* CalendarDayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDayCell.swift; sourceTree = "<group>"; };
+		A4EC746E205F449800D1169C /* AgendaNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AgendaNavigator.swift; path = "Family-Office/Application/Scenes/Tabbar/Home/Events/Agenda/AgendaNavigator.swift"; sourceTree = SOURCE_ROOT; };
+		A4EC7470205F454500D1169C /* AgendaViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AgendaViewModel.swift; path = "Family-Office/Application/Scenes/Tabbar/Home/Events/Agenda/AgendaViewModel.swift"; sourceTree = SOURCE_ROOT; };
+		A4EC7472205F45E800D1169C /* AgendaController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgendaController.swift; sourceTree = "<group>"; };
 		A7ACE2A028DA56B8D9961EBB /* Pods-Family-Office.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Family-Office.release.xcconfig"; path = "Pods/Target Support Files/Pods-Family-Office/Pods-Family-Office.release.xcconfig"; sourceTree = "<group>"; };
 		F832127F7425C43A37F58A2D /* Pods_Family_Office.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Family_Office.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -1838,6 +1844,7 @@
 		A4A491892059EE130048E42A /* Events */ = {
 			isa = PBXGroup;
 			children = (
+				A4EC746D205F447C00D1169C /* Agenda */,
 				A487ECB4205C3593005617A5 /* CreateEvent */,
 				A4A491912059FDB00048E42A /* cells */,
 				A4A4918A2059EE2E0048E42A /* Index */,
@@ -1862,6 +1869,16 @@
 				A4A49194205AD86A0048E42A /* CalendarDayCell.swift */,
 			);
 			path = cells;
+			sourceTree = "<group>";
+		};
+		A4EC746D205F447C00D1169C /* Agenda */ = {
+			isa = PBXGroup;
+			children = (
+				A4EC7472205F45E800D1169C /* AgendaController.swift */,
+				A4EC7470205F454500D1169C /* AgendaViewModel.swift */,
+				A4EC746E205F449800D1169C /* AgendaNavigator.swift */,
+			);
+			path = Agenda;
 			sourceTree = "<group>";
 		};
 		CE1CB8D1D13ABD89DE485FE6 /* Pods */ = {
@@ -2265,6 +2282,7 @@
 				023AAB53201F84EB00F50207 /* Family.swift in Sources */,
 				02E559B62024CDF300D3FC07 /* RMAttachment.swift in Sources */,
 				02C932EA202CC90300E64A42 /* MenuMainStevia.swift in Sources */,
+				A4EC746F205F449800D1169C /* AgendaNavigator.swift in Sources */,
 				023AAB4B201EBF6E00F50207 /* User.swift in Sources */,
 				02F5D04E204865AA009211BB /* IllnessAddViewModel.swift in Sources */,
 				028F3E93204631DF00B7CB25 /* ApplicationSolicitudeViewModel.swift in Sources */,
@@ -2314,7 +2332,9 @@
 				023AAB06201EBB0900F50207 /* UIViewAnchorPoint.swift in Sources */,
 				023A36F420505B790046FCDE /* MockMessage.swift in Sources */,
 				02C24013204F022600BD64D3 /* webViewController.swift in Sources */,
+				A4EC7473205F45E800D1169C /* AgendaController.swift in Sources */,
 				02BF68B5204250C600D03CDA /* Decodable+Ext.swift in Sources */,
+				A4EC7471205F454500D1169C /* AgendaViewModel.swift in Sources */,
 				022FCEDE204DB12A00070546 /* MainInsuranceViewModel.swift in Sources */,
 				025742E4203F3D2F00215A56 /* SearchUserViewModel.swift in Sources */,
 				02EF0F1B203225ED0020A133 /* PendingViewModel.swift in Sources */,

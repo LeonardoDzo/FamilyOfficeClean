@@ -13,7 +13,7 @@ enum ip: String {
     case COT = "192.168.1.191"
 }
 
-let uri = ip.Dev
+let uri = ip.COT
 
 extension ip {
     func getPort() -> String {

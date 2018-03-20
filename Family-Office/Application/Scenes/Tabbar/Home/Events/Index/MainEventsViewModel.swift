@@ -6,7 +6,7 @@
 //  Copyright © 2018 Leonardo Durazo. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import RxSwift
 import RxCocoa
 
@@ -49,7 +49,15 @@ final class MainEventsViewModel: ViewModelType {
             self.navigator.toCreateEvent()
         })
         
-        return Output(months: events, tapped: tap)
+        let selected = input.itemSelected.do(onNext: { index in
+            self.navigator.toAgenda()
+        })
+        
+        return Output(
+            months: events,
+            tapped: tap,
+            select: selected
+        )
     }
 }
 
@@ -57,9 +65,11 @@ extension MainEventsViewModel {
     struct Input {
         let willAppear: Driver<Void>
         let newEvent: Driver<Void>
+        let itemSelected: Driver<IndexPath>
     }
     struct Output {
         let months: Driver<[MonthData]>
         let tapped: Driver<Void>
+        let select: Driver<IndexPath>
     }
 }

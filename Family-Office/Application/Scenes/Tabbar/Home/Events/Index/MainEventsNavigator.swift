@@ -26,4 +26,9 @@ class MainEventsNavigator: NavigatorType {
         nav.toMain(sender: nil)
     }
     
+    func toAgenda() {
+        let nav = AgendaNavigator(navigationController: navigationController)
+        nav.toMain(sender: nil)
+    }
+    
 }

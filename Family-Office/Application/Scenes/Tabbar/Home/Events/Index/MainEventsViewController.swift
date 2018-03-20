@@ -55,7 +55,14 @@ class MainEventsViewController: UICollectionViewController {
             .asDriverOnErrorJustComplete()
             .mapToVoid()
         
-        let input = MainEventsViewModel.Input(willAppear: willAppear, newEvent: addButton.rx.tap.asDriver())
+        let itemSelected = collectionView?.rx.itemSelected
+            .asDriver()
+        
+        let input = MainEventsViewModel.Input(
+            willAppear: willAppear,
+            newEvent: addButton.rx.tap.asDriver(),
+            itemSelected: itemSelected!
+        )
         
         let output = viewModel.transform(input: input)
         
@@ -64,6 +71,7 @@ class MainEventsViewController: UICollectionViewController {
             cell.bind(events: model.items, start: model.month, end: end)
         }.disposed(by: disposeBag)
         output.tapped.drive().disposed(by: disposeBag)
+        output.select.drive().disposed(by: disposeBag)
     }
 
     override func didReceiveMemoryWarning() {

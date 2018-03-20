@@ -51,6 +51,7 @@ class CalendarMonthCell: UICollectionViewCell {
         monthLabel.text = start.string(with: monthFormatter)
         calendarView.calendarDelegate = self
         calendarView.calendarDataSource = self
+        calendarView.reloadData()
     }
 }
 
@@ -78,4 +79,6 @@ extension CalendarMonthCell: JTAppleCalendarViewDelegate, JTAppleCalendarViewDat
     
     func calendar(_ calendar: JTAppleCalendarView, willDisplay cell: JTAppleCell, forItemAt date: Date, cellState: CellState, indexPath: IndexPath) {
     }
+    
+    
 }

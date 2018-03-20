@@ -21,12 +21,16 @@ final class NetEventsUseCase: EventsUseCase {
 
     func get(start: Date, end: Date) -> Observable<[Event]> {
         return network.get(start: start, end: end).map { evs in
-            evs.forEach { ev in
-                for var inst in ev.instances {
-                    inst.parent = ev
+            let events: [Event] = evs.map { ev in
+                var event = ev
+                event.instances = ev.instances.map { inst in
+                    var instance = inst
+                    instance.parent = ev
+                    return instance
                 }
+                return event
             }
-            return evs
+            return events
         }
     }
 
