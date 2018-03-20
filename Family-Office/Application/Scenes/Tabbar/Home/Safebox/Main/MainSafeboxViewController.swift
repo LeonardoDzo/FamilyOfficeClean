@@ -15,6 +15,7 @@ import SideMenu
 class MainSafeboxViewController: UIViewController, UITabBarDelegate {
     private let disposeBag = DisposeBag()
     var v = MainSafebox()
+    var currentFolder = ["root"]
     var viewModel: MainSafeboxViewModel!
     
     override func loadView(){
@@ -25,8 +26,15 @@ class MainSafeboxViewController: UIViewController, UITabBarDelegate {
         self.v = MainSafebox()
         self.view = self.v
         self.navigationItem.leftBarButtonItem = self.backBtn
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .organize, target: self, action: #selector(self.changeStyle))
         self.bindToView()
         self.title = "Caja Fuerte"
+    }
+    
+    @objc func changeStyle(){
+        self.v.collectionView.isHidden = !self.v.collectionView.isHidden
+        self.v.tableView.isHidden = !self.v.tableView.isHidden
+        self.view = self.v
     }
     
     override func viewDidLoad(){
@@ -48,10 +56,11 @@ class MainSafeboxViewController: UIViewController, UITabBarDelegate {
             .asDriverOnErrorJustComplete()
             .mapToVoid()
         let search = self.v.searchBar.rx.text.changed.asDriver()
-        let selectPost = self.v.collectionView.rx.itemSelected.asDriver()
-        self.v.collectionView.allowsSelection = true
+        let selectPost = self.v.tableView.rx.itemSelected.asDriver()
         
-        let input = MainSafeboxViewModel.Input(backTrigger: self.backBtn.rx.tap.asDriver(), taptrigger: self.v.tabbar.rx.didSelectItem.asDriver(), willAppearTrigger: willAppear, searchTrigger: search)
+        self.v.tableView.allowsSelection = true
+        
+        let input = MainSafeboxViewModel.Input(backTrigger: self.backBtn.rx.tap.asDriver(), taptrigger: self.v.tabbar.rx.didSelectItem.asDriver(), willAppearTrigger: willAppear, searchTrigger: search, selectTrigger: selectPost)
         
         let output = viewModel.transform(input: input)
         
@@ -60,9 +69,15 @@ class MainSafeboxViewController: UIViewController, UITabBarDelegate {
             .drive()
             .disposed(by: disposeBag)
         
-        output.safeboxAttachments.drive(self.v.collectionView.rx.items(cellIdentifier: "cell", cellType: SafeboxCollectionViewCell.self)) {i,model,cell in
+        output.select.drive().disposed(by: disposeBag)
+        
+        output.safeboxAttachments.drive(self.v.tableView.rx.items(cellIdentifier: "cell", cellType: SafeboxTableViewCell.self)) {i,model,cell in
             cell.bind(attachment: model)
         }.disposed(by: disposeBag)
+        
+        output.safeboxAttachments.drive(self.v.collectionView.rx.items(cellIdentifier: "cell", cellType: SafeboxCollectionViewCell.self)) {i,model,cell in
+            cell.bind(attachment: model)
+            }.disposed(by: disposeBag)
         
         output.error.drive(self.errorBinding).disposed(by: disposeBag)
         

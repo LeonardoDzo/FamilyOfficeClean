@@ -1,15 +1,15 @@
 //
-//  SafeboxCollectionViewCell.swift
+//  SafeboxTableViewCell.swift
 //  Family-Office
 //
-//  Created by Jesús Ernesto Jaramillo Salazar on 14/03/18.
+//  Created by Jesús Ernesto Jaramillo Salazar on 16/03/18.
 //  Copyright © 2018 Leonardo Durazo. All rights reserved.
 //
 
 import Foundation
 import Stevia
 
-class SafeboxCollectionViewCell: UICollectionViewCellX, SafeboxBindable {
+class SafeboxTableViewCell: UITableViewCellX, SafeboxBindable {
     var attachment: SafeboxAttachment!
     var nameLbl: UILabelX! = UILabelX()
     var iconImgView: UIImageViewX! = UIImageViewX()
@@ -22,22 +22,17 @@ class SafeboxCollectionViewCell: UICollectionViewCellX, SafeboxBindable {
         super.init(coder: aDecoder)
     }
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        sv(iconImgView, nameLbl)
-        
-        nameLbl.font = nameLbl.font.withSize(10)
+        sv(nameLbl, iconImgView)
+        iconImgView.width(30).height(30)
         iconImgView.contentMode = UIViewContentMode.scaleAspectFit
+        
         layout(
-            2,
-            |-10-iconImgView-10-|,
-            10,
-            |-2-nameLbl.height(12).width(100%)-2-|,
-            2
+            7,
+            |-5-iconImgView-10-nameLbl-5-|,
+            7
         )
     }
-    
-    
-    
 }

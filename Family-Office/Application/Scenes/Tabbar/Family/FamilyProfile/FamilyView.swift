@@ -53,7 +53,7 @@ final class FamilyProfileView: UIViewX, FamilyBindable {
     }
 
     func styleAddMemberBtn(_ btnx: UIButtonX ) {
-        btnx.setImage(#imageLiteral(resourceName: "add"), for: .normal)
+        btnx.setImage(#imageLiteral(resourceName: "safebox_file"), for: .normal)
         btnx.size(50)
         btnx.backgroundColor = UIColor.clear
     }

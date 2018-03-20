@@ -38,11 +38,10 @@ extension SafeboxBindable {
                 print("\(Constants.url.safebox)\(attachment.token)")
                 view.kf.indicatorType = .activity
                 let processor = RoundCornerImageProcessor(cornerRadius: 2)
-                view.kf.setImage(with: url, placeholder: #imageLiteral(resourceName: "family-default"), options: [.transition(.fade(0.2)), .processor(processor)])
+                view.kf.setImage(with: url, placeholder: #imageLiteral(resourceName: "safebox_file"), options: [.transition(.fade(0.2)), .processor(processor)])
             }else{
                 //put generic icon depending on file type
             }
-            view.image = #imageLiteral(resourceName: "safeBox") // safebox icon por mientras lmao
         }
     }
 }

@@ -12,6 +12,7 @@ import Stevia
 class MainSafebox: UIViewX {
     let tabbar = UITabBar()
     var collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
+    let tableView = UITableView()
     let searchBar = UISearchBar()
     let allBtn = UITabBarItem(title: "Todos", image: #imageLiteral(resourceName: "icons8-plus_2_math"), tag: 0)
     let filesBtn = UITabBarItem(title: "Archivos", image: #imageLiteral(resourceName: "icons8-plus_2_math"), tag: 1)
@@ -24,13 +25,18 @@ class MainSafebox: UIViewX {
     
     func render() -> Void {
         self.setupCollection()
-        sv(collectionView, tabbar.style(self.styleTabbar), searchBar)
+        self.setupTable()
+        sv(tableView, collectionView, tabbar.style(self.styleTabbar), searchBar)
         
         tabbar.items = [allBtn, filesBtn, imgBtn, newBtn]
         tabbar.bottom(0).left(0).right(0).width(100%).height(45)
         tabbar.barTintColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
         
+        collectionView.isHidden = true
+        
         collectionView.bottom(45).top(105).width(100%).left(0).right(0)
+        tableView.bottom(45).top(105).width(100%).left(0).right(0)
+        tableView.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         
         let label = UILabelX()
         label.text = "No hay archivos"
@@ -41,6 +47,12 @@ class MainSafebox: UIViewX {
         
         backgroundColor = #colorLiteral(red: 0.9792956669, green: 0.9908331388, blue: 1, alpha: 1)
         
+    }
+    
+    private func setupTable(){
+        tableView.rowHeight = 50
+        tableView.estimatedRowHeight = 50
+        tableView.register(SafeboxTableViewCell.self, forCellReuseIdentifier: "cell")
     }
     
     private func setupCollection(){
