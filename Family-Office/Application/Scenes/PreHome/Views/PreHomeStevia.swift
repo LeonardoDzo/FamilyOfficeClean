@@ -14,6 +14,7 @@ import RxSwift
 class Prehome: UIViewX, UserBindable {
     var user: User!
     var tableView: UITableView = UITableView()
+    var solicitudeTv: UITableView = UITableView()
     var topContent = UIImageViewX()
     var photoProfile: UIImageViewX! = UIImageViewX()
     var nameLbl: UILabelX! = UILabelX()
@@ -64,15 +65,18 @@ class Prehome: UIViewX, UserBindable {
             settingBtn,
             logoutBtn,
             creteFamilybtn,
-            tableView
+            tableView,
+            solicitudeTv
         )
         conftable()
         layout(
             0,
             |topContent.height(300).width(100%)|,
-            10,
+            5,
             |-tableView.width(100%)-|,
-            10,
+            5,
+            |-solicitudeTv.width(100%).height(80)-|,
+            5,
             creteFamilybtn,
             ""
         )
@@ -94,6 +98,7 @@ class Prehome: UIViewX, UserBindable {
         topContent.image = #imageLiteral(resourceName: "background_profile")
         topContent.contentMode = .scaleToFill
         photoProfile.size(100)
+        
         backgroundColor = #colorLiteral(red: 0.921431005, green: 0.9214526415, blue: 0.9214410186, alpha: 1)
         styles()
         animations()
@@ -107,6 +112,13 @@ class Prehome: UIViewX, UserBindable {
         tableView.register(FamilyTableViewCell.self, forCellReuseIdentifier: FamilyTableViewCell.reuseID)
 
         tableView.tableFooterView = UIView()
+        
+        solicitudeTv.refreshControl = UIRefreshControl()
+        solicitudeTv.estimatedRowHeight = 80
+        solicitudeTv.rowHeight = 64
+        solicitudeTv.register(SolicitudeTableViewCell.self, forCellReuseIdentifier: SolicitudeTableViewCell.reuseID)
+        
+        solicitudeTv.tableFooterView = UIView()
     }
 
     func styleImg(_ img: UIImageViewX) {

@@ -26,6 +26,7 @@ target 'Family-Office' do
     pod 'GenericPasswordRow', '~> 3.0'
 	pod 'Kingfisher', '~> 4.0'
     pod 'SideMenu'
+    pod 'ImageRow', '~> 3.0'
     pod 'Hero'
     pod 'SlackTextViewController'
     pod 'ALCameraViewController'

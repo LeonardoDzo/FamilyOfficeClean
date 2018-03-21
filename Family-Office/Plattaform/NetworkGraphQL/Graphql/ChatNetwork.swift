@@ -28,5 +28,17 @@ final class ChatNetwork {
     func seenChat(chatId: String) -> Observable<Void> {
         return network.postItem(SeenChatMutation(chatId: chatId)).mapToVoid()
     }
+    
+    func create(ids: [String], name: String, photo: Data?) -> Observable<Chat> {
+        
+        let mutation = CreateChatGroupMutation(users: ids.filter({$0 != me}), name: name, file: nil)
+        if let data = photo {
+            let id = UUID().uuidString
+            let file = GraphQLFile(fieldName: "file", originalName: "\(id).jpeg", mimeType: "image/jpeg", data: data)
+            return network.postItem(mutation, files: [file])
+        }else{
+            return network.postItem(mutation)
+        }
+    }
   
 }

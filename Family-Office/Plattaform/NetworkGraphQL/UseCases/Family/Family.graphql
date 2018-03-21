@@ -9,6 +9,11 @@ mutation CreateFamily($name:String!) {
         }
     }
 }
+mutation EditFamily($fid: ID!, $name: String, $file: Upload){
+    editFamily(id: $fid, name: $name, photo: $file){
+        ...FamilyDetails
+    }
+}
 
 query MyFamilies {
     myFamilies {
@@ -30,8 +35,8 @@ fragment AttachmentDetails on Attachment {
 fragment FamilyDetails on Family {
     id,
     name,
-    photo{
-    ...AttachmentDetails
+    photo {
+        ...AttachmentDetails
     }
 }
 

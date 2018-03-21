@@ -46,7 +46,7 @@ final class RMChatUseCase<Repository>: ChatUseCase where Repository: AbstractRep
         return byGroup! ? repository.query(with: NSPredicate(format: "name != '' OR family != nil"), sortDescriptors: []) : repository.query(with: NSPredicate(format: "name == '' AND family == nil"), sortDescriptors: [])
     }
     
-    func create(chat: Chat) -> Observable<Chat> {
+    func create(chat: Chat, data: Data? = nil) -> Observable<Chat> {
         MainSocket.shareIntstance.channel.action("execute", with: ChatMessageAdded(id: chat.uid))
         MainSocket.shareIntstance.channel.action("execute", with: chatMembershipChanged(chat: chat.uid))
         return repository.save(entity: chat).map({return chat})

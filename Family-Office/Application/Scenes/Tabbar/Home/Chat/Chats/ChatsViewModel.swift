@@ -39,8 +39,8 @@ final class ChatsViewmodel: ViewModelType {
         let selected = input.selectTrigger.flatMapLatest({ indexpath in
             return BehaviorRelay(value: self.chats[indexpath.row]).asDriver()
         }).do(onNext: {self.navigator.toChat($0)}).mapToVoid()
-        
-        return Output(chats: chats, selected: selected)
+        let addTapped = input.addTrigger.do(onNext: {self.navigator.toAddEdit(Chat(family: nil, group: ChatGroup(name: "", photo: nil), uid: "", lastMessage: nil, members: [], messages: []))})
+        return Output(chats: chats, addTapped: addTapped, selected: selected)
     }
     
     
@@ -48,10 +48,12 @@ final class ChatsViewmodel: ViewModelType {
 extension ChatsViewmodel {
     struct Input {
         let willAppearTriger: Driver<Void>
+        let addTrigger: Driver<Void>
         let selectTrigger: Driver<IndexPath>
     }
     struct Output {
         let chats: Driver<[Chat]>
+        let addTapped: Driver<Void>
         let selected: Driver<Void>
     }
 }

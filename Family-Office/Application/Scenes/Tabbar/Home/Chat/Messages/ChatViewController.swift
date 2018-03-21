@@ -68,6 +68,9 @@ class ChatViewController: SLKTextViewController {
         self.tabBarController?.tabBar.isHidden = true
         setupView()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = true
+    }
     override func viewWillDisappear(_ animated: Bool) {
          self.tabBarController?.tabBar.isHidden = false
          NetUseCaseProvider().makeChatUseCase().seenToChat(id: viewModel.chat.uid).asDriverOnErrorJustComplete().drive().disposed(by: disposeBag)
@@ -89,6 +92,7 @@ class ChatViewController: SLKTextViewController {
             cell.transform = (self.tableView?.transform)!
             cell.isFromSender(isMe: item.sender?.uid == me)
             cell.bindToView(chatId: self.viewModel.chat.uid)
+            tv.slk_scrollToTop(animated: true)
             return cell
         })
         dataSource.titleForFooterInSection = { ds, index in
@@ -140,8 +144,7 @@ class ChatViewController: SLKTextViewController {
         output.selectedInfo.drive().disposed(by: disposeBag)
         infoView.bind(chat: viewModel.chat)
         infoView.title.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-      
-        
+
     }
     override func didMove(toParentViewController parent: UIViewController?) {
         super.didMove(toParentViewController: parent)

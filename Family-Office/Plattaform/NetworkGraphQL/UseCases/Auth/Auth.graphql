@@ -43,7 +43,12 @@ fragment UserDetails on User {
     user_type,
     photo {
      ...AttachmentDetails
-    }
+    },
+    bloodtype,
+    birthday,
+    curp,
+    nss,
+    rfc
 }
 
 fragment FamilyMembershipDetails on FamilyMembership {

@@ -11,6 +11,7 @@ import RxSwift
 
 public protocol FamilyUseCase {
     func save(fam: Family) -> Observable<Void>
+    func edit(family: Family, photo: Data?) -> Observable<Void>
     func get() -> Observable<[Family]>
     func getMyFamilies(uid: String) -> Observable<[Family]>
     func get(byId: String) -> Observable<Family>

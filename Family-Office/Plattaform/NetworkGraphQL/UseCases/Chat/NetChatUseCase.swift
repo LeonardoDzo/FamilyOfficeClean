@@ -25,7 +25,7 @@ final class NetChatUseCase: ChatUseCase {
     func get(byGroup: Bool?) -> Observable<[Chat]> {
         return network.get().do(onNext: { chats in
             chats.forEach({
-                self.provider.makeChatUseCase().create(chat: $0).subscribe().dispose()
+                self.provider.makeChatUseCase().create(chat: $0, data: nil).subscribe().dispose()
             })
         })
     }
@@ -34,13 +34,15 @@ final class NetChatUseCase: ChatUseCase {
         return mNetwork.sendMessage(chatId: chatId, message: message).mapToVoid()
     }
     
-    func create(chat: Chat) -> Observable<Chat> {
-        return Variable(Chat(family: nil, group: nil, uid: "", lastMessage: nil, members: [], messages: [])).asObservable()
+    func create(chat: Chat, data: Data?) -> Observable<Chat> {
+        return network.create(ids: chat.members.map({($0.user?.uid)!}), name: (chat.group?.name)!, photo: data).do(onNext:  {
+            self.provider.makeChatUseCase().create(chat: $0, data: nil).subscribe().dispose()
+        })
     }
     
     func create(userId: String) -> Observable<Chat> {
         return network.createChat(uid:userId).do(onNext: { chat in
-            self.provider.makeChatUseCase().create(chat: chat).subscribe().dispose()
+            self.provider.makeChatUseCase().create(chat: chat, data: nil).subscribe().dispose()
         })
     }
     func get(uid: String) -> Observable<Chat> {

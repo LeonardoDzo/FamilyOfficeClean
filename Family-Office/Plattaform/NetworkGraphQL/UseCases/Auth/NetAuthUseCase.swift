@@ -28,7 +28,7 @@ final class NetAuthUseCase: AuthUseCase {
         MainSocket.shareIntstance.channel.action("execute", with: PendingAddedSubscription())
         
         MainSocket.shareIntstance.channel.action("execute", with: FamilyMembershipAddedSubscription())
-        
+        MainSocket.shareIntstance.channel.action("execute", with: ChatAdded())
         self.provider.makeUseCase().save(user: authmodel.user).subscribe().dispose()
         
         NetUseCaseProvider().makeUseCase().getAssistants().subscribe().dispose()

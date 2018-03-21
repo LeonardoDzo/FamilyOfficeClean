@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import SideMenu
 import Hero
+import RxSwift
 
 protocol PreHomeNavigator {
     func toHome()
@@ -19,7 +20,6 @@ protocol PreHomeNavigator {
     func toProfile(user: User)
 }
 class PreHomeNav: PreHomeNavigator {
-
     private let navigationController: UINavigationController
     private let service: RMUseCaseProvider
     init(service: RMUseCaseProvider, nc: UINavigationController) {
@@ -29,8 +29,10 @@ class PreHomeNav: PreHomeNavigator {
     }
 
     func toMe(user: User) {
-          let preHome = PreHomeViewController()
+        let preHome = PreHomeViewController()
+    
         let viewModel = PreHomeViewModel(user: user, navigator: self, familyMembershipUseCase: service.makeFamilyMembershipUseCase(), familyUseCase: service.makeFamilyUseCase(), userUseCase: service.makeUseCase())
+        
             preHome.viewModel = viewModel
             preHome.hero.isEnabled = true
             navigationController.hero.navigationAnimationType = .slide(direction: .up)

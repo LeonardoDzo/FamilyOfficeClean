@@ -50,11 +50,20 @@ class PreHomeViewController: UIViewController {
             .drive(self.v.tableView.rx.items(cellIdentifier: FamilyTableViewCell.reuseID, cellType: FamilyTableViewCell.self)) {tv, model, cell in
             cell.bind(family: model)
         }.disposed(by: disposeBag)
+        
+        output.solicitudes
+            .drive(self.v.solicitudeTv.rx.items(cellIdentifier: SolicitudeTableViewCell.reuseID, cellType: SolicitudeTableViewCell.self)) {tv, model, cell in
+                cell.bind(app: model)
+            }.disposed(by: disposeBag)
+
         output.logout
             .drive()
             .disposed(by: disposeBag)
         output.selectedFamily
             .drive()
+            .disposed(by: disposeBag)
+        output.fetching
+            .drive(self.v.tableView.refreshControl!.rx.isRefreshing)
             .disposed(by: disposeBag)
         self.navigationController?.isNavigationBarHidden = true
     }

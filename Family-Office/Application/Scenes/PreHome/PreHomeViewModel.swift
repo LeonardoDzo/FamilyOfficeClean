@@ -38,13 +38,22 @@ final class PreHomeViewModel: ViewModelType {
     }
 
     func transform(input: PreHomeViewModel.Input) -> PreHomeViewModel.Output {
+        let activityIndicator = ActivityIndicator()
         let toCreateFamily = input.createBtntrigger.do(onNext: navigator.toAddFamily)
 
         let user = self.getUser(input.trigger, self.userUseCase, self.user.uid)
 
         let families = input.trigger.flatMapLatest {_ in
-            return self.getMyFamilies(self.familyMembershipUseCase)
+            return self.familyMembershipUseCase
+                .get(byUser: me)
+                .trackActivity(activityIndicator)
+                .map({$0.flatMap({$0.family})})
+                .asDriverOnErrorJustComplete()
             }.do(onNext: {self.families = $0})
+        
+        let solicitudes = input.trigger.flatMapLatest {_ in
+            return NetUseCaseProvider().makeApplicationUseCase().getFamilyApplications().asDriverOnErrorJustComplete()
+        }
     
         let gotoProfile = input.profileViewTrigger.do(onNext: {_ in
             self.navigator.toProfile(user: self.user)
@@ -61,7 +70,7 @@ final class PreHomeViewModel: ViewModelType {
                 .asDriverOnErrorJustComplete()
         }.do(onNext: {self.navigator.toHome()})
 
-        return Output(user: user, families: families, create: toCreateFamily, profile: gotoProfile, logout: logout, selectedFamily: selectedFamily)
+        return Output(user: user, families: families, solicitudes: solicitudes, create: toCreateFamily, profile: gotoProfile, logout: logout, fetching: activityIndicator.asDriver(), selectedFamily: selectedFamily)
     }
 
 }
@@ -77,9 +86,11 @@ extension PreHomeViewModel {
     struct Output {
         let user: Driver<User>
         let families: Driver<[Family]>
+        let solicitudes: Driver<[ApplicationFamily]>
         let create: Driver<Void>
         let profile: Driver<Void>
         let logout: Driver<Void>
+        let fetching: Driver<Bool>
         let selectedFamily: Driver<Void>
     }
 }

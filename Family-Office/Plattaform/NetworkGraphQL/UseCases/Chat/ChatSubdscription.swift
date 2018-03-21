@@ -18,6 +18,13 @@ func ChatMessageAdded(id: String) -> [String: Any] {
         .appending(UserDetails.fragmentString)
         .appending(AttachmentDetails.fragmentString)]
 }
+
+func ChatAdded() -> [String: Any] {
+    return ["query": "subscription ChatAdded{ chatAdded { ...ChatDetails, members {...ChatMembershipDetails }}"
+        .appending(ChatMembershipDetails.fragmentString)
+        .appending(UserDetails.fragmentString)
+        .appending(AttachmentDetails.fragmentString)]
+}
 func chatMembershipChanged(chat: String) -> [String: Any] {
     return ["variables": ["id": chat], "query": "subscription ChatMembershipChanged($id: ID!) { chatMembershipChanged(chat: $id) {...ChatMembershipDetails} }"
         .appending(ChatMembershipDetails.fragmentString)

@@ -17,8 +17,12 @@ extension User: Mappable {
         case name
         case email
         case families
+        case rfc
+        case bloodyType = "bloodtype"
         case photo
         case user_type
+        case curp
+        case nss
     }
 
 }

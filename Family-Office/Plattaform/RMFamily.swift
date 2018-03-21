@@ -40,7 +40,7 @@ extension Family: RealmRepresentable {
         family.name = name
         family.members.append(objectsIn: members.map({$0.asRealm()}))
         family.isSelected = isSelected
-      
+        family.photo = photo?.asRealm()
         return family
     }
 }

@@ -52,6 +52,8 @@ class ChatGroupTableViewCell: UITableViewCellX, ChatBindible {
         alignHorizontally(|-20-photo-container-20-|)
         container.centerVertically()
         userLbl.font = userLbl.font.withSize(14)
+        userLbl.width(>=20)
+        userLbl.sizeToFit()
         lastMessage.style(self.smallSize(_:))
         dateLbl.style(self.smallSize(_:)).style { lbl in
             lbl.textAlignment = .right

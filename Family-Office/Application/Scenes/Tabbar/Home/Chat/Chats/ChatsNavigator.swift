@@ -29,4 +29,9 @@ final class ChatsNavigator: NavigatorType {
         let navigator = ChatNavigator(navigationController: navigationController!)
         navigator.toMain(sender: chat)
     }
+    
+    func toAddEdit(_ chat: Chat) -> Void {
+        let navigator = AddEditChatNavigator(navigationController: self.navigationController!)
+        navigator.toMain(sender: chat)
+    }
 }

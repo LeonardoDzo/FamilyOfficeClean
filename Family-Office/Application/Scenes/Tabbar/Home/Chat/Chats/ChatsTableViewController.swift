@@ -13,7 +13,7 @@ import Kingfisher
 class ChatsTableViewController: UITableViewController {
     
     let disposeBag = DisposeBag()
-    
+    let add = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: nil)
     var viewwModel: ChatsViewmodel!
     
     fileprivate func setupView() {
@@ -24,6 +24,7 @@ class ChatsTableViewController: UITableViewController {
         self.tableView.backgroundColor = #colorLiteral(red: 0.9792956669, green: 0.9908331388, blue: 1, alpha: 1)
         self.tableView.separatorInset = UIEdgeInsets(top: 0, left: 80, bottom: 0, right: 0)
         self.tableView.dataSource = nil
+        self.navigationItem.rightBarButtonItem = add
         let label = UILabel()
         label.text = "No se encontro nada :("
         label.textAlignment = .center
@@ -42,7 +43,7 @@ class ChatsTableViewController: UITableViewController {
         let willAppear = rx.sentMessage(#selector(self.viewWillAppear))
             .asDriverOnErrorJustComplete()
             .mapToVoid()
-        let input = ChatsViewmodel.Input(willAppearTriger: willAppear, selectTrigger: self.tableView.rx.itemSelected.asDriver())
+        let input = ChatsViewmodel.Input(willAppearTriger: willAppear, addTrigger: add.rx.tap.asDriver(), selectTrigger: self.tableView.rx.itemSelected.asDriver())
         let output = viewwModel.transform(input: input)
         
         output.chats.drive(self.tableView.rx.items(cellIdentifier: "cell", cellType: ChatGroupTableViewCell.self)){
@@ -50,7 +51,7 @@ class ChatsTableViewController: UITableViewController {
             cell.bind(chat: model)
             self.tableView.backgroundView = nil
         }.disposed(by: disposeBag)
-        
+        output.addTapped.drive().disposed(by: disposeBag)
         output.selected.drive().disposed(by: disposeBag)
     }
     override func didReceiveMemoryWarning() {

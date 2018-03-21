@@ -56,6 +56,11 @@ final class MainSocket {
                                     provider.makePendingUseCase().save(pending: model).subscribe().dispose()
                                 }
                                 break
+                            case "chatAdded":
+                                if let model = FindObject<Chat>().decoder(data: data) {
+                                    self.provider.makeChatUseCase().create(chat: model, data: nil).subscribe().dispose()
+                                }
+                                break
                             case "chatMessageAdded":
                                 if var model = FindObject<ChatMessage>().decoder(data: data) {
                                     guard let dic = json["chatMessageAdded"] as? NSDictionary, let chat = dic["chat"] as? NSDictionary, let chatId = chat["id"] as? String  else {

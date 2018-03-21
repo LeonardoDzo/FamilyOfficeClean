@@ -41,7 +41,7 @@ class FamilyProfileViewController: UIViewController {
             .mapToVoid()
             .asDriverOnErrorJustComplete()
 
-        let input = FamilyProfileViewModel.Input(familyTrigger: viewWillAppear, tapAddMemberTrigger: self.v.addMemberBtn.rx.tap.asDriver(), backtrigger: self.v.backButton.rx.tap.asDriver())
+        let input = FamilyProfileViewModel.Input(familyTrigger: viewWillAppear, tapAddMemberTrigger: self.v.addMemberBtn.rx.tap.asDriver(), backtrigger: self.v.backButton.rx.tap.asDriver(), changeImage: self.v.editImage.rx.tap.asDriver())
         let output = viewModel.transform(input: input)
 
         output.back.drive().disposed(by: disposeBag)
@@ -59,6 +59,16 @@ class FamilyProfileViewController: UIViewController {
         output.tapAddMember
             .drive()
             .disposed(by: disposeBag)
+        
+        output.selected.drive(onNext: { f in
+            self.selectImage(completion: { (img) in
+            if img != nil {
+                if let aux: Data = (img)?.resizeImage().jpeg(.high)! {
+                    NetUseCaseProvider().makeFamilyUseCase().edit(family: f, photo: aux).asDriverOnErrorJustComplete().drive().disposed(by: self.disposeBag)
+                }
+            }
+        })}).disposed(by: disposeBag)
+        
 
     }
     override func didReceiveMemoryWarning() {

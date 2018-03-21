@@ -8,8 +8,8 @@ query allUser($phones: [String], $rol: Int) {
     }
 }
 
-mutation EditUser($file: Upload) {
-    editUser(photo: $file) {
+mutation EditUser($birthday: Int, $bloodtype: String, $curp: String, $name: String, $nss: String, $phone: String, $rfc: String, $file: Upload) {
+editUser(photo: $file, birthday: $birthday, bloodtype: $bloodtype, curp: $curp, name: $name, nss: $nss, phone: $phone, rfc: $rfc) {
      ...UserDetails
     }
 }

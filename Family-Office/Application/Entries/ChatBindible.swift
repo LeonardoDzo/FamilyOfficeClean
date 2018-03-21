@@ -76,7 +76,8 @@ extension ChatBindible {
                 view.numberOfLines = 2
                 view.height(<=40)
                 let text = message?.attachment != nil ? "📷" : ""
-                view.text =  text + (message?.text)!
+                view.text =  text + (message?.text ?? "")
+                view.clipsToBounds = true
                 view.textColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
                 view.sizeToFit()
             }else{
@@ -116,7 +117,9 @@ extension ChatBindible {
             switch chat.getType() {
                 case .Family:
                     if let att = chat.family?.photo {
-                        view.kf.setImage(with: URL(string: att.routes[1]))
+                        let token = UserDefaults().value(forKey: "token") as? String ?? ""
+                        let urlstring = att.routes[1].appending("?token=\(token)")
+                        view.kf.setImage(with: URL(string: urlstring))
                     }
                     break
                 case .Group:
@@ -134,6 +137,7 @@ extension ChatBindible {
         }
         
         if let view = lastMessage {
+            view.numberOfLines = 2
             if chat.getType() != .OneToOne {
                 view.text = message?.text
                 view.isHidden = false

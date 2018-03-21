@@ -55,4 +55,7 @@ final class RMFamilyUseCase<Repository>: FamilyUseCase where Repository: Abstrac
         return repository.query(with: predicate, sortDescriptors: [])
         
     }
+    func edit(family: Family, photo: Data?) -> Observable<Void> {
+        return repository.save(entity: family)
+    }
 }

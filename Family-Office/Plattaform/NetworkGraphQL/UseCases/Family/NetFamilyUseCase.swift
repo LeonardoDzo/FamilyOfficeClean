@@ -44,4 +44,8 @@ final class NetFamilyUseCase: FamilyUseCase {
             })
         })
     }
+    
+    func edit(family: Family, photo: Data?) -> Observable<Void> {
+        return network.edit(family: family, photo: photo).mapToVoid()
+    }
 }

@@ -51,7 +51,7 @@ extension UserBindable {
             emailLbl.text = user.email
         }
         if let view = photoProfile {
-            let url = URL(string: user.photo?.routes[2] ?? "")
+            let url = URL(string: Constants.url.nographql.appending(user.photo?.url ?? "").appending(user.photo?.ext.split(separator: ",")[1] ?? ""))
             view.kf.indicatorType = .activity
             let processor = RoundCornerImageProcessor(cornerRadius: 8)
             view.kf.setImage(with: url, placeholder: #imageLiteral(resourceName: "profile_default"), options: [.transition(.fade(0.2)), .processor(processor)])

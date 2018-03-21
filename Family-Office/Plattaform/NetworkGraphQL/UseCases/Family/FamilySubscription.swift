@@ -9,6 +9,10 @@
 import Foundation
 
 func FamilySubscription(_ family: Family) -> [String: Any] {
+    if subscriptions.contains("FamilyChanged\(family.uid)") {
+        return [:]
+    }
+    subscriptions.append("FamilyChanged\(family.uid)")
     return ["variables": ["id": family.uid], "query": "subscription FamilyChanged($id:ID){familyChanged(id:$id) {...FamilyDetails }}"
         .appending(FamilyDetails.fragmentString)
         .appending(AttachmentDetails.fragmentString)]

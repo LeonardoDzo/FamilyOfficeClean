@@ -56,7 +56,7 @@ class SolicitudeTableViewCell: UITableViewCell {
     func bind(app: ApplicationFamily) -> Void {
       
         if  case .Pending? = app.status  {
-            self.details.text = "La Familia \(app.family.name) quiere que seas uno mas de su miembros"
+            self.details.text = "Aceptar la familia: \(app.family.name)"
             confirmBtn.isHidden = false
             deleteBtn.isHidden = false
             bindToViewModel(app: app)

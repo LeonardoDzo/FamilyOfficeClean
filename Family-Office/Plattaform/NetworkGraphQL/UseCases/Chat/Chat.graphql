@@ -1,6 +1,6 @@
 
-mutation CreateChatGroup($users: [ID]!,$name: String!) {
-    createChatGroup(users: $users, name: $name) {
+mutation CreateChatGroup($users: [ID]!,$name: String!, $file: Upload) {
+    createChatGroup(users: $users, name: $name, photo: $file) {
         ...ChatDetails,
         members{
             ...ChatMembershipDetails
