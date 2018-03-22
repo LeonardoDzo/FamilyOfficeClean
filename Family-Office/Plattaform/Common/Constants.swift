@@ -9,7 +9,7 @@
 import Foundation
 
 enum ip: String {
-    case Dev = "1396f7d3.ngrok.io"
+    case Dev = "305cb7c3.ngrok.io"
     case COT = "192.168.1.191"
 }
 

@@ -17,6 +17,7 @@ class MainSafeboxViewController: UIViewController, UITabBarDelegate {
     var v = MainSafebox()
     var currentFolder = ["root"]
     var viewModel: MainSafeboxViewModel!
+    var backButton = UIBarButtonItem(image: #imageLiteral(resourceName: "back-27x20"), style: .plain, target: self, action: #selector(goBack))
     
     override func loadView(){
         view = self.v
@@ -25,10 +26,14 @@ class MainSafeboxViewController: UIViewController, UITabBarDelegate {
     fileprivate func setupView(){
         self.v = MainSafebox()
         self.view = self.v
-        self.navigationItem.leftBarButtonItem = self.backBtn
+        self.navigationItem.leftBarButtonItem = self.backButton
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .organize, target: self, action: #selector(self.changeStyle))
         self.bindToView()
         self.title = "Caja Fuerte"
+    }
+    
+    @objc func goBack(){
+        
     }
     
     @objc func changeStyle(){
@@ -55,12 +60,15 @@ class MainSafeboxViewController: UIViewController, UITabBarDelegate {
         let willAppear = rx.sentMessage(#selector(self.viewWillAppear))
             .asDriverOnErrorJustComplete()
             .mapToVoid()
-        let search = self.v.searchBar.rx.text.changed.asDriver()
-        let selectPost = self.v.tableView.rx.itemSelected.asDriver()
+        let search = self.v.searchBar.rx.text.changed.asDriver().startWith("")
+        let selectPost = self.v.tableView.rx.itemSelected.asDriver().startWith(IndexPath(item: -1, section: 0))
+        let selectCollection = self.v.collectionView.rx.itemSelected.asDriver().startWith(IndexPath(item: -1, section: 0))
+        let back = self.backButton.rx.tap.asDriver().startWith(())
         
         self.v.tableView.allowsSelection = true
+        self.v.collectionView.allowsSelection = true
         
-        let input = MainSafeboxViewModel.Input(backTrigger: self.backBtn.rx.tap.asDriver(), taptrigger: self.v.tabbar.rx.didSelectItem.asDriver(), willAppearTrigger: willAppear, searchTrigger: search, selectTrigger: selectPost)
+        let input = MainSafeboxViewModel.Input(backTrigger: back, taptrigger: self.v.tabbar.rx.didSelectItem.asDriver().startWith((self.v.tabbar.items?.first!)!), willAppearTrigger: willAppear, searchTrigger: search, selectTrigger: selectPost, selectCollTrigger: selectCollection)
         
         let output = viewModel.transform(input: input)
         
@@ -72,11 +80,13 @@ class MainSafeboxViewController: UIViewController, UITabBarDelegate {
         output.select.drive().disposed(by: disposeBag)
         
         output.safeboxAttachments.drive(self.v.tableView.rx.items(cellIdentifier: "cell", cellType: SafeboxTableViewCell.self)) {i,model,cell in
-            cell.bind(attachment: model)
+            cell.bind(attachment: model, history: self.viewModel.bc)
         }.disposed(by: disposeBag)
         
+        self.v.collectionView.isUserInteractionEnabled = true
         output.safeboxAttachments.drive(self.v.collectionView.rx.items(cellIdentifier: "cell", cellType: SafeboxCollectionViewCell.self)) {i,model,cell in
-            cell.bind(attachment: model)
+            cell.isSelected = true
+            cell.bind(attachment: model, history: self.viewModel.bc)
             }.disposed(by: disposeBag)
         
         output.error.drive(self.errorBinding).disposed(by: disposeBag)

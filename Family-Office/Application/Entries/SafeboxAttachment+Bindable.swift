@@ -19,8 +19,10 @@ extension SafeboxBindable {
     var nameLbl: UILabelX! {return nil}
     var iconImgView: UIImageViewX! {return nil}
     
-    func bind(attachment: SafeboxAttachment) -> Void {
+    func bind(attachment: SafeboxAttachment, history: [String]) -> Void {
+        let dumbArr = attachment.name.split(separator: "/")
         self.attachment = attachment
+        self.attachment.name = String(describing: dumbArr[history.count - 1])
         bind()
     }
     func bind() -> Void {
@@ -28,20 +30,32 @@ extension SafeboxBindable {
             return
         }
         if let view = nameLbl {
+            
             view.text = attachment.name
         }
         
         if let view = iconImgView {
-            if attachment.mime.contains("image"){
-                
+            view.image = nil
+            switch NSString(string: attachment.name).pathExtension{
+            case "":
+                view.image = #imageLiteral(resourceName: "safebox_folder")
+                break
+            case "jpg", "jpeg", "png":
                 let url = URL(string: "\(Constants.url.safebox)\(attachment.token!)")
-                print("\(Constants.url.safebox)\(attachment.token)")
+                let resource = ImageResource(downloadURL: url!, cacheKey: attachment.name)
                 view.kf.indicatorType = .activity
                 let processor = RoundCornerImageProcessor(cornerRadius: 2)
-                view.kf.setImage(with: url, placeholder: #imageLiteral(resourceName: "safebox_file"), options: [.transition(.fade(0.2)), .processor(processor)])
-            }else{
-                //put generic icon depending on file type
+                view.kf.setImage(with: resource, placeholder: #imageLiteral(resourceName: "safebox_file"), options: [.transition(.fade(0.2)), .processor(processor)], progressBlock: nil, completionHandler: nil)
+                break
+            case "docx", "txt":
+                view.image = #imageLiteral(resourceName: "docx_file")
+                break
+            case "xls", "xlsx", "csv":
+                view.image = #imageLiteral(resourceName: "xls_file")
+                break
+            default: break
             }
+            
         }
     }
 }

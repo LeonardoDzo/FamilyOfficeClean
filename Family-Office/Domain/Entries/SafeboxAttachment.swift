@@ -13,4 +13,5 @@ public struct SafeboxAttachment: Decodable {
     var name: String! = ""
     var mime: String! = ""
     var token: String! = ""
+    
 }
