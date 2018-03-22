@@ -17,5 +17,7 @@ extension Pending: Mappable {
         case seen
         case created_at
         case updated_at
+        case boss = "user"
+        case assistantId = "assistant"
     }
 }

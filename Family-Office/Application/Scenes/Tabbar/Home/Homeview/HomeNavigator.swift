@@ -48,12 +48,21 @@ class HomeNavigator: HomeNavigatorPr {
             mainNavigationController,
             profileAssistant,
             addeditPendingNavigationController]
-        
+        setMenu()
         tabBarController.setStyle(homeBtn)
         mainNavigator.toMain()
         adPendingNavigator.toMain(pending: Pending())
         profileAssitantNavigator.toMain()
         navigationController.present(tabBarController, animated: true, completion: nil)
+    }
+    
+    fileprivate func setMenu() {
+        let menu = MenuAssistantsViewController()
+        menu.viewModel = MenuAssistantViewModel(userUseCase: RMUseCaseProvider().makeUseCase())
+        
+        let menuLeftNavigationController = UISideMenuNavigationController(rootViewController: menu)
+        menuLeftNavigationController.view.backgroundColor = #colorLiteral(red: 0.9792956669, green: 0.9908331388, blue: 1, alpha: 1)
+        SideMenuManager.default.menuLeftNavigationController = menuLeftNavigationController
     }
     
     func toModule(homeBtn: HomeBtn) {

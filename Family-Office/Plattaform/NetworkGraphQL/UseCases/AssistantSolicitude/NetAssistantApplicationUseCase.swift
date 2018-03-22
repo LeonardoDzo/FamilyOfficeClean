@@ -21,12 +21,12 @@ final class NetApplicationAssistantUseCase: ApplicationAssistantUseCase {
  
     func save(appAssistant: ApplicationAssistant) -> Observable<Void> {
         return network.createAssitantApplication(appAssistant.assistant.uid).do(onNext:  { solicitude in
-            self.provider.makeApplicationAssistantUseCase().save(appAssistant: solicitude).subscribe().dispose()
+            //self.provider.makeApplicationAssistantUseCase().save(appAssistant: solicitude).subscribe().dispose()
         }).mapToVoid()
     }
     func getAssistantsApplications() -> Observable<[ApplicationAssistant]> {
         return network.getApplications().do(onNext: { applications in
-            applications.forEach({self.provider.makeApplicationAssistantUseCase().save(appAssistant: $0).subscribe().dispose()})
+//            applications.forEach({self.provider.makeApplicationAssistantUseCase().save(appAssistant: $0).subscribe().dispose()})
         })
     }
 }

@@ -48,6 +48,8 @@
 		022FCEEF204DBD9500070546 /* InsuranceNethwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022FCEEE204DBD9500070546 /* InsuranceNethwork.swift */; };
 		022FE36A202CCD58009029AD /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022FE369202CCD58009029AD /* HomeViewModel.swift */; };
 		022FE36D202CDB09009029AD /* HomeCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022FE36C202CDB09009029AD /* HomeCellViewModel.swift */; };
+		023494162062E61C0054A264 /* MenuAssistantsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023494152062E61C0054A264 /* MenuAssistantsViewController.swift */; };
+		023494182062E6BE0054A264 /* MenuAssistantViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023494172062E6BE0054A264 /* MenuAssistantViewModel.swift */; };
 		023858492044DECB00D1CDB3 /* ProfileAssistantViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023858482044DECB00D1CDB3 /* ProfileAssistantViewModel.swift */; };
 		0238584B2044E20000D1CDB3 /* ProfileAssitantNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0238584A2044E20000D1CDB3 /* ProfileAssitantNavigator.swift */; };
 		023A36F020505B020046FCDE /* MessageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023A36EF20505B020046FCDE /* MessageType.swift */; };
@@ -371,6 +373,8 @@
 		022FCEEE204DBD9500070546 /* InsuranceNethwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsuranceNethwork.swift; sourceTree = "<group>"; };
 		022FE369202CCD58009029AD /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		022FE36C202CDB09009029AD /* HomeCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCellViewModel.swift; sourceTree = "<group>"; };
+		023494152062E61C0054A264 /* MenuAssistantsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuAssistantsViewController.swift; sourceTree = "<group>"; };
+		023494172062E6BE0054A264 /* MenuAssistantViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuAssistantViewModel.swift; sourceTree = "<group>"; };
 		0237D519201A6A8B00895DF5 /* Family-Office.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Family-Office.entitlements"; sourceTree = "<group>"; };
 		023858482044DECB00D1CDB3 /* ProfileAssistantViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAssistantViewModel.swift; sourceTree = "<group>"; };
 		0238584A2044E20000D1CDB3 /* ProfileAssitantNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAssitantNavigator.swift; sourceTree = "<group>"; };
@@ -828,6 +832,15 @@
 				022FE36C202CDB09009029AD /* HomeCellViewModel.swift */,
 			);
 			path = cell;
+			sourceTree = "<group>";
+		};
+		023494142062E6010054A264 /* MenuAssistants */ = {
+			isa = PBXGroup;
+			children = (
+				023494152062E61C0054A264 /* MenuAssistantsViewController.swift */,
+				023494172062E6BE0054A264 /* MenuAssistantViewModel.swift */,
+			);
+			path = MenuAssistants;
 			sourceTree = "<group>";
 		};
 		023A36EE20505AF40046FCDE /* Protocol */ = {
@@ -1314,6 +1327,7 @@
 		02A0C49E202E221C0045B6B6 /* Menus */ = {
 			isa = PBXGroup;
 			children = (
+				023494142062E6010054A264 /* MenuAssistants */,
 				02A0C4A1202E23010045B6B6 /* Menu */,
 				02A0C49F202E22360045B6B6 /* MenuViewController.swift */,
 				0242D4AF202E2C8E00B11E03 /* MenuViewModel.swift */,
@@ -2085,6 +2099,7 @@
 			files = (
 				0242E955204E116F00C46D00 /* DetailsInsuranceViewModel.swift in Sources */,
 				02EDD78F203E096F003DA591 /* Application+Ext.swift in Sources */,
+				023494182062E6BE0054A264 /* MenuAssistantViewModel.swift in Sources */,
 				0265E3942051AE7600DEB2B6 /* Tabbarcontroller+Ext.swift in Sources */,
 				02D338DF2040823B007FDF7B /* ServiceLocator.swift in Sources */,
 				023AAB40201EBB4900F50207 /* DesignableTabBarController.swift in Sources */,
@@ -2245,6 +2260,7 @@
 				02C24015204F026E00BD64D3 /* webNavigator.swift in Sources */,
 				025742E6203F3D3A00215A56 /* SearchUserNavigator.swift in Sources */,
 				022FCEE4204DBB2E00070546 /* InsuranceType.swift in Sources */,
+				023494162062E61C0054A264 /* MenuAssistantsViewController.swift in Sources */,
 				023AAB68201FAB7300F50207 /* AuthNetwork.swift in Sources */,
 				02EF0EF72031F9A10020A133 /* AddEditPendingViewController.swift in Sources */,
 				02169013204DC3580097F150 /* RMInsurance.swift in Sources */,

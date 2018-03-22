@@ -4,8 +4,8 @@ query AllPending {
         ...PendingDetails
     }
 }
-mutation CreatePending($title: String!, $priority:String, $details: String){
-    createPending(title: $title, priority: $priority, details: $details){
+mutation CreatePending($title: String!, $priority:String, $details: String, $assistant: ID!){
+createPending(title: $title, priority: $priority, details: $details, assistant: $assistant){
         ...PendingDetails
     }
 }
@@ -16,5 +16,11 @@ fragment PendingDetails on Pending {
     priority,
     details,
     created_at,
-    updated_at
+    updated_at,
+    user {
+        ...UserDetails
+    },
+    assistant {
+        ...UserDetails
+    }
 }

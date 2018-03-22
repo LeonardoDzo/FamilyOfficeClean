@@ -26,11 +26,11 @@ class AddAssistantNavigator: AssistantNavigatorPr {
     func toMain() {
         let view = AddAssistantViewController()
        
-        let result = RMUseCaseProvider().makeApplicationAssistantUseCase()
+        let result = NetUseCaseProvider().makeApplicationAssistantUseCase()
             .getAssistantsApplications()
             .asDriverOnErrorJustComplete()
         result.drive(onNext: { applications in
-            view.viewModel = AddAssistantViewModel(userUseCase: self.service.makeUseCase(), navigator: self,applications: applications )
+            view.viewModel = AddAssistantViewModel(userUseCase: self.service.makeUseCase(), navigator: self, applications: applications )
             self.navigationController.pushViewController(view, animated: true)}).disposed(by: disposeBag)
        
     }

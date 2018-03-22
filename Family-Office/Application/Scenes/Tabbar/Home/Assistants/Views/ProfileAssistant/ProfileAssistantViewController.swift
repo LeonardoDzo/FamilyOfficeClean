@@ -9,6 +9,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import SideMenu
 
 class ProfileAssistantViewController: UIViewController {
     private let disposeBag = DisposeBag()
@@ -23,6 +24,8 @@ class ProfileAssistantViewController: UIViewController {
             self.v = ProfileAssistantStevia()
             self.view = self.v
         }
+        SideMenuManager.default.menuAddPanGestureToPresent(toView: self.navigationController!.navigationBar)
+        SideMenuManager.default.menuAddScreenEdgePanGesturesToPresent(toView: self.navigationController!.view)
         v.topview.callBtn.btn.addTarget(self, action: #selector(self.call(_:)), for: .touchUpInside)
         self.navigationItem.leftBarButtonItem = self.backBtn
         bindToView()

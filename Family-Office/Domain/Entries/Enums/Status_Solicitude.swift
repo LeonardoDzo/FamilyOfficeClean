@@ -26,6 +26,8 @@ extension STATUS_SOLICITUDE {
         switch rawValue {
         case "Accepted":
             self = .Accepted
+        case "Approved":
+            self = .Accepted
         case "Pending":
             self = .Pending
         default:

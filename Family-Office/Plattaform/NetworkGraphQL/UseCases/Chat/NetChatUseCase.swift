@@ -8,6 +8,7 @@
 
 import Foundation
 import RxSwift
+import RealmSwift
 
 final class NetChatUseCase: ChatUseCase {
 
@@ -24,6 +25,17 @@ final class NetChatUseCase: ChatUseCase {
     
     func get(byGroup: Bool?) -> Observable<[Chat]> {
         return network.get().do(onNext: { chats in
+            
+            let realm = try! Realm()
+            /// Elimina chat que ya no contiene
+            realm.objects(RMChat.self).forEach({ (chat) in
+                if !chats.contains(where: {$0.uid == chat.uid}) {
+                    try! realm.write {
+                        realm.delete(chat)
+                    }
+                }
+            })
+            
             chats.forEach({
                 self.provider.makeChatUseCase().create(chat: $0, data: nil).subscribe().dispose()
             })

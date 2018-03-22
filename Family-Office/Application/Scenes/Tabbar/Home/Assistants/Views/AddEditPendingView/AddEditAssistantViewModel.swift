@@ -27,7 +27,7 @@ final class AddEditPendingViewModel: ViewModelType {
 
             })
         let cansave = input.canSaveTrigger.map { ( pending) -> Bool in
-            return !pending.title.isEmpty && pending.title.count > 4
+            return !pending.assistantId.isEmpty && !pending.title.isEmpty && pending.title.count > 4 
         }
         return Output(canSave: cansave, save: save)
     }

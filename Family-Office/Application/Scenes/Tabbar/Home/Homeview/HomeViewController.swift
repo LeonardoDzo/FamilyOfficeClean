@@ -28,7 +28,15 @@ class HomeViewController: UIViewController, UICollectionViewDelegate {
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        let menu = MenuViewController()
+        menu.viewModel = MenuViewModel(service: RMUseCaseProvider().makeFamilyUseCase(), familyMembershipUseCase: RMUseCaseProvider().makeFamilyMembershipUseCase())
+        
+        let menuLeftNavigationController = UISideMenuNavigationController(rootViewController: menu)
+        menuLeftNavigationController.view.backgroundColor = #colorLiteral(red: 0.9792956669, green: 0.9908331388, blue: 1, alpha: 1)
+        SideMenuManager.default.menuLeftNavigationController = menuLeftNavigationController
+        
     }
     fileprivate func setupView() {
 

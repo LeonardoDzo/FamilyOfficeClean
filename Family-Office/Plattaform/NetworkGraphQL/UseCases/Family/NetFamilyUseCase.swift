@@ -8,6 +8,7 @@
 
 import Foundation
 import RxSwift
+import RealmSwift
 
 final class NetFamilyUseCase: FamilyUseCase {
     private let diposeBag = DisposeBag()
@@ -38,6 +39,15 @@ final class NetFamilyUseCase: FamilyUseCase {
     }
     func getMyFamilies(uid: String = "") -> Observable<[Family]> {
         return network.myFamilies().do(onNext: {fams in
+            let realm = try! Realm()
+            /// Elimina chat que ya no contiene
+            realm.objects(RMFamily.self).forEach({ (family) in
+                if !fams.contains(where: {$0.uid == family.uid}) {
+                    try! realm.write {
+                        realm.delete(family)
+                    }
+                }
+            })
             fams.forEach({
                 $0.members.forEach({MainSocket.shareIntstance.channel.action("execute", with: UserSubscription($0.user))})
                 self.provider.makeFamilyUseCase().save(fam: $0).subscribe().disposed(by: self.diposeBag)

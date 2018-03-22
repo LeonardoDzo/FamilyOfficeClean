@@ -39,7 +39,8 @@ class AssistantInviteTableViewCell: UITableViewCellX, UserBindable {
             btn.cornerRadius = 8
         }
         photoProfile.image = #imageLiteral(resourceName: "Blog_Admin_Assistant")
-        photoProfile.contentMode = .center
+        photoProfile.clipsToBounds = true
+        photoProfile.contentMode = .scaleAspectFill
         
     }
     

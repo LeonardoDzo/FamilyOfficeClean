@@ -18,6 +18,7 @@ class AddEditPendingViewController: FormViewController {
     var pending: Variable<Pending> = Variable(Pending())
     var viewModel: AddEditPendingViewModel!
     fileprivate func searchKey(_ key: String, _ value: Any?) {
+        pending.value.assistantId = assistantId
         switch key {
         case "title":
             self.pending.value.title = value as? String ?? ""

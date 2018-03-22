@@ -10,6 +10,8 @@ import UIKit
 import RxCocoa
 import RxSwift
 import Stevia
+import SideMenu
+
 class AssistantViewController: UIViewController {
     private let disposeBag = DisposeBag()
     let back = UIBarButtonItem(image: #imageLiteral(resourceName: "icons8-expand_arrow"), style: .plain, target: self, action: nil)
@@ -21,6 +23,8 @@ class AssistantViewController: UIViewController {
     override func loadView() { view = v }
     override func viewDidLoad() {
         super.viewDidLoad()
+        SideMenuManager.default.menuAddPanGestureToPresent(toView: self.navigationController!.navigationBar)
+        SideMenuManager.default.menuAddScreenEdgePanGesturesToPresent(toView: self.navigationController!.view)
         setNavbar()
         bindViewModel()
     }

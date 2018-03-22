@@ -20,8 +20,11 @@ func ChatMessageAdded(id: String) -> [String: Any] {
 }
 
 func ChatAdded() -> [String: Any] {
-    return ["query": "subscription ChatAdded{ chatAdded { ...ChatDetails, members {...ChatMembershipDetails }}"
+    return ["query": "subscription ChatAdded{chatAdded{ ...ChatDetails, members {...ChatMembershipDetails}}}"
+        .appending(ChatDetails.fragmentString)
         .appending(ChatMembershipDetails.fragmentString)
+        .appending(ChatMessageDetails.fragmentString)
+        .appending(FamilyDetails.fragmentString)
         .appending(UserDetails.fragmentString)
         .appending(AttachmentDetails.fragmentString)]
 }

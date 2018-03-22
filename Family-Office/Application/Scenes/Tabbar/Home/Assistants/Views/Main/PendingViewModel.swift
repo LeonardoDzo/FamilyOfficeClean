@@ -27,7 +27,7 @@ final class PendingViewModel: ViewModelType {
             return self.usecases.get()
                 .trackError(errorTracker)
                 .asDriverOnErrorJustComplete()
-        }
+        }.map({$0.filter({$0.assistantId == assistantId})})
         let assistants = input.trigger.flatMapLatest {
             return self.assistantUseCase
                 .getAssistants()

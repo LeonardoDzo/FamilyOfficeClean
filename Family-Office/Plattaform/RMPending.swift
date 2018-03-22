@@ -28,10 +28,11 @@ final class RMPending: Object {
     }
 }
 extension RMPending: DomainConvertibleType {
+    
     func asDomain() -> Pending {
         var pending = Pending()
-//        pending.assistantId = assistantId
-//        pending.boss = boss
+        pending.assistantId = assistantId
+        pending.boss = boss
         pending.created_at = created_at
         pending.details = details
         pending.done = done
@@ -46,8 +47,8 @@ extension RMPending: DomainConvertibleType {
 extension Pending: RealmRepresentable {
     func asRealm() -> RMPending {
         return RMPending.build({ (obj) in
-//            obj.assistantId = assistantId
-//            obj.boss = boss
+            obj.assistantId = assistantId
+            obj.boss = boss
             obj.created_at = created_at
             obj.details = details
             obj.done = done

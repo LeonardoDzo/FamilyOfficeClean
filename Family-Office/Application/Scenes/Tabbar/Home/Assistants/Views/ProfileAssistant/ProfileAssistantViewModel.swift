@@ -21,11 +21,12 @@ final class ProfileAsssistantViewModel : ViewModelType {
         self.navigator = navigator
     }
     func transform(input: ProfileAsssistantViewModel.Input) -> ProfileAsssistantViewModel.Output {
+        
         let assistants = input.trigger.flatMapLatest { _ in
             return self.assistantUseCase
                 .getAssistants()
                 .asDriverOnErrorJustComplete()
-            .map({$0.first ?? User(name: "", email: "", phone: "")})
+                .map({$0.filter({$0.uid == UserDefaults().value(forKey: "assistantId") as? String ?? ""}).first ?? User(name: "", email: "", phone: "")})
             }
         return Output(assistant: assistants)
     }

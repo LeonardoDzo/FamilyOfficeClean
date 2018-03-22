@@ -9,7 +9,7 @@
 import Foundation
 import Stevia
 class MainAssistantViewStevia: UIViewX {
-    let menu = MenuMainAss()
+    let menu = MenuMainAss(total: ["Todos","Pendientes", "Terminadas"], colorPrimary: #colorLiteral(red: 0.9518877864, green: 0.5812291503, blue: 0.4435725808, alpha: 1))
     let table = TaskTableview()
     convenience init() {
         self.init(frame: CGRect.zero)

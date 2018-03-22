@@ -55,6 +55,14 @@ public struct Pending: Codable {
             priority = try values.decode(PENDING_PRIORITY.self, forKey: .priority)
             created_at = try values.decodeIfPresent(Int.self, forKey: .created_at) ?? 0
             updated_at = try values.decodeIfPresent(Int.self, forKey: .updated_at) ?? 0
+            
+            if let assistant = values.decodeSafelyIfPresent(User.self, forKey: .assistantId) {
+                assistantId = assistant.uid
+            }
+            
+            if let user = values.decodeSafelyIfPresent(User.self, forKey: .boss) {
+                boss = user.uid
+            }
         }
 
     }
