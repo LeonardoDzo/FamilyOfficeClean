@@ -9,6 +9,7 @@
 import Foundation
 import RxSwift
 import RxCocoa
+import UIKit
 
 final class ChatViewModel: ViewModelType {
 
@@ -20,9 +21,10 @@ final class ChatViewModel: ViewModelType {
     
     var text = ""
     
-    init(chatUseCase: ChatUseCase, navigator: ChatNavigator) {
+    init(chatUseCase: ChatUseCase, navigator: ChatNavigator, chat: Chat){
         self.chatUseCase = chatUseCase
         self.navigator = navigator
+        self.chat = chat
     }
     
     func transform(input: ChatViewModel.Input) -> ChatViewModel.Output {
@@ -35,17 +37,21 @@ final class ChatViewModel: ViewModelType {
             }.do(onNext: {self.chat = $0})
         
 
-        let messages = chattrigger.map({ (chat)  in
-            return Dictionary(grouping: chat.messages.reversed()) { (message) -> Date in
-                return Date(message.seenAt)?.midnight() ?? Date()
-                }.reversed().map({SectionOfMessages(value: $0)})
-        }).do(onNext: { _ in
-            NetUseCaseProvider().makeChatUseCase()
-                .seenToChat(id: self.chat.uid)
+        let messages = chattrigger.flatMapLatest { (chat) in
+            return self.chatUseCase
+                .getMessage(chatId: chat.uid)
                 .asDriverOnErrorJustComplete()
-                .drive()
-                .dispose()
-        })
+                .map({ (mess) -> [SectionOfMessages] in
+                    return Dictionary(grouping: mess.reversed()) { m -> Date in
+                        return Date(m.seenAt)?.midnight() ?? Date()
+                        }.map({SectionOfMessages(value: $0)})
+                })
+            }.do(onNext: { _ in
+                NetUseCaseProvider().makeChatUseCase()
+                    .seenToChat(id: self.chat.uid)
+                    .subscribe()
+                    .dispose()
+            })
         
         let textChanged  = input.textChange.do(onNext: {self.text = $0})
         
@@ -53,14 +59,30 @@ final class ChatViewModel: ViewModelType {
             return self.sendMessage()
         })
         
-        let image = input.imageSelected.map { (value) in
-            return value
-        }
-        let selectedInfo = input.selectInfo.withLatestFrom(chattrigger) {_, chat in
-            return chat
-            }.do(onNext: {self.navigator.toInfoChat($0)})
+        let selectedInfo = input.selectInfo.withLatestFrom(chattrigger)
+            .do(onNext: self.navigator.toInfoChat)
         
-        return Output(messages: messages, infoChat: chattrigger, sendMessage: sendMessage, messageChange: textChanged.mapToVoid(), tapCamera: input.tapCameraTrigger, imageSelected: image, selectedInfo: selectedInfo.mapToVoid())
+        let selectcell = Driver.combineLatest(input.selectCell, messages).map({ indexpath, sections -> (String, [(Int,ChatMessage)]) in
+            let isValid = sections[indexpath.section].items[indexpath.row].attachment?.isImage ?? false
+            let uid = sections[indexpath.section].items[indexpath.row].uid
+            if isValid {
+               return (uid, sections[indexpath.section].items.enumerated().filter({ (i,m) -> Bool in
+                    return m.attachment?.isImage ?? false
+                    }))
+            }
+            return (uid, [])
+        }).map({ arg -> (String, [AttachmentViewModel]) in
+            return (arg.0, arg.1.map({ (item) -> AttachmentViewModel in
+                let (i, chatm) = item
+                return AttachmentViewModel(message: chatm,index: i)
+            }))
+        })
+    
+        return Output(messages: messages, infoChat: chattrigger, sendMessage: sendMessage, messageChange: textChanged.mapToVoid(), tapCamera: input.tapCameraTrigger, selectedInfo: selectedInfo.mapToVoid(), selectCell: selectcell)
+    }
+    
+    deinit {
+        chat = nil
     }
     
     func sendMessage(data: Data? = nil) -> SharedSequence<DriverSharingStrategy, Void> {
@@ -83,8 +105,8 @@ extension ChatViewModel {
         let textChange: Driver<String>
         let sendMessage: Driver<Void>
         let tapCameraTrigger: Driver<Void>
-        let imageSelected: Driver<[Any]>
         let selectInfo: Driver<Void>
+        let selectCell: Driver<IndexPath>
     }
     struct Output {
         let messages: Driver<[SectionOfMessages]>
@@ -92,8 +114,7 @@ extension ChatViewModel {
         let sendMessage: Driver<Void>
         let messageChange: Driver<Void>
         let tapCamera: Driver<Void>
-        let imageSelected: Driver<[Any]>
         let selectedInfo: Driver<Void>
-       
+        let selectCell: Driver<(String, [AttachmentViewModel])>
     }
 }

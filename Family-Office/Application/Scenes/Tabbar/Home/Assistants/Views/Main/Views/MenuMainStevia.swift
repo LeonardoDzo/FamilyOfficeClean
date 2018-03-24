@@ -11,11 +11,8 @@ import Stevia
 
 class MenuMainAss: UIViewX {
     var btns = [UIButtonX]()
-    let allBtn = UIButtonX()
     let line = UIViewX()
     var views = [UIView]()
-    let doneBtn = UIButtonX()
-    let pendingBtn = UIButtonX()
     var colorPrimary: UIColor!
     var selected = 0
     convenience init() {
@@ -23,7 +20,6 @@ class MenuMainAss: UIViewX {
         // This is only needed for live reload as injectionForXcode
         // doesn't swizzle init methods.
         // Get injectionForXcode here : http://johnholdsworth.com/injection.html
-        render()
     }
     convenience init(total: [String], colorPrimary: UIColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)) {
         self.init(frame: .zero)
@@ -68,38 +64,6 @@ class MenuMainAss: UIViewX {
 
     fileprivate func setStyleBtns() {
         btns.forEach({self.commonFieldStyle($0)})
-        allBtn.style(commonFieldStyle)
-        pendingBtn.style(commonFieldStyle)
-        doneBtn.style(commonFieldStyle)
-    }
-
-    func render() {
-        // View Hierarchy
-        // This essentially does `translatesAutoresizingMaskIntoConstraints = false`
-        // and `addSubsview()`. The neat benefit is that
-        // (`sv` calls can be nested which will visually show hierarchy ! )
-
-        layout(
-            4,
-            |-allBtn.width(33%)-doneBtn.width(33%)-pendingBtn.width(33%)-| ~ 60,
-            2,
-            |-line-| ~ 5,
-            2
-        )
-        alignHorizontally(allBtn, doneBtn, pendingBtn)
-        line.width(120)
-        line.backgroundColor = colorPrimary
-        line.cornerRadius = 2
-        allBtn.tag = 0
-        doneBtn.tag = 1
-        doneBtn.centerHorizontally()
-        pendingBtn.tag = 2
-        // Content 🖋
-        allBtn.text("Todas")
-        doneBtn.text("Terminadas")
-        pendingBtn.text("Pendientes")
-
-        setStyleBtns()
     }
 
     func indexLine(from: Int, to: Int) {

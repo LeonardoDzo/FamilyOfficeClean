@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import RxDataSources
 
 @objc enum MESSAGESTATUS: Int {
     case Pending,
@@ -40,10 +41,12 @@ public struct ChatMessage: Decodable {
     }
     
 }
-extension ChatMessage {
-
+extension ChatMessage: IdentifiableType, Equatable {
+    public typealias Identity = String
+    
+    public var identity : Identity { return uid }
+    
     public static func == (lhs: ChatMessage, rhs: ChatMessage) -> Bool {
         return lhs.uid == rhs.uid
     }
-    
 }

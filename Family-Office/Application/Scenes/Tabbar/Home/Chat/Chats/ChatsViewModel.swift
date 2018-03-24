@@ -15,7 +15,6 @@ final class ChatsViewmodel: ViewModelType {
     let byGroup: Bool!
     let navigator: ChatsNavigator!
     let chatUseCase: ChatUseCase!
-    var chats = [Chat]()
     init(navigator: ChatsNavigator, byGroup: Bool = false, chatUseCase: ChatUseCase) {
         self.byGroup = byGroup
         self.navigator = navigator
@@ -31,15 +30,19 @@ final class ChatsViewmodel: ViewModelType {
                 return $0.sorted(by: { (old, new) -> Bool in
                     let dateOne = old.messages.last?.seenAt ?? 0
                     let dateTwo = new.messages.last?.seenAt ?? 1
-                    
                     return dateOne > dateTwo
                 })
             }
-            .do(onNext: {self.chats = $0})
-        let selected = input.selectTrigger.flatMapLatest({ indexpath in
-            return BehaviorRelay(value: self.chats[indexpath.row]).asDriver()
-        }).do(onNext: {self.navigator.toChat($0)}).mapToVoid()
+        
+        let selected = input.selectTrigger.withLatestFrom(chats) {
+             indexpath, chats in
+            return chats[indexpath.row]
+            }
+            .do(onNext: self.navigator.toChat)
+            .mapToVoid()
+        
         let addTapped = input.addTrigger.do(onNext: {self.navigator.toAddEdit(Chat(family: nil, group: ChatGroup(name: "", photo: nil), uid: "", lastMessage: nil, members: [], messages: []))})
+        
         return Output(chats: chats, addTapped: addTapped, selected: selected)
     }
     

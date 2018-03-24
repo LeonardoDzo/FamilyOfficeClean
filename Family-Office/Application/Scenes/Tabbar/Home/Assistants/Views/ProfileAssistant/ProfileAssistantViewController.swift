@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 import SideMenu
 
-class ProfileAssistantViewController: UIViewController {
+class ProfileAssistantViewController:  UIViewController {
     private let disposeBag = DisposeBag()
     var v = ProfileAssistantStevia()
     var viewModel: ProfileAsssistantViewModel!
@@ -41,6 +41,10 @@ class ProfileAssistantViewController: UIViewController {
             .drive(onNext: { assistant in
                 self.v.topview.bind(user: assistant)
             }).disposed(by: disposeBag)
+        output.pendings.drive(onNext: { pendings in
+            self.v.topview.allTaskBtn.btn.text( "\(pendings.count)")
+            self.v.topview.taskCompleteBtn.btn.text("\(pendings.filter({$0.done}).count)")
+        }).disposed(by: disposeBag)
     }
     
     @objc func call(_ sender: UIButtonX) {

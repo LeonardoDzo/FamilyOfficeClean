@@ -12,7 +12,7 @@ import RxCocoa
 import Kingfisher
 class ChatsTableViewController: UITableViewController {
     
-    let disposeBag = DisposeBag()
+    var disposeBag = DisposeBag()
     let add = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: nil)
     var viewwModel: ChatsViewmodel!
     
@@ -58,5 +58,5 @@ class ChatsTableViewController: UITableViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+  
 }

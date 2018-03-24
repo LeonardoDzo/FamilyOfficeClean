@@ -13,7 +13,7 @@ import RealmSwift
 
 final class MenuAssistantViewModel: ViewModelType {
     private var userUseCase: UserUseCase!
-    var assitant = Variable(assistantId)
+    var assitant = Variable(getAssitantid())
     
     init(userUseCase: UserUseCase) {
         self.userUseCase = userUseCase

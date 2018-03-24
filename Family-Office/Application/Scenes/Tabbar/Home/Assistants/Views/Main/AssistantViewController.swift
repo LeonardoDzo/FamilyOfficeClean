@@ -44,8 +44,13 @@ class AssistantViewController: UIViewController {
         let pull = self.v.table.tableView.refreshControl!.rx
             .controlEvent(.valueChanged)
             .asDriver()
+        let btns = self.v.menu.btns.enumerated().map({ i, btn in
+            return btn.rx.tap.asDriver().map({i})
+        }).flatMap({$0})
     
-        let input = PendingViewModel.Input(trigger: Driver.merge(viewWillAppear, pull), editTrigger: editButton.rx.tap.asDriver(), backtrigger: back.rx.tap.asDriver(), gotoAddAssistant: notExistBtn.rx.tap.asDriver())
+    
+        
+        let input = PendingViewModel.Input(trigger: Driver.merge(viewWillAppear, pull), editTrigger: editButton.rx.tap.asDriver(), backtrigger: back.rx.tap.asDriver(), gotoAddAssistant: notExistBtn.rx.tap.asDriver(), menu: btns)
 
         let output = viewModel.transform(input: input)
 
@@ -53,21 +58,38 @@ class AssistantViewController: UIViewController {
             i, model, cell in
                 cell.bind(pending: model)
                 cell.content.bind(pending: model)
-
+            
             }.disposed(by: disposeBag)
 
         output.backTrigger.drive().disposed(by: disposeBag)
+        
         output.modeEdit.drive(onNext: {
-            if self.isEdit {
-                self.editButton.title = "Listo"
-                self.v.table.tableView.setEditing(true, animated: true)
-            } else {
+            if self.v.table.tableView.isEditing {
                 self.editButton.title = "Editar"
                 self.v.table.tableView.setEditing(false, animated: true)
+            } else {
+                self.editButton.title = "Listo"
+                self.v.table.tableView.setEditing(true, animated: true)
             }
             self.isEdit = !self.isEdit
         }).disposed(by: disposeBag)
         
+        output.pendings.drive(onNext: {pendings in
+            if pendings.isEmpty {
+                let imageview = UIImageViewX()
+                imageview.image = #imageLiteral(resourceName: "background_no_pendings")
+                imageview.contentMode = .scaleAspectFit
+                self.v.table.tableView.backgroundView = imageview
+            }else{
+                self.v.table.tableView.backgroundView = UIView()
+            }
+        }).disposed(by: disposeBag)
+        
+        output.btns.forEach {
+            $0.drive(onNext: { i in
+                self.v.changeType(i)
+            }).disposed(by: disposeBag)
+        }
         output.assistants.drive().disposed(by: disposeBag)
     }
 

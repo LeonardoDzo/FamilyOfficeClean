@@ -84,7 +84,7 @@ extension MessageBindible {
             view.cornerRadius = view.bounds.size.width / 2
             view.clipsToBounds = true
             view.size(40)
-            let url = URL(string: message.sender?.photo?.routes[3] ?? "")
+            let url = URL(string: message.sender?.photo?.routes[2] ?? "")
             view.kf.indicatorType = .activity
             view.kf.setImage(with: url, placeholder: #imageLiteral(resourceName: "profile_default"))
         }

@@ -67,8 +67,6 @@ class MessageTableViewCell: UITableViewCellX, MessageBindible {
         view.backgroundColor = UIColor.clear
         selectedBackgroundView = view
         backgroundColor = #colorLiteral(red: 0.921431005, green: 0.9214526415, blue: 0.9214410186, alpha: 1)
-        animation = "fadeInUp"
-        animate()
     }
     
     func isFromSender(isMe: Bool) {

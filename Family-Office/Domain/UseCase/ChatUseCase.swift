@@ -17,4 +17,5 @@ public protocol ChatUseCase {
     func create(chat: Chat, data: Data?) -> Observable<Chat>
     func create(userId: String) -> Observable<Chat>
     func seenToChat(id: String) -> Observable<Void>
+    func getMessage(chatId: String) -> Observable<[ChatMessage]>
 }

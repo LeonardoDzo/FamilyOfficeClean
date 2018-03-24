@@ -8,7 +8,7 @@
 
 import Foundation
 
- public enum PENDING_PRIORITY: String, CustomStringConvertible {
+ @objc public enum PENDING_PRIORITY: Int, CustomStringConvertible {
     case Low
     case Normal
     case High
@@ -23,15 +23,43 @@ import Foundation
             return "Baja"
         }
     }
+    public var value: String {
+        switch self {
+        case .High:
+            return "High"
+        case .Normal:
+            return "Normal"
+        case .Low:
+            return "Low"
+        }
+    }
+    
 
 }
-extension PENDING_PRIORITY: Codable {
-    enum CodingKeys: String, CodingKey {
-        case Low, Normal, High
+extension PENDING_PRIORITY: Decodable {
+    enum Key: CodingKey {
+        case rawValue
+    }
+    enum CodingError: Error {
+        case unknownValue
+    }
+    public init(from decoder: Decoder) throws {
+        let rawValue = try decoder.singleValueContainer().decode(String.self)
+        
+        switch rawValue {
+        case "High":
+            self = .High
+        case "Normal":
+            self = .Normal
+        case "Low":
+            self = .Low
+        default:
+            throw CodingError.unknownValue
+        }
     }
 }
 
-public struct Pending: Codable {
+public struct Pending: Decodable {
     public var uid: String = ""
     public var details: String = ""
     public var title: String = ""

@@ -10,6 +10,7 @@ import Foundation
 import RxCocoa
 import UIKit
 import ALCameraViewController
+import Lightbox
 
 extension UIViewController {
     var backBtn: UIBarButtonItem! {

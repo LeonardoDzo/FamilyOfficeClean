@@ -34,23 +34,19 @@ class MainAssistantViewStevia: UIViewX {
         // With type-safe visual format
         layout(
             60,
-            |menu|,
+            |menu.height(60)|,
             2,
             |table.height(100%)|,
             >=40
         )
-
-        menu.allBtn.addTarget(self, action: #selector(self.changeType(_:)), for: .touchUpInside)
-        menu.pendingBtn.addTarget(self, action: #selector(self.changeType(_:)), for: .touchUpInside)
-        menu.doneBtn.addTarget(self, action: #selector(self.changeType(_:)), for: .touchUpInside)
         // Styling 🎨
         backgroundColor = #colorLiteral(red: 0.9792956669, green: 0.9908331388, blue: 1, alpha: 1)
     }
 
     @objc
-    func changeType(_ sender: UIButtonX) {
-        menu.indexLine(from: table.type, to: sender.tag)
-        table.type = sender.tag
+    func changeType(_ n: Int) {
+        menu.indexLine(from: table.type, to: n)
+        table.type = n
     }
 
     // Style can be extracted and applied kind of like css \o/

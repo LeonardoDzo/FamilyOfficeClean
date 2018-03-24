@@ -35,10 +35,13 @@ class MenuAssistantsViewController: UIViewController {
         output.assistants.drive(self.v.tableView.rx.items(cellIdentifier: UITableViewCellX.reuseID, cellType: UITableViewCellX.self)) {tv, model, cell in
             cell.isSelected = false
             let url = model.0.photo?.routes[1] ?? ""
-            cell.imageView?.kf.setImage(with: URL(string: url))
+            let resize =  ResizingImageProcessor(referenceSize: CGSize(width: 44, height: 44))
+            let corner = RoundCornerImageProcessor(cornerRadius: 8)
+            cell.imageView?.kf.indicatorType = .activity
+            cell.imageView?.kf.setImage(with: URL(string: url), options: [.processor(resize.append(another: corner)), .transition(.fade(0.4))])
             cell.imageView?.clipsToBounds = true
-            cell.imageView?.contentMode = .scaleAspectFill
-            cell.imageView?.size(44)
+            cell.imageView?.contentMode = .redraw
+            
             cell.textLabel?.text = model.0.name
             if model.1 {
                 cell.accessoryType = .checkmark

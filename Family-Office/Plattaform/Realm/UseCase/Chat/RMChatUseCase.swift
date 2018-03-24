@@ -71,6 +71,10 @@ final class RMChatUseCase<Repository>: ChatUseCase where Repository: AbstractRep
         })
     }
     
+    func getMessage(chatId: String) -> Observable<[ChatMessage]> {
+        return repository.query(uid: chatId).map({$0.messages})
+    }
+    
   
 }
 

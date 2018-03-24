@@ -33,10 +33,7 @@ class TaskTableview: UIViewX, UITableViewDelegate {
             |tableView|,
             0
         )
-        let imageview = UIImageViewX()
-        imageview.image = #imageLiteral(resourceName: "background_no_pendings")
-        imageview.contentMode = .scaleAspectFit
-        self.tableView.backgroundView = imageview
+       
         self.tableView.tableFooterView = UIView()
     }
     fileprivate func conftable() {

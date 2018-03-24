@@ -25,7 +25,7 @@ class ProfileAssistantNavigator: NavigatorPr {
     func toMain() {
         let view = ProfileAssistantViewController()
         
-        view.viewModel = ProfileAsssistantViewModel(assistantUseCase: service.makeUseCase(), navigator: self)
+        view.viewModel = ProfileAsssistantViewModel(usecases: service.makePendingUseCase(), assistantUseCase: service.makeUseCase(), navigator: self)
         navigationController.pushViewController(view, animated: true)
     }
     

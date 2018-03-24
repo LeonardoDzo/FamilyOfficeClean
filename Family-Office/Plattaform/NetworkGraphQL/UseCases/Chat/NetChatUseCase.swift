@@ -68,5 +68,8 @@ final class NetChatUseCase: ChatUseCase {
         return network.seenChat(chatId:id)
     }
     
+    func getMessage(chatId: String) -> Observable<[ChatMessage]> {
+        return Variable([]).asObservable()
+    }
     
 }

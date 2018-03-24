@@ -10,6 +10,7 @@ import UIKit
 import Eureka
 import RxSwift
 import RxCocoa
+import SideMenu
 
 class AddEditPendingViewController: FormViewController {
     private let disposeBag = DisposeBag()
@@ -18,7 +19,7 @@ class AddEditPendingViewController: FormViewController {
     var pending: Variable<Pending> = Variable(Pending())
     var viewModel: AddEditPendingViewModel!
     fileprivate func searchKey(_ key: String, _ value: Any?) {
-        pending.value.assistantId = assistantId
+        pending.value.assistantId = getAssitantid()
         switch key {
         case "title":
             self.pending.value.title = value as? String ?? ""
@@ -88,6 +89,8 @@ class AddEditPendingViewController: FormViewController {
         super.viewDidLoad()
         self.tabBarController?.navigationItem.titleView = nil
         saveBtn.isEnabled = false
+        SideMenuManager.default.menuAddPanGestureToPresent(toView: self.navigationController!.navigationBar)
+        SideMenuManager.default.menuAddScreenEdgePanGesturesToPresent(toView: self.navigationController!.view)
         self.navigationItem.rightBarButtonItem = saveBtn
         setupForm()
         bindViewModel()

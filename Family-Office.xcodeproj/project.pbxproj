@@ -52,6 +52,7 @@
 		023494182062E6BE0054A264 /* MenuAssistantViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023494172062E6BE0054A264 /* MenuAssistantViewModel.swift */; };
 		023858492044DECB00D1CDB3 /* ProfileAssistantViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023858482044DECB00D1CDB3 /* ProfileAssistantViewModel.swift */; };
 		0238584B2044E20000D1CDB3 /* ProfileAssitantNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0238584A2044E20000D1CDB3 /* ProfileAssitantNavigator.swift */; };
+		0238AC1A206579BA002B683B /* AttachmentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0238AC19206579BA002B683B /* AttachmentViewModel.swift */; };
 		023A36F020505B020046FCDE /* MessageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023A36EF20505B020046FCDE /* MessageType.swift */; };
 		023A36F220505B3C0046FCDE /* MessageData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023A36F120505B3C0046FCDE /* MessageData.swift */; };
 		023A36F420505B790046FCDE /* MockMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023A36F320505B790046FCDE /* MockMessage.swift */; };
@@ -378,6 +379,7 @@
 		0237D519201A6A8B00895DF5 /* Family-Office.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Family-Office.entitlements"; sourceTree = "<group>"; };
 		023858482044DECB00D1CDB3 /* ProfileAssistantViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAssistantViewModel.swift; sourceTree = "<group>"; };
 		0238584A2044E20000D1CDB3 /* ProfileAssitantNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAssitantNavigator.swift; sourceTree = "<group>"; };
+		0238AC19206579BA002B683B /* AttachmentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmentViewModel.swift; sourceTree = "<group>"; };
 		023A36EF20505B020046FCDE /* MessageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageType.swift; sourceTree = "<group>"; };
 		023A36F120505B3C0046FCDE /* MessageData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageData.swift; sourceTree = "<group>"; };
 		023A36F320505B790046FCDE /* MockMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMessage.swift; sourceTree = "<group>"; };
@@ -1273,6 +1275,7 @@
 				02C720C120585BE500C7E5A3 /* ChatNavigator.swift */,
 				02EBB7E5205CDEB4008133CC /* titleView.swift */,
 				02EBB7E7205CECDE008133CC /* HeaderChatView.swift */,
+				0238AC19206579BA002B683B /* AttachmentViewModel.swift */,
 			);
 			path = Messages;
 			sourceTree = "<group>";
@@ -1989,6 +1992,7 @@
 				"${BUILT_PRODUCTS_DIR}/ActionCableClient/ActionCableClient.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Apollo/Apollo.framework",
+				"${BUILT_PRODUCTS_DIR}/Cache/Cache.framework",
 				"${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework",
 				"${BUILT_PRODUCTS_DIR}/Eureka/Eureka.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
@@ -1997,9 +2001,12 @@
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/GzipSwift/Gzip.framework",
 				"${BUILT_PRODUCTS_DIR}/Hero/Hero.framework",
+				"${BUILT_PRODUCTS_DIR}/Hue/Hue.framework",
 				"${BUILT_PRODUCTS_DIR}/ImagePicker/ImagePicker.framework",
 				"${BUILT_PRODUCTS_DIR}/ImageRow/ImageRow.framework",
+				"${BUILT_PRODUCTS_DIR}/Imaginary/Imaginary.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
+				"${BUILT_PRODUCTS_DIR}/Lightbox/Lightbox.framework",
 				"${BUILT_PRODUCTS_DIR}/ReactiveSwift/ReactiveSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
@@ -2022,6 +2029,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ActionCableClient.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Apollo.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Cache.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Differentiator.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Eureka.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
@@ -2030,9 +2038,12 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Gzip.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hero.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hue.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ImagePicker.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ImageRow.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Imaginary.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Lightbox.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
@@ -2399,6 +2410,7 @@
 				022FCEE7204DBC5700070546 /* Insurance+Bindable.swift in Sources */,
 				023AAAF6201EBA1100F50207 /* Observable+Extension.swift in Sources */,
 				02FE577F2020F09900B7E084 /* RMUser.swift in Sources */,
+				0238AC1A206579BA002B683B /* AttachmentViewModel.swift in Sources */,
 				02F2E4E3201A5DFC002E360E /* AppDelegate.swift in Sources */,
 				02FE57652020E0C100B7E084 /* AuthModel.swift in Sources */,
 			);

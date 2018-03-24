@@ -30,7 +30,7 @@ target 'Family-Office' do
     pod 'Hero'
     pod 'SlackTextViewController'
     pod 'ALCameraViewController'
-    
+    pod 'Lightbox'
     pod 'Alamofire'
 	pod 'ActionCableClient'
 	

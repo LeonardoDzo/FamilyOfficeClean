@@ -11,19 +11,17 @@ import UIKit
 import RxSwift
 
 class ChatNavigator: NavigatorType {
-    let disposeBag = DisposeBag()
     weak var navigationController: UINavigationController?
     
     required init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
     func toMain(sender: Any?) {
-        if let chat = sender as? Chat, let top = UIApplication.topViewController(), !(top is ChatViewController) {
+        if let chat = sender as? Chat {
             let view = ChatViewController()
-            view.viewModel = ChatViewModel(chatUseCase: RMUseCaseProvider().makeChatUseCase(), navigator: self)
-            view.viewModel.chat = chat
-            
-            NetUseCaseProvider().makeChatUseCase().seenToChat(id: chat.uid).asDriverOnErrorJustComplete().drive().disposed(by: disposeBag)
+            view.viewModel = ChatViewModel(chatUseCase: RMUseCaseProvider().makeChatUseCase(), navigator: self, chat: chat)
+           
+            NetUseCaseProvider().makeChatUseCase().seenToChat(id: chat.uid).asDriverOnErrorJustComplete().drive().dispose()
             
             navigationController?.pushViewController(view, animated: true)
         }

@@ -72,7 +72,7 @@ class TopViewProfileAssistant: UIViewX, UserBindable {
         taskCompleteBtn.setFeatures { (view) in
             view.btn.setTitle("10", for: .normal)
             view.btn.style(self.setStyleBtn)
-            view.lbl.text = "TAREAS"
+            view.lbl.text = "COMPLETAS"
             view.lbl.style(self.setStyleLbl)
         }
 

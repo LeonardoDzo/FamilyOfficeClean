@@ -19,11 +19,13 @@ final class AddEditPendingViewModel: ViewModelType {
     func transform(input: AddEditPendingViewModel.Input) -> AddEditPendingViewModel.Output {
         let errorTracker = ErrorTracker()
 
-        let save = input.saveTrigger.withLatestFrom(input.canSaveTrigger).flatMapLatest { [unowned self] in
-            return self.usecases.save(pending: $0)
+        let save = input.saveTrigger.withLatestFrom(input.canSaveTrigger).flatMapLatest({ pending -> SharedSequence<DriverSharingStrategy, Void> in
+            var p = pending
+            p.assistantId = getAssitantid()
+            return self.usecases.save(pending: p)
                 .trackError(errorTracker)
                 .asDriverOnErrorJustComplete()
-            }.do(onNext: { _ in
+            }).do(onNext: { _ in
 
             })
         let cansave = input.canSaveTrigger.map { ( pending) -> Bool in

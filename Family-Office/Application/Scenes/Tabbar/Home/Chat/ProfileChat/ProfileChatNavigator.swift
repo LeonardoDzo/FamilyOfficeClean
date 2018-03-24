@@ -16,7 +16,7 @@ final class ProfileChatNavigator: NavigatorType {
         self.navigationController = navigationController
     }
     func toMain(sender: Any?) {
-        if let chat = sender as? Chat, let top = UIApplication.topViewController(), !(top is ProfileChatViewController) {
+        if let chat = sender as? Chat {
             let view = ProfileChatViewController()
             view.chat = chat
             navigationController?.pushViewController(view, animated: true)
